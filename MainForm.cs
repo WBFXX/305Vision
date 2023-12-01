@@ -49,7 +49,7 @@ namespace _305Vision
             toolBox.DockPanel.DockLeftPortion = 0.1;
             //创建主窗口2
             platform2.Text =  "窗口2";
-            platform2.Show(dockPanel1);
+            platform2.Show(dockPanel1); 
 
         }
 
