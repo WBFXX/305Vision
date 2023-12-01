@@ -43,9 +43,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -79,19 +79,19 @@
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.打开ToolStripMenuItem.Text = "打开";
             // 
             // 关闭ToolStripMenuItem
             // 
             this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
-            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.关闭ToolStripMenuItem.Text = "关闭";
             // 
             // 工具栏ToolStripMenuItem
             // 
             this.工具栏ToolStripMenuItem.Name = "工具栏ToolStripMenuItem";
-            this.工具栏ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.工具栏ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.工具栏ToolStripMenuItem.Text = "工具栏";
             this.工具栏ToolStripMenuItem.Click += new System.EventHandler(this.工具栏ToolStripMenuItem_Click);
             // 
@@ -181,6 +181,20 @@
             this.tabPage2.Text = "视图";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.BackgroundImage = global::_305Vision.Properties.Resources.tool_box;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(3, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(47, 47);
+            this.button3.TabIndex = 2;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.tabControl1);
@@ -202,20 +216,6 @@
             this.dockPanel1.Size = new System.Drawing.Size(1104, 474);
             this.dockPanel1.TabIndex = 19;
             this.dockPanel1.Theme = this.vS2015LightTheme1;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Transparent;
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(3, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(47, 47);
-            this.button3.TabIndex = 2;
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // MainForm
             // 
