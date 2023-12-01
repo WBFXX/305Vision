@@ -1,0 +1,117 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Text;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+
+namespace _305Vision
+{
+    public partial class MainForm : Form
+    {
+
+        //加载侧边工具栏
+        ToolsBox toolBox = new ToolsBox();
+        //加载主平台
+        FormPlatform platform = new FormPlatform();
+        FormPlatform platform2 = new FormPlatform();
+        FormOutput FormPicture = new FormOutput();
+        FormProcess FormProcess = new FormProcess();        
+
+        
+
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        
+        
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            
+            // 调整左侧停靠区域的宽度比例
+            dockPanel1.DockLeftPortion = 0.1;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%
+            platform.Show(dockPanel1);//没第二个参数 默认为主窗体 中间
+            //加载流程框架,在platform的左边 占比30%
+            FormProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
+            //加载输出栏,在platform的下方 占比30%
+            FormPicture.Show(platform.Pane,DockAlignment.Bottom,0.3);
+            //加载侧边栏，并设置侧边栏的宽度
+            toolBox.Show(dockPanel1,DockState.DockLeft);
+            toolBox.DockPanel.DockLeftPortion = 0.1;
+            //创建主窗口2
+            platform2.Text =  "窗口2";
+            platform2.Show(dockPanel1);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// 打开工具栏（如果工具栏不存在）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 工具栏ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (toolBox.DockState == DockState.Hidden || toolBox.DockState == DockState.Unknown) { 
+            ToolsBox toolBox = new ToolsBox();
+            toolBox.Show(dockPanel1, DockState.DockLeft);
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("工具栏已打开");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            STNodeEdit sTNodeEdit = new STNodeEdit();
+            sTNodeEdit.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            TreeView treeView = new TreeView();
+            treeView.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (toolBox.DockState == DockState.Hidden || toolBox.DockState == DockState.Unknown)
+            {
+                ToolsBox toolBox = new ToolsBox();
+                toolBox.Show(dockPanel1, DockState.DockLeft);
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("工具栏已打开");
+            }
+        }
+    }
+    
+}
