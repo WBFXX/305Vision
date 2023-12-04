@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PictureWindow">
+      <HintPath>..\PictureWindow\bin\Debug\PictureWindow.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="ST.Library.UI">
@@ -63,6 +66,9 @@
     <Compile Include="BottonStyle\OrangeStyle.cs" />
     <Compile Include="BottonStyle\TypeColorStyle.cs" />
     <Compile Include="Service\FormService.cs" />
+    <Compile Include="图片操作测试\ImageBaseNode.cs" />
+    <Compile Include="图片操作测试\ImageChannelNode.cs" />
+    <Compile Include="图片操作测试\ImageInputNode.cs" />
     <Compile Include="通用\CalcNode.cs" />
     <Compile Include="Service\NodeService.cs" />
     <Compile Include="TreeView.cs">
