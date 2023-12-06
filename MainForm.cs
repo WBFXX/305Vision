@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using _305Vision.Enum;
 
 namespace _305Vision
 {
@@ -22,8 +23,8 @@ namespace _305Vision
         //加载主平台
         FormPlatform platform = new FormPlatform();
         FormPlatform platform2 = new FormPlatform();
-        FormOutput FormPicture = new FormOutput();
-        FormProcess FormProcess = new FormProcess();        
+        FormOutput FormOut = FormOutput.Instance;
+        FormProcess FormProcess = new FormProcess();
 
         
 
@@ -42,15 +43,15 @@ namespace _305Vision
             platform.Show(dockPanel1);//没第二个参数 默认为主窗体 中间
             //加载流程框架,在platform的左边 占比30%
             FormProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
-            //加载输出栏,在platform的下方 占比30%
-            FormPicture.Show(platform.Pane,DockAlignment.Bottom,0.3);
+            
             //加载侧边栏，并设置侧边栏的宽度
             toolBox.Show(dockPanel1,DockState.DockLeft);
             toolBox.DockPanel.DockLeftPortion = 0.1;
             //创建主窗口2
             platform2.Text =  "窗口2";
-            platform2.Show(dockPanel1); 
-
+            platform2.Show(dockPanel1);
+            //加载输出栏,在platform的下方 占比30%
+            FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
         }
 
 
@@ -109,8 +110,12 @@ namespace _305Vision
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("工具栏已打开");
+                //输出日志
+                FormOut.ReadLog("ERROR:工具栏已打开。");
+                //System.Windows.Forms.MessageBox.Show("工具栏已打开");
             }
+            FormOut.ReadLog("这是"+ this.Name + "窗口的按钮",LogLevel.Warning);
+
         }
     }
     

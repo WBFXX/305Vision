@@ -17,5 +17,8 @@ namespace _305Vision.Service
         public static FormProcess Process { get => _process; set => _process = value; }
         public static FormOutput Output { get => _output; set => _output = value; }
         public static ToolsBox ToolsBox { get => _toolsBox; set => _toolsBox = value; }
+
+        
+
     }
 }

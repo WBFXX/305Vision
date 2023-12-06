@@ -7,25 +7,148 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
+using _305Vision.Enum;
 
 namespace _305Vision
 {
+    /// <summary>
+    /// 日志输出
+    /// </summary>
+
     public partial class FormOutput : DockContent
     {
-        public FormOutput()
+        //private static FormOutput instance;  // 用于共享的单例实例
+        //private static readonly object lockObject = new object();  // 用于确保线程安全
+
+        
+
+        private static Lazy<FormOutput> lazyInstance = new Lazy<FormOutput>(() => new FormOutput());
+        private static readonly object lockObject = new object();  // 用于确保线程安全
+
+        private FormOutput()
         {
             InitializeComponent();
+            ReadLog("窗口初始化成功");
         }
-        private static FormOutput _instance;
+
         public static FormOutput Instance
         {
             get
             {
-                if (_instance == null || _instance.IsDisposed)
-                    _instance = new FormOutput();
-                return _instance; 
+                if (lazyInstance.Value.Visible)
+                {
+                    return lazyInstance.Value;
+                }
+
+                lock (lockObject)
+                {
+                    if (!lazyInstance.Value.Visible)
+                    {
+                        // 使用 Invoke 确保在 UI 线程上执行显示逻辑
+                        lazyInstance.Value.Invoke((MethodInvoker)delegate
+                        {
+                            lazyInstance.Value.Show();
+                            lazyInstance.Value.Focus();
+                        });
+                    }
+                }
+
+                return lazyInstance.Value;
             }
+        }
+
+        //public static void ShowInstance()
+        //{
+        //    Instance.Show();
+        //    Instance.Focus();
+        //}
+
+        /// <summary>
+        /// Info 普通信息,Warning 警告,Error 错误,如果不提供，它将默认使用 LogLevel.Info。
+        /// </summary>
+        /// <param name="log"></param>
+        /// <param name="level"></param>
+        /// 
+
+        //ReadLog 函数已经定义了一个可选参数 LogLevel level = LogLevel.Info，这使得调用者可以选择提供或者不提供第二个参数。如果不提供，它将默认使用 LogLevel.Info。
+        public void ReadLog(string log, LogLevel level = LogLevel.Info)
+        {
+            string time = Convert.ToString(DateTime.Now);
+            if (!this.Visible)
+            {
+                this.Show();
+            }
+            switch (level)
+            {
+                case LogLevel.Info:
+                    richTextBox1.SelectionColor = System.Drawing.Color.Black; // 默认黑色
+                    break;
+                case LogLevel.Warning:
+                    richTextBox1.SelectionColor = System.Drawing.Color.Orange; // 警告颜色
+                    break;
+                case LogLevel.Error:
+                    richTextBox1.SelectionColor = System.Drawing.Color.Red; // 错误颜色
+                    break;
+                default:
+                    richTextBox1.SelectionColor = System.Drawing.Color.Black;
+                    break;
+            }
+
+            richTextBox1.AppendText(time + "  "  + level + ":" + log + "\n");
+
+            // 恢复默认颜色
+            richTextBox1.SelectionColor = richTextBox1.ForeColor;
+        }
+
+        //private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    //// 获取当前选中的行的索引
+        //    //int currentLine = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart);
+
+        //    //// 获取当前行的起始字符索引
+        //    //int startOfCurrentLine = richTextBox1.GetFirstCharIndexFromLine(currentLine);
+
+        //    //// 获取下一行的起始字符索引，如果当前行是最后一行，则取文本的长度
+        //    //int startOfNextLine = richTextBox1.Text.IndexOf('\n', startOfCurrentLine) + 1;
+        //    //if (startOfNextLine == 0)
+        //    //{
+        //    //    startOfNextLine = richTextBox1.Text.Length;
+        //    //}
+
+        //    //// 删除当前行的文本范围
+        //    //richTextBox1.Text = richTextBox1.Text.Remove(startOfCurrentLine, startOfNextLine - startOfCurrentLine);
+
+        //    // 获取当前光标所在的行的起始位置
+        //    int currentLineStart = richTextBox1.GetFirstCharIndexOfCurrentLine();
+
+        //    // 获取当前光标所在的行的结束位置
+        //    int currentLineEnd = richTextBox1.GetFirstCharIndexFromLine(richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart) + 1);
+
+        //    // 如果当前行结束位置为-1，表示是最后一行
+        //    if (currentLineEnd == -1)
+        //    {
+        //        currentLineEnd = richTextBox1.Text.Length;
+        //    }
+
+        //    // 保存当前整行的颜色
+        //    Color originalColor = richTextBox1.SelectionColor;
+
+        //    // 恢复整行的颜色
+        //    richTextBox1.Select(currentLineStart, currentLineEnd - currentLineStart);
+        //    richTextBox1.SelectionColor = originalColor;
+
+        //    // 删除当前行的文本范围
+        //    richTextBox1.Text = richTextBox1.Text.Remove(currentLineStart, currentLineEnd - currentLineStart);
+
+
+        //}
+
+        private void 删除全部ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 删除全部文本
+            richTextBox1.Text = string.Empty;
         }
     }
 }

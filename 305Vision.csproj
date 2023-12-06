@@ -65,6 +65,7 @@
     <Compile Include="BottonStyle\CommonStyle.cs" />
     <Compile Include="BottonStyle\OrangeStyle.cs" />
     <Compile Include="BottonStyle\TypeColorStyle.cs" />
+    <Compile Include="Enum\Enum.cs" />
     <Compile Include="Service\FormService.cs" />
     <Compile Include="图片操作测试\ImageBaseNode.cs" />
     <Compile Include="图片操作测试\ImageChannelNode.cs" />
