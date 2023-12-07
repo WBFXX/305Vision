@@ -88,12 +88,12 @@ namespace _305Vision
             // 确保字典中包含当前 PictureBox 的键
             if (!pictureBoxTag.ContainsKey(pictureBoxes[0].Tag))
             {
-                // 如果没有，可以将其添加到字典中
+                // 如果没有，可以将其添加到字典中,记录第一个窗口是否被点击
                 pictureBoxTag[pictureBoxes[0].Tag] = false;
             }
 
 
-            //根据pictureBox状态来还原位置
+            //根据pictureBox状态来还原位置,如果已经被点击过
             if (pictureBoxTag[pictureBoxes[0].Tag])
             {
 
@@ -124,12 +124,18 @@ namespace _305Vision
                 //放到最满 然后取消边距
                 pictureBoxes[0].Margin = new Padding(0);
                 pictureBoxTag[pictureBoxes[0].Tag] = true;
+
                 exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
 
             }
         }
 
-
+        /// <summary>
+        /// 图像显示区域大小
+        /// </summary>
+        /// <param name="rows"></param>
+        /// <param name="cols"></param>
+        /// <returns></returns>
         private Size CalculatePictureBoxSize(int rows, int cols)
         {
             int width = (flowLayoutPanel1.Width - 4) / cols;
@@ -139,7 +145,13 @@ namespace _305Vision
             //int size = Math.Min(width, height);
             return new Size(width, height);
         }
-
+        /// <summary>
+        /// 计算图像显示区域的位置
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="rows"></param>
+        /// <param name="cols"></param>
+        /// <returns></returns>
         private Point CalculatePictureBoxLocation(int tag, int rows, int cols)
         {
             int row = (tag - 1) / cols;

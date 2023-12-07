@@ -19,43 +19,27 @@ namespace _305Vision
 
     public partial class FormOutput : DockContent
     {
+        private static FormOutput _instance;
+
         //private static FormOutput instance;  // 用于共享的单例实例
         //private static readonly object lockObject = new object();  // 用于确保线程安全
 
-        
 
-        private static Lazy<FormOutput> lazyInstance = new Lazy<FormOutput>(() => new FormOutput());
-        private static readonly object lockObject = new object();  // 用于确保线程安全
 
         private FormOutput()
         {
             InitializeComponent();
-            ReadLog("窗口初始化成功");
+            //ReadLog("窗口初始化成功");
         }
 
         public static FormOutput Instance
         {
+
             get
             {
-                if (lazyInstance.Value.Visible)
-                {
-                    return lazyInstance.Value;
-                }
-
-                lock (lockObject)
-                {
-                    if (!lazyInstance.Value.Visible)
-                    {
-                        // 使用 Invoke 确保在 UI 线程上执行显示逻辑
-                        lazyInstance.Value.Invoke((MethodInvoker)delegate
-                        {
-                            lazyInstance.Value.Show();
-                            lazyInstance.Value.Focus();
-                        });
-                    }
-                }
-
-                return lazyInstance.Value;
+                if (_instance == null || _instance.IsDisposed)
+                    _instance = new FormOutput();
+                return _instance;
             }
         }
 
@@ -69,17 +53,18 @@ namespace _305Vision
         /// Info 普通信息,Warning 警告,Error 错误,如果不提供，它将默认使用 LogLevel.Info。
         /// </summary>
         /// <param name="log"></param>
+        /// <param name="formName"></param>
         /// <param name="level"></param>
         /// 
-
         //ReadLog 函数已经定义了一个可选参数 LogLevel level = LogLevel.Info，这使得调用者可以选择提供或者不提供第二个参数。如果不提供，它将默认使用 LogLevel.Info。
-        public void ReadLog(string log, LogLevel level = LogLevel.Info)
+        public void ReadLog(string log,String formName , LogLevel level = LogLevel.Info)
         {
             string time = Convert.ToString(DateTime.Now);
             if (!this.Visible)
             {
                 this.Show();
             }
+            
             switch (level)
             {
                 case LogLevel.Info:
@@ -96,7 +81,7 @@ namespace _305Vision
                     break;
             }
 
-            richTextBox1.AppendText(time + "  "  + level + ":" + log + "\n");
+            richTextBox1.AppendText(time + "  " + "<" + formName +"> " +level + ":" + log + "\n");
 
             // 恢复默认颜色
             richTextBox1.SelectionColor = richTextBox1.ForeColor;

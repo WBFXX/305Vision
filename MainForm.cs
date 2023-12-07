@@ -97,8 +97,10 @@ namespace _305Vision
 
         private void button2_Click(object sender, EventArgs e)
         {
-            TreeView treeView = new TreeView();
-            treeView.Show();
+            FormPlatform platform = new FormPlatform();
+            platform.Show();
+            //TreeView treeView = new TreeView();
+            //treeView.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -111,10 +113,10 @@ namespace _305Vision
             else
             {
                 //输出日志
-                FormOut.ReadLog("ERROR:工具栏已打开。");
+                FormOut.ReadLog("工具栏已打开。",this.Name );
                 //System.Windows.Forms.MessageBox.Show("工具栏已打开");
             }
-            FormOut.ReadLog("这是"+ this.Name + "窗口的按钮",LogLevel.Warning);
+            FormOut.ReadLog("这是"+ this.Name + "窗口的按钮",this.Name ,LogLevel.Warning);
 
         }
 
