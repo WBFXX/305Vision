@@ -37,8 +37,11 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.richTextBox1.ContextMenuStrip = this.contextMenuStrip1;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.ForeColor = System.Drawing.Color.White;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(800, 450);
@@ -52,12 +55,12 @@
             this.删除全部ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 56);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 28);
             // 
             // 删除全部ToolStripMenuItem
             // 
             this.删除全部ToolStripMenuItem.Name = "删除全部ToolStripMenuItem";
-            this.删除全部ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.删除全部ToolStripMenuItem.Size = new System.Drawing.Size(159, 24);
             this.删除全部ToolStripMenuItem.Text = "清除内容(×)";
             this.删除全部ToolStripMenuItem.Click += new System.EventHandler(this.删除全部ToolStripMenuItem_Click);
             // 
@@ -68,6 +71,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
             this.Controls.Add(this.richTextBox1);
+            this.ForeColor = System.Drawing.Color.White;
             this.HideOnClose = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

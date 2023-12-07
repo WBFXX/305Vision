@@ -83,7 +83,7 @@ namespace _305Vision
             switch (level)
             {
                 case LogLevel.Info:
-                    richTextBox1.SelectionColor = System.Drawing.Color.Black; // 默认黑色
+                    richTextBox1.SelectionColor = System.Drawing.Color.White; // 默认黑色
                     break;
                 case LogLevel.Warning:
                     richTextBox1.SelectionColor = System.Drawing.Color.Orange; // 警告颜色
@@ -92,7 +92,7 @@ namespace _305Vision
                     richTextBox1.SelectionColor = System.Drawing.Color.Red; // 错误颜色
                     break;
                 default:
-                    richTextBox1.SelectionColor = System.Drawing.Color.Black;
+                    richTextBox1.SelectionColor = System.Drawing.Color.White;
                     break;
             }
 
@@ -102,53 +102,15 @@ namespace _305Vision
             richTextBox1.SelectionColor = richTextBox1.ForeColor;
         }
 
-        //private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    //// 获取当前选中的行的索引
-        //    //int currentLine = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart);
-
-        //    //// 获取当前行的起始字符索引
-        //    //int startOfCurrentLine = richTextBox1.GetFirstCharIndexFromLine(currentLine);
-
-        //    //// 获取下一行的起始字符索引，如果当前行是最后一行，则取文本的长度
-        //    //int startOfNextLine = richTextBox1.Text.IndexOf('\n', startOfCurrentLine) + 1;
-        //    //if (startOfNextLine == 0)
-        //    //{
-        //    //    startOfNextLine = richTextBox1.Text.Length;
-        //    //}
-
-        //    //// 删除当前行的文本范围
-        //    //richTextBox1.Text = richTextBox1.Text.Remove(startOfCurrentLine, startOfNextLine - startOfCurrentLine);
-
-        //    // 获取当前光标所在的行的起始位置
-        //    int currentLineStart = richTextBox1.GetFirstCharIndexOfCurrentLine();
-
-        //    // 获取当前光标所在的行的结束位置
-        //    int currentLineEnd = richTextBox1.GetFirstCharIndexFromLine(richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart) + 1);
-
-        //    // 如果当前行结束位置为-1，表示是最后一行
-        //    if (currentLineEnd == -1)
-        //    {
-        //        currentLineEnd = richTextBox1.Text.Length;
-        //    }
-
-        //    // 保存当前整行的颜色
-        //    Color originalColor = richTextBox1.SelectionColor;
-
-        //    // 恢复整行的颜色
-        //    richTextBox1.Select(currentLineStart, currentLineEnd - currentLineStart);
-        //    richTextBox1.SelectionColor = originalColor;
-
-        //    // 删除当前行的文本范围
-        //    richTextBox1.Text = richTextBox1.Text.Remove(currentLineStart, currentLineEnd - currentLineStart);
-
-
-        //}
 
         private void 删除全部ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 删除全部文本
             richTextBox1.Text = string.Empty;
         }
+
+        
+
+
     }
 }

@@ -43,15 +43,15 @@ namespace _305Vision
             platform.Show(dockPanel1);//没第二个参数 默认为主窗体 中间
             //加载流程框架,在platform的左边 占比30%
             FormProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
-            
+            //加载输出栏,在platform的下方 占比30%
+            FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
             //加载侧边栏，并设置侧边栏的宽度
             toolBox.Show(dockPanel1,DockState.DockLeft);
             toolBox.DockPanel.DockLeftPortion = 0.1;
             //创建主窗口2
             platform2.Text =  "窗口2";
             platform2.Show(dockPanel1);
-            //加载输出栏,在platform的下方 占比30%
-            FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
+            
         }
 
 
@@ -117,6 +117,29 @@ namespace _305Vision
             FormOut.ReadLog("这是"+ this.Name + "窗口的按钮",LogLevel.Warning);
 
         }
+
+
+        //#region 防止闪屏
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        CreateParams cp = base.CreateParams;
+        //        cp.ExStyle |= 0x02000000;
+        //        return cp;
+        //    }
+        //}
+        //#endregion
+
+
+
+
+
+
+
+
+
+
     }
-    
+
 }

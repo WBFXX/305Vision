@@ -54,12 +54,6 @@ namespace _305Vision
                     //可以设置其他属性
                 };
 
-                ////设置每个pic被点击的记录
-                //pictureBoxStates[pictureBox] = false;
-                //// 在这里为每个 PictureBox 添加默认的大小和位置
-                //pictureBoxSizes[pictureBox] = pictureBox.Size;
-                //pictureBoxLocations[pictureBox] = pictureBox.Location;
-
                 pictureBox.MouseClick += PictureBox_MouseClick;
                 pictureBoxes.Add(pictureBox);
                 string imgePath = "e:/1.jpg";
@@ -175,6 +169,12 @@ namespace _305Vision
             // 将源控件的属性赋给目标控件
             pictureBox_Mudi.Image = imageTemp;
             // pictureBox_Mudi.Tag = TagTemp;
+        }
+
+        private void flowLayoutPanel1_SizeChanged(object sender, EventArgs e)
+        {
+            // 当窗体大小发生变化时更新 PictureBox 的大小和位置
+            AdjustImageArea();
         }
     }
 }
