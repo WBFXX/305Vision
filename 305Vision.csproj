@@ -164,5 +164,11 @@
   <ItemGroup>
     <Content Include="Icon\tool-box.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PictureWindow\PictureWindow.csproj">
+      <Project>{ff66971d-799f-4b1e-a874-2f2da4409b27}</Project>
+      <Name>PictureWindow</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

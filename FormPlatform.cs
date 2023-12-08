@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace _305Vision
 {
     public partial class FormPlatform : DockContent
     {
-        private int cameraCount = 4;//为了测试效果，将相机数量设置为5
+        private int cameraCount = 10;//为了测试效果，将相机数量设置为5
         public FormPlatform()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace _305Vision
         private Dictionary<PictureBox, Point> pictureBoxLocations = new Dictionary<PictureBox, Point>(); //添加了一个字典，用于存储PictureBox的位置
         private Dictionary<PictureBox, bool> pictureBoxStates = new Dictionary<PictureBox, bool>(); //添加一个字典，用于存储Picturebox是否被点击
         private Dictionary<Object, bool> pictureBoxTag = new Dictionary<Object, bool>(); //添加一个字典，用于存储Picturebox的Tag是否被点击
+        //private Dictionary<Object, PictureBox> tagToPictureBox = new Dictionary<Object, PictureBox>(); //添加一个字典，用于查找tag对应的pictureBox
 
         //public Form1()
         //{
@@ -54,7 +56,7 @@ namespace _305Vision
                     //可以设置其他属性
                 };
 
-                pictureBox.MouseClick += PictureBox_MouseClick;
+                pictureBox.Click += PictureBox_Click;
                 pictureBoxes.Add(pictureBox);
                 string imgePath = "e:/1.jpg";
                 Bitmap bitmap = new Bitmap(imgePath);
@@ -79,11 +81,11 @@ namespace _305Vision
                 }
             }
         }
-
-        private void PictureBox_MouseClick(object sender, MouseEventArgs e)
+        private Object tagToPictureBox;
+        private void PictureBox_Click(object sender, EventArgs e)
         {
             PictureBox clickedPictureBox = (PictureBox)sender;
-
+            
 
             // 确保字典中包含当前 PictureBox 的键
             if (!pictureBoxTag.ContainsKey(pictureBoxes[0].Tag))
@@ -103,7 +105,8 @@ namespace _305Vision
                 pictureBoxes[0].Location = pictureBoxLocations[pictureBoxes[0]];
                 pictureBoxes[0].Margin = new Padding(1);
                 pictureBoxTag[pictureBoxes[0].Tag] = false;
-                exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
+
+                exChangePictureBox(clickedPictureBox, pictureBoxes[(int)tagToPictureBox -1]);
             }
             else
             {
@@ -112,19 +115,16 @@ namespace _305Vision
 
                 pictureBoxSizes[pictureBoxes[0]] = pictureBoxes[0].Size;
                 pictureBoxLocations[pictureBoxes[0]] = pictureBoxes[0].Location;
-
                 //exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
-
 
                 //0为主显示框,点击后，直接把第一个放大，并且交换显示的图片
                 pictureBoxes[0].Size = new Size(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
-
 
                 //clickedPictureBox.Location = new Point(0, 0);
                 //放到最满 然后取消边距
                 pictureBoxes[0].Margin = new Padding(0);
                 pictureBoxTag[pictureBoxes[0].Tag] = true;
-
+                tagToPictureBox = clickedPictureBox.Tag;
                 exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
 
             }
@@ -138,8 +138,8 @@ namespace _305Vision
         /// <returns></returns>
         private Size CalculatePictureBoxSize(int rows, int cols)
         {
-            int width = (flowLayoutPanel1.Width - 4) / cols;
-            int height = (flowLayoutPanel1.Height - 4) / rows;
+            int width = (flowLayoutPanel1.Width - cols*2) / cols;
+            int height = (flowLayoutPanel1.Height - rows*2) / rows;
 
             ////确保每个PictureBox的宽高都接近正方形
             //int size = Math.Min(width, height);
@@ -171,6 +171,7 @@ namespace _305Vision
          * */
         private void exChangePictureBox(PictureBox pictureBox_Sourse, PictureBox pictureBox_Mudi)
         {
+            if (pictureBox_Sourse == pictureBox_Mudi) return;
             // 保存源控件的属性
             Image imageTemp = pictureBox_Sourse.Image;
             //Object TagTemp = pictureBox_Sourse.Tag;
