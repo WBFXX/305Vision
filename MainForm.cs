@@ -13,10 +13,12 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using _305Vision.Enum;
 
+
 namespace _305Vision
 {
     public partial class MainForm : Form
     {
+        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
         //加载侧边工具栏
         ToolsBox toolBox = new ToolsBox();
@@ -51,7 +53,8 @@ namespace _305Vision
             //创建主窗口2
             platform2.Text =  "窗口2";
             platform2.Show(dockPanel1);
-            
+            logger.Info("bb");
+
         }
 
 
@@ -112,6 +115,7 @@ namespace _305Vision
             }
             else
             {
+                logger.Info("aa");
                 //输出日志
                 FormOut.ReadLog("工具栏已打开。",this.Name );
                 //System.Windows.Forms.MessageBox.Show("工具栏已打开");
