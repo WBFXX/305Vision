@@ -13,7 +13,9 @@ namespace _305Vision
 {
     public partial class FormPlatform : DockContent
     {
-        private int cameraCount = 10;//为了测试效果，将相机数量设置为5
+
+        
+        private int cameraCount = 4;//为了测试效果，将相机数量设置为5
         public FormPlatform()
         {
             InitializeComponent();
@@ -39,6 +41,8 @@ namespace _305Vision
 
         private void InitializeCamera()
         {
+            
+            
             //根据相机数量生成PictureBox
             for (int i = 0; i < cameraCount; i++)
             {
@@ -52,7 +56,7 @@ namespace _305Vision
                     Anchor = AnchorStyles.None,
 
                     Tag = i + 1,
-
+                    
                     //可以设置其他属性
                 };
 

@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.logBox = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除全部ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // logBox
             // 
-            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBox1.ContextMenuStrip = this.contextMenuStrip1;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.ForeColor = System.Drawing.Color.White;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(800, 450);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.logBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.logBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logBox.ContextMenuStrip = this.contextMenuStrip1;
+            this.logBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logBox.ForeColor = System.Drawing.Color.White;
+            this.logBox.Location = new System.Drawing.Point(0, 0);
+            this.logBox.Name = "logBox";
+            this.logBox.Size = new System.Drawing.Size(800, 450);
+            this.logBox.TabIndex = 0;
+            this.logBox.Text = "";
             // 
             // contextMenuStrip1
             // 
@@ -70,7 +70,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.logBox);
             this.ForeColor = System.Drawing.Color.White;
             this.HideOnClose = true;
             this.MaximizeBox = false;
@@ -87,9 +87,8 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox logBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 删除全部ToolStripMenuItem;
-        
     }
 }

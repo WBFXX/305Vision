@@ -9,7 +9,7 @@ namespace _305Vision.Enum
     /// <summary>
     /// 日志等级
     /// </summary>
-    public enum LogLevel
+    public enum LogClass
     {
         Info,     // 普通信息
         Warning,  // 警告

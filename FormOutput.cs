@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
 using _305Vision.Enum;
+using NLog;
 
 namespace _305Vision
 {
@@ -23,11 +24,12 @@ namespace _305Vision
 
         //private static FormOutput instance;  // 用于共享的单例实例
         //private static readonly object lockObject = new object();  // 用于确保线程安全
-
+        private static Logger logger = null;
 
 
         private FormOutput()
         {
+            
             InitializeComponent();
             //ReadLog("窗口初始化成功");
         }
@@ -56,8 +58,8 @@ namespace _305Vision
         /// <param name="formName"></param>
         /// <param name="level"></param>
         /// 
-        //ReadLog 函数已经定义了一个可选参数 LogLevel level = LogLevel.Info，这使得调用者可以选择提供或者不提供第二个参数。如果不提供，它将默认使用 LogLevel.Info。
-        public void ReadLog(string log,String formName , LogLevel level = LogLevel.Info)
+        //ReadLog 函数已经定义了一个可选参数 LogClass level = LogClass.Info，这使得调用者可以选择提供或者不提供第二个参数。如果不提供，它将默认使用 LogClass.Info。
+        public void ReadLog(string log,String formName , LogClass level = LogClass.Info)
         {
             string time = Convert.ToString(DateTime.Now);
             if (!this.Visible)
@@ -67,35 +69,32 @@ namespace _305Vision
             
             switch (level)
             {
-                case LogLevel.Info:
-                    richTextBox1.SelectionColor = System.Drawing.Color.White; // 默认黑色
+                case LogClass.Info:
+                    logBox.SelectionColor = System.Drawing.Color.White; // 默认黑色
                     break;
-                case LogLevel.Warning:
-                    richTextBox1.SelectionColor = System.Drawing.Color.Orange; // 警告颜色
+                case LogClass.Warning:
+                    logBox.SelectionColor = System.Drawing.Color.Orange; // 警告颜色
                     break;
-                case LogLevel.Error:
-                    richTextBox1.SelectionColor = System.Drawing.Color.Red; // 错误颜色
+                case LogClass.Error:
+                    logBox.SelectionColor = System.Drawing.Color.Red; // 错误颜色
                     break;
                 default:
-                    richTextBox1.SelectionColor = System.Drawing.Color.White;
+                    logBox.SelectionColor = System.Drawing.Color.White;
                     break;
             }
 
-            richTextBox1.AppendText(time + "  " + "<" + formName +"> " +level + ":" + log + "\n");
+            logBox.AppendText(time + "  " + "<" + formName +"> " +level + ":" + log + "\n");
 
             // 恢复默认颜色
-            richTextBox1.SelectionColor = richTextBox1.ForeColor;
+            logBox.SelectionColor = logBox.ForeColor;
         }
 
 
         private void 删除全部ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // 删除全部文本
-            richTextBox1.Text = string.Empty;
+            //// 删除全部文本
+            logBox.Text = string.Empty;
         }
-
-        
-
 
     }
 }
