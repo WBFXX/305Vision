@@ -54,6 +54,7 @@
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(687, 509);
             this.Controls.Add(this.stNodeEditor1);
+            this.HideOnClose = true;
             this.Name = "STNodeEdit";
             this.Text = "Form1";
             this.ResumeLayout(false);

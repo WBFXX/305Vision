@@ -63,9 +63,69 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap hand_painted_plate {
+            get {
+                object obj = ResourceManager.GetObject("hand-painted-plate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap tool_box {
             get {
                 object obj = ResourceManager.GetObject("tool-box", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 图片_moving_picture {
+            get {
+                object obj = ResourceManager.GetObject("图片_moving-picture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 工具箱_toolkit {
+            get {
+                object obj = ResourceManager.GetObject("工具箱_toolkit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 手绘板_hand_painted_plate {
+            get {
+                object obj = ResourceManager.GetObject("手绘板_hand-painted-plate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 树结构_tree_list {
+            get {
+                object obj = ResourceManager.GetObject("树结构_tree-list", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 键盘_keyboard_one {
+            get {
+                object obj = ResourceManager.GetObject("键盘_keyboard-one", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

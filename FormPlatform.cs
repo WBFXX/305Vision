@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,16 +14,17 @@ namespace _305Vision
 {
     public partial class FormPlatform : DockContent
     {
-
         
         private int cameraCount = 4;//为了测试效果，将相机数量设置为5
         public FormPlatform()
         {
-            InitializeComponent();
-            InitializeCamera();
-            AdjustImageArea();
-        }
 
+                InitializeComponent();
+                InitializeCamera();
+                AdjustImageArea();
+        
+        }
+        FormOutput FormOutput = FormOutput.Instance;
 
         private List<PictureBox> pictureBoxes = new List<PictureBox>();
 
@@ -91,47 +93,48 @@ namespace _305Vision
             PictureBox clickedPictureBox = (PictureBox)sender;
             
 
-            // 确保字典中包含当前 PictureBox 的键
-            if (!pictureBoxTag.ContainsKey(pictureBoxes[0].Tag))
-            {
-                // 如果没有，可以将其添加到字典中,记录第一个窗口是否被点击
-                pictureBoxTag[pictureBoxes[0].Tag] = false;
-            }
+                // 确保字典中包含当前 PictureBox 的键
+                if (!pictureBoxTag.ContainsKey(pictureBoxes[0].Tag))
+                {
+                    // 如果没有，可以将其添加到字典中,记录第一个窗口是否被点击
+                    pictureBoxTag[pictureBoxes[0].Tag] = false;
+                }
 
 
-            //根据pictureBox状态来还原位置,如果已经被点击过
-            if (pictureBoxTag[pictureBoxes[0].Tag])
-            {
+                //根据pictureBox状态来还原位置,如果已经被点击过
+                if (pictureBoxTag[pictureBoxes[0].Tag])
+                {
 
-                // 如果是放大状态，再次点击还原
-                //
-                pictureBoxes[0].Size = pictureBoxSizes[pictureBoxes[0]];
-                pictureBoxes[0].Location = pictureBoxLocations[pictureBoxes[0]];
-                pictureBoxes[0].Margin = new Padding(1);
-                pictureBoxTag[pictureBoxes[0].Tag] = false;
+                    // 如果是放大状态，再次点击还原
+                    //
+                    pictureBoxes[0].Size = pictureBoxSizes[pictureBoxes[0]];
+                    pictureBoxes[0].Location = pictureBoxLocations[pictureBoxes[0]];
+                    pictureBoxes[0].Margin = new Padding(1);
+                    pictureBoxTag[pictureBoxes[0].Tag] = false;
 
-                exChangePictureBox(clickedPictureBox, pictureBoxes[(int)tagToPictureBox -1]);
-            }
-            else
-            {
-                // 如果是还原状态，点击放大
-                //先存第一个pic的大小和位置
+                    exChangePictureBox(clickedPictureBox, pictureBoxes[(int)tagToPictureBox - 1]);
+                }
+                else
+                {
+                    // 如果是还原状态，点击放大
+                    //先存第一个pic的大小和位置
 
-                pictureBoxSizes[pictureBoxes[0]] = pictureBoxes[0].Size;
-                pictureBoxLocations[pictureBoxes[0]] = pictureBoxes[0].Location;
-                //exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
+                    pictureBoxSizes[pictureBoxes[0]] = pictureBoxes[0].Size;
+                    pictureBoxLocations[pictureBoxes[0]] = pictureBoxes[0].Location;
+                    //exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
 
-                //0为主显示框,点击后，直接把第一个放大，并且交换显示的图片
-                pictureBoxes[0].Size = new Size(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
+                    //0为主显示框,点击后，直接把第一个放大，并且交换显示的图片
+                    pictureBoxes[0].Size = new Size(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
 
-                //clickedPictureBox.Location = new Point(0, 0);
-                //放到最满 然后取消边距
-                pictureBoxes[0].Margin = new Padding(0);
-                pictureBoxTag[pictureBoxes[0].Tag] = true;
-                tagToPictureBox = clickedPictureBox.Tag;
-                exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
+                    //clickedPictureBox.Location = new Point(0, 0);
+                    //放到最满 然后取消边距
+                    pictureBoxes[0].Margin = new Padding(0);
+                    pictureBoxTag[pictureBoxes[0].Tag] = true;
+                    tagToPictureBox = clickedPictureBox.Tag;
+                    exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
 
-            }
+                }
+            
         }
 
         /// <summary>

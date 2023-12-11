@@ -24,7 +24,6 @@ namespace _305Vision
 
         //private static FormOutput instance;  // 用于共享的单例实例
         //private static readonly object lockObject = new object();  // 用于确保线程安全
-        private static Logger logger = null;
 
 
         private FormOutput()

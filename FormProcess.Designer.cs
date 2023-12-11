@@ -61,26 +61,26 @@
             this.位置锁定解除ToolStripMenuItem,
             this.连接锁定解除ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 104);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(175, 76);
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
             // 位置锁定解除ToolStripMenuItem
             // 
             this.位置锁定解除ToolStripMenuItem.Name = "位置锁定解除ToolStripMenuItem";
-            this.位置锁定解除ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.位置锁定解除ToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
             this.位置锁定解除ToolStripMenuItem.Text = "位置锁定/解除";
             this.位置锁定解除ToolStripMenuItem.Click += new System.EventHandler(this.位置锁定解除ToolStripMenuItem_Click);
             // 
             // 连接锁定解除ToolStripMenuItem
             // 
             this.连接锁定解除ToolStripMenuItem.Name = "连接锁定解除ToolStripMenuItem";
-            this.连接锁定解除ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.连接锁定解除ToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
             this.连接锁定解除ToolStripMenuItem.Text = "连接锁定/解除";
             this.连接锁定解除ToolStripMenuItem.Click += new System.EventHandler(this.连接锁定解除ToolStripMenuItem_Click);
             // 
@@ -89,8 +89,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(777, 525);
+            this.ControlBox = false;
             this.Controls.Add(this.stNodeEditor1);
+            this.HideOnClose = true;
             this.Name = "FormProcess";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "算法流程";
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);

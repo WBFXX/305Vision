@@ -175,6 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon\tool-box.png" />
+    <Content Include="Icon\hand-painted-plate.png" />
+    <Content Include="Icon\图片_moving-picture.png" />
+    <Content Include="Icon\工具箱_toolkit.png" />
+    <Content Include="Icon\手绘板_hand-painted-plate.png" />
+    <Content Include="Icon\树结构_tree-list.png" />
+    <Content Include="Icon\键盘_keyboard-one.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PictureWindow\PictureWindow.csproj">

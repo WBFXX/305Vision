@@ -22,7 +22,7 @@ namespace _305Vision
         /// <summary>
         /// 引入日志 logger
         /// </summary>
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger(); 
+        private static  Logger logger = null; 
 
 
         //加载侧边工具栏
@@ -31,7 +31,7 @@ namespace _305Vision
         FormPlatform platform = new FormPlatform();
         FormPlatform platform2 = new FormPlatform();
         FormOutput FormOut = FormOutput.Instance;
-        FormProcess FormProcess = new FormProcess();
+        FormProcess formProcess = new FormProcess();
 
         
 
@@ -50,7 +50,7 @@ namespace _305Vision
             dockPanel1.DockLeftPortion = 0.1;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%
             platform.Show(dockPanel1);//没第二个参数 默认为主窗体 中间
             //加载流程框架,在platform的左边 占比30%
-            FormProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
+            formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
             //加载输出栏,在platform的下方 占比30%
             FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
            
@@ -62,7 +62,10 @@ namespace _305Vision
             platform2.Text =  "窗口2";
             platform2.Show(dockPanel1);
 
-            //logger.Info("bb");
+            if(logger == null)
+            {
+                logger = LogManager.GetCurrentClassLogger();
+            }
 
         }
 
@@ -94,10 +97,12 @@ namespace _305Vision
             if (toolBox.DockState == DockState.Hidden || toolBox.DockState == DockState.Unknown) { 
             ToolsBox toolBox = new ToolsBox();
             toolBox.Show(dockPanel1, DockState.DockLeft);
+
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("工具栏已打开");
+                //System.Windows.Forms.MessageBox.Show("工具栏已打开");
+                logger.Warn("工具栏已打开");
             }
         }
 
@@ -117,23 +122,92 @@ namespace _305Vision
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (toolBox.DockState == DockState.Hidden || toolBox.DockState == DockState.Unknown)
+            if (toolBox.IsHidden)
             {
                 ToolsBox toolBox = new ToolsBox();
                 toolBox.Show(dockPanel1, DockState.DockLeft);
-                FormOut.ReadLog("打开工具栏", this.Name);
+                this.toolBox = toolBox;
+                //FormOut.ReadLog("打开工具栏", this.Name);
             }
             else
             {
                 logger.Info("打开工具栏失败，原因是已经有工具栏。" );
                 
                 //输出日志
-                FormOut.ReadLog("工具栏已打开",this.Name,LogClass.Warning);
+                //FormOut.ReadLog("工具栏已打开",this.Name,LogClass.Warning);
                 //System.Windows.Forms.MessageBox.Show("工具栏已打开");
             }
             //FormOut.ReadLog("这是"+ this.Name + "窗口的按钮",this.Name ,LogClass.Warning);
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (formProcess.IsHidden)
+            {
+                logger.Info(this.formProcess.IsHidden);
+                FormProcess formProcess = new FormProcess();
+                if(!platform.IsHidden && !FormOut.IsHidden)
+                {
+                    FormOut.IsHidden = true;
+                    formProcess.Show(platform.Pane,DockAlignment.Left,0.5);
+                    FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
+                }
+                else
+                {
+                    formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
+                }
+                this.formProcess = formProcess;
+                logger.Info("打开窗口成功");
+            }
+            else
+            {
+                logger.Info("当前点击窗口" + formProcess.Name + "已存在");
+
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+           
+             if (FormOut.IsHidden)
+            {
+                FormOutput FormOut = FormOutput.Instance;
+                if (!platform.IsHidden)
+                {
+                    FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
+                }
+                else
+                {
+                    FormOut.Show(dockPanel1,DockState.DockBottom);
+                }
+                logger.Info("打开窗口成功");
+            }
+            else
+            {
+                logger.Info("当前点击窗口" + FormOut.Name + "已存在");
+
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            FormPlatform formPlatform = new FormPlatform();
+
+            try
+            {
+                formPlatform.Text = "图像窗口";
+                formPlatform.Show(dockPanel1);
+            }
+            catch (Exception ex)
+            {
+
+                logger.Error(ex);
+            }
+            
+        }
+
+
 
 
         //#region 防止闪屏
