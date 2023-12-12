@@ -15,6 +15,16 @@ namespace _305Vision
 {
     public partial class FormProcess : DockContent
     {
+        private static FormProcess _instance;
+        public static FormProcess Instance
+        {
+            get
+            {
+                if (_instance == null || _instance.IsDisposed)
+                    _instance = new FormProcess();
+                return _instance;
+            }
+        }
         
         public FormProcess()
         {

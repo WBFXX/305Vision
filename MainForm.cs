@@ -22,16 +22,17 @@ namespace _305Vision
         /// <summary>
         /// 引入日志 logger
         /// </summary>
-        private static  Logger logger = null; 
+        private static  Logger logger = null;
 
+        //单例
+        private static MainForm _instance;
 
         //加载侧边工具栏
-        ToolsBox toolBox = new ToolsBox();
+        ToolsBox toolBox = ToolsBox.Instance;
         //加载主平台
-        FormPlatform platform = new FormPlatform();
-        FormPlatform platform2 = new FormPlatform();
+        FormPlatform platform = FormPlatform.Instance;
         FormOutput FormOut = FormOutput.Instance;
-        FormProcess formProcess = new FormProcess();
+        FormProcess formProcess = FormProcess.Instance;
 
         
 
@@ -40,6 +41,15 @@ namespace _305Vision
             InitializeComponent();
         }
 
+        public static MainForm Instance
+        {
+            get 
+            {
+                if(_instance == null || _instance.IsDisposed)
+                    _instance = new MainForm();
+                return _instance; 
+            }
+        }
         
         
         private void MainForm_Load(object sender, EventArgs e)
@@ -232,7 +242,7 @@ namespace _305Vision
 
 
 
-
+        
     }
 
 }

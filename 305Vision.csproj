@@ -71,6 +71,7 @@
     <Compile Include="MySTNode\BottonStyle\OrangeStyle.cs" />
     <Compile Include="MySTNode\BottonStyle\TypeColorStyle.cs" />
     <Compile Include="Enum\Enum.cs" />
+    <Compile Include="MySTNode\图片操作\ImageSoure.cs" />
     <Compile Include="Service\FormService.cs" />
     <Compile Include="MySTNode\图片操作\ImageBaseNode.cs" />
     <Compile Include="MySTNode\图片操作\ImageChannelNode.cs" />

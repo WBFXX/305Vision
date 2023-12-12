@@ -14,7 +14,7 @@ namespace _305Vision.BottonStyle
         protected override void OnOwnerChanged()
         {
             base.OnOwnerChanged();
-            this.Owner?.SetTypeColor(typeof(int), Color.DarkOrange);
+            this.Owner?.SetTypeColor(typeof(int), Color.DarkCyan);
         }
     }
 }

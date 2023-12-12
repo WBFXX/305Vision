@@ -14,7 +14,17 @@ namespace _305Vision
 {
     public partial class FormPlatform : DockContent
     {
-        
+        private static FormPlatform _instance;
+        public static FormPlatform Instance
+        {
+            get
+            {
+                if (_instance == null || _instance.IsDisposed)
+                    _instance = new FormPlatform();
+                return _instance;
+            }
+        }
+
         private int cameraCount = 4;//为了测试效果，将相机数量设置为5
         public FormPlatform()
         {
@@ -24,7 +34,6 @@ namespace _305Vision
                 AdjustImageArea();
         
         }
-        FormOutput FormOutput = FormOutput.Instance;
 
         private List<PictureBox> pictureBoxes = new List<PictureBox>();
 

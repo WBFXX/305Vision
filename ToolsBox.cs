@@ -15,6 +15,16 @@ namespace _305Vision
 {
     public partial class ToolsBox : DockContent
     {
+        private static ToolsBox _instance;
+        public static ToolsBox Instance
+        {
+            get
+            {
+                if (_instance == null || _instance.IsDisposed)
+                    _instance = new ToolsBox();
+                return _instance;
+            }
+        }
         public ToolsBox()
         {
             InitializeComponent(); 

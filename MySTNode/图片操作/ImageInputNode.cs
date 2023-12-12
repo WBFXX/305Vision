@@ -19,7 +19,7 @@ namespace _305Vision.图片操作测试
             get { return _FileName; }
             set
             {
-                Image img = null;                       //当文件名被设置时 加载图片并 向输出节点输出
+                Image img = null;  //当文件名被设置时 加载图片并 向输出节点输出
                 if (!string.IsNullOrEmpty(value))
                 {
                     img = Image.FromFile(value);
@@ -86,7 +86,8 @@ namespace _305Vision.图片操作测试
 
         protected override void OnDrawValueRectangle(DrawingTools dt)
         {
-            base.OnDrawValueRectangle(dt);              //在STNodePropertyGrid绘制此属性区域时候将"打开"按钮绘制上去
+            base.OnDrawValueRectangle(dt);              
+            //在STNodePropertyGrid绘制此属性区域时候将"打开"按钮绘制上去
             dt.Graphics.FillRectangle(Brushes.Gray, m_rect_open);
             dt.Graphics.DrawString("+", this.Control.Font, Brushes.White, m_rect_open, m_sf);
         }
