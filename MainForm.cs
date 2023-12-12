@@ -58,10 +58,11 @@ namespace _305Vision
             //加载侧边栏，并设置侧边栏的宽度
             toolBox.Show(dockPanel1,DockState.DockLeft);
             toolBox.DockPanel.DockLeftPortion = 0.1;
-            //创建主窗口2
-            platform2.Text =  "窗口2";
-            platform2.Show(dockPanel1);
-
+            ////创建主窗口2
+            //platform2.Text =  "窗口2";
+            //platform2.Show(dockPanel1);
+            
+            //在FormOut后开启logger
             if(logger == null)
             {
                 logger = LogManager.GetCurrentClassLogger();
@@ -114,10 +115,10 @@ namespace _305Vision
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FormPlatform platform = new FormPlatform();
-            platform.Show();
-            //TreeView treeView = new TreeView();
-            //treeView.Show();
+            //FormPlatform platform = new FormPlatform();
+            //platform.Show();
+            TreeView treeView = new TreeView();
+            treeView.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -190,18 +191,19 @@ namespace _305Vision
             }
         }
 
+        private int FP_number = 0;
         private void button7_Click(object sender, EventArgs e)
         {
             FormPlatform formPlatform = new FormPlatform();
-
+            FP_number++;
             try
             {
-                formPlatform.Text = "图像窗口";
+                formPlatform.Text = "图像窗口"+ FP_number;
                 formPlatform.Show(dockPanel1);
             }
             catch (Exception ex)
             {
-
+                FP_number--;
                 logger.Error(ex);
             }
             

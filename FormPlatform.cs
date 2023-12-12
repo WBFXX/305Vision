@@ -88,53 +88,57 @@ namespace _305Vision
             }
         }
         private Object tagToPictureBox;
+        private PictureBox lastClickedPictureBox; // 添加一个字段存储上一次点击的 PictureBox
         private void PictureBox_Click(object sender, EventArgs e)
         {
             PictureBox clickedPictureBox = (PictureBox)sender;
-            
 
                 // 确保字典中包含当前 PictureBox 的键
                 if (!pictureBoxTag.ContainsKey(pictureBoxes[0].Tag))
                 {
                     // 如果没有，可以将其添加到字典中,记录第一个窗口是否被点击
                     pictureBoxTag[pictureBoxes[0].Tag] = false;
-                }
+            }
 
 
-                //根据pictureBox状态来还原位置,如果已经被点击过
-                if (pictureBoxTag[pictureBoxes[0].Tag])
-                {
+            //根据pictureBox状态来还原位置,如果已经被点击过
+            if (pictureBoxTag[pictureBoxes[0].Tag])
+            {
 
-                    // 如果是放大状态，再次点击还原
-                    //
-                    pictureBoxes[0].Size = pictureBoxSizes[pictureBoxes[0]];
-                    pictureBoxes[0].Location = pictureBoxLocations[pictureBoxes[0]];
-                    pictureBoxes[0].Margin = new Padding(1);
-                    pictureBoxTag[pictureBoxes[0].Tag] = false;
+                // 如果是放大状态，再次点击还原
+                //
+                pictureBoxes[0].Size = pictureBoxSizes[pictureBoxes[0]];
+                pictureBoxes[0].Location = pictureBoxLocations[pictureBoxes[0]];
+                pictureBoxes[0].Margin = new Padding(1);
+                pictureBoxTag[pictureBoxes[0].Tag] = false;
 
-                    exChangePictureBox(clickedPictureBox, pictureBoxes[(int)tagToPictureBox - 1]);
-                }
-                else
-                {
-                    // 如果是还原状态，点击放大
-                    //先存第一个pic的大小和位置
+                exChangePictureBox(clickedPictureBox, pictureBoxes[(int)tagToPictureBox - 1]);
+            }
+            else
+            {
+                // 如果是还原状态，点击放大
+                //先存第一个pic的大小和位置
 
-                    pictureBoxSizes[pictureBoxes[0]] = pictureBoxes[0].Size;
-                    pictureBoxLocations[pictureBoxes[0]] = pictureBoxes[0].Location;
-                    //exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
+                pictureBoxSizes[pictureBoxes[0]] = pictureBoxes[0].Size;
+                pictureBoxLocations[pictureBoxes[0]] = pictureBoxes[0].Location;
+                //exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
 
-                    //0为主显示框,点击后，直接把第一个放大，并且交换显示的图片
-                    pictureBoxes[0].Size = new Size(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
+                //0为主显示框,点击后，直接把第一个放大，并且交换显示的图片
+                pictureBoxes[0].Size = new Size(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
 
-                    //clickedPictureBox.Location = new Point(0, 0);
-                    //放到最满 然后取消边距
-                    pictureBoxes[0].Margin = new Padding(0);
-                    pictureBoxTag[pictureBoxes[0].Tag] = true;
-                    tagToPictureBox = clickedPictureBox.Tag;
-                    exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
+                //clickedPictureBox.Location = new Point(0, 0);
+                //放到最满 然后取消边距
+                pictureBoxes[0].Margin = new Padding(0);
+                pictureBoxTag[pictureBoxes[0].Tag] = true;
+                tagToPictureBox = clickedPictureBox.Tag;
+                exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
 
-                }
-            
+            }
+
+            //存储点击的图片，为了防止调整窗体bug出现
+            lastClickedPictureBox = clickedPictureBox;
+
+
         }
 
         /// <summary>
@@ -195,6 +199,13 @@ namespace _305Vision
         {
             // 当窗体大小发生变化时更新 PictureBox 的大小和位置
             AdjustImageArea();
+
+            // 将上一次点击的 PictureBox 的 Tag 状态设置为 false
+            if (lastClickedPictureBox != null)
+            {
+                pictureBoxTag[lastClickedPictureBox.Tag] = false;
+                lastClickedPictureBox = null;
+            }
         }
     }
 }
