@@ -26,6 +26,7 @@ namespace _305Vision
         }
 
         public static List<PictureBox> PictureBoxes { get => pictureBoxes; set => pictureBoxes = value; }
+        public int CameraCount { get => cameraCount; set => cameraCount = value; }
 
         private int cameraCount = 4;//为了测试效果，将相机数量设置为5
         public FormPlatform()
@@ -57,7 +58,7 @@ namespace _305Vision
             
             
             //根据相机数量生成PictureBox
-            for (int i = 0; i < cameraCount; i++)
+            for (int i = 0; i < CameraCount; i++)
             {
                 PictureBox pictureBox = new PictureBox
                 {
@@ -85,15 +86,17 @@ namespace _305Vision
 
         private void AdjustImageArea()
         {
-            int rows = (int)Math.Ceiling(Math.Sqrt(cameraCount));
-            int cols = (int)Math.Ceiling((double)cameraCount / rows);
+            int rows = (int)Math.Ceiling(Math.Sqrt(CameraCount));
+            int cols = (int)Math.Ceiling((double)CameraCount / rows);
+            double rows_double = Math.Ceiling(Math.Sqrt(CameraCount));
+            double cols_double = Math.Ceiling((double)CameraCount / rows);
 
             foreach (PictureBox pictureBox in PictureBoxes)
             {
                 int tag;
                 if (int.TryParse(pictureBox.Tag.ToString(), out tag))
                 {
-                    pictureBox.Size = CalculatePictureBoxSize(rows, cols);
+                    pictureBox.Size = CalculatePictureBoxSize(rows, cols,rows_double,cols_double);
                     pictureBox.Location = CalculatePictureBoxLocation(tag, rows, cols);
                 }
             }
@@ -153,15 +156,32 @@ namespace _305Vision
         }
 
         /// <summary>
-        /// 图像显示区域大小
+        /// 图像显示区域大小 4参
+        /// </summary>
+        /// <param name="rows"></param>
+        /// <param name="cols"></param>
+        /// <param name="rows_double"></param>
+        /// <param name="cols_double"></param>
+        /// <returns></returns>
+        private Size CalculatePictureBoxSize(int rows, int cols,double rows_double,double cols_double)
+        {
+            int width = (int)((flowLayoutPanel1.Width - cols*2) / cols_double);
+            int height = (int)((flowLayoutPanel1.Height - rows*2) / rows_double);
+
+            ////确保每个PictureBox的宽高都接近正方形
+            //int size = Math.Min(width, height);
+            return new Size(width, height);
+        }
+        /// <summary>
+        /// 图像显示区域大小 2参
         /// </summary>
         /// <param name="rows"></param>
         /// <param name="cols"></param>
         /// <returns></returns>
         private Size CalculatePictureBoxSize(int rows, int cols)
         {
-            int width = (flowLayoutPanel1.Width - cols*2) / cols;
-            int height = (flowLayoutPanel1.Height - rows*2) / rows;
+            int width = (int)((flowLayoutPanel1.Width - cols * 2) / rows);
+            int height = (int)((flowLayoutPanel1.Height - rows * 2) / cols);
 
             ////确保每个PictureBox的宽高都接近正方形
             //int size = Math.Min(width, height);

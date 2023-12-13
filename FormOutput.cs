@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
-using _305Vision.Enum;
+using _305Vision.MyEnum;
 using NLog;
 
 namespace _305Vision

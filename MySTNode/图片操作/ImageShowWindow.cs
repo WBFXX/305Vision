@@ -14,60 +14,35 @@ namespace _305Vision.MySTNode.图片操作
         private List<PictureBox> ST_GETpictureBoxes = FormPlatform.PictureBoxes;
         private Bitmap _bitmap;
 
-        // 属性用于存储所选 PictureBox 名称
-        private string _selectedPictureBoxName;
-        [STNodeProperty("选择图像", "选择一个图像")]
-        public string SelectedPictureBoxName
-        {
-            get => _selectedPictureBoxName;
-            set
-            {
-                _selectedPictureBoxName = value;
-                // 根据选择的名称检索 PictureBox 对象
-                PictureBox selectedPictureBox = GetPictureBoxByName(_selectedPictureBoxName);
-                // 如果需要，可以在此处更新其他属性或执行其他操作
-            }
-        }
+        public Bitmap Bitmap { get => _bitmap; set => _bitmap = value; }
 
-        // 方法用于根据名称检索 PictureBox 对象
-        private PictureBox GetPictureBoxByName(string name)
-        {
-            return ST_GETpictureBoxes.FirstOrDefault(p => p.Name == name);
-        }
-
+        private STNodeOption IN_option;
         protected override void OnCreate()
         {
             base.OnCreate();
-            this.Title = "图像显示选择框";
-            this.TitleColor = Color.FromArgb(20);
             this.AutoSize = false;
-            this.Size = new Size(200, 200);
-
-            // 创建并配置用于 PictureBox 选择的 ComboBox
-            ComboBox pictureBoxComboBox = new ComboBox();
-            pictureBoxComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            pictureBoxComboBox.Width = 150;
-            pictureBoxComboBox.SelectedIndexChanged += PictureBoxComboBox_SelectedIndexChanged;
-
-            // 将 PictureBox 名称添加到 ComboBox 中
-            foreach (PictureBox pictureBox in ST_GETpictureBoxes)
-            {
-                pictureBoxComboBox.Items.Add(pictureBox.Name);
-            }
-
-            // 将 ComboBox 添加到节点的控件中
+            this.Size = new Size(100,50);
+            IN_option =  this.InputOptions.Add("图片输入",typeof(Image),true);
+            IN_option.DataTransfer += new STNodeOptionEventHandler(IN_option_DataTransfer);
         }
 
-        // ComboBox 选择更改事件处理程序
-        private void PictureBoxComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void IN_option_DataTransfer(object sender, STNodeOptionEventArgs e)
         {
-            if (sender is ComboBox comboBox)
+            if(e.Status == ConnectionStatus.Connected)
             {
-                // 当 ComboBox 选择更改时更新所选 PictureBox 名称
-                SelectedPictureBoxName = comboBox.SelectedItem.ToString();
+                if (e.TargetOption.Data != null)
+                {
+                    MessageBox.Show("连接成功");
+                    FormPlatform.PictureBoxes[0].Image = (Image)e.TargetOption.Data;
+                }
+                else FormPlatform.PictureBoxes[0].Image = null;
+            }
+            else
+            {
+                MessageBox.Show("断开连接");
+                FormPlatform.PictureBoxes[0].Image = null;
             }
         }
-
-
     }
+    
 }

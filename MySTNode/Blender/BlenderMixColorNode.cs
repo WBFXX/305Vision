@@ -64,6 +64,7 @@ namespace _305Vision.Blender
             Add,
             Subtract
         }
+        
 
         private STNodeSelectEnumBox m_ctrl_select;  //自定义控件
         private STNodeProgress m_ctrl_progess;
@@ -116,7 +117,10 @@ namespace _305Vision.Blender
             m_ctrl_select = new STNodeSelectEnumBox();
             m_ctrl_select.DisplayRectangle = new Rectangle(10, 21, 120, 18);
             m_ctrl_select.Enum = this._MixType;
-            m_ctrl_select.ValueChanged += (s, e) => this._MixType = (ColorMixType)m_ctrl_select.Enum;
+            m_ctrl_select.ValueChanged += (s, e) =>
+            {
+                this._MixType = (ColorMixType)m_ctrl_select.Enum;
+            };
             this.Controls.Add(m_ctrl_select);
         }
 

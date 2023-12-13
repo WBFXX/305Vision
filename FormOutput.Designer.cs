@@ -38,7 +38,7 @@
             // logBox
             // 
             this.logBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.logBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.logBox.ContextMenuStrip = this.contextMenuStrip1;
             this.logBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logBox.ForeColor = System.Drawing.Color.White;

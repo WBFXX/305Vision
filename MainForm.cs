@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using _305Vision.Enum;
+using _305Vision.MyEnum;
 using NLog;
-
+using _305Vision.Blender;
 
 namespace _305Vision
 {
@@ -127,13 +127,28 @@ namespace _305Vision
             STNodeEdit sTNodeEdit = new STNodeEdit();
             sTNodeEdit.Show();
         }
+        
+        public System.Enum a
+        {
+            get
+            {
+                return a;
+            }
+            set { a = value; }
+        }
 
+        
+        
         private void button2_Click(object sender, EventArgs e)
         {
             //FormPlatform platform = new FormPlatform();
             //platform.Show();
-            TreeView treeView = new TreeView();
-            treeView.Show();
+            //TreeView treeView = new TreeView();
+            //treeView.Show();
+            
+            FrmEnumSelect frmEnumSelect = new FrmEnumSelect(a,new System.Drawing.Point(Left),100,1);
+               
+
         }
 
         private void button3_Click(object sender, EventArgs e)

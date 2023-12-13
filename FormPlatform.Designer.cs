@@ -28,7 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.图像数量1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.图像数量2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.图像数量4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.图像数量9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.图像数量60ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -42,6 +50,48 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.SizeChanged += new System.EventHandler(this.flowLayoutPanel1_SizeChanged);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.图像数量1ToolStripMenuItem,
+            this.图像数量2ToolStripMenuItem,
+            this.图像数量4ToolStripMenuItem,
+            this.图像数量9ToolStripMenuItem,
+            this.图像数量60ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(172, 124);
+            // 
+            // 图像数量1ToolStripMenuItem
+            // 
+            this.图像数量1ToolStripMenuItem.Name = "图像数量1ToolStripMenuItem";
+            this.图像数量1ToolStripMenuItem.Size = new System.Drawing.Size(171, 24);
+            this.图像数量1ToolStripMenuItem.Text = "图像数量：1";
+            // 
+            // 图像数量2ToolStripMenuItem
+            // 
+            this.图像数量2ToolStripMenuItem.Name = "图像数量2ToolStripMenuItem";
+            this.图像数量2ToolStripMenuItem.Size = new System.Drawing.Size(171, 24);
+            this.图像数量2ToolStripMenuItem.Text = "图像数量：2";
+            // 
+            // 图像数量4ToolStripMenuItem
+            // 
+            this.图像数量4ToolStripMenuItem.Name = "图像数量4ToolStripMenuItem";
+            this.图像数量4ToolStripMenuItem.Size = new System.Drawing.Size(171, 24);
+            this.图像数量4ToolStripMenuItem.Text = "图像数量：4";
+            // 
+            // 图像数量9ToolStripMenuItem
+            // 
+            this.图像数量9ToolStripMenuItem.Name = "图像数量9ToolStripMenuItem";
+            this.图像数量9ToolStripMenuItem.Size = new System.Drawing.Size(171, 24);
+            this.图像数量9ToolStripMenuItem.Text = "图像数量：9";
+            // 
+            // 图像数量60ToolStripMenuItem
+            // 
+            this.图像数量60ToolStripMenuItem.Name = "图像数量60ToolStripMenuItem";
+            this.图像数量60ToolStripMenuItem.Size = new System.Drawing.Size(171, 24);
+            this.图像数量60ToolStripMenuItem.Text = "图像数量：60";
+            // 
             // FormPlatform
             // 
             this.AllowEndUserDocking = false;
@@ -53,6 +103,7 @@
             this.HideOnClose = true;
             this.Name = "FormPlatform";
             this.Text = "主窗口";
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -60,5 +111,11 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 图像数量1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 图像数量2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 图像数量4ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 图像数量9ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 图像数量60ToolStripMenuItem;
     }
 }
