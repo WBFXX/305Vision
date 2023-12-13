@@ -25,6 +25,8 @@ namespace _305Vision
             }
         }
 
+        public static List<PictureBox> PictureBoxes { get => pictureBoxes; set => pictureBoxes = value; }
+
         private int cameraCount = 4;//为了测试效果，将相机数量设置为5
         public FormPlatform()
         {
@@ -35,7 +37,7 @@ namespace _305Vision
         
         }
 
-        private List<PictureBox> pictureBoxes = new List<PictureBox>();
+        private static List<PictureBox> pictureBoxes = new List<PictureBox>();
 
         private Dictionary<PictureBox, Size> pictureBoxSizes = new Dictionary<PictureBox, Size>(); //添加了一个字典，用于存储PictureBox的大小
         private Dictionary<PictureBox, Point> pictureBoxLocations = new Dictionary<PictureBox, Point>(); //添加了一个字典，用于存储PictureBox的位置
@@ -59,7 +61,7 @@ namespace _305Vision
             {
                 PictureBox pictureBox = new PictureBox
                 {
-                    Name = "pictureBox" + (i + 1),
+                    Name = "图像" + (i + 1),
                     SizeMode = PictureBoxSizeMode.Zoom,
                     BackColor = Color.Black,
                     Margin = new Padding(1),
@@ -72,10 +74,10 @@ namespace _305Vision
                 };
 
                 pictureBox.Click += PictureBox_Click;
-                pictureBoxes.Add(pictureBox);
+                PictureBoxes.Add(pictureBox);
                 string imgePath = "e:/1.jpg";
                 Bitmap bitmap = new Bitmap(imgePath);
-                pictureBoxes[0].Image = bitmap;
+                PictureBoxes[0].Image = bitmap;
                 flowLayoutPanel1.Controls.Add(pictureBox);
             }
         }
@@ -86,7 +88,7 @@ namespace _305Vision
             int rows = (int)Math.Ceiling(Math.Sqrt(cameraCount));
             int cols = (int)Math.Ceiling((double)cameraCount / rows);
 
-            foreach (PictureBox pictureBox in pictureBoxes)
+            foreach (PictureBox pictureBox in PictureBoxes)
             {
                 int tag;
                 if (int.TryParse(pictureBox.Tag.ToString(), out tag))
@@ -103,44 +105,44 @@ namespace _305Vision
             PictureBox clickedPictureBox = (PictureBox)sender;
 
                 // 确保字典中包含当前 PictureBox 的键
-                if (!pictureBoxTag.ContainsKey(pictureBoxes[0].Tag))
+                if (!pictureBoxTag.ContainsKey(PictureBoxes[0].Tag))
                 {
                     // 如果没有，可以将其添加到字典中,记录第一个窗口是否被点击
-                    pictureBoxTag[pictureBoxes[0].Tag] = false;
+                    pictureBoxTag[PictureBoxes[0].Tag] = false;
             }
 
 
             //根据pictureBox状态来还原位置,如果已经被点击过
-            if (pictureBoxTag[pictureBoxes[0].Tag])
+            if (pictureBoxTag[PictureBoxes[0].Tag])
             {
 
                 // 如果是放大状态，再次点击还原
                 //
-                pictureBoxes[0].Size = pictureBoxSizes[pictureBoxes[0]];
-                pictureBoxes[0].Location = pictureBoxLocations[pictureBoxes[0]];
-                pictureBoxes[0].Margin = new Padding(1);
-                pictureBoxTag[pictureBoxes[0].Tag] = false;
+                PictureBoxes[0].Size = pictureBoxSizes[PictureBoxes[0]];
+                PictureBoxes[0].Location = pictureBoxLocations[PictureBoxes[0]];
+                PictureBoxes[0].Margin = new Padding(1);
+                pictureBoxTag[PictureBoxes[0].Tag] = false;
 
-                exChangePictureBox(clickedPictureBox, pictureBoxes[(int)tagToPictureBox - 1]);
+                exChangePictureBox(clickedPictureBox, PictureBoxes[(int)tagToPictureBox - 1]);
             }
             else
             {
                 // 如果是还原状态，点击放大
                 //先存第一个pic的大小和位置
 
-                pictureBoxSizes[pictureBoxes[0]] = pictureBoxes[0].Size;
-                pictureBoxLocations[pictureBoxes[0]] = pictureBoxes[0].Location;
+                pictureBoxSizes[PictureBoxes[0]] = PictureBoxes[0].Size;
+                pictureBoxLocations[PictureBoxes[0]] = PictureBoxes[0].Location;
                 //exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
 
                 //0为主显示框,点击后，直接把第一个放大，并且交换显示的图片
-                pictureBoxes[0].Size = new Size(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
+                PictureBoxes[0].Size = new Size(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
 
                 //clickedPictureBox.Location = new Point(0, 0);
                 //放到最满 然后取消边距
-                pictureBoxes[0].Margin = new Padding(0);
-                pictureBoxTag[pictureBoxes[0].Tag] = true;
+                PictureBoxes[0].Margin = new Padding(0);
+                pictureBoxTag[PictureBoxes[0].Tag] = true;
                 tagToPictureBox = clickedPictureBox.Tag;
-                exChangePictureBox(clickedPictureBox, pictureBoxes[0]);
+                exChangePictureBox(clickedPictureBox, PictureBoxes[0]);
 
             }
 

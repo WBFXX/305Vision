@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 
-namespace WinNodeEditorDemo
+namespace _305Vision
 {
     /// <summary>
     /// 此节点仅演示UI自定义以及控件 并不包含功能

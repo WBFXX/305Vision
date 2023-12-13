@@ -57,23 +57,28 @@ namespace _305Vision
             
 
             // 调整左侧停靠区域的宽度比例
-            dockPanel1.DockLeftPortion = 0.1;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%
+            dockPanel1.DockLeftPortion = 0.15;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%
+            
+
             platform.Show(dockPanel1);//没第二个参数 默认为主窗体 中间
             //加载流程框架,在platform的左边 占比30%
             formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
             //加载输出栏,在platform的下方 占比30%
             FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
-           
 
             //加载侧边栏，并设置侧边栏的宽度
-            toolBox.Show(dockPanel1,DockState.DockLeft);
-            toolBox.DockPanel.DockLeftPortion = 0.1;
+            toolBox.Show(dockPanel1, DockState.DockLeft);
+            toolBox.DockPanel.DockLeftPortion = 0.15;
+
+
+
+
             ////创建主窗口2
             //platform2.Text =  "窗口2";
             //platform2.Show(dockPanel1);
-            
+
             //在FormOut后开启logger
-            if(logger == null)
+            if (logger == null)
             {
                 logger = LogManager.GetCurrentClassLogger();
             }
@@ -156,18 +161,20 @@ namespace _305Vision
         {
             if (formProcess.IsHidden)
             {
-                logger.Info(this.formProcess.IsHidden);
                 FormProcess formProcess = new FormProcess();
-                if(!platform.IsHidden && !FormOut.IsHidden)
+                //如果 主窗口在 且 输出窗口在
+                if (!platform.IsHidden && !FormOut.IsHidden)
                 {
                     FormOut.IsHidden = true;
-                    formProcess.Show(platform.Pane,DockAlignment.Left,0.5);
+                    formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
                     FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
                 }
-                else
+                //如果 主窗口在 且 输出窗口不在
+                else if (!platform.IsHidden && FormOut.IsHidden)
                 {
                     formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
                 }
+                else formProcess.Show(dockPanel1);
                 this.formProcess = formProcess;
                 logger.Info("打开窗口成功");
             }
@@ -201,19 +208,24 @@ namespace _305Vision
             }
         }
 
-        private int FP_number = 0;
         private void button7_Click(object sender, EventArgs e)
         {
-            FormPlatform formPlatform = new FormPlatform();
-            FP_number++;
+            FormPlatform formPlatform = FormPlatform.Instance;
             try
             {
-                formPlatform.Text = "图像窗口"+ FP_number;
-                formPlatform.Show(dockPanel1);
+                if (platform.IsHidden)
+                {
+                    formPlatform.Text = "图像窗口";
+                    formPlatform.Show(dockPanel1);
+                }
+                else
+                {
+                    logger.Warn("窗口已存在");
+                }
+                
             }
             catch (Exception ex)
             {
-                FP_number--;
                 logger.Error(ex);
             }
             
