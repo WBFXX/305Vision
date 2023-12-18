@@ -14,6 +14,7 @@ namespace _305Vision.Blender
         private int m_nWidth; // 弹出窗口的宽度
         private float m_scale; // 缩放比例
         private List<object> m_lst = new List<object>(); // 存储枚举值的列表
+
         private StringFormat m_sf; // 字符串格式化对象
 
         public System.Enum Enum { get; set; } // 选定的枚举值属性
@@ -24,6 +25,10 @@ namespace _305Vision.Blender
         public FrmEnumSelect(System.Enum e, Point pt, int nWidth, float scale)
         {
             // 设置控件样式，启用双缓冲等
+            //双缓冲技术用于减少绘图时的闪烁和提高绘图性能。
+            //启用这个样式可以在内存中创建一个缓冲区，绘制到这个缓冲区，
+            //然后一次性将整个缓冲区的内容复制到屏幕上，减少闪烁。
+            //true: 启用了上述样式，表示启用了优化的双缓冲
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 

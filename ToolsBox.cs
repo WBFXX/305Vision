@@ -34,7 +34,7 @@ namespace _305Vision
         {
             base.OnLoad(e);
             stNodeTreeView1.LoadAssembly(Application.ExecutablePath);
-            stNodePropertyGrid1.Text = "测试";
+            stNodePropertyGrid1.Text = "属性栏";
             stNodePropertyGrid1.SetInfoKey("作者", "邮箱", "联系","帮助");
             NodeService.STNodePropertyGrid = stNodePropertyGrid1;
             

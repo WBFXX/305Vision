@@ -81,6 +81,13 @@
     <Compile Include="MySTNode\Blender\STNodeColorButton.cs" />
     <Compile Include="MySTNode\Blender\STNodeProgress.cs" />
     <Compile Include="MySTNode\Blender\STNodeSelectBox.cs" />
+    <Compile Include="MySTNode\控件库\ComBoxControl.cs" />
+    <Compile Include="MySTNode\控件库\ComBoxCL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MySTNode\控件库\ComBoxCL.Designer.cs">
+      <DependentUpon>ComBoxCL.cs</DependentUpon>
+    </Compile>
     <Compile Include="MySTNode\图片操作\ImageShowWindow.cs" />
     <Compile Include="Service\FormService.cs" />
     <Compile Include="MySTNode\图片操作\ImageBaseNode.cs" />
@@ -147,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MySTNode\控件库\ComBoxCL.resx">
+      <DependentUpon>ComBoxCL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

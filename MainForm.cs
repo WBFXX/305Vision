@@ -14,6 +14,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using _305Vision.MyEnum;
 using NLog;
 using _305Vision.Blender;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace _305Vision
 {
@@ -145,9 +146,19 @@ namespace _305Vision
             //platform.Show();
             //TreeView treeView = new TreeView();
             //treeView.Show();
-            
-            FrmEnumSelect frmEnumSelect = new FrmEnumSelect(a,new System.Drawing.Point(Left),100,1);
-               
+
+            //FrmEnumSelect frmEnumSelect = new FrmEnumSelect(a,new System.Drawing.Point(Left),100,1);
+
+            //FormPlatform.Instance.Dispose();
+            //FormPlatform formPlatform =  new FormPlatform(9);
+            //formPlatform.Show(FormOut.Pane,DockAlignment.Top,0.7);
+
+
+
+
+
+            System.Windows.Forms.MessageBox.Show("测试");
+
 
         }
 

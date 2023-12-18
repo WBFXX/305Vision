@@ -94,14 +94,14 @@
             // 
             // FormPlatform
             // 
-            this.AllowEndUserDocking = false;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.CloseButtonVisible = false;
             this.Controls.Add(this.flowLayoutPanel1);
             this.HideOnClose = true;
             this.Name = "FormPlatform";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "主窗口";
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
