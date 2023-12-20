@@ -89,7 +89,6 @@
       <DependentUpon>ComBoxCL.cs</DependentUpon>
     </Compile>
     <Compile Include="MySTNode\图片操作\ImageShowWindow.cs" />
-    <Compile Include="Service\FormService.cs" />
     <Compile Include="MySTNode\图片操作\ImageBaseNode.cs" />
     <Compile Include="MySTNode\图片操作\ImageChannelNode.cs" />
     <Compile Include="MySTNode\图片操作\ImageInputNode.cs" />

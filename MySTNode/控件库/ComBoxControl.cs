@@ -26,7 +26,7 @@ namespace _305Vision.MySTNode.图片操作
             //文本在指定的矩形区域内水平左对齐
             m_sf.Alignment = StringAlignment.Near;
             //文本、字体、颜色、所在矩形框、对齐方式
-            g.DrawString(ComBoxCL.SelectPreText, this.Font, Brushes.White, this.ClientRectangle, m_sf); // 绘制枚举值文本
+            g.DrawString(PName, this.Font, Brushes.White, this.ClientRectangle, m_sf); // 绘制枚举值文本
 
             // 绘制下拉箭头(灰色，三个点填充)
             g.FillPolygon(Brushes.Gray, new Point[]{
@@ -39,11 +39,25 @@ namespace _305Vision.MySTNode.图片操作
 
         private List<PictureBox> m_ = new List<PictureBox>();
 
-        public string PName { get => pName; set => pName = value; }
+        public string PName
+        {
+            get => pName; set
+            {
+                pName = value;
+                this.Invalidate();
+            }
+        }
+        public event EventHandler ValueChanged; // 定义值改变事件
+        protected virtual void OnValueChanged(EventArgs e)
+        {
+            if (this.ValueChanged != null)
+                this.ValueChanged(this, e); // 触发值改变事件
+        }
 
         protected override void OnMouseClick(System.Windows.Forms.MouseEventArgs e)
         {
             base.OnMouseClick(e);
+            //MessageBox.Show(e.ToString());
             m_ = FormPlatform.PictureBoxes;
            
             // 计算弹出窗口的位置
@@ -52,15 +66,17 @@ namespace _305Vision.MySTNode.图片操作
             pt = this.Owner.Owner.PointToScreen(pt);
 
             // 创建并显示枚举选择窗口
-            ComBoxCL frm = new ComBoxCL(m_ , pt, this.Width, this.Owner.Owner.CanvasScale);
-            frm.ShowDialog();
+            ComBoxCL frm = new ComBoxCL(m_ , pt, this.Width, this.Owner.Owner.CanvasScale ,pName);
+            this.pName = frm.SelectPreText;
 
-            //// 如果用户确认选择
-            //if (v == System.Windows.Forms.DialogResult.OK)
-            //{
+            var v = frm.ShowDialog();
 
-            //    this.OnValueChanged(new EventArgs());
-            //}
+            // 如果用户确认选择
+            if (v == System.Windows.Forms.DialogResult.OK)
+            {
+                this.PName = frm.SelectPreText;
+                this.OnValueChanged(new EventArgs());
+            }
 
 
         }

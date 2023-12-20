@@ -20,23 +20,13 @@ namespace _305Vision.MySTNode.图片操作
 
         private StringFormat m_sf; // 字符串格式化对象
 
-        private static string _SelectPreText = null;
        
 
 
 
         private bool m_bClosed; // 标记窗口是否已关闭
 
-        public static string SelectPreText
-        {
-            get => _SelectPreText; 
-            set
-            {
-                _SelectPreText = value;
-                
-         
-            }
-        }
+        public string SelectPreText { get;set; }
 
         /// <summary>
         /// 下拉框控件
@@ -45,7 +35,9 @@ namespace _305Vision.MySTNode.图片操作
         /// <param name="pt">位置</param>
         /// <param name="nWidth">宽</param>
         /// <param name="scale">缩放比例</param>
-        public ComBoxCL(List<PictureBox> e, Point pt, int nWidth, float scale)
+        /// <param name="pName">当前框中名</param>
+        private string pName;
+        public ComBoxCL(List<PictureBox> e, Point pt, int nWidth, float scale ,string pName)
         {
             // 设置控件样式，启用双缓冲等
             //双缓冲技术用于减少绘图时的闪烁和提高绘图性能。
@@ -58,7 +50,7 @@ namespace _305Vision.MySTNode.图片操作
             // 初始化窗口属性
             foreach (var v in e)
                 m_lst.Add(v.Name); // 将枚举值添加到列表中
-            if(_SelectPreText == null)_SelectPreText = "选择窗口"; // 设置初始选定的枚举值
+            if (this.SelectPreText == null) this.SelectPreText = pName;
             m_pt = pt; // 设置弹出窗口的位置
             m_scale = scale; // 设置缩放比例
             m_nWidth = nWidth; // 设置弹出窗口的宽度
@@ -69,6 +61,7 @@ namespace _305Vision.MySTNode.图片操作
             this.ShowInTaskbar = false;
             this.BackColor = Color.FromArgb(255, 34, 34, 34);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.pName = pName;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -99,7 +92,7 @@ namespace _305Vision.MySTNode.图片操作
             base.OnMouseClick(e);
             int nIndex = e.Y / (int)(20 * m_scale); // 计算点击的位置对应的枚举值索引
             if (nIndex >= 0 && nIndex < m_lst.Count)
-                _SelectPreText = (String)m_lst[nIndex]; // 更新选定的枚举值
+                this.SelectPreText = (String)m_lst[nIndex]; // 更新选定的枚举值
 
 
             //MessageBox.Show(SelectPreText);
@@ -109,10 +102,25 @@ namespace _305Vision.MySTNode.图片操作
 
         protected override void OnMouseLeave(EventArgs e)
         {
+
             base.OnMouseLeave(e);
             if (m_bClosed) return;
             //this.DialogResult = System.Windows.Forms.DialogResult.None; // 设置对话框结果为无
-            this.Close(); // 关闭窗口
+            // 添加延迟关闭窗口，以确保文本修改生效
+            Task.Delay(100).ContinueWith(_ =>
+            {
+                if (!m_bClosed)
+                {
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        if( this.pName!= null)
+                        {
+                            this.SelectPreText = this.pName;
+                        }
+                        this.Close(); // 关闭窗口
+                    }));
+                }
+            });
         }
     }
 }
