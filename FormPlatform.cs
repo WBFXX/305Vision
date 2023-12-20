@@ -33,6 +33,7 @@ namespace _305Vision
 
         public FormPlatform(int cameraCount)
         {
+            PictureBoxes = new List<PictureBox>();
             this.cameraCount = cameraCount;
             InitializeComponent();
             InitializeCamera();

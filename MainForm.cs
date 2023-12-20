@@ -15,6 +15,7 @@ using _305Vision.MyEnum;
 using NLog;
 using _305Vision.Blender;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Windows.Input;
 
 namespace _305Vision
 {
@@ -129,14 +130,6 @@ namespace _305Vision
             sTNodeEdit.Show();
         }
         
-        public System.Enum a
-        {
-            get
-            {
-                return a;
-            }
-            set { a = value; }
-        }
 
         
         
@@ -149,9 +142,10 @@ namespace _305Vision
 
             //FrmEnumSelect frmEnumSelect = new FrmEnumSelect(a,new System.Drawing.Point(Left),100,1);
 
-            //FormPlatform.Instance.Dispose();
-            //FormPlatform formPlatform =  new FormPlatform(9);
-            //formPlatform.Show(FormOut.Pane,DockAlignment.Top,0.7);
+            FormPlatform.Instance.Close();
+            FormPlatform formPlatform =  new FormPlatform(9);
+            logger.Info(FormPlatform.PictureBoxes.Count);
+            formPlatform.Show(FormOut.Pane,DockAlignment.Top,0.7);
 
 
 
