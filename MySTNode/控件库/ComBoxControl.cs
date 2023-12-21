@@ -100,7 +100,7 @@ namespace _305Vision.MySTNode.图片操作
                 this.OnValueChanged(new EventArgs());
             }
 
-
+            
         }
         //public event EventHandler ValueChanged; // 定义值改变事件
         //protected virtual void OnValueChanged(EventArgs e)

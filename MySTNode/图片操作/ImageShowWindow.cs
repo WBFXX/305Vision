@@ -43,26 +43,32 @@ namespace _305Vision.MySTNode.图片操作
 
 
 
-            //下拉选择框
-            ComboBox = new ComBoxControl();
-            ComboBox.Top = 5;
-            //logger.Info(ComboBox.Size.ToString());
-            ComboBox.Left = 12;
-            //ComboBox.Location = new Point(20,20);
-            ComboBox.Width = 76;
-            // 手动设置一次文本 初始显示文本
-            ComboBox.PName = "选择窗口";
-            //ComboBox.PName = this.PName;
-            //m_ctrl_select.ValueChanged += (s, e) =>
-            //{
-            //    this._MixType = (ColorMixType)m_ctrl_select.Enum;
-            //};
-            ComboBox.ValueChanged += (s, e) =>
+            try
             {
-                //MessageBox.Show(this.PName + "CPNAME：" + ComboBox.PName);
-                this.PName = this.ComboBox.PName;
-            };
-            this.Controls.Add(ComboBox);
+                //下拉选择框
+                ComboBox = new ComBoxControl();
+                ComboBox.Top = 5;
+                //logger.Info(ComboBox.Size.ToString());
+                ComboBox.Left = 12;
+                //ComboBox.Location = new Point(20,20);
+                ComboBox.Width = 76;
+                // 手动设置一次文本 初始显示文本
+                ComboBox.PName = "选择窗口";
+                //ComboBox.PName = this.PName;
+                //m_ctrl_select.ValueChanged += (s, e) =>
+                //{
+                //    this._MixType = (ColorMixType)m_ctrl_select.Enum;
+                //};
+                ComboBox.ValueChanged += (s, e) =>
+                {
+                    //MessageBox.Show(this.PName + "CPNAME：" + ComboBox.PName);
+                    this.PName = this.ComboBox.PName;
+                };
+                this.Controls.Add(ComboBox);
+            }catch (Exception ex)
+            {
+                logger.Error(ex);
+            }
 
 
         }
@@ -107,6 +113,7 @@ namespace _305Vision.MySTNode.图片操作
 
 
         }
+        
     }
     
 }

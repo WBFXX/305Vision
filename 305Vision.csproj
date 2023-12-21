@@ -142,6 +142,7 @@
     <Compile Include="MySTNode\CommonNode\Input_demo.cs" />
     <Compile Include="MySTNode\CommonNode\test1.cs" />
     <Compile Include="MySTNode\CommonNode\输入.cs" />
+    <Compile Include="Utils\InputBox.cs" />
     <EmbeddedResource Include="FormOutput.resx">
       <DependentUpon>FormOutput.cs</DependentUpon>
     </EmbeddedResource>
@@ -201,6 +202,7 @@
     <Content Include="Icon\手绘板_hand-painted-plate.png" />
     <Content Include="Icon\树结构_tree-list.png" />
     <Content Include="Icon\键盘_keyboard-one.png" />
+    <None Include="Resources\Mouse.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PictureWindow\PictureWindow.csproj">

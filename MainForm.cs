@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using _305Vision.Utils;
 using NLog;
 
 
@@ -120,7 +121,7 @@ namespace _305Vision
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string userInput = InputBox.Show("请输入一个值：", "输入框");
+            string userInput = InputBox.Show("请输入图像块的数量：", "输入框");
 
             // 处理用户输入
             if (!string.IsNullOrEmpty(userInput))
@@ -130,6 +131,13 @@ namespace _305Vision
                 int inputValue;
                 if (int.TryParse(userInput, out inputValue))
                 {
+                    // 检查规则
+                    if (inputValue > 49 || inputValue <= 0)
+                    {
+                        MessageBox.Show("输入无效，请输入一个介于1和49之间的数字。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return; // 输入无效，关闭窗口
+                    }
+
                     // 创建新的 FormPlatform 实例
                     FormPlatform newInstance = new FormPlatform(inputValue);
 
@@ -138,47 +146,22 @@ namespace _305Vision
 
                     // 关闭旧窗口
                     FormPlatform.Instance.Close();
+                    //FormPlatform.Instance.Dispose();
 
                     // 更新 FormPlatform.Instance 单例的引用
                     FormPlatform.SetPlatformInstance(newInstance);
 
-                    logger.Info("当前窗口数量：" + FormPlatform.Instance.PictureBoxes.Count + ";" + FormPlatform.Instance.IsHidden);
+                    logger.Info("当前窗口数量：" + FormPlatform.Instance.PictureBoxes.Count + ";" + "隐藏状态："+FormPlatform.Instance.IsHidden);
                 }
                 else
                 {
-                    MessageBox.Show("无效的输入，请输入一个整数。");
+                    MessageBox.Show("无效的输入，请输入一个整数。", "警告",MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
 
         }
 
-        public static class InputBox
-        {
-            public static string Show(string prompt, string title = "Input", string defaultValue = "")
-            {
-                Form promptForm = new Form()
-                {
-                    Width = 500,
-                    Height = 150,
-                    FormBorderStyle = FormBorderStyle.FixedDialog,
-                    Text = title,
-                    StartPosition = FormStartPosition.CenterScreen
-                };
-
-                Label textLabel = new Label() { Left = 50, Top = 20, Text = prompt };
-                TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400, Text = defaultValue };
-
-                Button confirmation = new Button() { Text = "OK", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
-                confirmation.Click += (sender, e) => promptForm.Close();
-
-                promptForm.Controls.Add(textBox);
-                promptForm.Controls.Add(confirmation);
-                promptForm.Controls.Add(textLabel);
-                promptForm.AcceptButton = confirmation;
-
-                return promptForm.ShowDialog() == DialogResult.OK ? textBox.Text : defaultValue;
-            }
-        }
+        
 
 
 
@@ -283,7 +266,8 @@ namespace _305Vision
                 }
                 else
                 {
-                    logger.Warn("窗口已存在");
+
+                    logger.Warn("窗口已存在,窗口名称为：" + formPlatform.Text +"  隐藏代替关闭："+ formPlatform.HideOnClose);
                 }
                 
             }

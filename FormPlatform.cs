@@ -19,8 +19,12 @@ namespace _305Vision
         {
             get
             {
-                if (_instance == null || _instance.IsDisposed)
+                if (_instance == null || _instance.IsDisposed )
+                {
                     _instance = new FormPlatform();
+                    
+                }
+
                 return _instance;
             }
         }
@@ -44,17 +48,19 @@ namespace _305Vision
 
         private int cameraCount;
 
-        public FormPlatform(int cameraCount)
+        public  FormPlatform(int cameraCount)
         {
             PictureBoxes = new List<PictureBox>();
             this.cameraCount = cameraCount;
             InitializeComponent();
             InitializeCamera();
             AdjustImageArea();
+            this.Text = "带数量的窗口";
         }
+
         public FormPlatform()
         {
-                if (CameraCount == 0)
+            if (CameraCount == 0)
                  {
                       cameraCount = 4;//为了测试效果，将相机数量设置为5
                  }
@@ -72,6 +78,8 @@ namespace _305Vision
         public static void SetPlatformInstance(FormPlatform platform)
         {
             _instance = platform;
+            
+            MessageBox.Show(platform.IsHidden.ToString());
         }
 
         private  List<PictureBox> pictureBoxes = new List<PictureBox>();
