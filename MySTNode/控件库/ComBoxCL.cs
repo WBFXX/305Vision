@@ -46,10 +46,14 @@ namespace _305Vision.MySTNode.图片操作
             //true: 启用了上述样式，表示启用了优化的双缓冲
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            if (e != null)
+            {
+                // 初始化窗口属性
+                foreach (var v in e)
+                    m_lst.Add(v.Name); // 将枚举值添加到列表中
 
-            // 初始化窗口属性
-            foreach (var v in e)
-                m_lst.Add(v.Name); // 将枚举值添加到列表中
+            }
+            else m_lst.Add("null");
             if (this.SelectPreText == null) this.SelectPreText = pName;
             m_pt = pt; // 设置弹出窗口的位置
             m_scale = scale; // 设置缩放比例
@@ -62,6 +66,7 @@ namespace _305Vision.MySTNode.图片操作
             this.BackColor = Color.FromArgb(255, 34, 34, 34);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.pName = pName;
+
         }
 
         protected override void OnLoad(EventArgs e)
@@ -92,11 +97,14 @@ namespace _305Vision.MySTNode.图片操作
             base.OnMouseClick(e);
             int nIndex = e.Y / (int)(20 * m_scale); // 计算点击的位置对应的枚举值索引
             if (nIndex >= 0 && nIndex < m_lst.Count)
+            {
                 this.SelectPreText = (String)m_lst[nIndex]; // 更新选定的枚举值
-
+                
+            }
 
             //MessageBox.Show(SelectPreText);
             this.DialogResult = System.Windows.Forms.DialogResult.OK; // 设置对话框结果为确认
+
             m_bClosed = true; // 标记窗口已关闭
         }
 
@@ -107,13 +115,13 @@ namespace _305Vision.MySTNode.图片操作
             if (m_bClosed) return;
             //this.DialogResult = System.Windows.Forms.DialogResult.None; // 设置对话框结果为无
             // 添加延迟关闭窗口，以确保文本修改生效
-            Task.Delay(100).ContinueWith(_ =>
+            Task.Delay(200).ContinueWith(_ =>
             {
                 if (!m_bClosed)
                 {
                     this.BeginInvoke(new Action(() =>
                     {
-                        if( this.pName!= null)
+                        if (this.pName != null)
                         {
                             this.SelectPreText = this.pName;
                         }
@@ -122,5 +130,8 @@ namespace _305Vision.MySTNode.图片操作
                 }
             });
         }
+
+       
+
     }
 }

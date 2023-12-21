@@ -25,7 +25,20 @@ namespace _305Vision
             }
         }
 
-        public static List<PictureBox> PictureBoxes { get => pictureBoxes; set => pictureBoxes = value; }
+        
+
+        public List<PictureBox> PictureBoxes
+        {
+            get {
+                //当窗口被隐藏时（也就是假关闭后，应该获取不到PictureBoxes的）
+                return pictureBoxes; 
+            }
+            private set
+            {
+                pictureBoxes = value;
+            }
+        }
+
         public int CameraCount { get => cameraCount; set => cameraCount = value; }
         public static Dictionary<string, PictureBox> PictureBoxName { get => pictureBoxName; set => pictureBoxName = value; }
 
@@ -52,7 +65,16 @@ namespace _305Vision
         
         }
 
-        private static List<PictureBox> pictureBoxes = new List<PictureBox>();
+        /// <summary>
+        /// 创建Platform单例，用于更新单例引用
+        /// </summary>
+        /// <param name="platform"></param>
+        public static void SetPlatformInstance(FormPlatform platform)
+        {
+            _instance = platform;
+        }
+
+        private  List<PictureBox> pictureBoxes = new List<PictureBox>();
 
         private Dictionary<PictureBox, Size> pictureBoxSizes = new Dictionary<PictureBox, Size>(); //添加了一个字典，用于存储PictureBox的大小
         private Dictionary<PictureBox, Point> pictureBoxLocations = new Dictionary<PictureBox, Point>(); //添加了一个字典，用于存储PictureBox的位置

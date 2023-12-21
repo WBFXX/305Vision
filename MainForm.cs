@@ -1,21 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using _305Vision.MyEnum;
 using NLog;
-using _305Vision.Blender;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Windows.Input;
+
 
 namespace _305Vision
 {
@@ -124,15 +111,77 @@ namespace _305Vision
             }
         }
 
+        /// <summary>
+        /// 根据数量改变窗口数量
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void button1_Click(object sender, EventArgs e)
         {
-            STNodeEdit sTNodeEdit = new STNodeEdit();
-            sTNodeEdit.Show();
-        }
-        
 
-        
-        
+            string userInput = InputBox.Show("请输入一个值：", "输入框");
+
+            // 处理用户输入
+            if (!string.IsNullOrEmpty(userInput))
+            {
+                // 将用户输入的值转换为需要的类型
+                // 这里可以添加逻辑根据需要处理用户输入的值
+                int inputValue;
+                if (int.TryParse(userInput, out inputValue))
+                {
+                    // 创建新的 FormPlatform 实例
+                    FormPlatform newInstance = new FormPlatform(inputValue);
+
+                    // 显示新窗口
+                    newInstance.Show(FormOut.Pane, DockAlignment.Top, 0.7);
+
+                    // 关闭旧窗口
+                    FormPlatform.Instance.Close();
+
+                    // 更新 FormPlatform.Instance 单例的引用
+                    FormPlatform.SetPlatformInstance(newInstance);
+
+                    logger.Info("当前窗口数量：" + FormPlatform.Instance.PictureBoxes.Count + ";" + FormPlatform.Instance.IsHidden);
+                }
+                else
+                {
+                    MessageBox.Show("无效的输入，请输入一个整数。");
+                }
+            }
+
+        }
+
+        public static class InputBox
+        {
+            public static string Show(string prompt, string title = "Input", string defaultValue = "")
+            {
+                Form promptForm = new Form()
+                {
+                    Width = 500,
+                    Height = 150,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    Text = title,
+                    StartPosition = FormStartPosition.CenterScreen
+                };
+
+                Label textLabel = new Label() { Left = 50, Top = 20, Text = prompt };
+                TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400, Text = defaultValue };
+
+                Button confirmation = new Button() { Text = "OK", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
+                confirmation.Click += (sender, e) => promptForm.Close();
+
+                promptForm.Controls.Add(textBox);
+                promptForm.Controls.Add(confirmation);
+                promptForm.Controls.Add(textLabel);
+                promptForm.AcceptButton = confirmation;
+
+                return promptForm.ShowDialog() == DialogResult.OK ? textBox.Text : defaultValue;
+            }
+        }
+
+
+
         private void button2_Click(object sender, EventArgs e)
         {
             //FormPlatform platform = new FormPlatform();
@@ -144,15 +193,8 @@ namespace _305Vision
 
             FormPlatform.Instance.Close();
             FormPlatform formPlatform =  new FormPlatform(9);
-            logger.Info(FormPlatform.PictureBoxes.Count);
+            //logger.Info(FormPlatform.PictureBoxes.Count);
             formPlatform.Show(FormOut.Pane,DockAlignment.Top,0.7);
-
-
-
-
-
-            System.Windows.Forms.MessageBox.Show("测试");
-
 
         }
 
@@ -233,6 +275,7 @@ namespace _305Vision
             FormPlatform formPlatform = FormPlatform.Instance;
             try
             {
+                logger.Info(platform.IsHidden);
                 if (platform.IsHidden)
                 {
                     formPlatform.Text = "图像窗口";

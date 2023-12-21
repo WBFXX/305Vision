@@ -58,10 +58,32 @@ namespace _305Vision.MySTNode.图片操作
         {
             base.OnMouseClick(e);
             //MessageBox.Show(e.ToString());
-            m_ = FormPlatform.PictureBoxes;
-           
+            if (FormPlatform.Instance.IsHidden)
+            {
+                m_ = null;
+            }else m_ = FormPlatform.Instance.PictureBoxes;
+
             // 计算弹出窗口的位置
-            Point pt = new Point(this.Left + this.Owner.Left, this.Top + this.Owner.Top + this.Owner.TitleHeight);
+            /*这一行是用来计算弹出窗口的位置 pt 的。让我解释一下这里各个参数的含义：
+
+            this.Left: 控件（ComBoxControl）在其容器（通常是 Form 或其他控件）中的左边缘相对于容器左边缘的距离。
+
+            this.Owner: 获取或设置此节点控件的所有者窗体或控件。在你的代码中，ComBoxControl 有一个所有者，即 STNodeControl。
+
+            this.Owner.Left: STNodeControl 的左边缘相对于其容器（通常是 Form）左边缘的距离。
+
+            this.Top: 控件的上边缘相对于其容器上边缘的距离。
+
+            this.Owner.Top: STNodeControl 的上边缘相对于其容器上边缘的距离。
+
+            this.Owner.TitleHeight: STNodeControl 的标题栏高度。这个值通常是标题栏的高度，可能包括任何标题栏上的边框或其他装饰。
+
+            总体来说，pt 的计算是为了将 ComBoxControl 在其容器中的位置转换为屏幕坐标系中的位置。这将被用作弹出窗口的位置，确保弹出窗口显示在正确的位置上。
+
+            关于 Owner 的解释：Owner 属性指定 STNodeControl 的所有者窗体或控件。它指定了该控件在视觉上所属的容器。如果控件是在 Form 中，那么 Form 就是它的所有者。这有助于控件协调在窗体中的位置。
+            如果没有所有者，Owner 可能是 null。
+             */
+            Point pt = new Point(this.Left + this.Owner.Left, this.Top + this.Owner.Top + this.Owner.TitleHeight + this.Owner.TitleHeight);
             pt = this.Owner.Owner.CanvasToControl(pt);
             pt = this.Owner.Owner.PointToScreen(pt);
 
