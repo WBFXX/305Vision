@@ -65,6 +65,7 @@ namespace _305Vision.MySTNode.图片操作
                     this.PName = this.ComboBox.PName;
                 };
                 this.Controls.Add(ComboBox);
+                this.Invalidate();
             }catch (Exception ex)
             {
                 logger.Error(ex);

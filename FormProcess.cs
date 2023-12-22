@@ -50,7 +50,19 @@ namespace _305Vision
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (stNodeEditor1.ActiveNode == null) return;
-            stNodeEditor1.Nodes.Remove(stNodeEditor1.ActiveNode);
+            RemoveSelectNode(stNodeEditor1.GetSelectedNode());
+        }
+
+        /// <summary>
+        /// 删除所有被选中的节点
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        private void RemoveSelectNode(STNode[] sTNodes)
+        {
+            foreach (STNode node in sTNodes)
+            {
+                stNodeEditor1.Nodes.Remove(node);
+            }
         }
 
         private void 位置锁定解除ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -62,6 +74,16 @@ namespace _305Vision
         private void 连接锁定解除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             stNodeEditor1.ActiveNode.LockOption = !stNodeEditor1.ActiveNode.LockOption;
+        }
+
+        private void stNodeEditor1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Delete:
+                    RemoveSelectNode(stNodeEditor1.GetSelectedNode());
+                    break;
+            }
         }
     }
 }

@@ -134,7 +134,7 @@ namespace _305Vision
                     // 检查规则
                     if (inputValue > 49 || inputValue <= 0)
                     {
-                        MessageBox.Show("输入无效，请输入一个介于1和49之间的数字。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("输入无效，请输入一个介于1和49之间的数字。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return; // 输入无效，关闭窗口
                     }
 
@@ -151,7 +151,7 @@ namespace _305Vision
                     // 更新 FormPlatform.Instance 单例的引用
                     FormPlatform.SetPlatformInstance(newInstance);
 
-                    logger.Info("当前窗口数量：" + FormPlatform.Instance.PictureBoxes.Count + ";" + "隐藏状态："+FormPlatform.Instance.IsHidden);
+                    logger.Info("创建主窗口成功，当前窗口数量：" + FormPlatform.Instance.PictureBoxes.Count + ";");
                 }
                 else
                 {
@@ -192,8 +192,8 @@ namespace _305Vision
             }
             else
             {
-                logger.Info("打开工具栏失败，原因是已经有工具栏。" );
-                
+                logger.Info("当前点击窗口(" + toolBox.Text + "窗口)已存在");
+
                 //输出日志
                 //FormOut.ReadLog("工具栏已打开",this.Name,LogClass.Warning);
                 //System.Windows.Forms.MessageBox.Show("工具栏已打开");
@@ -225,7 +225,7 @@ namespace _305Vision
             }
             else
             {
-                logger.Info("当前点击窗口" + formProcess.Name + "已存在");
+                logger.Info("当前点击窗口(" + formProcess.Text + "窗口)已存在");
 
             }
         }
@@ -248,7 +248,7 @@ namespace _305Vision
             }
             else
             {
-                logger.Info("当前点击窗口" + FormOut.Name + "已存在");
+                logger.Info("当前点击窗口(" + FormOut.Text + "窗口)已存在");
 
             }
         }
