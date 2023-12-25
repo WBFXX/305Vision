@@ -1,4 +1,5 @@
-﻿using ST.Library.UI.NodeEditor;
+﻿using _305Vision.Utils;
+using ST.Library.UI.NodeEditor;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -41,17 +42,8 @@ namespace _305Vision.图片操作测试
         protected override void OnDrawBody(DrawingTools dt)
         {
             base.OnDrawBody(dt);
-            Graphics g = dt.Graphics;
-            Rectangle rect = new Rectangle(this.Left + 10, this.Top + 40, 140, 80);
-            g.FillRectangle(Brushes.Gray, rect);
-            try
-            {
-                if (m_img_draw != null) g.DrawImage(m_img_draw, rect);
-
-            }
-            catch(Exception ex) {
-                logger.Error(ex);
-            }
+            MyDrawBody myDrawBody = new MyDrawBody();
+            myDrawBody.DrawBody(dt,m_img_draw,this.Left,this.Top);
         }
     }
     /// <summary>

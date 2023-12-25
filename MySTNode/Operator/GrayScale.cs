@@ -16,6 +16,8 @@ using _305Vision.Utils;
 
 namespace _305Vision.MySTNode.Operator
 {
+
+
     /// <summary>
     /// 灰度处理
     /// </summary>
@@ -102,6 +104,7 @@ namespace _305Vision.MySTNode.Operator
                 
             }
         }
+
         protected override void OnDrawBody(DrawingTools dt)
         {
             base.OnDrawBody(dt);

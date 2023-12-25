@@ -20,20 +20,50 @@ namespace _305Vision.MySTNode.Operator
     public class Binaryzation : ImageBaseNode
     {
         private STNodeOption in_option;
-        //private STNodeOption out_option;
+        //private STNodeOption out_option;7
+        private int doubleValue;
+        [STNodeProperty("阈值设置", "输入一个0-255的数值")]
+        public int DoubleValue
+        {
+            get
+            {
+                return doubleValue;
+            }
+
+            set
+            {
+                doubleValue = value;
+                // 触发值改变事件
+                OnDoubleValueChanged(EventArgs.Empty);
+
+                this.Invalidate();
+            }
+        }
+
+        // 定义值改变事件
+        public event EventHandler DoubleValueChanged;
+
+        // 触发值改变事件的方法
+        protected virtual void OnDoubleValueChanged(EventArgs e)
+        {
+            DoubleValueChanged?.Invoke(this, e);
+        }
+
 
         protected override void OnCreate()
         {
             base.OnCreate();
-            this.Title = "灰度化";
+            this.Title = "二值化";
 
             in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
 
             //当输入节点有数据输入时候
-            in_option.DataTransfer += new STNodeOptionEventHandler(Op_img_in_DataTransfer);
+            in_option.DataTransfer += new STNodeOptionEventHandler(op_img_in_DataTransfer);
         }
 
-        void Op_img_in_DataTransfer(object sender, STNodeOptionEventArgs e)
+        
+
+        void op_img_in_DataTransfer(object sender, STNodeOptionEventArgs e)
         {
             //如果当前不是连接状态 或者 接受到的数据为空
             if (e.Status != ConnectionStatus.Connected || e.TargetOption.Data == null)
@@ -45,58 +75,33 @@ namespace _305Vision.MySTNode.Operator
             }
             else
             {
-                //否则将图像转bitmap形式
-                Bitmap bmp = (Bitmap)e.TargetOption.Data;
-                //获取图像
-                BitmapData imgData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite,
-                PixelFormat.Format24bppRgb);
-                int width = imgData.Width;
-                int height = imgData.Height;
-                int stride = imgData.Stride;
-                try
+
+                // 创建一个 ProssesImage 实例,动态方法必须创建实例
+                ProssesImage processImageInstance = new ProssesImage();
+
+                // 然后调用实例方法
+                Bitmap processedImage = processImageInstance.ProcessImage((Bitmap)e.TargetOption.Data, 
+                    imageData =>
                 {
+
+                    // 具体的处理逻辑
                     unsafe
                     {
-                        //System.Windows.Forms.MessageBox.Show("a");
-                        byte* imageDataPtr = OpenCVSDK.grayScale(imgData.Scan0, width, height, stride);
-                        bmp.UnlockBits(imgData);
-                        int size = width * height;
-                        byte[] data = new byte[size];//创建同大小的数组
+                        byte* imageDataPtr = OpenCVSDK.binaryzation(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, doubleValue, 255, 0);
 
-                        // 接收 C++ 的字节数据流后释放分配的内存空间
-                        Marshal.Copy((IntPtr)imageDataPtr, data, 0, size);
-                        OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);//释放
+                        // 处理后的数据流复制到托管数组
+                        int size = imageData.Width * imageData.Height * 3;
+                        byte[] imageByte = new byte[size];
+                        Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
+                        OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
 
-                        // 定义一个用于将字节数据流转换为 Bitmap 图片的 Bitmap 变量
-                        Bitmap ImageBitmap = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
-
-                        // 设置颜色调色板
-                        ColorPalette palette = ImageBitmap.Palette;
-                        for (int i = 0; i < 256; i++)
-                        {
-                            palette.Entries[i] = Color.FromArgb(i, i, i);
-                        }
-
-                        ImageBitmap.Palette = palette;
-
-                        //处理完的图像BitmapData
-                        BitmapData bitmapData = ImageBitmap.LockBits(new Rectangle(0, 0, width, height),
-                            ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
-                        //复制到要显示的
-                        Marshal.Copy(data, 0, bitmapData.Scan0, data.Length);
-                        ImageBitmap.UnlockBits(bitmapData);//释放bitmapData
-
-                        m_op_img_out.TransferData((Image)ImageBitmap);//out选项 输出
-                        m_img_draw = (Image)ImageBitmap;
-
-
+                        return imageByte;
                     }
-                }
-                catch (Exception ex) 
-                {
-                    logger.Error("这里是grayScale："+ex);
-                }
-                
+                });
+                this.logger.Info("图像" +  this.Title + "处理完成");
+                m_op_img_out.TransferData((Image)processedImage);//out选项 输出
+                m_img_draw = (Image)processedImage;
+
             }
         }
         protected override void OnDrawBody(DrawingTools dt)

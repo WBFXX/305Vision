@@ -1,4 +1,5 @@
-﻿using _305Vision.Service;
+﻿using _305Vision.MySTNode.Operator;
+using _305Vision.Service;
 using ST.Library.UI.NodeEditor;
 using System;
 using System.Collections.Generic;
@@ -43,9 +44,12 @@ namespace _305Vision
             //那么这个菜单就会在右键点击时显示出来。
             stNodeEditor1.NodeAdded += (s, ea) => ea.Node.ContextMenuStrip = contextMenuStrip1;
 
+           
+
+
         }
 
-        
+
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {

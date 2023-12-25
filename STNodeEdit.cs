@@ -1,4 +1,7 @@
-﻿using System;
+﻿using _305Vision.MySTNode.Operator;
+using NLog;
+using ST.Library.UI.NodeEditor;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,13 +19,16 @@ namespace _305Vision
         public STNodeEdit()
         {
             InitializeComponent();
-        }
+            Binaryzation binaryzation = new Binaryzation();
 
+        }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             
+
+
         }
     }
 }
