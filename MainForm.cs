@@ -37,7 +37,11 @@ namespace _305Vision
             {
                 if(_instance == null || _instance.IsDisposed)
                     _instance = new MainForm();
-                return _instance; 
+                else
+                {
+                    MessageBox.Show("软件已启动!");
+                }
+                return _instance;
             }
         }
         

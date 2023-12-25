@@ -27,10 +27,10 @@ namespace _305Vision.图片操作测试
             m_op_img_g = this.OutputOptions.Add("G", typeof(Image), false);
             m_op_img_b = this.OutputOptions.Add("B", typeof(Image), false);
             //当输入节点有数据输入时候
-            m_op_img_in.DataTransfer += new STNodeOptionEventHandler(m_op_img_in_DataTransfer);
+            m_op_img_in.DataTransfer += new STNodeOptionEventHandler(Op_img_in_DataTransfer);
         }
 
-        void m_op_img_in_DataTransfer(object sender, STNodeOptionEventArgs e)
+        void Op_img_in_DataTransfer(object sender, STNodeOptionEventArgs e)
         {
             //如果当前不是连接状态 或者 接受到的数据为空
             if (e.Status != ConnectionStatus.Connected || e.TargetOption.Data == null)

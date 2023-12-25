@@ -42,9 +42,16 @@ namespace _305Vision.图片操作测试
         {
             base.OnDrawBody(dt);
             Graphics g = dt.Graphics;
-            Rectangle rect = new Rectangle(this.Left + 10, this.Top + 30, 140, 80);
+            Rectangle rect = new Rectangle(this.Left + 10, this.Top + 40, 140, 80);
             g.FillRectangle(Brushes.Gray, rect);
-            if (m_img_draw != null) g.DrawImage(m_img_draw, rect);
+            try
+            {
+                if (m_img_draw != null) g.DrawImage(m_img_draw, rect);
+
+            }
+            catch(Exception ex) {
+                logger.Error(ex);
+            }
         }
     }
     /// <summary>
@@ -57,9 +64,11 @@ namespace _305Vision.图片操作测试
 
         public OpenFileDescriptor()
         {
-            m_sf = new StringFormat();
-            m_sf.Alignment = StringAlignment.Center;
-            m_sf.LineAlignment = StringAlignment.Center;
+            m_sf = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
         }
 
         protected override void OnSetItemLocation()
@@ -76,8 +85,10 @@ namespace _305Vision.图片操作测试
         {
             if (m_rect_open.Contains(e.Location))
             {     //点击在"打开"区域 则弹出文件选择框
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "*.jpg|*.jpg|*.png|*.png";
+                OpenFileDialog ofd = new OpenFileDialog
+                {
+                    Filter = "*.jpg|*.jpg|*.png|*.png"
+                };
                 if (ofd.ShowDialog() != DialogResult.OK) return;
                 this.SetValue(ofd.FileName);
             }

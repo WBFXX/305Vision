@@ -52,7 +52,7 @@
             this.stNodeEditor1.Size = new System.Drawing.Size(777, 525);
             this.stNodeEditor1.TabIndex = 0;
             this.stNodeEditor1.Text = "stNodeEditor1";
-            this.stNodeEditor1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.stNodeEditor1_KeyDown);
+            this.stNodeEditor1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StNodeEditor1_KeyDown);
             // 
             // contextMenuStrip1
             // 

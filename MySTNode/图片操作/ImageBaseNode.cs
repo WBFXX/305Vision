@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Threading.Tasks;
+using NLog;
 
 namespace _305Vision.图片操作测试
 {
@@ -23,15 +24,16 @@ namespace _305Vision.图片操作测试
             /// 输出节点
             /// </summary>
             protected STNodeOption m_op_img_out;
+            protected Logger logger = LogManager.GetCurrentClassLogger();
 
             protected override void OnCreate()
             {
                 base.OnCreate();
-                m_op_img_out = this.OutputOptions.Add("", typeof(Image), false);
+                m_op_img_out = this.OutputOptions.Add("输出", typeof(Image), false);
                 this.AutoSize = false;          //此节点需要定制UI 所以无需AutoSize
                                                 //this.Size = new Size(320,240);
                 this.Width = 160;               //手动设置节点大小
-                this.Height = 120;
+                this.Height = 130;
                 this.TitleColor = Color.FromArgb(200, Color.DarkCyan);
             }
 

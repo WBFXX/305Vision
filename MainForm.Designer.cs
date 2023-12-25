@@ -215,7 +215,7 @@
             this.关闭ToolStripMenuItem,
             this.工具栏ToolStripMenuItem});
             this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
-            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.文件ToolStripMenuItem.Text = "文件";
             // 
             // 打开ToolStripMenuItem
@@ -240,7 +240,7 @@
             // 编辑ToolStripMenuItem
             // 
             this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
-            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.编辑ToolStripMenuItem.Text = "编辑";
             // 
             // menuStrip1

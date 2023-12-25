@@ -46,13 +46,14 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.AutoScroll = true;
             this.splitContainer1.Panel1.Controls.Add(this.stNodeTreeView1);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.stNodePropertyGrid1);
             this.splitContainer1.Size = new System.Drawing.Size(198, 491);
-            this.splitContainer1.SplitterDistance = 315;
+            this.splitContainer1.SplitterDistance = 298;
             this.splitContainer1.TabIndex = 0;
             // 
             // stNodeTreeView1
@@ -68,7 +69,7 @@
             this.stNodeTreeView1.MinimumSize = new System.Drawing.Size(100, 60);
             this.stNodeTreeView1.Name = "stNodeTreeView1";
             this.stNodeTreeView1.ShowFolderCount = true;
-            this.stNodeTreeView1.Size = new System.Drawing.Size(198, 315);
+            this.stNodeTreeView1.Size = new System.Drawing.Size(198, 298);
             this.stNodeTreeView1.TabIndex = 0;
             this.stNodeTreeView1.Text = "stNodeTreeView1";
             this.stNodeTreeView1.TextBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
@@ -87,7 +88,7 @@
             this.stNodePropertyGrid1.MinimumSize = new System.Drawing.Size(120, 50);
             this.stNodePropertyGrid1.Name = "stNodePropertyGrid1";
             this.stNodePropertyGrid1.ShowTitle = true;
-            this.stNodePropertyGrid1.Size = new System.Drawing.Size(198, 172);
+            this.stNodePropertyGrid1.Size = new System.Drawing.Size(198, 189);
             this.stNodePropertyGrid1.TabIndex = 0;
             this.stNodePropertyGrid1.Text = "属性";
             this.stNodePropertyGrid1.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));

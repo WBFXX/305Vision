@@ -76,7 +76,7 @@ namespace _305Vision
             stNodeEditor1.ActiveNode.LockOption = !stNodeEditor1.ActiveNode.LockOption;
         }
 
-        private void stNodeEditor1_KeyDown(object sender, KeyEventArgs e)
+        private void StNodeEditor1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
