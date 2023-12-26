@@ -50,6 +50,7 @@ namespace _305Vision.MySTNode.Operator
         }
 
 
+
         protected override void OnCreate()
         {
             base.OnCreate();
@@ -59,16 +60,31 @@ namespace _305Vision.MySTNode.Operator
 
             //当输入节点有数据输入时候
             in_option.DataTransfer += new STNodeOptionEventHandler(op_img_in_DataTransfer);
+            this.DoubleValueChanged += Binaryzation_DoubleValueChanged;
         }
 
-        
+        void Binaryzation_DoubleValueChanged(object sender, EventArgs e)
+        {
+            //判断改变值的大小是否在允许范围内
+            if (DoubleValue > 255 || DoubleValue < 0)
+            {
+                logger.Error("参数输入错误,请规范输入(0-255)。");
+                return;
+            }
+            //实例化自定义工具MyOption类
+            MyOption myOption = new MyOption();
+            myOption.ReconnectOutputNodes(in_option);
+            logger.Info(this.Title + "算子参数改变,已重新绘制图像");
+        }
+
+
 
         void op_img_in_DataTransfer(object sender, STNodeOptionEventArgs e)
         {
             //如果当前不是连接状态 或者 接受到的数据为空
             if (e.Status != ConnectionStatus.Connected || e.TargetOption.Data == null)
             {
-
+                
                 m_op_img_out.TransferData(null);    //向所有输出节点输出空数据
                 m_img_draw = null;                  //需要绘制显示的图片置为空
                 

@@ -44,7 +44,7 @@ namespace _305Vision
             //那么这个菜单就会在右键点击时显示出来。
             stNodeEditor1.NodeAdded += (s, ea) => ea.Node.ContextMenuStrip = contextMenuStrip1;
 
-           
+            
 
 
         }

@@ -259,13 +259,16 @@ namespace _305Vision
             if (pictureBox_Sourse == pictureBox_Mudi) return;
             // 保存源控件的属性
             Image imageTemp = pictureBox_Sourse.Image;
+            String name = pictureBox_Sourse.Name;
             //Object TagTemp = pictureBox_Sourse.Tag;
 
             // 将目标控件的属性赋给源控件
             pictureBox_Sourse.Image = pictureBox_Mudi.Image;
+            pictureBox_Sourse.Name = pictureBox_Mudi.Name;
             // pictureBox_Sourse.Tag = pictureBox_Mudi.Tag; 
             // 将源控件的属性赋给目标控件
             pictureBox_Mudi.Image = imageTemp;
+            pictureBox_Mudi.Name = name;
             // pictureBox_Mudi.Tag = TagTemp;
         }
 

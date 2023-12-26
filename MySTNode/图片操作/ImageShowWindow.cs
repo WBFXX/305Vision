@@ -38,8 +38,7 @@ namespace _305Vision.MySTNode.图片操作
             this.Title = "选择显示窗口";
             IN_option =  this.InputOptions.Add("",typeof(Image),true);
             IN_option.DataTransfer += new STNodeOptionEventHandler(IN_option_DataTransfer);
-
-
+           
 
 
 
@@ -72,9 +71,16 @@ namespace _305Vision.MySTNode.图片操作
                 logger.Error(ex);
             }
 
+            if (ComboBox.PName == null || ComboBox.PName == "选择窗口")
+            {
+                this.LockOption = true;
+            }
+            else this.LockOption = false;
+
+
 
         }
-        
+
 
         private ComBoxControl ComboBox;//自定义控件
         private String pName ;
@@ -84,6 +90,7 @@ namespace _305Vision.MySTNode.图片操作
 
         void IN_option_DataTransfer(object sender, STNodeOptionEventArgs e)
         {
+            
             //问题出在被选中的节点，节点被选中且被链接后，会重新加载ComBoxCL
             //经过测试 原生控件也有这个问题，会记录上一次点击的内容，在重新被连线后 会再次触发上次点击过的按钮。
             //MessageBox.Show(PName);
@@ -109,6 +116,7 @@ namespace _305Vision.MySTNode.图片操作
             }
             else
             {
+
                 pNameDictionary[PName].Image = null;
             }
 

@@ -108,6 +108,9 @@ namespace _305Vision.MySTNode.图片操作
             m_bClosed = true; // 标记窗口已关闭
         }
 
+
+
+        Boolean isClose = false;
         protected override void OnMouseLeave(EventArgs e)
         {
 
@@ -117,7 +120,7 @@ namespace _305Vision.MySTNode.图片操作
             // 添加延迟关闭窗口，以确保文本修改生效
             Task.Delay(200).ContinueWith(_ =>
             {
-                if (!m_bClosed)
+                if (!m_bClosed && !isClose )
                 {
                     this.BeginInvoke(new Action(() =>
                     {
@@ -126,6 +129,7 @@ namespace _305Vision.MySTNode.图片操作
                             this.SelectPreText = this.pName;
                         }
                         this.Close(); // 关闭窗口
+                        isClose = true;
                     }));
                 }
             });

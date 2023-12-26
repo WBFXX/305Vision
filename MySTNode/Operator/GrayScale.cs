@@ -40,6 +40,7 @@ namespace _305Vision.MySTNode.Operator
 
         void Op_img_in_DataTransfer(object sender, STNodeOptionEventArgs e)
         {
+            
             //如果当前不是连接状态 或者 接受到的数据为空
             if (e.Status != ConnectionStatus.Connected || e.TargetOption.Data == null)
             {

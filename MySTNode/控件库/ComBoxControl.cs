@@ -96,17 +96,18 @@ namespace _305Vision.MySTNode.图片操作
             // 如果用户确认选择
             if (v == System.Windows.Forms.DialogResult.OK)
             {
+                
                 this.PName = frm.SelectPreText;
+                if (PName == null || PName == "选择窗口")
+                {
+                    Owner.LockOption = true;
+                }
+                else Owner.LockOption = false;
                 this.OnValueChanged(new EventArgs());
             }
 
             
         }
-        //public event EventHandler ValueChanged; // 定义值改变事件
-        //protected virtual void OnValueChanged(EventArgs e)
-        //{
-        //    if (this.ValueChanged != null)
-        //        this.ValueChanged(this, e); // 触发值改变事件
-        //}
+        
     }
 }
