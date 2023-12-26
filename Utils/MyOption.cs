@@ -22,13 +22,13 @@ namespace _305Vision.Utils
             {
                 if(outputNode.Input == in_option)
                 {
-                    // 断开连接
-                    in_option.DisConnectOption(outputNode.Output);
+                // 断开连接
+                in_option.DisConnectOption(outputNode.Output);
 
-                    // 重新连接
-                    in_option.ConnectOption(outputNode.Output);
+                // 重新连接
+                in_option.ConnectOption(outputNode.Output);
                 }
-            }
+             }
         }
 
         // 封装获取连接的所有输出节点并重新传输数据的函数
