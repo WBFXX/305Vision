@@ -169,6 +169,7 @@
     <Compile Include="MySTNode\CommonNode\输入.cs" />
     <Compile Include="Utils\InputBox.cs" />
     <Compile Include="Utils\MyDrawBody.cs" />
+    <Compile Include="Utils\MyOption.cs" />
     <Compile Include="Utils\ProssesImage.cs" />
     <EmbeddedResource Include="FormOutput.resx">
       <DependentUpon>FormOutput.cs</DependentUpon>
