@@ -65,6 +65,15 @@ namespace _305Vision.MySTNode.Operator
 
         void Binaryzation_DoubleValueChanged(object sender, EventArgs e)
         {
+            //实例化自定义工具MyOption类
+            MyOption myOption = new MyOption();
+            myOption.ReconnectOutputNodes(in_option);
+            logger.Info(this.Title + "算子参数改变,已重新绘制图像");
+            this.DoubleValueChanged += Binaryzation_DoubleValueChanged;
+        }
+
+        void Binaryzation_DoubleValueChanged(object sender, EventArgs e)
+        {
             //判断改变值的大小是否在允许范围内
             if (DoubleValue > 255 || DoubleValue < 0)
             {
