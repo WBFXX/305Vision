@@ -71,6 +71,7 @@ namespace _305Vision.MySTNode.Operator
                 logger.Error("参数输入错误,请规范输入(0-255)。");
                 return;
             }
+
             //实例化自定义工具MyOption类
             MyOption myOption = new MyOption();
             myOption.ReconnectOutputNodes(in_option);
