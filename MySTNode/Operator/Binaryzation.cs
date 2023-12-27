@@ -21,8 +21,12 @@ namespace _305Vision.MySTNode.Operator
     {
         private STNodeOption in_option;
         //private STNodeOption out_option;7
-        private int doubleValue;
-        [STNodeProperty("阈值设置", "输入一个0-255的数值")]
+
+
+        private int doubleValue=150;
+        private int Max=255;
+        private int Min;
+        [STNodeProperty("阈值asdasdasdadasdasdasda", "阈值设置")]
         public int DoubleValue
         {
             get
@@ -39,6 +43,30 @@ namespace _305Vision.MySTNode.Operator
                 this.Invalidate();
             }
         }
+
+        [STNodeProperty("upper", "高于阈值时设置的像素值")]
+        public int Max1
+        {
+            get => Max; set
+            {
+                Max = value;
+                // 触发值改变事件
+                OnDoubleValueChanged(EventArgs.Empty);
+            }
+        }
+        [STNodeProperty("lower", "低于阈值时设置的像素值")]
+        public int Min1
+        {
+            get => Min; set
+            {
+                Min = value;
+                // 触发值改变事件
+                OnDoubleValueChanged(EventArgs.Empty);
+            }
+        }
+
+
+
 
         // 定义值改变事件
         public event EventHandler DoubleValueChanged;
@@ -66,7 +94,7 @@ namespace _305Vision.MySTNode.Operator
         void Binaryzation_DoubleValueChanged(object sender, EventArgs e)
         {
             //判断改变值的大小是否在允许范围内
-            if (DoubleValue > 255 || DoubleValue < 0)
+            if (DoubleValue > 255 || DoubleValue < 0 || Max>255||Max<0 || Min>255 || Min < 0)
             {
                 logger.Error("参数输入错误,请规范输入(0-255)。");
                 return;
@@ -104,7 +132,7 @@ namespace _305Vision.MySTNode.Operator
                     // 具体的处理逻辑
                     unsafe
                     {
-                        byte* imageDataPtr = OpenCVSDK.binaryzation(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, doubleValue, 255, 0);
+                        byte* imageDataPtr = OpenCVSDK.binaryzation(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, doubleValue, Max, Min);
 
                         // 处理后的数据流复制到托管数组
                         int size = imageData.Width * imageData.Height * 3;
