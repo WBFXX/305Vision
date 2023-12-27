@@ -105,6 +105,7 @@
     <Compile Include="MySTNode\Blender\STNodeProgress.cs" />
     <Compile Include="MySTNode\Blender\STNodeSelectBox.cs" />
     <Compile Include="MySTNode\Operator\Binaryzation.cs" />
+    <Compile Include="MySTNode\Operator\Eroding.cs" />
     <Compile Include="MySTNode\Operator\GrayScale.cs" />
     <Compile Include="MySTNode\控件库\ComBoxControl.cs" />
     <Compile Include="MySTNode\控件库\ComBoxCL.cs">
