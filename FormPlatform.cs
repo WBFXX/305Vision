@@ -86,7 +86,6 @@ namespace _305Vision
 
         private Dictionary<PictureBox, Size> pictureBoxSizes = new Dictionary<PictureBox, Size>(); //添加了一个字典，用于存储PictureBox的大小
         private Dictionary<PictureBox, Point> pictureBoxLocations = new Dictionary<PictureBox, Point>(); //添加了一个字典，用于存储PictureBox的位置
-        private Dictionary<PictureBox, bool> pictureBoxStates = new Dictionary<PictureBox, bool>(); //添加一个字典，用于存储Picturebox是否被点击
         private Dictionary<Object, bool> pictureBoxTag = new Dictionary<Object, bool>(); //添加一个字典，用于存储Picturebox的Tag是否被点击
         private static Dictionary<String, PictureBox> pictureBoxName = new Dictionary<String, PictureBox>(); //添加一个字典，通过Name查找PictureBox对象
 
@@ -251,24 +250,36 @@ namespace _305Vision
             return new Point(col * (flowLayoutPanel1.Width / cols) + xOffset , row * (flowLayoutPanel1.Height / rows) + yOffset);
         }
 
-        /**
-         * 交换算法
-         * */
+        /// <summary>
+        /// 交换算法
+        /// </summary>
+        /// <param name="pictureBox_Sourse">交换源</param>
+        /// <param name="pictureBox_Mudi">目的地</param>
         private void exChangePictureBox(PictureBox pictureBox_Sourse, PictureBox pictureBox_Mudi)
         {
             if (pictureBox_Sourse == pictureBox_Mudi) return;
+
+
+            //不能直接换pictureBox
             // 保存源控件的属性
             Image imageTemp = pictureBox_Sourse.Image;
-            String name = pictureBox_Sourse.Name;
-            //Object TagTemp = pictureBox_Sourse.Tag;
-
             // 将目标控件的属性赋给源控件
             pictureBox_Sourse.Image = pictureBox_Mudi.Image;
-            pictureBox_Sourse.Name = pictureBox_Mudi.Name;
-            // pictureBox_Sourse.Tag = pictureBox_Mudi.Tag; 
             // 将源控件的属性赋给目标控件
             pictureBox_Mudi.Image = imageTemp;
-            pictureBox_Mudi.Name = name;
+
+
+
+
+            //更新字典
+            PictureBox pictureBox = new PictureBox();
+            pictureBox = FormPlatform.PictureBoxName[pictureBox_Sourse.Name];
+            FormPlatform.PictureBoxName[pictureBox_Sourse.Name] = FormPlatform.PictureBoxName[pictureBox_Mudi.Name];
+            FormPlatform.PictureBoxName[pictureBox_Mudi.Name] =pictureBox ;
+
+            // pictureBox_Sourse.Tag = pictureBox_Mudi.Tag; 
+            
+            
             // pictureBox_Mudi.Tag = TagTemp;
         }
 
