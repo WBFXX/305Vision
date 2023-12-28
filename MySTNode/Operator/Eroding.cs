@@ -1,4 +1,4 @@
-﻿using _305Vision.Utils;
+﻿using _305Vision.BLL;
 using _305Vision.图片操作测试;
 using ST.Library.UI.NodeEditor;
 using System;
@@ -33,8 +33,8 @@ namespace _305Vision.MySTNode.Operator
         protected override void OnDrawBody(DrawingTools dt)
         {
             base.OnDrawBody(dt);
-            MyDrawBody myDrawBody = new MyDrawBody();
-            myDrawBody.DrawBody(dt, m_img_draw,this.Left,this.Right);
+            //非static 需要先实例化
+            STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top);
         }
     }
 }

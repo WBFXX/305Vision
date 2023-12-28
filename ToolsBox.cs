@@ -1,4 +1,4 @@
-﻿using _305Vision.Service;
+﻿using _305Vision.Model;
 using ST.Library.UI.NodeEditor;
 using System;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ namespace _305Vision
             //stNodeTreeView1.AutoScroll = true;
             stNodePropertyGrid1.Text = "属性栏";
             stNodePropertyGrid1.SetInfoKey("作者", "邮箱", "联系","帮助");
-            NodeService.STNodePropertyGrid = stNodePropertyGrid1;
+            NodePropertyGridInfo.STNodePropertyGrid = stNodePropertyGrid1;
             
         }
     }

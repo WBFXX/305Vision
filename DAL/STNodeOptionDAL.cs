@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _305Vision.Utils
+namespace _305Vision.BLL
 {
-    public class MyOption
+    public class STNodeOptionDAL
     {
         // 封装获取连接的所有输出节点并重新连接的函数
         //作者提供的GetConnection()方法有问题
@@ -15,20 +15,20 @@ namespace _305Vision.Utils
         /// 重新绘制连线，目的为了连接的上个节点重新传输数据
         /// </summary>
         /// <param name="in_option">输入节点</param>
-        public void ReconnectOutputNodes(STNodeOption in_option)
+        public static void ReconnectOutputNodes(STNodeOption in_option)
         {
             var connectedNodes = in_option.Owner.Owner.GetConnectionInfo();
             foreach (var outputNode in connectedNodes)
             {
-                if(outputNode.Input == in_option)
+                if (outputNode.Input == in_option)
                 {
-                // 断开连接
-                in_option.DisConnectOption(outputNode.Output);
+                    // 断开连接
+                    in_option.DisConnectOption(outputNode.Output);
 
-                // 重新连接
-                in_option.ConnectOption(outputNode.Output);
+                    // 重新连接
+                    in_option.ConnectOption(outputNode.Output);
                 }
-             }
+            }
         }
 
         // 封装获取连接的所有输出节点并重新传输数据的函数
@@ -36,7 +36,7 @@ namespace _305Vision.Utils
         /// 获取连接的所有输出节点并重新传输数据的函数
         /// </summary>
         /// <param name="in_option">输入节点</param>
-        public void TransferDataFromConnectedOutputNodes(STNodeOption in_option)
+        public static void TransferDataFromConnectedOutputNodes(STNodeOption in_option)
         {
             var connectedNodes = in_option.Owner.Owner.GetConnectionInfo();
             foreach (var outputNode in connectedNodes)
@@ -48,5 +48,6 @@ namespace _305Vision.Utils
                 }
             }
         }
+
     }
 }

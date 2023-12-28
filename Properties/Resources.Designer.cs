@@ -22,7 +22,7 @@ namespace _305Vision.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace _305Vision.Properties {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("_305Vision.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace _305Vision.Properties {
         ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,17 +63,7 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap hand_painted_plate {
-            get {
-                object obj = ResourceManager.GetObject("hand-painted-plate", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap Mouse {
+        public static System.Drawing.Bitmap Mouse {
             get {
                 object obj = ResourceManager.GetObject("Mouse", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,9 +73,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap tool_box {
+        public static System.Drawing.Bitmap tool_box {
             get {
-                object obj = ResourceManager.GetObject("tool-box", resourceCulture);
+                object obj = ResourceManager.GetObject("tool_box", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +83,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap 图片_moving_picture {
+        public static System.Drawing.Bitmap 图片_moving_picture {
             get {
-                object obj = ResourceManager.GetObject("图片_moving-picture", resourceCulture);
+                object obj = ResourceManager.GetObject("图片_moving_picture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,7 +93,7 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap 工具箱_toolkit {
+        public static System.Drawing.Bitmap 工具箱_toolkit {
             get {
                 object obj = ResourceManager.GetObject("工具箱_toolkit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,9 +103,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap 手绘板_hand_painted_plate {
+        public static System.Drawing.Bitmap 手绘板_hand_painted_plate {
             get {
-                object obj = ResourceManager.GetObject("手绘板_hand-painted-plate", resourceCulture);
+                object obj = ResourceManager.GetObject("手绘板_hand_painted_plate", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +113,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap 树结构_tree_list {
+        public static System.Drawing.Bitmap 树结构_tree_list {
             get {
-                object obj = ResourceManager.GetObject("树结构_tree-list", resourceCulture);
+                object obj = ResourceManager.GetObject("树结构_tree_list", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +123,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap 键盘_keyboard_one {
+        public static System.Drawing.Bitmap 键盘_keyboard_one {
             get {
-                object obj = ResourceManager.GetObject("键盘_keyboard-one", resourceCulture);
+                object obj = ResourceManager.GetObject("键盘_keyboard_one", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

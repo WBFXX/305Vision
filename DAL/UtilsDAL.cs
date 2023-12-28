@@ -1,10 +1,13 @@
 ﻿using System;
-using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _305Vision.Utils
+namespace _305Vision.DAL
 {
-    public static class InputBox
+    public class UtilsDAL
     {
         private const int FormWidth = 500;
         private const int FormHeight = 170;
@@ -16,8 +19,14 @@ namespace _305Vision.Utils
         private const int ButtonLeft = 350;
         private const int ButtonTop = 90;
         private const int ButtonWidth = 100;
-
-        public static string Show(string prompt, string title = "Input", string defaultValue = "")
+        /// <summary>
+        /// 输入框，返回用户输入的内容
+        /// </summary>
+        /// <param name="prompt">提示内容</param>
+        /// <param name="title">窗口标题</param>
+        /// <param name="defaultValue">默认内容</param>
+        /// <returns>返回string类型内容</returns>
+        public static string InputBox(string prompt, string title = "Input", string defaultValue = "")
         {
             Form promptForm = new Form
             {
@@ -34,11 +43,11 @@ namespace _305Vision.Utils
                 ShowInTaskbar = false,
             };
 
-            Label textLabel = new Label { Left = LabelLeft, Top = LabelTop, Text = prompt,Width = TextBoxWidth };
+            Label textLabel = new Label { Left = LabelLeft, Top = LabelTop, Text = prompt, Width = TextBoxWidth };
             TextBox textBox = new TextBox { Left = TextBoxLeft, Top = TextBoxTop, Width = TextBoxWidth, Text = defaultValue };
 
             Button confirmation = new Button { Text = "确定", Left = ButtonLeft, Width = ButtonWidth, Top = ButtonTop, DialogResult = DialogResult.OK };
-            
+
             confirmation.Click += (sender, e) => promptForm.Close();
 
             promptForm.Controls.Add(textBox);
@@ -48,5 +57,6 @@ namespace _305Vision.Utils
 
             return promptForm.ShowDialog() == DialogResult.OK ? textBox.Text : defaultValue;
         }
+        
     }
 }

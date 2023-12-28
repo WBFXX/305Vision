@@ -1,5 +1,5 @@
-﻿using _305Vision.MySTNode.Operator;
-using _305Vision.Service;
+﻿using _305Vision.Model;
+using _305Vision.MySTNode.Operator;
 using ST.Library.UI.NodeEditor;
 using System;
 using System.Collections.Generic;
@@ -36,7 +36,7 @@ namespace _305Vision
         {
             base.OnLoad(e);
             stNodeEditor1.LoadAssembly(Application.ExecutablePath);
-            stNodeEditor1.ActiveChanged += (s, ea) => NodeService.STNodePropertyGrid.SetNode(stNodeEditor1.ActiveNode);
+            stNodeEditor1.ActiveChanged += (s, ea) => NodePropertyGridInfo.STNodePropertyGrid.SetNode(stNodeEditor1.ActiveNode);
             stNodeEditor1.OptionConnected += (s, ea) => stNodeEditor1.ShowAlert(ea.Status.ToString(), Color.White, ea.Status == ConnectionStatus.Connected ? Color.FromArgb(125, Color.Green) : Color.FromArgb(125, Color.Red));
             stNodeEditor1.CanvasScaled += (s, ea) => stNodeEditor1.ShowAlert(stNodeEditor1.CanvasScale.ToString("F2"), Color.White, Color.FromArgb(125, Color.Yellow));
             //在这里使用 ContextMenuStrip 是为了定义一个与节点关联的上下文菜单。

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _305Vision.Utils
+using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+
+namespace _305Vision.DAL
 {
-    public class ProssesImage
+    public class ProcessImageDAL
     {
         /// <summary>
         /// 3通道图像数据处理。
@@ -18,7 +19,7 @@ namespace _305Vision.Utils
         /// <param name="imageData">要处理的图像数据。</param>
         /// <param name="binaryzationParams">二值化参数:输入。</param>
         /// <returns>处理后的图像数据。</returns>
-        public Bitmap ProcessImage(Bitmap originalImage, Func<BitmapData, byte[]> imageProcessingFunc)
+        public static Bitmap ProcessImage(Bitmap originalImage, Func<BitmapData, byte[]> imageProcessingFunc)
         {
             try
             {
@@ -54,7 +55,6 @@ namespace _305Vision.Utils
                 MessageBox.Show(ex.ToString());
                 return null; // 或者抛出异常，根据需要进行处理
             }
-
         }
     }
 }

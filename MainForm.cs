@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using _305Vision.Utils;
 using NLog;
-
+using _305Vision.BLL;
 
 namespace _305Vision
 {
@@ -29,6 +28,14 @@ namespace _305Vision
         public MainForm()
         {
             InitializeComponent();
+
+            //防闪屏,设置控件风格
+            SetStyle(
+                ControlStyles.AllPaintingInWmPaint |  //全部在窗口绘制消息中绘图
+                ControlStyles.OptimizedDoubleBuffer, //使用双缓冲
+                true);
+            this.TransparencyKey = System.Drawing.Color.LightGray;
+
         }
 
         public static MainForm Instance
@@ -125,65 +132,24 @@ namespace _305Vision
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string userInput = InputBox.Show("请输入图像块的数量：", "输入框");
-
+            int userInput = UtilsBLL.InputBox("请输入图像块的数量：", "输入框");
             // 处理用户输入
-            if (!string.IsNullOrEmpty(userInput))
+            if (userInput > 0)
             {
-                // 将用户输入的值转换为需要的类型
-                // 这里可以添加逻辑根据需要处理用户输入的值
-                int inputValue;
-                if (int.TryParse(userInput, out inputValue))
-                {
-                    // 检查规则
-                    if (inputValue > 49 || inputValue <= 0)
-                    {
-                        MessageBox.Show("输入无效，请输入一个介于1和49之间的数字。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return; // 输入无效，关闭窗口
-                    }
-
-                    // 创建新的 FormPlatform 实例
-                    FormPlatform newInstance = new FormPlatform(inputValue);
-
-                    // 显示新窗口
-                    newInstance.Show(FormOut.Pane, DockAlignment.Top, 0.7);
-
-                    // 关闭旧窗口
-                    FormPlatform.Instance.Close();
-                    //FormPlatform.Instance.Dispose();
-
-                    // 更新 FormPlatform.Instance 单例的引用
-                    FormPlatform.SetPlatformInstance(newInstance);
-
-                    logger.Info("创建主窗口成功，当前窗口数量：" + FormPlatform.Instance.PictureBoxes.Count + ";");
-                }
-                else
-                {
-                    MessageBox.Show("无效的输入，请输入一个整数。", "警告",MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                // 创建新的 FormPlatform 实例
+                FormPlatform newInstance = new FormPlatform(userInput);
+                // 显示新窗口
+                newInstance.Show(FormOut.Pane, DockAlignment.Top, 0.7);
+                // 关闭旧窗口
+                FormPlatform.Instance.Close();
+                // 更新 FormPlatform.Instance 单例的引用
+                FormPlatform.SetPlatformInstance(newInstance);
+                logger.Info("创建主窗口成功，当前窗口数量：" + FormPlatform.Instance.PictureBoxes.Count + ";");
             }
 
         }
 
-        
-
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //FormPlatform platform = new FormPlatform();
-            //platform.Show();
-            //TreeView treeView = new TreeView();
-            //treeView.Show();
-
-            //FrmEnumSelect frmEnumSelect = new FrmEnumSelect(a,new System.Drawing.Point(Left),100,1);
-
-            FormPlatform.Instance.Close();
-            FormPlatform formPlatform =  new FormPlatform(9);
-            //logger.Info(FormPlatform.PictureBoxes.Count);
-            formPlatform.Show(FormOut.Pane,DockAlignment.Top,0.7);
-
-        }
+      
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -285,27 +251,28 @@ namespace _305Vision
 
 
 
-        //#region 防止闪屏
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        CreateParams cp = base.CreateParams;
-        //        cp.ExStyle |= 0x02000000;
-        //        return cp;
-        //    }
-        //}
-        //#endregion
-
-
-
-
-
-
-
-
+        #region 防止闪屏
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
+        }
+        #endregion
 
         
+
+
+
+
+
+
+
+
+
     }
 
 }

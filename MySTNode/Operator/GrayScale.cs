@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-using _305Vision.Utils;
+using _305Vision.BLL;
 
 namespace _305Vision.MySTNode.Operator
 {
@@ -110,8 +110,7 @@ namespace _305Vision.MySTNode.Operator
         {
             base.OnDrawBody(dt);
             //非static 需要先实例化
-            MyDrawBody myDrawBodyInstance = new MyDrawBody();
-            myDrawBodyInstance.DrawBody(dt, m_img_draw,this.Left,this.Top);
+            STNodeBLL.DrawBody(dt, m_img_draw,this.Left,this.Top);
         }
 
     }

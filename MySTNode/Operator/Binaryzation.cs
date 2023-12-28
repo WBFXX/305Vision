@@ -1,5 +1,5 @@
-﻿using _305Vision.SDK;
-using _305Vision.Utils;
+﻿using _305Vision.BLL;
+using _305Vision.SDK;
 using _305Vision.图片操作测试;
 using NLog;
 using ST.Library.UI.NodeEditor;
@@ -49,9 +49,11 @@ namespace _305Vision.MySTNode.Operator
         {
             get => Max; set
             {
+                
                 Max = value;
                 // 触发值改变事件
                 OnDoubleValueChanged(EventArgs.Empty);
+
             }
         }
         [STNodeProperty("lower", "低于阈值时设置的像素值")]
@@ -97,12 +99,12 @@ namespace _305Vision.MySTNode.Operator
             if (DoubleValue > 255 || DoubleValue < 0 || Max>255||Max<0 || Min>255 || Min < 0)
             {
                 logger.Error("参数输入错误,请规范输入(0-255)。");
+
                 return;
             }
 
             //实例化自定义工具MyOption类
-            MyOption myOption = new MyOption();
-            myOption.ReconnectOutputNodes(in_option);
+           if(STNodeOptionBLL.ReconnectOutputNodes(in_option))
             logger.Info(this.Title + "算子参数改变,已重新绘制图像");
         }
 
@@ -121,11 +123,8 @@ namespace _305Vision.MySTNode.Operator
             else
             {
 
-                // 创建一个 ProssesImage 实例,动态方法必须创建实例
-                ProssesImage processImageInstance = new ProssesImage();
-
-                // 然后调用实例方法
-                Bitmap processedImage = processImageInstance.ProcessImage((Bitmap)e.TargetOption.Data, 
+                // 调用方法
+                Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)e.TargetOption.Data, 
                     imageData =>
                 {
 
@@ -152,8 +151,7 @@ namespace _305Vision.MySTNode.Operator
         protected override void OnDrawBody(DrawingTools dt)
         {
             base.OnDrawBody(dt);
-            MyDrawBody myDrawBodyInstance = new MyDrawBody();
-            myDrawBodyInstance.DrawBody(dt, m_img_draw, this.Left, this.Top);
+            STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top);
         }
 
     }

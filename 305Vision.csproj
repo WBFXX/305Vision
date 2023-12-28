@@ -90,11 +90,19 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\ProcessImageBLL.cs" />
+    <Compile Include="BLL\STNodeBLL.cs" />
+    <Compile Include="BLL\STNodeOptionBLL.cs" />
+    <Compile Include="BLL\UtilsBLL.cs" />
+    <Compile Include="DAL\ProcessImageDAL.cs" />
+    <Compile Include="DAL\STNodeDAL.cs" />
+    <Compile Include="DAL\STNodeOptionDAL.cs" />
+    <Compile Include="DAL\UtilsDAL.cs" />
+    <Compile Include="Model\NodePropertyGridInfo.cs" />
     <Compile Include="MySTNode\Blender\text.cs" />
     <Compile Include="MySTNode\BottonStyle\CommonStyle.cs" />
     <Compile Include="MySTNode\BottonStyle\OrangeStyle.cs" />
     <Compile Include="MySTNode\BottonStyle\TypeColorStyle.cs" />
-    <Compile Include="Enum\MyEnum.cs" />
     <Compile Include="MySTNode\Blender\BlenderMixColorNode.cs" />
     <Compile Include="MySTNode\Blender\DescriptorForColor.cs" />
     <Compile Include="MySTNode\Blender\FrmEnumSelect.cs">
@@ -119,8 +127,12 @@
     <Compile Include="MySTNode\图片操作\ImageChannelNode.cs" />
     <Compile Include="MySTNode\图片操作\ImageInputNode.cs" />
     <Compile Include="MySTNode\CommonNode\CalcNode.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SDK\OpencvSDK.cs" />
-    <Compile Include="Service\NodeService.cs" />
     <Compile Include="TreeView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,10 +180,6 @@
     <Compile Include="MySTNode\CommonNode\Input_demo.cs" />
     <Compile Include="MySTNode\CommonNode\test1.cs" />
     <Compile Include="MySTNode\CommonNode\输入.cs" />
-    <Compile Include="Utils\InputBox.cs" />
-    <Compile Include="Utils\MyDrawBody.cs" />
-    <Compile Include="Utils\MyOption.cs" />
-    <Compile Include="Utils\ProssesImage.cs" />
     <EmbeddedResource Include="FormOutput.resx">
       <DependentUpon>FormOutput.cs</DependentUpon>
     </EmbeddedResource>
@@ -188,15 +196,10 @@
       <DependentUpon>ComBoxCL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="STNodeEdit.resx">
       <DependentUpon>STNodeEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -224,13 +227,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icon\tool-box.png" />
-    <Content Include="Icon\hand-painted-plate.png" />
-    <Content Include="Icon\图片_moving-picture.png" />
-    <Content Include="Icon\工具箱_toolkit.png" />
-    <Content Include="Icon\手绘板_hand-painted-plate.png" />
-    <Content Include="Icon\树结构_tree-list.png" />
-    <Content Include="Icon\键盘_keyboard-one.png" />
     <None Include="Resources\Mouse.bmp" />
   </ItemGroup>
   <ItemGroup>
@@ -240,5 +236,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\hand-painted-plate.png" />
+    <Content Include="Resources\tool-box.png" />
+    <Content Include="Resources\图片_moving-picture.png" />
+    <Content Include="Resources\工具箱_toolkit.png" />
+    <Content Include="Resources\手绘板_hand-painted-plate.png" />
+    <Content Include="Resources\树结构_tree-list.png" />
+    <Content Include="Resources\键盘_keyboard-one.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
