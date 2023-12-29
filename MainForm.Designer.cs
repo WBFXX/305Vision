@@ -37,6 +37,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -45,10 +46,8 @@
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.工具栏ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.button4 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -112,7 +111,7 @@
             this.button2.Size = new System.Drawing.Size(25, 25);
             this.button2.TabIndex = 1;
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Test_Click);
             // 
             // button1
             // 
@@ -125,7 +124,7 @@
             this.button1.Size = new System.Drawing.Size(25, 25);
             this.button1.TabIndex = 0;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.NewCountPlatform_Click);
             // 
             // tabPage2
             // 
@@ -142,6 +141,21 @@
             this.tabPage2.TabIndex = 5;
             this.tabPage2.Text = "视图";
             // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.White;
+            this.button4.BackgroundImage = global::_305Vision.Properties.Resources.图片_moving_picture;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(83, 2);
+            this.button4.Name = "button4";
+            this.button4.Padding = new System.Windows.Forms.Padding(3);
+            this.button4.Size = new System.Drawing.Size(27, 27);
+            this.button4.TabIndex = 6;
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.PlatForm_Click);
+            // 
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.White;
@@ -155,7 +169,7 @@
             this.button6.Size = new System.Drawing.Size(27, 27);
             this.button6.TabIndex = 5;
             this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.Click += new System.EventHandler(this.OutForm_Click);
             // 
             // button5
             // 
@@ -169,7 +183,7 @@
             this.button5.Size = new System.Drawing.Size(27, 27);
             this.button5.TabIndex = 4;
             this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button4_Click);
+            this.button5.Click += new System.EventHandler(this.ProcessForm_Click);
             // 
             // button3
             // 
@@ -183,7 +197,7 @@
             this.button3.Size = new System.Drawing.Size(27, 27);
             this.button3.TabIndex = 2;
             this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.ToolForm_Click);
             // 
             // panel1
             // 
@@ -211,8 +225,7 @@
             // 
             this.文件ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.打开ToolStripMenuItem,
-            this.关闭ToolStripMenuItem,
-            this.工具栏ToolStripMenuItem});
+            this.关闭ToolStripMenuItem});
             this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
             this.文件ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.文件ToolStripMenuItem.Text = "文件";
@@ -220,21 +233,14 @@
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.打开ToolStripMenuItem.Text = "打开";
             // 
             // 关闭ToolStripMenuItem
             // 
             this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
-            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.关闭ToolStripMenuItem.Text = "关闭";
-            // 
-            // 工具栏ToolStripMenuItem
-            // 
-            this.工具栏ToolStripMenuItem.Name = "工具栏ToolStripMenuItem";
-            this.工具栏ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.工具栏ToolStripMenuItem.Text = "工具栏";
-            this.工具栏ToolStripMenuItem.Click += new System.EventHandler(this.工具栏ToolStripMenuItem_Click);
             // 
             // 编辑ToolStripMenuItem
             // 
@@ -254,21 +260,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(1104, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.White;
-            this.button4.BackgroundImage = global::_305Vision.Properties.Resources.图片_moving_picture;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(83, 2);
-            this.button4.Name = "button4";
-            this.button4.Padding = new System.Windows.Forms.Padding(3);
-            this.button4.Size = new System.Drawing.Size(27, 27);
-            this.button4.TabIndex = 6;
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // MainForm
             // 
@@ -312,7 +303,6 @@
         private System.Windows.Forms.ToolStripMenuItem 文件ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 打开ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 关闭ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 工具栏ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 编辑ToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Button button1;

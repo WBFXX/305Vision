@@ -15,6 +15,16 @@ namespace _305Vision
     public partial class FormPlatform : DockContent
     {
         private static FormPlatform _instance;
+        private List<PictureBox> pictureBoxes = new List<PictureBox>();
+        private Dictionary<PictureBox, Size> pictureBoxSizes = new Dictionary<PictureBox, Size>(); //添加了一个字典，用于存储PictureBox的大小
+        private Dictionary<PictureBox, Point> pictureBoxLocations = new Dictionary<PictureBox, Point>(); //添加了一个字典，用于存储PictureBox的位置
+        private Dictionary<Object, bool> pictureBoxTag = new Dictionary<Object, bool>(); //添加一个字典，用于存储Picturebox的Tag是否被点击
+        public static Dictionary<string, PictureBox> PictureBoxName { get => pictureBoxName; set => pictureBoxName = value; }
+        private static Dictionary<String, PictureBox> pictureBoxName = new Dictionary<String, PictureBox>(); //添加一个字典，通过Name查找PictureBox对象
+        private int cameraCount;
+
+
+
         public static FormPlatform Instance
         {
             get
@@ -29,24 +39,20 @@ namespace _305Vision
             }
         }
 
-        
-
         public List<PictureBox> PictureBoxes
         {
             get {
                 //当窗口被隐藏时（也就是假关闭后，应该获取不到PictureBoxes的）
                 return pictureBoxes; 
             }
-            private set
+            set
             {
                 pictureBoxes = value;
             }
         }
 
         public int CameraCount { get => cameraCount; set => cameraCount = value; }
-        public static Dictionary<string, PictureBox> PictureBoxName { get => pictureBoxName; set => pictureBoxName = value; }
 
-        private int cameraCount;
 
         public  FormPlatform(int cameraCount)
         {
@@ -55,7 +61,7 @@ namespace _305Vision
             InitializeComponent();
             InitializeCamera();
             AdjustImageArea();
-            this.Text = "带数量的窗口";
+            this.Text = "主窗口";
         }
 
         public FormPlatform()
@@ -80,13 +86,7 @@ namespace _305Vision
             _instance = platform;
         }
 
-        private  List<PictureBox> pictureBoxes = new List<PictureBox>();
-
-        private Dictionary<PictureBox, Size> pictureBoxSizes = new Dictionary<PictureBox, Size>(); //添加了一个字典，用于存储PictureBox的大小
-        private Dictionary<PictureBox, Point> pictureBoxLocations = new Dictionary<PictureBox, Point>(); //添加了一个字典，用于存储PictureBox的位置
-        private Dictionary<Object, bool> pictureBoxTag = new Dictionary<Object, bool>(); //添加一个字典，用于存储Picturebox的Tag是否被点击
-        private static Dictionary<String, PictureBox> pictureBoxName = new Dictionary<String, PictureBox>(); //添加一个字典，通过Name查找PictureBox对象
-
+        
 
         private void InitializeCamera()
         {
@@ -135,6 +135,8 @@ namespace _305Vision
                 }
             }
         }
+
+
         private Object tagToPictureBox;
         private PictureBox lastClickedPictureBox; // 添加一个字段存储上一次点击的 PictureBox
         private void PictureBox_Click(object sender, EventArgs e)
@@ -257,9 +259,6 @@ namespace _305Vision
             pictureBox_Sourse.Image = pictureBox_Mudi.Image;
             // 将源控件的属性赋给目标控件
             pictureBox_Mudi.Image = imageTemp;
-
-
-
 
             //更新字典
             PictureBox pictureBox = new PictureBox();

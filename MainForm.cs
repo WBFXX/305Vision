@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using NLog;
 using _305Vision.BLL;
+using _305Vision.DAL;
 
 namespace _305Vision
 {
@@ -12,13 +13,10 @@ namespace _305Vision
         /// 引入日志 logger
         /// </summary>
         private static  Logger logger = null;
+        private static MainForm _instance;//单例程
 
-        //单例
-        private static MainForm _instance;
-
-        //加载侧边工具栏
+        //加载实例
         ToolsBox toolBox = ToolsBox.Instance;
-        //加载主平台
         FormPlatform platform = FormPlatform.Instance;
         FormOutput FormOut = FormOutput.Instance;
         FormProcess formProcess = FormProcess.Instance;
@@ -28,14 +26,12 @@ namespace _305Vision
         public MainForm()
         {
             InitializeComponent();
-
             ////防闪屏,设置控件风格
             //SetStyle(
             //    ControlStyles.AllPaintingInWmPaint |  //全部在窗口绘制消息中绘图
             //    ControlStyles.OptimizedDoubleBuffer, //使用双缓冲
             //    true);
             //this.TransparencyKey = System.Drawing.Color.LightGray;
-
         }
 
         public static MainForm Instance
@@ -59,24 +55,15 @@ namespace _305Vision
 
             // 调整左侧停靠区域的宽度比例
             dockPanel1.DockLeftPortion = 0.15;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%
-            
-
             platform.Show(dockPanel1);//没第二个参数 默认为主窗体 中间
             //加载流程框架,在platform的左边 占比30%
             formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
             //加载输出栏,在platform的下方 占比30%
             FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
-
             //加载侧边栏，并设置侧边栏的宽度
             toolBox.Show(dockPanel1, DockState.DockLeft);
             toolBox.DockPanel.DockLeftPortion = 0.15;
 
-
-
-
-            ////创建主窗口2
-            //platform2.Text =  "窗口2";
-            //platform2.Show(dockPanel1);
 
             //在FormOut后开启logger
             if (logger == null)
@@ -88,48 +75,13 @@ namespace _305Vision
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /// <summary>
-        /// 打开工具栏（如果工具栏不存在）
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void 工具栏ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (toolBox.DockState == DockState.Hidden || toolBox.DockState == DockState.Unknown) { 
-            ToolsBox toolBox = new ToolsBox();
-            toolBox.Show(dockPanel1, DockState.DockLeft);
-
-            }
-            else
-            {
-                //System.Windows.Forms.MessageBox.Show("工具栏已打开");
-                logger.Warn("工具栏已打开");
-            }
-        }
-
         /// <summary>
         /// 根据数量改变窗口数量
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private void button1_Click(object sender, EventArgs e)
+        private void NewCountPlatform_Click(object sender, EventArgs e)
         {
 
             int userInput = UtilsBLL.InputBox("请输入图像块的数量：", "输入框");
@@ -149,136 +101,90 @@ namespace _305Vision
 
         }
 
-      
-
-        private void button3_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 打开工具栏
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ToolForm_Click(object sender, EventArgs e)
         {
-            if (toolBox.IsHidden)
-            {
-                toolBox.IsHidden = false;
-
-                //ToolsBox toolBox = new ToolsBox();
-                //toolBox.Show(dockPanel1, DockState.DockLeft);
-                //this.toolBox = toolBox;
-                ////FormOut.ReadLog("打开工具栏", this.Name);
-            }
-            else
-            {
-                logger.Info("当前点击窗口(" + toolBox.Text + "窗口)已存在");
-
-                //输出日志
-                //FormOut.ReadLog("工具栏已打开",this.Name,LogClass.Warning);
-                //System.Windows.Forms.MessageBox.Show("工具栏已打开");
-            }
+            WindowsViewBLL.ShowForm(toolBox);
             //FormOut.ReadLog("这是"+ this.Name + "窗口的按钮",this.Name ,LogClass.Warning);
 
         }
-
-        private void button4_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 打开画布窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProcessForm_Click(object sender, EventArgs e)
         {
-            if (formProcess.IsHidden)
-            {
-                formProcess.IsHidden = false;
-                ////如果 主窗口在 且 输出窗口在
-                //if (!platform.IsHidden && !FormOut.IsHidden)
-                //{
-                //    FormOut.IsHidden = true;
-                //    formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
-                //    FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
-                //}
-                ////如果 主窗口在 且 输出窗口不在
-                //else if (!platform.IsHidden && FormOut.IsHidden)
-                //{
-                //    formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
-                //}
-                //else formProcess.Show(dockPanel1);
-                //this.formProcess = formProcess;
-                logger.Info("打开窗口成功");
-            }
-            else
-            {
-                logger.Info("当前点击窗口(" + formProcess.Text + "窗口)已存在");
+            WindowsViewBLL.ShowForm(formProcess);
+        }
+        /// <summary>
+        /// 输出窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OutForm_Click(object sender, EventArgs e)
+        {
+            WindowsViewBLL.ShowForm(FormOut);
+            // if (FormOut.IsHidden)
+            //{
+            //    FormOut.IsHidden = false;
+            //    //FormOutput FormOut = FormOutput.Instance;
+            //    //if (!platform.IsHidden)
+            //    //{
+            //    //    FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
+            //    //}
+            //    //else
+            //    //{
+            //    //    FormOut.Show(dockPanel1,DockState.DockBottom);
+            //    //}
+            //    //logger.Info("打开窗口成功");
+            //}
+            //else
+            //{
+            //    logger.Info("当前点击窗口(" + FormOut.Text + "窗口)已存在");
 
-            }
+            //}
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 图像展示窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PlatForm_Click(object sender, EventArgs e)
         {
-           
-             if (FormOut.IsHidden)
-            {
-                FormOut.IsHidden = false;
-                //FormOutput FormOut = FormOutput.Instance;
-                //if (!platform.IsHidden)
-                //{
-                //    FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
-                //}
-                //else
-                //{
-                //    FormOut.Show(dockPanel1,DockState.DockBottom);
-                //}
-                //logger.Info("打开窗口成功");
-            }
-            else
-            {
-                logger.Info("当前点击窗口(" + FormOut.Text + "窗口)已存在");
-
-            }
+            WindowsViewBLL.ShowForm(FormPlatform.Instance);
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            FormPlatform formPlatform = FormPlatform.Instance;
-            try
-            {
-                logger.Info(platform.IsHidden);
-                if (platform.IsHidden)
-                {
-                    formPlatform.Text = "图像窗口";
-                    formPlatform.Show(dockPanel1);
-                }
-                else
-                {
 
-                    logger.Warn("窗口已存在,窗口名称为：" + formPlatform.Text +"  隐藏代替关闭："+ formPlatform.HideOnClose);
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-            }
-            
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 测试按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Test_Click(object sender, EventArgs e)
         {
             TreeView treeView = new TreeView();
             treeView.Show();
         }
 
-        private void button4_Click_1(object sender, EventArgs e)
+
+
+        #region 防止闪屏
+        protected override CreateParams CreateParams
         {
-            if(FormPlatform.Instance.IsHidden)
+            get
             {
-                FormPlatform.Instance.IsHidden = false;
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
             }
         }
-
-
-
-
-        //#region 防止闪屏
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        CreateParams cp = base.CreateParams;
-        //        cp.ExStyle |= 0x02000000;
-        //        return cp;
-        //    }
-        //}
-        //#endregion
+        #endregion
 
 
 

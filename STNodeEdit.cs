@@ -19,16 +19,7 @@ namespace _305Vision
         public STNodeEdit()
         {
             InitializeComponent();
-            Binaryzation binaryzation = new Binaryzation();
-
         }
 
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-            
-
-
-        }
     }
 }

@@ -109,10 +109,12 @@
     <Compile Include="BLL\STNodeBLL.cs" />
     <Compile Include="BLL\STNodeOptionBLL.cs" />
     <Compile Include="BLL\UtilsBLL.cs" />
+    <Compile Include="BLL\WindowsViewBLL.cs" />
     <Compile Include="DAL\ProcessImageDAL.cs" />
     <Compile Include="DAL\STNodeDAL.cs" />
     <Compile Include="DAL\STNodeOptionDAL.cs" />
     <Compile Include="DAL\UtilsDAL.cs" />
+    <Compile Include="DAL\WindowsViewDAL.cs" />
     <Compile Include="Model\NodePropertyGridInfo.cs" />
     <Compile Include="MySTNode\Blender\text.cs" />
     <Compile Include="MySTNode\BottonStyle\CommonStyle.cs" />
