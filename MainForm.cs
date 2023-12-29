@@ -29,12 +29,12 @@ namespace _305Vision
         {
             InitializeComponent();
 
-            //防闪屏,设置控件风格
-            SetStyle(
-                ControlStyles.AllPaintingInWmPaint |  //全部在窗口绘制消息中绘图
-                ControlStyles.OptimizedDoubleBuffer, //使用双缓冲
-                true);
-            this.TransparencyKey = System.Drawing.Color.LightGray;
+            ////防闪屏,设置控件风格
+            //SetStyle(
+            //    ControlStyles.AllPaintingInWmPaint |  //全部在窗口绘制消息中绘图
+            //    ControlStyles.OptimizedDoubleBuffer, //使用双缓冲
+            //    true);
+            //this.TransparencyKey = System.Drawing.Color.LightGray;
 
         }
 
@@ -251,17 +251,17 @@ namespace _305Vision
 
 
 
-        #region 防止闪屏
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;
-                return cp;
-            }
-        }
-        #endregion
+        //#region 防止闪屏
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        CreateParams cp = base.CreateParams;
+        //        cp.ExStyle |= 0x02000000;
+        //        return cp;
+        //    }
+        //}
+        //#endregion
 
         
 

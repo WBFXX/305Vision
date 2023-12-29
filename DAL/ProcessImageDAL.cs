@@ -21,8 +21,6 @@ namespace _305Vision.DAL
         /// <returns>处理后的图像数据。</returns>
         public static Bitmap ProcessImage(Bitmap originalImage, Func<BitmapData, byte[]> imageProcessingFunc)
         {
-            try
-            {
                 //克隆图像，避免把原图像修改回原来的节点
                 Bitmap bmp = originalImage;
                 originalImage = (Bitmap)originalImage.Clone();
@@ -49,12 +47,6 @@ namespace _305Vision.DAL
                 originalImage.UnlockBits(originalImageData);
 
                 return processedImage;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                return null; // 或者抛出异常，根据需要进行处理
-            }
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _305Vision.DAL;
+using System.Windows.Forms;
 
 namespace _305Vision.BLL
 {
@@ -19,7 +20,15 @@ namespace _305Vision.BLL
         /// <returns>处理后的图像数据。</returns>
         public static Bitmap ProcessImage(Bitmap originalImage, Func<BitmapData, byte[]> imageProcessingFunc)
         {
-            return ProcessImageDAL.ProcessImage(originalImage, imageProcessingFunc);
+            try
+            {
+                return ProcessImageDAL.ProcessImage(originalImage, imageProcessingFunc);
+
+            }catch (Exception ex)
+            {
+                MessageBox.Show("图像处理失败："+ex.Message,"警告",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return null;
+            }
         }
     }
 }

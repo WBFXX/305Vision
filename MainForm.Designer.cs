@@ -250,6 +250,7 @@
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "305Vision";

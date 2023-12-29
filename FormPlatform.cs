@@ -62,7 +62,7 @@ namespace _305Vision
         {
             if (CameraCount == 0)
                  {
-                      cameraCount = 4;//为了测试效果，将相机数量设置为5
+                      cameraCount = 1;//为了测试效果，将相机数量设置为5
                  }
 
                 InitializeComponent();
