@@ -62,7 +62,7 @@ namespace _305Vision
         {
             if (CameraCount == 0)
                  {
-                      cameraCount = 1;//为了测试效果，将相机数量设置为5
+                      cameraCount = 4;//为了测试效果，将相机数量设置为5
                  }
 
                 InitializeComponent();
@@ -78,8 +78,6 @@ namespace _305Vision
         public static void SetPlatformInstance(FormPlatform platform)
         {
             _instance = platform;
-            
-            //MessageBox.Show(platform.IsHidden.ToString());
         }
 
         private  List<PictureBox> pictureBoxes = new List<PictureBox>();
@@ -89,14 +87,6 @@ namespace _305Vision
         private Dictionary<Object, bool> pictureBoxTag = new Dictionary<Object, bool>(); //添加一个字典，用于存储Picturebox的Tag是否被点击
         private static Dictionary<String, PictureBox> pictureBoxName = new Dictionary<String, PictureBox>(); //添加一个字典，通过Name查找PictureBox对象
 
-        //private Dictionary<Object, PictureBox> tagToPictureBox = new Dictionary<Object, PictureBox>(); //添加一个字典，用于查找tag对应的pictureBox
-
-        //public Form1()
-        //{
-        //    InitializeComponent();
-        //    InitializeCamera();
-        //    AdjustImageArea();
-        //}
 
         private void InitializeCamera()
         {

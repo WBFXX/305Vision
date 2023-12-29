@@ -30,7 +30,12 @@ namespace _305Vision
         public FormProcess()
         {
             InitializeComponent();
-            
+            //this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);//以下三行消除主界面闪烁
+            //this.SetStyle(ControlStyles.DoubleBuffer, true);
+            //this.SetStyle(ControlStyles.UserPaint, true);
+
+
+
         }
         protected override void OnLoad(EventArgs e)
         {
@@ -89,5 +94,6 @@ namespace _305Vision
                     break;
             }
         }
+
     }
 }

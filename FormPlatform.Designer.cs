@@ -97,8 +97,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.CloseButton = false;
-            this.CloseButtonVisible = false;
             this.Controls.Add(this.flowLayoutPanel1);
             this.HideOnClose = true;
             this.MaximizeBox = false;

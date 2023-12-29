@@ -92,7 +92,6 @@
             this.ClientSize = new System.Drawing.Size(777, 525);
             this.ControlBox = false;
             this.Controls.Add(this.stNodeEditor1);
-            this.DoubleBuffered = true;
             this.HideOnClose = true;
             this.Name = "FormProcess";
             this.ShowIcon = false;

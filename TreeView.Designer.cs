@@ -28,27 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.stNodeEditorPannel1 = new ST.Library.UI.NodeEditor.STNodeEditorPannel();
+            this.stNodeEditor1 = new ST.Library.UI.NodeEditor.STNodeEditor();
             this.SuspendLayout();
             // 
-            // stNodeEditorPannel1
+            // stNodeEditor1
             // 
-            this.stNodeEditorPannel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.stNodeEditorPannel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stNodeEditorPannel1.Location = new System.Drawing.Point(0, 0);
-            this.stNodeEditorPannel1.MinimumSize = new System.Drawing.Size(250, 250);
-            this.stNodeEditorPannel1.Name = "stNodeEditorPannel1";
-            this.stNodeEditorPannel1.Size = new System.Drawing.Size(803, 508);
-            this.stNodeEditorPannel1.TabIndex = 0;
-            this.stNodeEditorPannel1.Text = "stNodeEditorPannel1";
-            this.stNodeEditorPannel1.Y = 250;
+            this.stNodeEditor1.AllowDrop = true;
+            this.stNodeEditor1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.stNodeEditor1.Curvature = 0.3F;
+            this.stNodeEditor1.Location = new System.Drawing.Point(212, 72);
+            this.stNodeEditor1.LocationBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.stNodeEditor1.MarkBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.stNodeEditor1.MarkForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.stNodeEditor1.MinimumSize = new System.Drawing.Size(100, 100);
+            this.stNodeEditor1.Name = "stNodeEditor1";
+            this.stNodeEditor1.Size = new System.Drawing.Size(200, 200);
+            this.stNodeEditor1.TabIndex = 0;
+            this.stNodeEditor1.Text = "stNodeEditor1";
             // 
             // TreeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(803, 508);
-            this.Controls.Add(this.stNodeEditorPannel1);
+            this.Controls.Add(this.stNodeEditor1);
             this.Name = "TreeView";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -57,6 +60,6 @@
 
         #endregion
 
-        private ST.Library.UI.NodeEditor.STNodeEditorPannel stNodeEditorPannel1;
+        private ST.Library.UI.NodeEditor.STNodeEditor stNodeEditor1;
     }
 }

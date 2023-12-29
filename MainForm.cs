@@ -155,10 +155,12 @@ namespace _305Vision
         {
             if (toolBox.IsHidden)
             {
-                ToolsBox toolBox = new ToolsBox();
-                toolBox.Show(dockPanel1, DockState.DockLeft);
-                this.toolBox = toolBox;
-                //FormOut.ReadLog("打开工具栏", this.Name);
+                toolBox.IsHidden = false;
+
+                //ToolsBox toolBox = new ToolsBox();
+                //toolBox.Show(dockPanel1, DockState.DockLeft);
+                //this.toolBox = toolBox;
+                ////FormOut.ReadLog("打开工具栏", this.Name);
             }
             else
             {
@@ -176,21 +178,21 @@ namespace _305Vision
         {
             if (formProcess.IsHidden)
             {
-                FormProcess formProcess = new FormProcess();
-                //如果 主窗口在 且 输出窗口在
-                if (!platform.IsHidden && !FormOut.IsHidden)
-                {
-                    FormOut.IsHidden = true;
-                    formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
-                    FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
-                }
-                //如果 主窗口在 且 输出窗口不在
-                else if (!platform.IsHidden && FormOut.IsHidden)
-                {
-                    formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
-                }
-                else formProcess.Show(dockPanel1);
-                this.formProcess = formProcess;
+                formProcess.IsHidden = false;
+                ////如果 主窗口在 且 输出窗口在
+                //if (!platform.IsHidden && !FormOut.IsHidden)
+                //{
+                //    FormOut.IsHidden = true;
+                //    formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
+                //    FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
+                //}
+                ////如果 主窗口在 且 输出窗口不在
+                //else if (!platform.IsHidden && FormOut.IsHidden)
+                //{
+                //    formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
+                //}
+                //else formProcess.Show(dockPanel1);
+                //this.formProcess = formProcess;
                 logger.Info("打开窗口成功");
             }
             else
@@ -205,16 +207,17 @@ namespace _305Vision
            
              if (FormOut.IsHidden)
             {
-                FormOutput FormOut = FormOutput.Instance;
-                if (!platform.IsHidden)
-                {
-                    FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
-                }
-                else
-                {
-                    FormOut.Show(dockPanel1,DockState.DockBottom);
-                }
-                logger.Info("打开窗口成功");
+                FormOut.IsHidden = false;
+                //FormOutput FormOut = FormOutput.Instance;
+                //if (!platform.IsHidden)
+                //{
+                //    FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
+                //}
+                //else
+                //{
+                //    FormOut.Show(dockPanel1,DockState.DockBottom);
+                //}
+                //logger.Info("打开窗口成功");
             }
             else
             {
@@ -248,6 +251,20 @@ namespace _305Vision
             
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            TreeView treeView = new TreeView();
+            treeView.Show();
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            if(FormPlatform.Instance.IsHidden)
+            {
+                FormPlatform.Instance.IsHidden = false;
+            }
+        }
+
 
 
 
@@ -263,7 +280,7 @@ namespace _305Vision
         //}
         //#endregion
 
-        
+
 
 
 
