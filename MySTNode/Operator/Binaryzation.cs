@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace _305Vision.MySTNode.Operator
 {
-    [STNode("/算子/", "对图像进行灰度处")]
+    [STNode("/算子/", "二值化")]
     public class Binaryzation : ImageBaseNode
     {
         private STNodeOption in_option;

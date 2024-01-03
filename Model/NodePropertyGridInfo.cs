@@ -12,7 +12,6 @@ namespace _305Vision.Model
         /// </summary>
         private static STNodePropertyGrid sTNodePropertyGrid;
 
-
         public static STNodePropertyGrid STNodePropertyGrid { get => sTNodePropertyGrid; set => sTNodePropertyGrid = value; }
 
         

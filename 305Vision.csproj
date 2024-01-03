@@ -130,6 +130,7 @@
     <Compile Include="MySTNode\Blender\STNodeProgress.cs" />
     <Compile Include="MySTNode\Blender\STNodeSelectBox.cs" />
     <Compile Include="MySTNode\Operator\Binaryzation.cs" />
+    <Compile Include="MySTNode\Operator\Expansion.cs" />
     <Compile Include="MySTNode\Operator\Eroding.cs" />
     <Compile Include="MySTNode\Operator\GrayScale.cs" />
     <Compile Include="MySTNode\控件库\ComBoxControl.cs" />
@@ -143,7 +144,6 @@
     <Compile Include="MySTNode\图片操作\ImageBaseNode.cs" />
     <Compile Include="MySTNode\图片操作\ImageChannelNode.cs" />
     <Compile Include="MySTNode\图片操作\ImageInputNode.cs" />
-    <Compile Include="MySTNode\CommonNode\CalcNode.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -194,9 +194,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MySTNode\CommonNode\Input_demo.cs" />
-    <Compile Include="MySTNode\CommonNode\test1.cs" />
-    <Compile Include="MySTNode\CommonNode\输入.cs" />
     <EmbeddedResource Include="FormOutput.resx">
       <DependentUpon>FormOutput.cs</DependentUpon>
     </EmbeddedResource>

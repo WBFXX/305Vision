@@ -46,35 +46,31 @@ namespace _305Vision.SDK
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <param name="stride"></param>
-        /// <param name="kerSize"></param>
+        /// <param name="kerSizeX"></param>
+        /// <param name="kerSizeY"></param>
         /// <param name="kerStr"></param>
         /// <param name="pointX"></param>
         /// <param name="pointY"></param>
         /// <param name="iterations"></param>
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "eroding", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe byte* eroding(IntPtr intPtr, int width, int height, int stride, int kerSize, int kerStr, int pointX, int pointY, int iterations);
+        public static extern unsafe byte* eroding(IntPtr intPtr, int width, int height, int stride, int kerSizeX, int kerSizeY, int kerStr, int pointX, int pointY, int iterations);
         /// <summary>
-        /// 图像扩展
+        /// 图像膨胀 
         /// </summary>
         /// <param name="intPtr"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <param name="stride"></param>
-        /// <param name="kerSize"></param>
+        /// <param name="kerSizeX"></param>
+        /// <param name="kerSizeY"></param>
         /// <param name="kerStr"></param>
         /// <param name="pointX"></param>
         /// <param name="pointY"></param>
         /// <param name="iterations"></param>
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "expansion", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe byte* expansion(IntPtr intPtr, int width, int height, int stride, int kerSize, int kerStr, int pointX, int pointY, int iterations);
+        public static extern unsafe byte* expansion(IntPtr intPtr, int width, int height, int stride, int kerSizeX, int kerSizeY, int kerStr, int pointX, int pointY, int iterations);
 
-
-
-
-
-        //[DllImport("demo.dll")]
-        //public extern static void toCV();
     }
 }

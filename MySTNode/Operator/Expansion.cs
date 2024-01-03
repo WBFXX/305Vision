@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace _305Vision.MySTNode.Operator
 {
-    [STNode("/算子","图像腐蚀")]
-    public class Eroding : ImageBaseNode
+    [STNode("/算子","图像膨胀")]
+    public class Expansion : ImageBaseNode
     {
-        #region 算法腐蚀参数
+        #region 算法膨胀参数
         private int kerSizeX = 3;
         private int kerSizeY = 3;
         private int kerStr = 3;
@@ -43,7 +43,7 @@ namespace _305Vision.MySTNode.Operator
         protected override void OnCreate()
         {
             base.OnCreate();
-            this.Title = "图像腐蚀";
+            this.Title = "图像膨胀";
 
             in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
             in_option.DataTransfer += In_option_DataTransfer;
@@ -63,8 +63,6 @@ namespace _305Vision.MySTNode.Operator
             else
             {
 
-
-
                 // 调用方法
                 Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)e.TargetOption.Data,
                     imageData =>
@@ -73,7 +71,7 @@ namespace _305Vision.MySTNode.Operator
                         // 具体的处理逻辑
                         unsafe
                         {
-                            byte* imageDataPtr = OpenCVSDK.eroding(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, KerSizeX, KerSizeY, KerStr, PointX, PointY, Iterations);
+                            byte* imageDataPtr = OpenCVSDK.expansion(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, KerSizeX, KerSizeY, KerStr, PointX, PointY, Iterations);
 
                             // 处理后的数据流复制到托管数组
                             int size = imageData.Width * imageData.Height * 3;
