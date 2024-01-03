@@ -258,7 +258,9 @@
       <Name>PictureWindow</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="OWindows\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\hand-painted-plate.png" />
     <Content Include="Resources\tool-box.png" />
