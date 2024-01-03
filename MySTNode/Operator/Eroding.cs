@@ -1,4 +1,5 @@
-﻿using _305Vision.BLL;
+﻿using _305Vision.Blender;
+using _305Vision.BLL;
 using _305Vision.SDK;
 using _305Vision.图片操作测试;
 using ST.Library.UI.NodeEditor;
@@ -10,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using static _305Vision.Blender.BlenderMixColorNode;
 
 namespace _305Vision.MySTNode.Operator
 {
@@ -23,19 +25,41 @@ namespace _305Vision.MySTNode.Operator
         private int pointX=-1;
         private int pointY=-1;
         private int iterations = 1;
+        public enum KerStrEnum
+        {
+            矩形 = 1,
+            交叉形 = 2,
+            椭圆形 = 3
+        }
+
 
         [STNodeProperty("内核长","内核大小，默认为3")]
         public int KerSizeX { get => kerSizeX; set => kerSizeX = value; }
         [STNodeProperty("内核宽", "内核大小，默认为3")]
         public int KerSizeY { get => kerSizeY; set => kerSizeY = value; }
-        [STNodeProperty("内核结构", "输入1/2/3，默认为3")]
-        public int KerStr { get => kerStr; set => kerStr = value; }
+        //[STNodeProperty("内核结构", "输入1/2/3，默认为3")]
+        //public int KerStr { get => kerStr; set => kerStr = value; }
+
+        private KerStrEnum _KerStr;
+        [STNodeProperty("内核结构", "1/2/2")]
+        public KerStrEnum KerStr
+        {
+            get { return _KerStr; }
+            set
+            {
+                _KerStr = value;
+            }
+        }
         [STNodeProperty("锚点横坐标", "默认-1为中心点")]
         public int PointX { get => pointX; set => pointX = value; }
         [STNodeProperty("锚点纵坐标", "默认-1为中心点")]
         public int PointY { get => pointY; set => pointY = value; }
         [STNodeProperty("操作次数", "默认1")]
         public int Iterations { get => iterations; set => iterations = value; }
+
+        
+
+        
         #endregion
 
 
@@ -45,7 +69,12 @@ namespace _305Vision.MySTNode.Operator
             base.OnCreate();
             this.Title = "图像腐蚀";
 
+
+           
+           
+
             in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
+
             in_option.DataTransfer += In_option_DataTransfer;
         }
 
@@ -73,7 +102,7 @@ namespace _305Vision.MySTNode.Operator
                         // 具体的处理逻辑
                         unsafe
                         {
-                            byte* imageDataPtr = OpenCVSDK.eroding(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, KerSizeX, KerSizeY, KerStr, PointX, PointY, Iterations);
+                            byte* imageDataPtr = OpenCVSDK.eroding(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, KerSizeX, KerSizeY, (int)KerStr, PointX, PointY, Iterations);
 
                             // 处理后的数据流复制到托管数组
                             int size = imageData.Width * imageData.Height * 3;

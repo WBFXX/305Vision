@@ -65,6 +65,7 @@ namespace _305Vision.Blender
             Subtract
         }
         
+        
 
         private STNodeSelectEnumBox m_ctrl_select;  //自定义控件
         private STNodeProgress m_ctrl_progess;
@@ -74,6 +75,7 @@ namespace _305Vision.Blender
 
         protected override void OnCreate() {
             base.OnCreate();
+            
             this.TitleColor = Color.FromArgb(200, Color.DarkKhaki);
             this.Title = "MixRGB";
             this.AutoSize = false;

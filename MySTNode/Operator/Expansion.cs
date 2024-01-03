@@ -10,6 +10,8 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using static _305Vision.MySTNode.Operator.Eroding;
 
 namespace _305Vision.MySTNode.Operator
 {
@@ -28,8 +30,16 @@ namespace _305Vision.MySTNode.Operator
         public int KerSizeX { get => kerSizeX; set => kerSizeX = value; }
         [STNodeProperty("内核宽", "内核大小，默认为3")]
         public int KerSizeY { get => kerSizeY; set => kerSizeY = value; }
-        [STNodeProperty("内核结构", "输入1/2/3，默认为3")]
-        public int KerStr { get => kerStr; set => kerStr = value; }
+        private KerStrEnum _KerStr;
+        [STNodeProperty("内核结构", "1/2/2")]
+        public KerStrEnum KerStr
+        {
+            get { return _KerStr; }
+            set
+            {
+                _KerStr = value;
+            }
+        }
         [STNodeProperty("锚点横坐标", "默认-1为中心点")]
         public int PointX { get => pointX; set => pointX = value; }
         [STNodeProperty("锚点纵坐标", "默认-1为中心点")]
@@ -71,7 +81,7 @@ namespace _305Vision.MySTNode.Operator
                         // 具体的处理逻辑
                         unsafe
                         {
-                            byte* imageDataPtr = OpenCVSDK.expansion(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, KerSizeX, KerSizeY, KerStr, PointX, PointY, Iterations);
+                            byte* imageDataPtr = OpenCVSDK.expansion(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, KerSizeX, KerSizeY, (int)KerStr, PointX, PointY, Iterations);
 
                             // 处理后的数据流复制到托管数组
                             int size = imageData.Width * imageData.Height * 3;
@@ -85,7 +95,6 @@ namespace _305Vision.MySTNode.Operator
                 this.logger.Info("图像" + this.Title + "处理完成");
                 m_op_img_out.TransferData((Image)processedImage);//out选项 输出
                 m_img_draw = (Image)processedImage;
-
             }
         }
 
