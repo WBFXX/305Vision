@@ -11,9 +11,9 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace _305Vision
 {
-    public partial class TreeView : Form
+    public partial class TestForm : Form
     {
-        public TreeView()
+        public TestForm()
         {
             InitializeComponent();
         }

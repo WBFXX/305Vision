@@ -149,12 +149,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SDK\OpencvSDK.cs" />
-    <Compile Include="TreeView.cs">
+    <Compile Include="PropertyGrid.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TreeView.Designer.cs">
-      <DependentUpon>TreeView.cs</DependentUpon>
+    <Compile Include="PropertyGrid.Designer.cs">
+      <DependentUpon>PropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SDK\OpencvSDK.cs" />
+    <Compile Include="TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="STNodeEdit.cs">
       <SubType>Form</SubType>
@@ -214,14 +220,17 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="PropertyGrid.resx">
+      <DependentUpon>PropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="STNodeEdit.resx">
       <DependentUpon>STNodeEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolsBox.resx">
       <DependentUpon>ToolsBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TreeView.resx">
-      <DependentUpon>TreeView.cs</DependentUpon>
+    <EmbeddedResource Include="TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Nlog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

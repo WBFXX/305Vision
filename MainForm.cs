@@ -9,6 +9,18 @@ namespace _305Vision
 {
     public partial class MainForm : Form
     {
+        #region 防止闪屏
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
+        }
+
+        #endregion
         /// <summary>
         /// 引入日志 logger
         /// </summary>
@@ -20,8 +32,9 @@ namespace _305Vision
         FormPlatform platform = FormPlatform.Instance;
         FormOutput FormOut = FormOutput.Instance;
         FormProcess formProcess = FormProcess.Instance;
+        PropertyGrid propertyGrid = PropertyGrid.Instance;
 
-        
+
 
         public MainForm()
         {
@@ -55,6 +68,8 @@ namespace _305Vision
 
             // 调整左侧停靠区域的宽度比例
             dockPanel1.DockLeftPortion = 0.15;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%
+            // 调整左侧停靠区域的宽度比例
+            dockPanel1.DockRightPortion = 0.15;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%
             platform.Show(dockPanel1);//没第二个参数 默认为主窗体 中间
             //加载流程框架,在platform的左边 占比30%
             formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
@@ -63,6 +78,10 @@ namespace _305Vision
             //加载侧边栏，并设置侧边栏的宽度
             toolBox.Show(dockPanel1, DockState.DockLeft);
             toolBox.DockPanel.DockLeftPortion = 0.15;
+            //加载属性栏,并设置侧边栏宽度
+            propertyGrid.Show(dockPanel1,DockState.DockRight);
+            propertyGrid.DockPanel.DockLeftPortion = 0.15;
+
 
 
             //在FormOut后开启logger
@@ -160,6 +179,15 @@ namespace _305Vision
             WindowsViewBLL.ShowForm(FormPlatform.Instance);
         }
 
+        /// <summary>
+        /// 属性框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PropertyGrid_Click(object sender, EventArgs e)
+        {
+            WindowsViewBLL.ShowForm(PropertyGrid.Instance);
+        }
 
         /// <summary>
         /// 测试按钮
@@ -168,34 +196,11 @@ namespace _305Vision
         /// <param name="e"></param>
         private void Test_Click(object sender, EventArgs e)
         {
-            TreeView treeView = new TreeView();
+            TestForm treeView = new TestForm();
             treeView.Show();
         }
 
-
-
-        #region 防止闪屏
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;
-                return cp;
-            }
-        }
-        #endregion
-
-
-
-
-
-
-
-
-
-
-
+        
     }
 
 }

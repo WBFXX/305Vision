@@ -1,6 +1,6 @@
 ﻿namespace _305Vision
 {
-    partial class TreeView
+    partial class TestForm
     {
         /// <summary>
         /// Required designer variable.
