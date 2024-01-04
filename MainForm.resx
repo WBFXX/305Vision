@@ -124,13 +124,6 @@
     <value>303, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk2GAAAAAAAAAD4AAAAoAAAAEgAAABIAAAABAAEAAAAAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAA////
-        /////8AA///AAP/PwAD/z8AA/5/AAPufwAD5P8AA+D/AAPgHwAD4D8AA+B/AAPg/wAD4f8AA+P/AAPn/
-        wAD7/8AA///AAP//wAA=
-</value>
-  </data>
   <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk2GAAAAAAAAAD4AAAAoAAAAEgAAABIAAAABAAEAAAAAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAA////
@@ -138,6 +131,9 @@
         wAD7/8AA///AAP//wAA=
 </value>
   </data>
+  <metadata name="vS2015DarkTheme1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 59</value>
+  </metadata>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

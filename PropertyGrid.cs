@@ -34,9 +34,8 @@ namespace _305Vision
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            
             //stNodeTreeView1.AutoScroll = true;
-            stNodePropertyGrid1.Text = "属性栏";
+            stNodePropertyGrid1.Text = "";
             stNodePropertyGrid1.SetInfoKey("作者", "邮箱", "联系", "帮助");
             NodePropertyGridInfo.STNodePropertyGrid = stNodePropertyGrid1;
 

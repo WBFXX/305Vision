@@ -73,6 +73,16 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap play_circle_icon1 {
+            get {
+                object obj = ResourceManager.GetObject("play_circle_icon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap tool_box {
             get {
                 object obj = ResourceManager.GetObject("tool_box", resourceCulture);

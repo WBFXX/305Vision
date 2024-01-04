@@ -4,6 +4,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using NLog;
 using _305Vision.BLL;
 using _305Vision.DAL;
+using _305Vision.Utils;
 
 namespace _305Vision
 {
@@ -39,6 +40,8 @@ namespace _305Vision
         public MainForm()
         {
             InitializeComponent();
+            menuStrip1.Renderer = new BlackRender(); //引用Utils自创继承颜色
+            //menuStrip1.Renderer = new ToolStripRendererEx(); //引用Utils自创继承颜色
             ////防闪屏,设置控件风格
             //SetStyle(
             //    ControlStyles.AllPaintingInWmPaint |  //全部在窗口绘制消息中绘图

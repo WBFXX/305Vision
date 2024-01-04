@@ -1,5 +1,6 @@
 ﻿using _305Vision.Model;
 using _305Vision.MySTNode.Operator;
+using _305Vision.Utils;
 using ST.Library.UI.NodeEditor;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,8 @@ namespace _305Vision
             //this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);//以下三行消除主界面闪烁
             //this.SetStyle(ControlStyles.DoubleBuffer, true);
             //this.SetStyle(ControlStyles.UserPaint, true);
+            contextMenuStrip1.ShowImageMargin = false;
+            contextMenuStrip1.Renderer = new ToolStripRendererEx();
 
 
 
@@ -84,6 +87,7 @@ namespace _305Vision
         {
             stNodeEditor1.ActiveNode.LockOption = !stNodeEditor1.ActiveNode.LockOption;
         }
+
 
         private void StNodeEditor1_KeyDown(object sender, KeyEventArgs e)
         {

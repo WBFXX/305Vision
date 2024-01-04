@@ -21,7 +21,7 @@ namespace _305Vision.MySTNode.Operator
         #region 算法腐蚀参数
         private int kerSizeX = 3;
         private int kerSizeY = 3;
-        private int kerStr = 3;
+        //private int kerStr = 3;
         private int pointX=-1;
         private int pointY=-1;
         private int iterations = 1;

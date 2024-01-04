@@ -67,7 +67,7 @@
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
@@ -81,7 +81,7 @@
             // 连接锁定解除ToolStripMenuItem
             // 
             this.连接锁定解除ToolStripMenuItem.Name = "连接锁定解除ToolStripMenuItem";
-            this.连接锁定解除ToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
+            this.连接锁定解除ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.连接锁定解除ToolStripMenuItem.Text = "连接锁定/解除";
             this.连接锁定解除ToolStripMenuItem.Click += new System.EventHandler(this.连接锁定解除ToolStripMenuItem_Click);
             // 
