@@ -5,6 +5,9 @@ using NLog;
 using _305Vision.BLL;
 using _305Vision.DAL;
 using _305Vision.Utils;
+using System.Drawing;
+using _305Vision.Properties;
+using System.Runtime.InteropServices;
 
 namespace _305Vision
 {
@@ -41,6 +44,15 @@ namespace _305Vision
         {
             InitializeComponent();
             menuStrip1.Renderer = new BlackRender(); //引用Utils自创继承颜色
+            // 订阅事件以进行绘制
+            //toolStrip1.Renderer = new CustomToolStripRenderer(); 
+            // 订阅事件以进行绘制
+            toolStrip1.Paint += ToolStrip1_Paint;
+
+            //tabControl1 = new TabControl();
+            // 设置选项卡的背景颜色
+
+
             //menuStrip1.Renderer = new ToolStripRendererEx(); //引用Utils自创继承颜色
             ////防闪屏,设置控件风格
             //SetStyle(
@@ -48,6 +60,16 @@ namespace _305Vision
             //    ControlStyles.OptimizedDoubleBuffer, //使用双缓冲
             //    true);
             //this.TransparencyKey = System.Drawing.Color.LightGray;
+        }
+
+        private void ToolStrip1_Paint(object sender, PaintEventArgs e)
+        {
+            //去掉toolStriip底边的线
+            if ((sender as ToolStrip).RenderMode == ToolStripRenderMode.System)
+            {
+                Rectangle rect = new Rectangle(0, 0, this.toolStrip1.Width, this.toolStrip1.Height - 2);
+                e.Graphics.SetClip(rect);
+            } 
         }
 
         public static MainForm Instance
@@ -85,7 +107,7 @@ namespace _305Vision
             propertyGrid.Show(dockPanel1,DockState.DockRight);
             propertyGrid.DockPanel.DockLeftPortion = 0.15;
 
-
+            
 
             //在FormOut后开启logger
             if (logger == null)
@@ -94,6 +116,8 @@ namespace _305Vision
             }
 
         }
+
+        
 
 
 
@@ -203,7 +227,7 @@ namespace _305Vision
             treeView.Show();
         }
 
-        
+
     }
 
 }

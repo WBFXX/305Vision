@@ -36,6 +36,7 @@ namespace _305Vision
             //this.SetStyle(ControlStyles.UserPaint, true);
             contextMenuStrip1.ShowImageMargin = false;
             contextMenuStrip1.Renderer = new ToolStripRendererEx();
+            
 
 
 
