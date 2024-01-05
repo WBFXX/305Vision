@@ -21,7 +21,8 @@ namespace _305Vision.MySTNode.Operator
         #region 算法膨胀参数
         private int kerSizeX = 3;
         private int kerSizeY = 3;
-        private int kerStr = 3;
+        //private int _KerStr = 3;
+        private KerStrEnum _KerStr = KerStrEnum.椭圆形;
         private int pointX=-1;
         private int pointY=-1;
         private int iterations = 1;
@@ -30,8 +31,7 @@ namespace _305Vision.MySTNode.Operator
         public int KerSizeX { get => kerSizeX; set => kerSizeX = value; }
         [STNodeProperty("内核宽", "内核大小，默认为3")]
         public int KerSizeY { get => kerSizeY; set => kerSizeY = value; }
-        private KerStrEnum _KerStr;
-        [STNodeProperty("内核结构", "1/2/2")]
+        [STNodeProperty("内核结构", "1/2/3")]
         public KerStrEnum KerStr
         {
             get { return _KerStr; }

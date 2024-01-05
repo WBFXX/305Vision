@@ -72,5 +72,23 @@ namespace _305Vision.SDK
         [DllImport("demo.dll", EntryPoint = "expansion", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe byte* expansion(IntPtr intPtr, int width, int height, int stride, int kerSizeX, int kerSizeY, int kerStr, int pointX, int pointY, int iterations);
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="intPtr">图像</param>
+        /// <param name="width">宽度</param>
+        /// <param name="height">高度</param>
+        /// <param name="stride">步长</param>
+        /// <param name="size">点的尺寸</param>
+        /// <param name="x">点的x坐标</param>
+        /// <param name="y">点的y坐标</param>
+        /// <param name="r">点的颜色r</param>
+        /// <param name="g">点的颜色g</param>
+        /// <param name="b">点的颜色b</param>
+        /// <returns>图像数组</returns>
+        [DllImport("demo.dll", EntryPoint = "drawPoint", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern unsafe byte* drawPoint(IntPtr intPtr, int width, int height, int stride, int size, int x, int y, int r, int g, int b);
+
     }
 }

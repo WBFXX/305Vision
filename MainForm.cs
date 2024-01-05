@@ -8,6 +8,8 @@ using _305Vision.Utils;
 using System.Drawing;
 using _305Vision.Properties;
 using System.Runtime.InteropServices;
+using ST.Library.UI.NodeEditor;
+using System.Windows.Markup;
 
 namespace _305Vision
 {
@@ -223,12 +225,31 @@ namespace _305Vision
         /// <param name="e"></param>
         private void Test_Click(object sender, EventArgs e)
         {
-            TestForm treeView = new TestForm();
-            treeView.Show();
+            STNodeEditor sTNodeEditor = new STNodeEditor();
+            sTNodeEditor = formProcess.GetEditor();
+            var stnodeConnection = sTNodeEditor.GetConnectionInfo();
+            if (stnodeConnection.Length > 0)
+            {
+                foreach (var item in stnodeConnection)
+                {
+                    if(item.Output.Owner.Title == "ImageInput")
+                    item.Output.TransferData();
+                    logger.Info("运行成功，输出的节点为" + stnodeConnection[0].Output.Owner.Title + "。");
+                
+                }
+            }
+            else
+            {
+                logger.Info("当前画布上无连接/无图像源节点。");
+            }
 
         }
 
-
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            TestForm testForm = new TestForm();
+            testForm.Show();
+        }
     }
 
 }

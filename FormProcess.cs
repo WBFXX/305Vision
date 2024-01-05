@@ -100,5 +100,10 @@ namespace _305Vision
             }
         }
 
+        public STNodeEditor GetEditor()
+        {
+            return stNodeEditor1;
+        }
+
     }
 }

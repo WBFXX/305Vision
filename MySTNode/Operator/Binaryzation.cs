@@ -38,7 +38,7 @@ namespace _305Vision.MySTNode.Operator
             {
                 doubleValue = value;
                 // 触发值改变事件
-                OnDoubleValueChanged(EventArgs.Empty);
+                //OnDoubleValueChanged(EventArgs.Empty);
 
                 this.Invalidate();
             }
@@ -52,7 +52,7 @@ namespace _305Vision.MySTNode.Operator
                 
                 Max = value;
                 // 触发值改变事件
-                OnDoubleValueChanged(EventArgs.Empty);
+                //OnDoubleValueChanged(EventArgs.Empty);
 
             }
         }
@@ -63,7 +63,7 @@ namespace _305Vision.MySTNode.Operator
             {
                 Min = value;
                 // 触发值改变事件
-                OnDoubleValueChanged(EventArgs.Empty);
+                //OnDoubleValueChanged(EventArgs.Empty);
             }
         }
 
@@ -90,7 +90,7 @@ namespace _305Vision.MySTNode.Operator
 
             //当输入节点有数据输入时候
             in_option.DataTransfer += new STNodeOptionEventHandler(op_img_in_DataTransfer);
-            this.DoubleValueChanged += Binaryzation_DoubleValueChanged;
+            //this.DoubleValueChanged += Binaryzation_DoubleValueChanged;
         }
 
         void Binaryzation_DoubleValueChanged(object sender, EventArgs e)

@@ -21,7 +21,8 @@ namespace _305Vision.MySTNode.Operator
         #region 算法腐蚀参数
         private int kerSizeX = 3;
         private int kerSizeY = 3;
-        //private int kerStr = 3;
+        //private int _KerStr = 3;
+        private KerStrEnum _KerStr = KerStrEnum.椭圆形;
         private int pointX=-1;
         private int pointY=-1;
         private int iterations = 1;
@@ -40,8 +41,8 @@ namespace _305Vision.MySTNode.Operator
         //[STNodeProperty("内核结构", "输入1/2/3，默认为3")]
         //public int KerStr { get => kerStr; set => kerStr = value; }
 
-        private KerStrEnum _KerStr;
-        [STNodeProperty("内核结构", "1/2/2")]
+        
+        [STNodeProperty("内核结构", "1/2/3")]
         public KerStrEnum KerStr
         {
             get { return _KerStr; }

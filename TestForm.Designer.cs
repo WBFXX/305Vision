@@ -28,38 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.stNodeEditor1 = new ST.Library.UI.NodeEditor.STNodeEditor();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // stNodeEditor1
+            // pictureBox1
             // 
-            this.stNodeEditor1.AllowDrop = true;
-            this.stNodeEditor1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.stNodeEditor1.Curvature = 0.3F;
-            this.stNodeEditor1.Location = new System.Drawing.Point(212, 72);
-            this.stNodeEditor1.LocationBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.stNodeEditor1.MarkBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.stNodeEditor1.MarkForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.stNodeEditor1.MinimumSize = new System.Drawing.Size(100, 100);
-            this.stNodeEditor1.Name = "stNodeEditor1";
-            this.stNodeEditor1.Size = new System.Drawing.Size(200, 200);
-            this.stNodeEditor1.TabIndex = 0;
-            this.stNodeEditor1.Text = "stNodeEditor1";
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(803, 508);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
-            // TreeView
+            // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(803, 508);
-            this.Controls.Add(this.stNodeEditor1);
-            this.Name = "TreeView";
+            this.Controls.Add(this.pictureBox1);
+            this.Name = "TestForm";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.TestForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private ST.Library.UI.NodeEditor.STNodeEditor stNodeEditor1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
