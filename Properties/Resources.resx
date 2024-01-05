@@ -121,25 +121,43 @@
   <data name="Mouse" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Mouse.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="键盘_keyboard_one" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\键盘_keyboard-one.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="树结构_tree_list" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\树结构_tree-list.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="图片_moving_picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\图片_moving-picture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="手绘板_hand_painted_plate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\手绘板_hand-painted-plate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="工具箱_toolkit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\工具箱_toolkit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="green-play-button-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\green-play-button-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tool_box" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tool-box.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="play_circle_icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\play_circle_icon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="creative-idea-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\creative-idea-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fast-forward-green-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fast-forward-green-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="green-play-button-icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\green-play-button-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Mouse1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Mouse.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="painting-bucket-logo-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\painting-bucket-logo-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pause-button-outline-red-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pause-button-outline-red-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play-button-outline-green-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play-button-outline-green-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="study-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\study-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="timber-color-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\timber-color-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tool-box" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tool-box.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="upload-round-color-red-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\upload-round-color-red-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

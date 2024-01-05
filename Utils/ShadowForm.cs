@@ -676,7 +676,7 @@ namespace _305Vision.Utils
             // ShadowForm
             // 
             this.ClientSize = new System.Drawing.Size(644, 587);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ShadowForm";
             this.ResumeLayout(false);
 

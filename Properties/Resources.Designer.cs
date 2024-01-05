@@ -63,6 +63,46 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap creative_idea_icon {
+            get {
+                object obj = ResourceManager.GetObject("creative-idea-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap fast_forward_green_icon {
+            get {
+                object obj = ResourceManager.GetObject("fast-forward-green-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap green_play_button_icon {
+            get {
+                object obj = ResourceManager.GetObject("green-play-button-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap green_play_button_icon1 {
+            get {
+                object obj = ResourceManager.GetObject("green-play-button-icon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap Mouse {
             get {
                 object obj = ResourceManager.GetObject("Mouse", resourceCulture);
@@ -73,9 +113,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Bitmap play_circle_icon1 {
+        public static System.Drawing.Bitmap Mouse1 {
             get {
-                object obj = ResourceManager.GetObject("play_circle_icon1", resourceCulture);
+                object obj = ResourceManager.GetObject("Mouse1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +123,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Bitmap tool_box {
+        public static System.Drawing.Bitmap painting_bucket_logo_icon {
             get {
-                object obj = ResourceManager.GetObject("tool_box", resourceCulture);
+                object obj = ResourceManager.GetObject("painting-bucket-logo-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +133,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Bitmap 图片_moving_picture {
+        public static System.Drawing.Bitmap pause_button_outline_red_icon {
             get {
-                object obj = ResourceManager.GetObject("图片_moving_picture", resourceCulture);
+                object obj = ResourceManager.GetObject("pause-button-outline-red-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +143,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Bitmap 工具箱_toolkit {
+        public static System.Drawing.Bitmap play_button_outline_green_icon {
             get {
-                object obj = ResourceManager.GetObject("工具箱_toolkit", resourceCulture);
+                object obj = ResourceManager.GetObject("play-button-outline-green-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +153,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Bitmap 手绘板_hand_painted_plate {
+        public static System.Drawing.Bitmap study_icon {
             get {
-                object obj = ResourceManager.GetObject("手绘板_hand_painted_plate", resourceCulture);
+                object obj = ResourceManager.GetObject("study-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +163,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Bitmap 树结构_tree_list {
+        public static System.Drawing.Bitmap timber_color_icon {
             get {
-                object obj = ResourceManager.GetObject("树结构_tree_list", resourceCulture);
+                object obj = ResourceManager.GetObject("timber-color-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +173,9 @@ namespace _305Vision.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Bitmap 键盘_keyboard_one {
+        public static System.Drawing.Bitmap upload_round_color_red_icon {
             get {
-                object obj = ResourceManager.GetObject("键盘_keyboard_one", resourceCulture);
+                object obj = ResourceManager.GetObject("upload-round-color-red-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

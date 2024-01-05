@@ -277,8 +277,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\play_circle_icon.ico" />
+    <Content Include="Resources\creative-idea-icon.png" />
+    <Content Include="Resources\fast-forward-green-icon.png" />
+    <Content Include="Resources\green-play-button-icon.png" />
     <Content Include="Resources\nstagram_brand_logo_social media_icon.ico" />
+    <Content Include="Resources\painting-bucket-logo-icon.png" />
+    <Content Include="Resources\pause-button-outline-red-icon.png" />
+    <Content Include="Resources\play-button-outline-green-icon.png" />
+    <Content Include="Resources\study-icon.png" />
+    <Content Include="Resources\timber-color-icon.png" />
     <Content Include="Resources\tool-box.png" />
+    <Content Include="Resources\upload-round-color-red-icon.png" />
     <Content Include="Resources\图片_moving-picture.png" />
     <Content Include="Resources\工具箱_toolkit.png" />
     <Content Include="Resources\手绘板_hand-painted-plate.png" />
