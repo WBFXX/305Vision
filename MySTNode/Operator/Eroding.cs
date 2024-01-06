@@ -22,7 +22,7 @@ namespace _305Vision.MySTNode.Operator
         private int kerSizeX = 3;
         private int kerSizeY = 3;
         //private int _KerStr = 3;
-        private KerStrEnum _KerStr = KerStrEnum.椭圆形;
+        private KerStrEnum _KerStr = KerStrEnum.交叉形;
         private int pointX=-1;
         private int pointY=-1;
         private int iterations = 1;

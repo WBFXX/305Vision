@@ -218,6 +218,7 @@ namespace _305Vision
             WindowsViewBLL.ShowForm(PropertyGrid.Instance);
         }
 
+        private bool isImageSourse = false;
         /// <summary>
         /// 测试按钮
         /// </summary>
@@ -233,14 +234,21 @@ namespace _305Vision
                 foreach (var item in stnodeConnection)
                 {
                     if(item.Output.Owner.Title == "ImageInput")
-                    item.Output.TransferData();
-                    logger.Info("运行成功，输出的节点为" + stnodeConnection[0].Output.Owner.Title + "。");
-                
+                    {
+                        item.Output.TransferData();
+                        logger.Info("运行成功，输出的节点为" + stnodeConnection[0].Output.Owner.Title + "。");
+                        isImageSourse = true;
+                    }
+
+                }
+                if (!isImageSourse)
+                {
+                    logger.Warn("无图像源节点。");
                 }
             }
             else
             {
-                logger.Info("当前画布上无连接/无图像源节点。");
+                logger.Warn("当前画布上无连接。");
             }
 
         }
