@@ -89,6 +89,45 @@ namespace _305Vision.SDK
         /// <returns>图像数组</returns>
         [DllImport("demo.dll", EntryPoint = "drawPoint", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe byte* drawPoint(IntPtr intPtr, int width, int height, int stride, int size, int x, int y, int r, int g, int b);
+        /// <summary>
+        /// 绘制旋转矩形区域
+        /// </summary>
+        /// <param name="intPtr"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="stride"></param>
+        /// <param name="startX">起点x</param>
+        /// <param name="startY">起点Y</param>
+        /// <param name="endX">终点x</param>
+        /// <param name="endY">终点Y</param>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <param name="angle">旋转角度，不转为0</param>
+        /// <returns>图像数组</returns>
+        [DllImport("demo.dll", EntryPoint = "drawRotatedRect", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern unsafe byte* drawRotatedRect(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,int r,int g,int b,double angle);
+        /// <summary>
+        /// 绘制旋转矩形区域
+        /// </summary>
+        /// <param name="intPtr"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="stride"></param>
+        /// <param name="startX">起点x</param>
+        /// <param name="startY">起点Y</param>
+        /// <param name="endX">终点x</param>
+        /// <param name="endY">终点Y</param>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <param name="angle">旋转角度，不转为0</param>
+        /// <returns>图像数组</returns>
+        [DllImport("demo.dll", EntryPoint = "roiCropping", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern unsafe byte* roiCropping(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,int r,int g,int b,double angle);
+
+
+
 
     }
 }
