@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace _305Vision.图片操作测试
 {
-    [STNode("图片测试", "Wubofan", "1157712386@qq.com", " ", "Image Node")]
+    [STNode("图像源", "Wubofan", "1157712386@qq.com", " ", "Image Node")]
     public class ImageInputNode : ImageBaseNode
     {
         private string _FileName;//默认的DescriptorType不支持文件路径的选择 所以需要扩展

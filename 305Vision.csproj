@@ -109,11 +109,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\ImageRoiBLL.cs" />
     <Compile Include="BLL\ProcessImageBLL.cs" />
     <Compile Include="BLL\STNodeBLL.cs" />
     <Compile Include="BLL\STNodeOptionBLL.cs" />
     <Compile Include="BLL\UtilsBLL.cs" />
     <Compile Include="BLL\WindowsViewBLL.cs" />
+    <Compile Include="DAL\ImageRoiDAL.cs" />
     <Compile Include="DAL\ProcessImageDAL.cs" />
     <Compile Include="DAL\STNodeDAL.cs" />
     <Compile Include="DAL\STNodeOptionDAL.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="MySTNode\Operator\Expansion.cs" />
     <Compile Include="MySTNode\Operator\Eroding.cs" />
     <Compile Include="MySTNode\Operator\GrayScale.cs" />
+    <Compile Include="MySTNode\功能节点\DotROI.cs" />
     <Compile Include="MySTNode\控件库\ComBoxControl.cs" />
     <Compile Include="MySTNode\控件库\ComBoxCL.cs">
       <SubType>Form</SubType>
@@ -144,10 +147,17 @@
     <Compile Include="MySTNode\控件库\ComBoxCL.Designer.cs">
       <DependentUpon>ComBoxCL.cs</DependentUpon>
     </Compile>
-    <Compile Include="MySTNode\图片操作\ImageShowWindow.cs" />
-    <Compile Include="MySTNode\图片操作\ImageBaseNode.cs" />
-    <Compile Include="MySTNode\图片操作\ImageChannelNode.cs" />
-    <Compile Include="MySTNode\图片操作\ImageInputNode.cs" />
+    <Compile Include="MySTNode\图像源\ImageShowWindow.cs" />
+    <Compile Include="MySTNode\图像源\ImageBaseNode.cs" />
+    <Compile Include="MySTNode\图像源\ImageChannelNode.cs" />
+    <Compile Include="MySTNode\图像源\ImageInputNode.cs" />
+    <Compile Include="MySTNode\控件库\STNodeButton.cs" />
+    <Compile Include="OWindows\DotROI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OWindows\DotROI.Designer.cs">
+      <DependentUpon>DotROI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -205,6 +215,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\BlackRender.cs" />
+    <Compile Include="Utils\CustomNodeTreeView .cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utils\CustomToolStripRenderer.cs" />
     <Compile Include="Utils\ShadowForm.cs">
       <SubType>Form</SubType>
@@ -224,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MySTNode\控件库\ComBoxCL.resx">
       <DependentUpon>ComBoxCL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OWindows\DotROI.resx">
+      <DependentUpon>DotROI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -272,9 +288,7 @@
       <Name>PictureWindow</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="OWindows\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\play_circle_icon.ico" />
     <Content Include="Resources\creative-idea-icon.png" />

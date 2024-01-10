@@ -53,8 +53,10 @@ namespace _305Vision.BLL
         /// <returns>Size( width,heigh )</returns>
         public static Size GetPictureBoxCurrentSize(PictureBox p_PictureBox)
         {
-            if (p_PictureBox == null)
+            if (p_PictureBox == null || p_PictureBox.Image == null )
+            {
                 return Size.Empty;
+            }
             else
             {
                 return UtilsDAL.GetPictureCurrentSize(p_PictureBox);
@@ -68,7 +70,7 @@ namespace _305Vision.BLL
         /// <returns>double缩放比例</returns>
         public static double GetPictureWRate(PictureBox pictureBox, Size currentSize)
         {
-            if (pictureBox == null) { return 0; }
+            if (pictureBox == null || pictureBox.Image == null) { return 0; }
             else
             {
                 return UtilsDAL.GetPictureWRate(pictureBox, currentSize);
@@ -84,11 +86,13 @@ namespace _305Vision.BLL
         /// <returns>double缩放比例</returns>
         public static double GetPictureHRate(PictureBox pictureBox, Size currentSize)
         {
-            //缩放比例
-            //double rate =   pictureBox.Image.Width / currentSize.Width;
-            double rate = (double)pictureBox.Image.Height / (double)currentSize.Height;
-            MessageBox.Show(rate.ToString());
-            return rate;
+            if (pictureBox == null || pictureBox.Image == null) { return 0; }
+            else
+            {
+                double rate = (double)pictureBox.Image.Height / (double)currentSize.Height;
+                return rate;
+            }
+            
         }
 
         /// <summary>
@@ -99,7 +103,12 @@ namespace _305Vision.BLL
         /// <returns>Size(左边距，上边距)</returns>
         public static Size GetBlackSize(PictureBox pictureBox, Size currentSize)
         {
-            return UtilsDAL.GetBlackSize(pictureBox, currentSize);
+            if (pictureBox == null || pictureBox.Image == null) { return Size.Empty; }
+            else
+            {
+                return UtilsDAL.GetBlackSize(pictureBox, currentSize);
+            }
+            
         }
     }
 }

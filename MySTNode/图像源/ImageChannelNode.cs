@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace _305Vision.图片操作测试
 {
-    [STNode("/图片测试")]
+    [STNode("/图像源")]
     public class ImageChannelNode : ImageBaseNode
     {
         private STNodeOption m_op_img_in;   //输入的节点

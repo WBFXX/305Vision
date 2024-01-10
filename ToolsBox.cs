@@ -1,4 +1,6 @@
 ﻿using _305Vision.Model;
+using _305Vision.Utils;
+using NLog;
 using ST.Library.UI.NodeEditor;
 using System;
 using System.Collections.Generic;
@@ -33,12 +35,17 @@ namespace _305Vision
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            //stNodeTreeView1.LoadAssembly(Application.ExecutablePath);
             stNodeTreeView1.LoadAssembly(Application.ExecutablePath);
+            //Logger logger = new LogManager(this);
             //stNodeTreeView1.AutoScroll = true;
             //stNodePropertyGrid1.Text = "属性栏";
             //stNodePropertyGrid1.SetInfoKey("作者", "邮箱", "联系","帮助");
             //NodePropertyGridInfo.STNodePropertyGrid = stNodePropertyGrid1;
-            
+
         }
+
+        
+
     }
 }

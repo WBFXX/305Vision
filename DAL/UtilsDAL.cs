@@ -71,6 +71,7 @@ namespace _305Vision.DAL
         /// <returns>Size( width,heigh )</returns>
         public static Size GetPictureCurrentSize(PictureBox pictureBox)
         {
+            
             //原始宽高
             int originalWidth = pictureBox.Image.Width;
             int originalHeight = pictureBox.Image.Height;

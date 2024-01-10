@@ -15,18 +15,8 @@ namespace _305Vision
 {
     public partial class MainForm : Form
     {
-        #region 防止闪屏
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;
-                return cp;
-            }
-        }
-
-        #endregion
+        
+        //#endregion
         /// <summary>
         /// 引入日志 logger
         /// </summary>
@@ -63,7 +53,7 @@ namespace _305Vision
             //    true);
             //this.TransparencyKey = System.Drawing.Color.LightGray;
         }
-
+        //重绘ToolStripl
         private void ToolStrip1_Paint(object sender, PaintEventArgs e)
         {
             //去掉toolStriip底边的线
@@ -91,7 +81,16 @@ namespace _305Vision
         
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+
+            #region yyds防闪屏
+            this.DoubleBuffered = true;//设置本窗体
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
+                                                        //SetStyle(ControlStyles.DoubleBuffer | ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+                                                        //UpdateStyles();
+            #endregion
+
 
             // 调整左侧停靠区域的宽度比例
             dockPanel1.DockLeftPortion = 0.15;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%

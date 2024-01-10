@@ -44,7 +44,7 @@ namespace _305Vision.MySTNode.Operator
             //如果当前不是连接状态 或者 接受到的数据为空
             if (e.Status != ConnectionStatus.Connected || e.TargetOption.Data == null)
             {
-
+                
                 m_op_img_out.TransferData(null);    //向所有输出节点输出空数据
                 m_img_draw = null;                  //需要绘制显示的图片置为空
                 
