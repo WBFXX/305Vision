@@ -1,5 +1,6 @@
 ﻿using _305Vision.BLL;
 using _305Vision.SDK;
+using _305Vision.Utils;
 using NLog;
 using PictureWindowControl;
 using System;
@@ -35,59 +36,115 @@ namespace _305Vision
 
         }
 
-        
+
 
         private void pictureWindow1_MouseClick(object sender, MouseEventArgs e)
         {
-            logger.Info("点了一次");
+            PictureBox pictureBox = sender as PictureBox;
 
-            PictureBox clickedPictureBox = sender as PictureBox;
+            Point clientMouse = e.Location;
+            //logger.Info("点击坐标:" + clientMouse);
 
-            if (clickedPictureBox != null)
+            // 获取 PictureBox 的大小
+            Size pictureBoxSize = pictureBox.ClientSize;
+
+            //logger.Info(UtilsBLL.GetPictureBoxCurrentSize(clickedPictureBox));
+
+
+            Size Lsize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+            double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+            double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+            //logger.Info("留白:" + Lsize);
+            logger.Info("缩放比例:" + wrate);
+
+
+            float x = ((float)((clientMouse.X - Lsize.Width) * wrate));
+            float y = ((float)((clientMouse.Y - Lsize.Height) * hrate));
+
+
+            //if (pictureBox.Image != null)
+            //{
+            //    Image image = pictureBox.Image;
+            //    //float x = e.X * image.Width / pictureBox.Width;
+            //    //float y = e.Y * image.Height / pictureBox.Height;
+            //    using (Graphics graphics = Graphics.FromImage(image))
+            //    {
+            //        graphics.DrawEllipse(Pens.Red, x, y, 2, 2);
+            //    }
+            //    pictureBox.Image = image;
+            //}
+
+
+
+
+
+
+
+
+            //    logger.Info("点了一次");
+
+            //    PictureBox clickedPictureBox = sender as PictureBox;
+
+            //    if (clickedPictureBox != null)
+            //    {
+            //        Point clientMouse = e.Location;
+            //        logger.Info("点击坐标:" + clientMouse);
+
+            //        // 获取 PictureBox 的大小
+            //        Size pictureBoxSize = clickedPictureBox.ClientSize;
+
+            //        //logger.Info(UtilsBLL.GetPictureBoxCurrentSize(clickedPictureBox));
+
+
+            //        Size Lsize = UtilsBLL.GetBlackSize(clickedPictureBox, UtilsBLL.GetPictureBoxCurrentSize(clickedPictureBox));
+            //        double rate = UtilsBLL.GetPictureWRate(clickedPictureBox, UtilsBLL.GetPictureBoxCurrentSize(clickedPictureBox));
+
+            //        int x = (int)((clientMouse.X - Lsize.Width) / rate);
+            //        int y = (int)((clientMouse.Y - Lsize.Height) / rate);
+            //        logger.Info("换算的横坐标：" + x + "，换算的纵坐标：" + y);
+
+            // 获取 PictureBox 显示的图片
+            Image image = pictureBox.Image;
+
+            if (image != null)
             {
-                Point clientMouse = e.Location;
-                logger.Info(clientMouse);
 
-                // 获取 PictureBox 的大小
-                Size pictureBoxSize = clickedPictureBox.ClientSize;
 
-                // 获取 PictureBox 显示的图片
-                Image image = clickedPictureBox.Image;
-
-                if (image != null)
-                {
-                    
-
-                    // 调用方法，处理原始图片的像素位置
-                    Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)clickedPictureBox.Image,
-                        imageData =>
+                // 调用方法，处理原始图片的像素位置
+                Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)pictureBox.Image,
+                    imageData =>
+                    {
+                        // 具体的处理逻辑
+                        unsafe
                         {
-                            // 具体的处理逻辑
-                            unsafe
+                            try
                             {
-                                try
-                                {
-                                    byte* imageDataPtr = OpenCVSDK.drawPoint(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, 10, clientMouse.X, clientMouse.Y, 255, 0, 200);
-                                    // 处理后的数据流复制到托管数组
-                                    int size = imageData.Width * imageData.Height * 3;
-                                    byte[] imageByte = new byte[size];
-                                    Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
-                                    OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
-                                    return imageByte;
-                                }
-                                catch (Exception ex)
-                                {
-                                    MessageBox.Show(ex.ToString());
-                                    return null;
-                                }
+
+                                byte* imageDataPtr = OpenCVSDK.drawPoint(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, 10
+                                    , (int)x, (int)y, 255, 0, 200);
+                                // 处理后的数据流复制到托管数组
+                                int size = imageData.Width * imageData.Height * 3;
+                                byte[] imageByte = new byte[size];
+                                Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
+                                OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
+                                return imageByte;
                             }
-                        });
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.ToString());
+                                return null;
+                            }
+                        }
+                    });
 
-                    clickedPictureBox.Image = processedImage;
-                }
+
+                pictureBox.Image = processedImage;
+
+                //        }
+                //    }
             }
+
+
         }
-
-
     }
 }
