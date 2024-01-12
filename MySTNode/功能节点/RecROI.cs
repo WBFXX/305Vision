@@ -36,7 +36,7 @@ namespace _305Vision.MySTNode.功能节点
             base.OnCreate();
            
 
-            this.Title = "选取矩形ROI";
+            this.Title = "矩形ROI";
             in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
             
             this.AutoSize = false;

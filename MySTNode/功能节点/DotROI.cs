@@ -36,7 +36,7 @@ namespace _305Vision.MySTNode.功能节点
             base.OnCreate();
            
 
-            this.Title = "绘制点(dot)";
+            this.Title = "画点";
             in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
             
             this.AutoSize = false;

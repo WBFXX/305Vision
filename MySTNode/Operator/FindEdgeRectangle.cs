@@ -43,11 +43,12 @@ namespace _305Vision.MySTNode.Operator
             base.OnCreate();
            
 
-            this.Title = "矩形ROI找边";
+            this.Title = "找边算法";
             in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
             
             this.AutoSize = false;
             this.Height += 30;
+
             var ctrl = new STNodeButton();
             ctrl.Text = "选取";
             ctrl.Location = new Point(42, 110);
