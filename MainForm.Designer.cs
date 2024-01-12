@@ -92,16 +92,18 @@
             this.打开ToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.打开ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
-            this.打开ToolStripMenuItem.Text = "打开";
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.打开ToolStripMenuItem.Text = "&打开";
+            this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
             // 
             // 关闭ToolStripMenuItem
             // 
             this.关闭ToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.关闭ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
-            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
-            this.关闭ToolStripMenuItem.Text = "关闭";
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.关闭ToolStripMenuItem.Text = "&保存";
+            this.关闭ToolStripMenuItem.Click += new System.EventHandler(this.关闭ToolStripMenuItem_Click);
             // 
             // 编辑ToolStripMenuItem
             // 

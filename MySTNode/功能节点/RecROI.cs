@@ -24,10 +24,10 @@ namespace _305Vision.MySTNode.功能节点
     /// 灰度处理
     /// </summary>
     [STNode("/ROI功能节点", "在图像上画点")]
-    public class RecROI : ImageBaseNode
+    public class FindEdgeRectangle : ImageBaseNode
     {
         private STNodeOption in_option;
-        private OWindows.RecROI RetangelROI = new OWindows.RecROI();
+        private OWindows.RecROIForm RetangelROI = new OWindows.RecROIForm();
 
         //private STNodeOption out_option;
 

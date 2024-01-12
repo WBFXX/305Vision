@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,6 +18,7 @@ namespace _305Vision
 {
     public partial class FormProcess : DockContent
     {
+
         private static FormProcess _instance;
         public static FormProcess Instance
         {
@@ -27,7 +29,9 @@ namespace _305Vision
                 return _instance;
             }
         }
+
         
+
         public FormProcess()
         {
             InitializeComponent();
@@ -41,6 +45,8 @@ namespace _305Vision
 
 
         }
+
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -52,9 +58,6 @@ namespace _305Vision
             //当用户右键点击一个节点时，如果该节点有关联的 ContextMenuStrip，
             //那么这个菜单就会在右键点击时显示出来。
             stNodeEditor1.NodeAdded += (s, ea) => ea.Node.ContextMenuStrip = contextMenuStrip1;
-
-            
-
 
         }
 
@@ -99,7 +102,10 @@ namespace _305Vision
                     break;
             }
         }
-
+        /// <summary>
+        /// 获取画布 需要实例
+        /// </summary>
+        /// <returns></returns>
         public STNodeEditor GetEditor()
         {
             return stNodeEditor1;

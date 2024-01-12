@@ -257,6 +257,23 @@ namespace _305Vision
             TestForm testForm = new TestForm();
             testForm.Show();
         }
+
+        private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "*.stn|*.stn";
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+            FormProcess.Instance.GetEditor().Nodes.Clear();//清除后再加载
+            FormProcess.Instance.GetEditor().LoadCanvas(ofd.FileName);
+        }
+
+        private void 关闭ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "*.stn|*.stn";
+            if (sfd.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
+            FormProcess.Instance.GetEditor().SaveCanvas(sfd.FileName);
+        }
     }
 
 }

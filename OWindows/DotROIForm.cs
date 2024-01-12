@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace _305Vision.OWindows
 {
-    public partial class DotROI : Form
+    public partial class DotROIForm : Form
     {
         Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -34,7 +34,7 @@ namespace _305Vision.OWindows
         #endregion
 
 
-        public DotROI()
+        public DotROIForm()
         {
             InitializeComponent();
 

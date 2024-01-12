@@ -1,6 +1,6 @@
 ﻿namespace _305Vision.OWindows
 {
-    partial class DotROI
+    partial class DotROIForm
     {
         /// <summary>
         /// Required designer variable.

@@ -139,6 +139,7 @@
     <Compile Include="MySTNode\Operator\Expansion.cs" />
     <Compile Include="MySTNode\Operator\Eroding.cs" />
     <Compile Include="MySTNode\Operator\GrayScale.cs" />
+    <Compile Include="MySTNode\Operator\FindEdgeRectangle.cs" />
     <Compile Include="MySTNode\功能节点\RecROI.cs" />
     <Compile Include="MySTNode\功能节点\DotROI.cs" />
     <Compile Include="MySTNode\控件库\ComBoxControl.cs" />
@@ -153,17 +154,23 @@
     <Compile Include="MySTNode\图像源\ImageChannelNode.cs" />
     <Compile Include="MySTNode\图像源\ImageInputNode.cs" />
     <Compile Include="MySTNode\控件库\STNodeButton.cs" />
-    <Compile Include="OWindows\RecROI.cs">
+    <Compile Include="OWindows\FindEdgeRectangleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OWindows\RecROI.Designer.cs">
-      <DependentUpon>RecROI.cs</DependentUpon>
+    <Compile Include="OWindows\FindEdgeRectangleForm.Designer.cs">
+      <DependentUpon>FindEdgeRectangleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OWindows\DotROI.cs">
+    <Compile Include="OWindows\RecROIForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OWindows\DotROI.Designer.cs">
-      <DependentUpon>DotROI.cs</DependentUpon>
+    <Compile Include="OWindows\RecROIForm.Designer.cs">
+      <DependentUpon>RecROIForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OWindows\DotROIForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OWindows\DotROIForm.Designer.cs">
+      <DependentUpon>DotROIForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -245,11 +252,14 @@
     <EmbeddedResource Include="MySTNode\控件库\ComBoxCL.resx">
       <DependentUpon>ComBoxCL.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OWindows\RecROI.resx">
-      <DependentUpon>RecROI.cs</DependentUpon>
+    <EmbeddedResource Include="OWindows\FindEdgeRectangleForm.resx">
+      <DependentUpon>FindEdgeRectangleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OWindows\DotROI.resx">
-      <DependentUpon>DotROI.cs</DependentUpon>
+    <EmbeddedResource Include="OWindows\RecROIForm.resx">
+      <DependentUpon>RecROIForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OWindows\DotROIForm.resx">
+      <DependentUpon>DotROIForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

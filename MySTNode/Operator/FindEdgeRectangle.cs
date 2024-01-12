@@ -16,18 +16,25 @@ using _305Vision.OWindows;
 using _305Vision.MySTNode.控件库;
 using _305Vision.Model;
 
-namespace _305Vision.MySTNode.功能节点
+namespace _305Vision.MySTNode.Operator
 {
 
-    
+
     /// <summary>
-    /// 灰度处理
+    /// 找边算法
     /// </summary>
     [STNode("/ROI功能节点", "在图像上画点")]
-    public class DotROI : ImageBaseNode
+    public class FindEdgeRectangle : ImageBaseNode
     {
         private STNodeOption in_option;
-        private OWindows.DotROIForm RetangelROI = new OWindows.DotROIForm();
+        private OWindows.FindEdgeRectangleForm findEdgeRectangleForm = new OWindows.FindEdgeRectangleForm();
+        private static int edgeNum;
+        /// <summary>
+        /// 找边数量
+        /// </summary>
+        [STNodeProperty("找边数量", "矩形框中间的数量")]
+        public static int EdgeNum { get => edgeNum; set => edgeNum = value; }
+
 
         //private STNodeOption out_option;
 
@@ -36,13 +43,13 @@ namespace _305Vision.MySTNode.功能节点
             base.OnCreate();
            
 
-            this.Title = "绘制点(dot)";
+            this.Title = "矩形ROI找边";
             in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
             
             this.AutoSize = false;
             this.Height += 30;
             var ctrl = new STNodeButton();
-            ctrl.Text = "绘制";
+            ctrl.Text = "选取";
             ctrl.Location = new Point(42, 110);
             this.Controls.Add(ctrl);
             
@@ -60,9 +67,9 @@ namespace _305Vision.MySTNode.功能节点
             //创建RetangelROI类的实例，并传递RetangelROIInfo类的实例
             //实例化图像处理窗口
 
-            RetangelROI.ShowDialog();
-            m_img_draw = RetangelROI.OverImage;
-            m_op_img_out.TransferData(RetangelROI.OverImage);//out选项 输出
+            findEdgeRectangleForm.ShowDialog();
+            m_img_draw = findEdgeRectangleForm.OverImage;
+            m_op_img_out.TransferData(findEdgeRectangleForm.OverImage);//out选项 输出
 
         }
         
@@ -71,16 +78,19 @@ namespace _305Vision.MySTNode.功能节点
             //如果当前不是连接状态 或者 接受到的数据为空
             if (e.Status != ConnectionStatus.Connected || e.TargetOption.Data == null)
             {
+
                 m_op_img_out.TransferData(null);    //向所有输出节点输出空数据
                 m_img_draw = null;                  //需要绘制显示的图片置为空
+                
             }
             else
             {
                     Bitmap img = (Bitmap)e.TargetOption.Data;
                     //把图像传给操作表格
-                    RetangelROI.ResouseImage = (Image)img;
+                    findEdgeRectangleForm.ResouseImage = (Image)img;
                     m_op_img_out.TransferData((Image)img);//out选项 输出
                     m_img_draw = (Image)img;
+
             }
         }
 

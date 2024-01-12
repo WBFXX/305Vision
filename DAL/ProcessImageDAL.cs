@@ -48,5 +48,36 @@ namespace _305Vision.DAL
 
                 return processedImage;
         }
+
+
+        public static Bitmap ProcessCoriImage(Bitmap originalImage, Func<BitmapData, byte[]> imageProcessingFunc,int width,int height)
+        {
+            //克隆图像，避免把原图像修改回原来的节点
+            Bitmap bmp = originalImage;
+            originalImage = (Bitmap)originalImage.Clone();
+
+            // 获取图像信息
+            int owidth = originalImage.Width;
+            int oheight = originalImage.Height;
+
+            // 锁定位图数据
+            BitmapData originalImageData = originalImage.LockBits(new Rectangle(0, 0, owidth, oheight), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            // 调用特定的图像处理函数
+            byte[] processedData = imageProcessingFunc(originalImageData);
+            // 解锁原始图像数据
+            originalImage.UnlockBits(originalImageData);
+            // 创建新的图像
+            Bitmap processedImage = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            BitmapData processedImageData = processedImage.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+
+            // 将处理后的数据流复制到新图像
+            Marshal.Copy(processedData, 0, processedImageData.Scan0, processedData.Length);
+
+            processedImage.UnlockBits(processedImageData);
+            
+
+            return processedImage;
+        }
     }
 }

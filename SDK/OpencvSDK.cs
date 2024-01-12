@@ -125,6 +125,22 @@ namespace _305Vision.SDK
         /// <returns>图像数组</returns>
         [DllImport("demo.dll", EntryPoint = "roiCropping", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe byte* roiCropping(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,int r,int g,int b,double angle);
+        /// <summary>
+        /// 矩形找边
+        /// </summary>
+        /// <param name="intPtr"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="stride"></param>
+        /// <param name="startX"></param>
+        /// <param name="startY"></param>
+        /// <param name="endX"></param>
+        /// <param name="endY"></param>
+        /// <param name="angle">角度</param>
+        /// <param name="edgeNum">边的数量</param>
+        /// <returns></returns>
+        [DllImport("demo.dll", EntryPoint = "findEdgeRectangle", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern unsafe byte* findEdgeRectangle(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,double angle,int edgeNum);
 
 
 

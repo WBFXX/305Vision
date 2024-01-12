@@ -1,7 +1,10 @@
 ﻿using _305Vision.BLL;
+using _305Vision.DAL;
 using _305Vision.Model;
 using _305Vision.SDK;
 using NLog;
+using NLog.Fluent;
+using ST.Library.UI.NodeEditor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +19,7 @@ using System.Windows.Forms;
 
 namespace _305Vision.OWindows
 {
-    public partial class RecROI : Form
+    public partial class FindEdgeRectangleForm : Form
     {
         Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -30,7 +33,9 @@ namespace _305Vision.OWindows
         private double wrate;//宽缩放比率
         private double hrate;//高缩放比率
         private Image MidImage;//处理中的图片
-
+        private bool isMove = false;//记录鼠标是否在画框
+        private byte[] bytess ;//记录中间图像
+        private int edgeNum;//找边数量
 
 
 
@@ -42,13 +47,15 @@ namespace _305Vision.OWindows
         /// 处理前的图片
         /// </summary>
         public Image ResouseImage { get => resouseImage; set => resouseImage = value; }
+        public int EdgeNum { get => edgeNum; set => edgeNum = value; }
+
         #endregion
 
 
-        public RecROI()
+        public FindEdgeRectangleForm()
         {
-            InitializeComponent();
 
+            InitializeComponent();
         }
 
         private void RetangelROI_Load(object sender, EventArgs e)
@@ -68,74 +75,7 @@ namespace _305Vision.OWindows
         }
 
 
-
-
-
-
-
-
-
-
-        private void pictureBox1_Click(object sender, MouseEventArgs e)
-        {
-            PictureBox pictureBox = sender as PictureBox;
-
-            Point clientMouse = e.Location;
-            
-
-            // 获取 PictureBox 显示的图片
-            Image image = pictureBox.Image;
-
-            if (image != null)
-            {
-
-                //获取留白
-                Size Lsize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                //宽度缩放比率
-                double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                //高度缩放比率
-                double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-
-
-                float x = ((float)((clientMouse.X - Lsize.Width) * wrate));
-                float y = ((float)((clientMouse.Y - Lsize.Height) * hrate));
-
-                // 调用方法，处理原始图片的像素位置
-                Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)pictureBox.Image,
-                    imageData =>
-                    {
-                        // 具体的处理逻辑
-                        unsafe
-                        {
-                            try
-                            {
-                                byte* imageDataPtr = OpenCVSDK.drawPoint(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, 10
-                                    , (int)x, (int)y, 255, 0, 200);
-                                // 处理后的数据流复制到托管数组
-                                int size = imageData.Width * imageData.Height * 3;
-                                byte[] imageByte = new byte[size];
-                                Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
-                                OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
-                                return imageByte;
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.ToString());
-                                return null;
-                            }
-                        }
-                    });
-                //把处理完的图像传给当前显示窗口
-                pictureBox.Image = processedImage;
-
-            }
-            else
-            {
-                MessageBox.Show("当前窗口无图像");
-            }
-
-        }
-        bool isMove =false;
+        
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             PictureBox pictureBox = sender as PictureBox;
@@ -186,6 +126,7 @@ namespace _305Vision.OWindows
                     double y = ((double)((clientMouse.Y - Lsize.Height) * hrate));
                     end = new Point((int)x, (int)y);//记录结束坐标
 
+
                     // 调用方法，处理原始图片的像素位置
                     Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage,
                             imageData =>
@@ -195,14 +136,20 @@ namespace _305Vision.OWindows
                                 {
                                     try
                                     {
-                                        byte* imageDataPtr = OpenCVSDK.drawRotatedRect(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
-                                            , start.X, start.Y, end.X, end.Y, 255, 0, 200, 0);
-                                        // 处理后的数据流复制到托管数组
-                                        int size = imageData.Width * imageData.Height * 3;
-                                        byte[] imageByte = new byte[size];
-                                        Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
-                                        OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
-                                        return imageByte;
+
+                                       
+                                        logger.Info("开始坐标:" + start);
+                                        byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
+                                            , start.X, start.Y, end.X, end.Y,0, 10);
+                                            // 处理后的数据流复制到托管数组
+                                            int size = imageData.Width * imageData.Height * 3;
+                                            byte[] imageByte = new byte[size];
+                                            Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
+                                            OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
+                                            bytess = imageByte;
+                                            return imageByte;
+                                        
+                                        
                                     }
                                     catch (Exception ex)
                                     {
@@ -213,7 +160,7 @@ namespace _305Vision.OWindows
                             });
                     //把处理完的图像传给当前显示窗口
                     pictureBox.Image = processedImage;
-                    logger.Info("过程坐标为：" + end);
+
                 }
             }
         }
@@ -223,5 +170,7 @@ namespace _305Vision.OWindows
             isMove = false;
 
         }
+
+        
     }
 }
