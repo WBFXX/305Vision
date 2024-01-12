@@ -74,21 +74,22 @@ namespace _305Vision.SDK
 
 
         /// <summary>
-        /// 
+        /// 画点
         /// </summary>
         /// <param name="intPtr">图像</param>
         /// <param name="width">宽度</param>
         /// <param name="height">高度</param>
         /// <param name="stride">步长</param>
-        /// <param name="size">点的尺寸</param>
+        /// <param name="size">线的长短</param>
         /// <param name="x">点的x坐标</param>
         /// <param name="y">点的y坐标</param>
         /// <param name="r">点的颜色r</param>
         /// <param name="g">点的颜色g</param>
         /// <param name="b">点的颜色b</param>
+        /// <param name="thickness">粗细/param>
         /// <returns>图像数组</returns>
         [DllImport("demo.dll", EntryPoint = "drawPoint", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe byte* drawPoint(IntPtr intPtr, int width, int height, int stride, int size, int x, int y, int r, int g, int b);
+        public static extern unsafe byte* drawPoint(IntPtr intPtr, int width, int height, int stride, int size, int x, int y, int r, int g, int b , int thickness);
         /// <summary>
         /// 绘制旋转矩形区域
         /// </summary>

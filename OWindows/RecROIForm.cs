@@ -119,11 +119,14 @@ namespace _305Vision.OWindows
                     wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
                     //高度缩放比率
                     hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                    double x = ((double)((clientMouse.X - Lsize.Width) * wrate));
-                    double y = ((double)((clientMouse.Y - Lsize.Height) * hrate));
-                    end = new Point((int)x, (int)y);//记录结束坐标
-
-
+                    
+                    //if ((clientMouse.X - start.X) * 3 % 4 == 1 || (clientMouse.X - start.X) * 3 <= 4)
+                    //{
+                        double x = ((double)((clientMouse.X - Lsize.Width) * wrate));
+                        double y = ((double)((clientMouse.Y - Lsize.Height) * hrate));
+                        end = new Point((int)x, (int)y);//记录结束坐标
+                    //}
+                        
                     // 调用方法，处理原始图片的像素位置
                     Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage,
                             imageData =>
@@ -133,21 +136,25 @@ namespace _305Vision.OWindows
                                 {
                                     try
                                     {
-
-                                        logger.Info("宽度：" + (end.X - start.X) * 3 % 4);
-                                        logger.Info("高度：" + (end.Y - start.Y) * 3 % 4);
-                                        byte* imageDataPtr = OpenCVSDK.drawRotatedRect(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
+                                        if ((end.X - start.X) * 3 % 4 == 1 || (end.X - start.X) * 3 <= 4)
+                                        {
+                                            logger.Info("宽度：" + (end.X - start.X) * 3 % 4);
+                                            logger.Info("高度：" + (end.Y - start.Y) * 3 % 4);
+                                            byte* imageDataPtr = OpenCVSDK.drawRotatedRect(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
                                             , start.X, start.Y, end.X, end.Y, 255, 0, 200, 0);
                                             // 处理后的数据流复制到托管数组
-
                                             int size = imageData.Width * imageData.Height * 3;
                                             byte[] imageByte = new byte[size];
                                             Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
                                             OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
                                             bytess = imageByte;
                                             return imageByte;
-                                        
-                                        
+                                        }
+                                        else
+                                        {
+                                            return bytess;
+                                        }
+
                                     }
                                     catch (Exception ex)
                                     {
@@ -181,22 +188,22 @@ namespace _305Vision.OWindows
                         {
                             try
                             {
-
-                                byte* imageDataPtr = OpenCVSDK.roiCropping(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
+                                
+                                    byte* imageDataPtr = OpenCVSDK.roiCropping(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
                                     , start.X, start.Y, end.X, end.Y, 255, 0, 200, 0);
-                                
-                                // 处理后的数据流复制到托管数组
 
-                                int aWidth= end.X - start.X;//475
-                                
-                                int aHeight = end.Y - start.Y;
-                                int size = aWidth * aHeight * 3;
-                                MessageBox.Show("宽："+aWidth + "高："+aHeight+ "大小："+size.ToString());
-                                byte[] imageByte = new byte[size];
-                                Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
-                                OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
+                                    // 处理后的数据流复制到托管数组
 
-                                return imageByte;
+                                    int aWidth = end.X - start.X;//475
+
+                                    int aHeight = end.Y - start.Y;
+                                    int size = aWidth * aHeight * 3;
+                                    byte[] imageByte = new byte[size];
+                                    Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
+                                    OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
+                                    return imageByte;
+                                
+                                
 
                             }
                             catch (Exception ex)
@@ -205,7 +212,7 @@ namespace _305Vision.OWindows
                                 return null;
                             }
                         }
-                    }, ((end.X - start.X )*3)/3 ,  end.Y - start.Y);
+                    }, end.X - start.X , end.Y - start.Y);
 
             //把处理完的图像传给当前显示窗口
             pictureBox1.Image = (Image)processedImage;

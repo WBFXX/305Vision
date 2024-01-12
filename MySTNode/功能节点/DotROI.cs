@@ -59,7 +59,6 @@ namespace _305Vision.MySTNode.功能节点
         {
             //创建RetangelROI类的实例，并传递RetangelROIInfo类的实例
             //实例化图像处理窗口
-
             RetangelROI.ShowDialog();
             m_img_draw = RetangelROI.OverImage;
             m_op_img_out.TransferData(RetangelROI.OverImage);//out选项 输出

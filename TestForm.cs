@@ -120,8 +120,8 @@ namespace _305Vision
                             try
                             {
 
-                                byte* imageDataPtr = OpenCVSDK.drawPoint(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, 10
-                                    , (int)x, (int)y, 255, 0, 200);
+                                byte* imageDataPtr = OpenCVSDK.drawPoint(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, 20
+                                    , (int)x, (int)y, 255, 0, 200,2);
                                 // 处理后的数据流复制到托管数组
                                 int size = imageData.Width * imageData.Height * 3;
                                 byte[] imageByte = new byte[size];
