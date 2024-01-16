@@ -48,6 +48,7 @@
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.statusStrip1.SuspendLayout();
@@ -92,7 +93,7 @@
             this.打开ToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.打开ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
             this.打开ToolStripMenuItem.Text = "&打开";
             this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
             // 
@@ -101,7 +102,7 @@
             this.关闭ToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.关闭ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
-            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
             this.关闭ToolStripMenuItem.Text = "&保存";
             this.关闭ToolStripMenuItem.Click += new System.EventHandler(this.关闭ToolStripMenuItem_Click);
             // 
@@ -156,6 +157,7 @@
             this.toolStripButton5,
             this.toolStripButton6,
             this.toolStripButton7,
+            this.toolStripButton8,
             this.toolStripButton9});
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
@@ -257,6 +259,18 @@
             this.toolStripButton7.ToolTipText = "属性窗口";
             this.toolStripButton7.Click += new System.EventHandler(this.PropertyGrid_Click);
             // 
+            // toolStripButton8
+            // 
+            this.toolStripButton8.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
+            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton8.Name = "toolStripButton8";
+            this.toolStripButton8.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton8.Text = "toolStripButton7";
+            this.toolStripButton8.ToolTipText = "属性窗口";
+            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
+            // 
             // toolStripButton9
             // 
             this.toolStripButton9.BackColor = System.Drawing.Color.Transparent;
@@ -267,7 +281,7 @@
             this.toolStripButton9.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton9.Text = "toolStripButton7";
             this.toolStripButton9.ToolTipText = "属性窗口";
-            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
+            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click_1);
             // 
             // dockPanel1
             // 
@@ -336,6 +350,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
         private System.Windows.Forms.ToolStripButton toolStripButton9;
+        private System.Windows.Forms.ToolStripButton toolStripButton8;
     }
 }
 

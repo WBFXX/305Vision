@@ -274,6 +274,22 @@ namespace _305Vision
             if (sfd.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
             FormProcess.Instance.GetEditor().SaveCanvas(sfd.FileName);
         }
+
+        private void toolStripButton9_Click_1(object sender, EventArgs e)
+        {
+            Test2 test2 = new Test2();
+            test2.Show();
+            
+        }
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+            TestForm testForm = new TestForm();
+            string imgePath = "e:/1.jpg";
+            Bitmap bitmap = new Bitmap(imgePath);
+            testForm.Image = new Bitmap(bitmap);
+            testForm.Show();
+        }
     }
 
 }

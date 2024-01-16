@@ -1,5 +1,4 @@
-﻿using _305PictureBox;
-using _305Vision.BLL;
+﻿using _305Vision.BLL;
 using _305Vision.SDK;
 using _305Vision.Utils;
 using NLog;
@@ -9,7 +8,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,69 +19,93 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace _305Vision
 {
-    public partial class TestForm : Form
+    public partial class Test2 : Form
     {
-        Logger logger = LogManager.GetCurrentClassLogger();
-        public TestForm()
-        {
-            InitializeComponent();
-        }
+        private Point startPoint;
+        private Point endPoint;
+        private Rectangle selectedRectangle;
+        private bool isDrawing;
+        private bool isRotating;
+        private Point rotateHandle;
+        private float rotationAngle;
 
-
-        public Image Image { get; set; }
-
-        private void TestForm_Load(object sender, EventArgs e)
+        public Test2()
         {
             
+            InitializeComponent();
+            //string imgePath = "e:/1.jpg";
+            //Bitmap bitmap = new Bitmap(imgePath);
+            //pictureBox1.Image = (Image)bitmap;
+            isDrawing = false;
+            isRotating = false;
+            rotateHandle = Point.Empty;
+            rotationAngle = 0;
+            pictureBox1.MouseDown += PictureBox1_MouseDown;
+            pictureBox1.MouseMove += PictureBox1_MouseMove;
+            pictureBox1.Paint += PictureBox1_Paint;
+            Text = "右键定点 左键拖拽";
 
-            MyPictureBox myPictureBox1 = new MyPictureBox(Image); // 使用带参数的构造函数初始化控件
-            myPictureBox1.Dock = DockStyle.Fill;
-            myPictureBox1.Location = new Point(100,100); // 设置控件位置
-            this.Controls.Add(myPictureBox1); // 将控件添加到窗体中
+        }
 
+        int ox = -1;
+        int oy = -1;
+        int mx = 0;
+        int my = 0;
+        private void PictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            using (var path = new GraphicsPath())
+            {
+                path.AddRectangle(new Rectangle(30, 30, 230, 160));
+
+                if (ox < 0 || oy < 0)
+                {
+                    g.DrawPath(Pens.Green, path);
+                    return;
+                }
+
+                g.DrawLine(Pens.Red, ox - 5, oy, ox + 5, oy);
+                g.DrawLine(Pens.Red, ox, oy - 5, ox, oy + 5);
+
+                if (mx > 0 || my > 0)
+                {
+                    var a = Math.Atan2(my - oy, mx - ox);
+                    var n1 = (float)Math.Cos(a);
+                    var n2 = (float)Math.Sin(a);
+                    var n3 = -(float)Math.Sin(a);
+                    var n4 = (float)Math.Cos(a);
+                    var n5 = (float)((ox * (1 - Math.Cos(a)) + oy * Math.Sin(a)));
+                    var n6 = (float)((oy * (1 - Math.Cos(a)) - ox * Math.Sin(a)));
+                    path.Transform(new Matrix(n1, n2, n3, n4, n5, n6));
+                }
+                g.DrawPath(Pens.Black, path);
+                Invalidate();
+            }
         }
 
 
 
+        private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                mx = e.X;
+                my = e.Y;
+                Invalidate();
+            }
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ox = e.X;
+                oy = e.Y;
+                mx = e.X;
+                my = e.Y;
+                Invalidate();
+            }
+        }
 
         private void pictureWindow1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -99,53 +124,11 @@ namespace _305Vision
             double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
             double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
             //logger.Info("留白:" + Lsize);
-            logger.Info("缩放比例:" + wrate);
 
 
             float x = ((float)((clientMouse.X - Lsize.Width) * wrate));
             float y = ((float)((clientMouse.Y - Lsize.Height) * hrate));
 
-
-            //if (pictureBox.Image != null)
-            //{
-            //    Image image = pictureBox.Image;
-            //    //float x = e.X * image.Width / pictureBox.Width;
-            //    //float y = e.Y * image.Height / pictureBox.Height;
-            //    using (Graphics graphics = Graphics.FromImage(image))
-            //    {
-            //        graphics.DrawEllipse(Pens.Red, x, y, 2, 2);
-            //    }
-            //    pictureBox.Image = image;
-            //}
-
-
-
-
-
-
-
-
-            //    logger.Info("点了一次");
-
-            //    PictureBox clickedPictureBox = sender as PictureBox;
-
-            //    if (clickedPictureBox != null)
-            //    {
-            //        Point clientMouse = e.Location;
-            //        logger.Info("点击坐标:" + clientMouse);
-
-            //        // 获取 PictureBox 的大小
-            //        Size pictureBoxSize = clickedPictureBox.ClientSize;
-
-            //        //logger.Info(UtilsBLL.GetPictureBoxCurrentSize(clickedPictureBox));
-
-
-            //        Size Lsize = UtilsBLL.GetBlackSize(clickedPictureBox, UtilsBLL.GetPictureBoxCurrentSize(clickedPictureBox));
-            //        double rate = UtilsBLL.GetPictureWRate(clickedPictureBox, UtilsBLL.GetPictureBoxCurrentSize(clickedPictureBox));
-
-            //        int x = (int)((clientMouse.X - Lsize.Width) / rate);
-            //        int y = (int)((clientMouse.Y - Lsize.Height) / rate);
-            //        logger.Info("换算的横坐标：" + x + "，换算的纵坐标：" + y);
 
             // 获取 PictureBox 显示的图片
             Image image = pictureBox.Image;
@@ -188,6 +171,11 @@ namespace _305Vision
                 //    }
             }
 
+
+        }
+
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
 
         }
     }
