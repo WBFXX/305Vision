@@ -142,6 +142,11 @@ namespace _305Vision.SDK
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "findEdgeRectangle", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe byte* findEdgeRectangle(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,double angle,int edgeNum);
+        
+        [DllImport("demo.dll", EntryPoint = "abba", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern  int abba();
+        [DllImport("demo.dll", EntryPoint = "abba", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern  int abbb();
 
 
 

@@ -35,7 +35,8 @@ namespace _305Vision
 
             MyPictureBox myPictureBox1 = new MyPictureBox(Image); // 使用带参数的构造函数初始化控件
             myPictureBox1.Dock = DockStyle.Fill;
-            myPictureBox1.Location = new Point(100,100); // 设置控件位置
+
+            //myPictureBox1.Location = new Point(100,100); // 设置控件位置
             this.Controls.Add(myPictureBox1); // 将控件添加到窗体中
 
         }

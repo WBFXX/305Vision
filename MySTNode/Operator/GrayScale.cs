@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using _305Vision.BLL;
+using _305Vision.Utils;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace _305Vision.MySTNode.Operator
 {
@@ -26,7 +29,7 @@ namespace _305Vision.MySTNode.Operator
     {
         private STNodeOption in_option;
         //private STNodeOption out_option;
-
+        AlgorithmFlow algorithmFlow = new AlgorithmFlow();
         protected override void OnCreate()
         {
             base.OnCreate();
@@ -94,8 +97,28 @@ namespace _305Vision.MySTNode.Operator
 
                         m_op_img_out.TransferData((Image)ImageBitmap);//out选项 输出
                         m_img_draw = (Image)ImageBitmap;
-
-
+                        #region
+                        // 添加第一个算子调用信息
+                        OperatorCallInfo operatorCallInfo1 = new OperatorCallInfo
+                        {
+                            OperatorType = "GrayScale",
+                            Parameters = new Dictionary<string, object>
+                            {
+                                    { "imgData", imgData.Scan0 },
+                                    { "width", width },
+                                    { "height", height },
+                                    { "stride", stride }
+                            }
+                        };
+                        algorithmFlow.OperatorCalls.Add(operatorCallInfo1);
+                        // 保存到JSON文件
+                        try
+                        {
+                            string jsonContent = JsonConvert.SerializeObject(algorithmFlow, Newtonsoft.Json.Formatting.Indented);
+                            File.WriteAllText("algorithm_flow.json", jsonContent);
+                            logger.Info("保存json成功。");
+                        }catch (Exception ex) { logger.Error(ex); }
+                        #endregion
                     }
                 }
                 catch (Exception ex) 
