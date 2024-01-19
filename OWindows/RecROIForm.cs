@@ -103,7 +103,7 @@ namespace _305Vision.OWindows
             }
 
         }
-        
+
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMove)
@@ -140,9 +140,9 @@ namespace _305Vision.OWindows
                                         //{
                                             logger.Info("宽度：" + (end.X - start.X));
                                             logger.Info("宽度：" + (end.X - start.X) * 3 % 4);
-                                            logger.Info("高度：" + (end.Y - start.Y) * 3 % 4);
                                             byte* imageDataPtr = OpenCVSDK.drawRotatedRect(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
                                             , start.X, start.Y, end.X, end.Y, 255, 0, 200, 0);
+                                            
                                             // 处理后的数据流复制到托管数组
                                             int size = imageData.Width * imageData.Height * 3;
                                             byte[] imageByte = new byte[size];

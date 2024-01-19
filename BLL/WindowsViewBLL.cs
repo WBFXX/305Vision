@@ -15,6 +15,12 @@ namespace _305Vision.BLL
         {
             WindowsViewDAL.ShowForm(form);
         }
-            
+
+        public static byte[] showImage(IntPtr data, int width, int height, int stride)
+        {
+           return WindowsViewDAL.shouImage(data,width, height, stride);
+        }
+
+
     }
 }

@@ -9,7 +9,19 @@ using System.Threading.Tasks;
 namespace _305Vision.SDK
 {
     class OpenCVSDK
-    {   /// <summary>
+    {
+        /// <summary>
+        /// 图像宽度预处理（读图片）
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="stride"></param>
+        /// <returns></returns>
+        [DllImport("demo.dll", EntryPoint = "showImage", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern unsafe byte* showImage(IntPtr data, int width, int height, int stride);
+
+        /// <summary>
         /// 灰度处理
         /// </summary>
         /// <param name="data">图像指针</param>

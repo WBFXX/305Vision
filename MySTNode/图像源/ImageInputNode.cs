@@ -1,12 +1,16 @@
 ﻿using _305Vision.BLL;
+using _305Vision.SDK;
 using ST.Library.UI.NodeEditor;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 
 namespace _305Vision.图片操作测试
 {
@@ -14,7 +18,7 @@ namespace _305Vision.图片操作测试
     public class ImageInputNode : ImageBaseNode
     {
         private string _FileName;//默认的DescriptorType不支持文件路径的选择 所以需要扩展
-        [STNodeProperty("InputImage", "Click to select a image", DescriptorType = typeof(OpenFileDescriptor))]
+        [STNodeProperty("输入图片", "点击选择图片", DescriptorType = typeof(OpenFileDescriptor))]
         public string FileName
         {
             get { return _FileName; }
@@ -24,6 +28,23 @@ namespace _305Vision.图片操作测试
                 if (!string.IsNullOrEmpty(value))
                 {
                     img = Image.FromFile(value);
+                }
+                //判断输入图片的宽度
+                if(img.Width * 3 %4!=0 )
+                {
+                    Bitmap imgBit = (Bitmap)img.Clone();
+                    BitmapData bitmapData = imgBit.LockBits(new Rectangle(0,0,img.Width,img.Height),ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+                    //获取处理完的图像
+                    byte[] processedData = WindowsViewBLL.showImage(bitmapData.Scan0, bitmapData.Width, bitmapData.Height, bitmapData.Stride);
+                    //创建新宽度的图像
+                    Bitmap bitmap = new Bitmap((img.Width + 3) / 4 * 4, img.Height, PixelFormat.Format24bppRgb);
+                    BitmapData processedImageData = bitmap.LockBits(new Rectangle(0, 0, (img.Width + 3) / 4 * 4, img.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+                    // 将处理后的数据流复制到新图像
+                    Marshal.Copy(processedData, 0, processedImageData.Scan0, processedData.Length);
+                    imgBit.UnlockBits(bitmapData);
+                    bitmap.UnlockBits(processedImageData);
+                    img = bitmap;
+                    logger.Info("图像宽度不规范，已自动处理。");
                 }
                 if (m_img_draw != null) m_img_draw.Dispose();
                 m_img_draw = img;
