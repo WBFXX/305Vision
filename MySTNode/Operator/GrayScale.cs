@@ -99,7 +99,7 @@ namespace _305Vision.MySTNode.Operator
 
                         m_op_img_out.TransferData((Image)ImageBitmap);//out选项 输出
                         m_img_draw = (Image)ImageBitmap;
-                        #region 报错json
+                        #region 保存json
                         // 添加第一个算子调用信息
                         OperatorCallInfo operatorCallInfo1 = new OperatorCallInfo
                         {
