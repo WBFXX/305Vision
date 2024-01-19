@@ -194,7 +194,7 @@ namespace _305Vision.OWindows
                                 //logger.Info("abba是：" + a + ". " + "awidth是：" + aWidth);
                                 this.aHeight = end.Y - start.Y;
 
-                                 byte* imageDataPtr = OpenCVSDK.roiCropping(imageData.Scan0, imageData.Width, imageData.Height
+                                 byte* imageDataPtr = OpenCVSDK.roiCropping(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
                                  , start.X, start.Y, end.X, end.Y, 255, 0, 200, 0);
                                 int a = OpenCVSDK.abba();
                                 //int b = OpenCVSDK.abbb();
@@ -210,7 +210,6 @@ namespace _305Vision.OWindows
                                 Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
                                 OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
                                 return imageByte;
-
 
                             }
                             catch (Exception ex)

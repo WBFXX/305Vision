@@ -71,27 +71,6 @@ namespace _305Vision.DAL
             BitmapData processedImageData = processedImage.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
             // 将处理后的数据流复制到新图像
             Marshal.Copy(processedData, 0, processedImageData.Scan0, processedData.Length);
-
-
-
-            #region DEBUG
-            // 获取扫描行地址
-            IntPtr scan0 = processedImageData.Scan0;
-
-            // 计算图像数据的大小
-            int imageSize = processedImageData.Stride * processedImageData.Height;
-
-            // 创建一个托管数组来存储图像数据
-            byte[] imageDataArray = new byte[imageSize];
-
-            // 复制图像数据到托管数组
-            Marshal.Copy(scan0, imageDataArray, 0, imageSize);
-
-            // 查看托管数组的第0个字节
-            byte firstByte = imageDataArray[0];
-
-            #endregion
-
             processedImage.UnlockBits(processedImageData);
             
 

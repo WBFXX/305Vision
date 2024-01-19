@@ -81,7 +81,7 @@ namespace _305Vision.MySTNode.Operator
                         // 具体的处理逻辑
                         unsafe
                         {
-                            byte* imageDataPtr = OpenCVSDK.expansion(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, KerSizeX, KerSizeY, (int)KerStr, PointX, PointY, Iterations);
+                            byte* imageDataPtr = OpenCVSDK.expansion(imageData.Scan0, imageData.Width, imageData.Height, imageData.Width*3, KerSizeX, KerSizeY, (int)KerStr, PointX, PointY, Iterations);
 
                             // 处理后的数据流复制到托管数组
                             int size = imageData.Width * imageData.Height * 3;

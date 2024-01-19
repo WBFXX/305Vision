@@ -106,7 +106,8 @@ namespace _305Vision.OWindows
             }
 
         }
-        
+        private int aWidth;
+        private int aHeight;
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMove)
@@ -139,13 +140,14 @@ namespace _305Vision.OWindows
 
                                         logger.Info("开始坐标:" + start);
                                         byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
-                                            , start.X, start.Y, end.X, end.Y,0, 20);
-                                            // 处理后的数据流复制到托管数组
-                                            int size = imageData.Width * imageData.Height * 3;
+                                            , start.X, start.Y, end.X, end.Y,0, 10);
+                                        // 处理后的数据流复制到托管数组
+                                        
+                                            int size = imageData.Width * imageData.Height *3;
                                             byte[] imageByte = new byte[size];
                                             Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
                                             OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
-                                            bytess = imageByte;
+                                            //bytess = imageByte;
                                             return imageByte;
                                         
                                     }

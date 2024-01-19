@@ -134,7 +134,7 @@ namespace _305Vision.MySTNode.Operator
                         byte* imageDataPtr = OpenCVSDK.binaryzation(imageData.Scan0, imageData.Width, imageData.Height, imageData.Width*3, doubleValue, Max, Min);
 
                         // 处理后的数据流复制到托管数组
-                        int size = imageData.Width * imageData.Height * 3;
+                        int size = imageData.Width *  imageData.Height * 3 ;
                         byte[] imageByte = new byte[size];
                         Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
                         OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);

@@ -125,7 +125,7 @@ namespace _305Vision.SDK
         /// <param name="angle">旋转角度，不转为0</param>
         /// <returns>图像数组</returns>
         [DllImport("demo.dll", EntryPoint = "roiCropping", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe byte* roiCropping(IntPtr intPtr, int width, int height, double startX,double startY,double endX,double endY,int r,int g,int b,double angle);
+        public static extern unsafe byte* roiCropping(IntPtr intPtr, int width, int height,int stride, double startX,double startY,double endX,double endY,int r,int g,int b,double angle);
         /// <summary>
         /// 矩形找边
         /// </summary>
