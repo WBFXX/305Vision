@@ -67,7 +67,9 @@ namespace _305Vision.MySTNode.Operator
                     unsafe
                     {
                         //System.Windows.Forms.MessageBox.Show("a");
-                        byte* imageDataPtr = OpenCVSDK.grayScale(imgData.Scan0, width, height, stride);
+                        byte* imageDataPtr = OpenCVSDK.grayScale(imgData.Scan0, width, height);
+
+
                         bmp.UnlockBits(imgData);
                         int size = width * height;
                         byte[] data = new byte[size];//创建同大小的数组
@@ -97,7 +99,7 @@ namespace _305Vision.MySTNode.Operator
 
                         m_op_img_out.TransferData((Image)ImageBitmap);//out选项 输出
                         m_img_draw = (Image)ImageBitmap;
-                        #region
+                        #region 报错json
                         // 添加第一个算子调用信息
                         OperatorCallInfo operatorCallInfo1 = new OperatorCallInfo
                         {

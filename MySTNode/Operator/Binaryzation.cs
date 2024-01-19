@@ -131,7 +131,7 @@ namespace _305Vision.MySTNode.Operator
                     // 具体的处理逻辑
                     unsafe
                     {
-                        byte* imageDataPtr = OpenCVSDK.binaryzation(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, doubleValue, Max, Min);
+                        byte* imageDataPtr = OpenCVSDK.binaryzation(imageData.Scan0, imageData.Width, imageData.Height, imageData.Width*3, doubleValue, Max, Min);
 
                         // 处理后的数据流复制到托管数组
                         int size = imageData.Width * imageData.Height * 3;
