@@ -50,7 +50,15 @@ namespace _305Vision.DAL
             }
         }
 
-        // 辅助方法：按比例缩放图像
+        /// <summary>
+        /// 按比例缩放图像
+        /// </summary>
+        /// <param name="originalWidth"></param>
+        /// <param name="originalHeight"></param>
+        /// <param name="maxWidth"></param>
+        /// <param name="maxHeight"></param>
+        /// <param name="scaledWidth"></param>
+        /// <param name="scaledHeight"></param>
         private static void ScaleToFit(int originalWidth, int originalHeight, int maxWidth, int maxHeight, out int scaledWidth, out int scaledHeight)
         {
             double widthRatio = (double)maxWidth / originalWidth;
