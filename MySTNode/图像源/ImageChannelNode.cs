@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace _305Vision.图片操作测试
 {
-    [STNode("/图像源")]
+    [STNode("/算子")]
     public class ImageChannelNode : ImageBaseNode
     {
         private STNodeOption m_op_img_in;   //输入的节点
@@ -20,7 +20,7 @@ namespace _305Vision.图片操作测试
         protected override void OnCreate()
         {
             base.OnCreate();
-            this.Title = "ImageChannel";
+            this.Title = "(测试)RGB分离";
 
             m_op_img_in = this.InputOptions.Add("", typeof(Image), true);
             m_op_img_r = this.OutputOptions.Add("R", typeof(Image), false);

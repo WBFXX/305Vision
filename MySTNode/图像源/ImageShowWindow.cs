@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace _305Vision.MySTNode.图片操作
 {
     
-    [STNode("Image", "111111111111111111111111111111111111111")]
+    [STNode("选择显示窗口", "111111111111111111111111111111111111111")]
     public class ImageShowWindow : STNode
     {
         private Logger logger = LogManager.GetCurrentClassLogger();

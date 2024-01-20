@@ -27,19 +27,41 @@ namespace _305Vision.DAL
                 Graphics g = dt.Graphics;
                 Rectangle rect = new Rectangle(x + 10, y + 40, 140, 80);
                 g.FillRectangle(Brushes.Gray, rect);
-                if (m_img_draw != null) g.DrawImage(m_img_draw, rect);
+
+                if (m_img_draw != null)
+                {
+                    // 计算按比例缩放后的宽度和高度
+                    int scaledWidth, scaledHeight;
+                    ScaleToFit(m_img_draw.Width, m_img_draw.Height, rect.Width, rect.Height, out scaledWidth, out scaledHeight);
+
+                    // 计算绘制图像的位置
+                    int drawX = x + 10 + (rect.Width - scaledWidth) / 2;
+                    int drawY = y + 40 + (rect.Height - scaledHeight) / 2;
+
+                    // 绘制图像
+                    g.DrawImage(m_img_draw, drawX, drawY, scaledWidth, scaledHeight);
+                }
 
                 return true;
-
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return false;
             }
-            
-
-            
         }
 
+        // 辅助方法：按比例缩放图像
+        private static void ScaleToFit(int originalWidth, int originalHeight, int maxWidth, int maxHeight, out int scaledWidth, out int scaledHeight)
+        {
+            double widthRatio = (double)maxWidth / originalWidth;
+            double heightRatio = (double)maxHeight / originalHeight;
+            double ratio = Math.Min(widthRatio, heightRatio);
+
+            scaledWidth = (int)(originalWidth * ratio);
+            scaledHeight = (int)(originalHeight * ratio);
+        }
+
+
     }
-    
+
 }

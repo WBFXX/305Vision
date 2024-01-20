@@ -138,9 +138,11 @@ namespace _305Vision.OWindows
                                     try
                                     {
 
-                                        logger.Info("开始坐标:" + start);
+                                        logger.Info("截取宽度：" + Math.Abs(end.X - start.X));
+                                        logger.Info("截取高度" + Math.Abs(end.Y - start.Y));
+                                        logger.Info("起点坐标：" + start + ";" + "终点坐标：" + end);
                                         byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
-                                            , start.X, start.Y, end.X, end.Y,0, 10);
+                                            , start.X, start.Y, end.X, end.Y,0, 20);
                                         // 处理后的数据流复制到托管数组
                                         
                                             int size = imageData.Width * imageData.Height *3;

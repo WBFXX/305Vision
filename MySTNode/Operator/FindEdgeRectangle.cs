@@ -23,17 +23,23 @@ namespace _305Vision.MySTNode.Operator
     /// <summary>
     /// 找边算法
     /// </summary>
-    [STNode("/ROI功能节点", "在图像上画点")]
+    [STNode("/算子", "在图像上画点")]
     public class FindEdgeRectangle : ImageBaseNode
     {
         private STNodeOption in_option;
         private OWindows.FindEdgeRectangleForm findEdgeRectangleForm = new OWindows.FindEdgeRectangleForm();
-        private static int edgeNum;
+        private int edgeNum;
         /// <summary>
         /// 找边数量
         /// </summary>
-        [STNodeProperty("找边数量", "矩形框中间的数量")]
-        public static int EdgeNum { get => edgeNum; set => edgeNum = value; }
+        [STNodeProperty("找边线数量", "矩形框中间的数量")]
+        public int EdgeNum
+        {
+            get => edgeNum; set
+            {
+                edgeNum = value;
+            }
+        }
 
 
         //private STNodeOption out_option;
@@ -53,7 +59,7 @@ namespace _305Vision.MySTNode.Operator
             ctrl.Text = "选取";
             ctrl.Location = new Point(42, 110);
             this.Controls.Add(ctrl);
-            
+
 
             //当输入节点有数据输入时候
             in_option.DataTransfer += new STNodeOptionEventHandler(Op_img_in_DataTransfer);
@@ -67,8 +73,8 @@ namespace _305Vision.MySTNode.Operator
         {
             //创建RetangelROI类的实例，并传递RetangelROIInfo类的实例
             //实例化图像处理窗口
-
             findEdgeRectangleForm.ShowDialog();
+            //findEdgeRectangleForm.EdgeNum = edgeNum;
             m_img_draw = findEdgeRectangleForm.OverImage;
             m_op_img_out.TransferData(findEdgeRectangleForm.OverImage);//out选项 输出
 

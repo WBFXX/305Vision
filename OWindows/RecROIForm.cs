@@ -138,8 +138,9 @@ namespace _305Vision.OWindows
                                     {
                                         //if ((end.X - start.X) * 3 % 4 == 0 || (end.X - start.X) * 3 <= 4)
                                         //{
-                                            logger.Info("宽度：" + (end.X - start.X));
-                                            logger.Info("宽度：" + (end.X - start.X) * 3 % 4);
+                                            logger.Info("截取宽度：" + Math.Abs(end.X - start.X));
+                                            logger.Info("截取高度：" + Math.Abs(end.Y - start.Y));
+                                            logger.Info("起点坐标：" + start + ";" + "终点坐标：" + end);
                                             byte* imageDataPtr = OpenCVSDK.drawRotatedRect(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
                                             , start.X, start.Y, end.X, end.Y, 255, 0, 200, 0);
                                             
@@ -174,8 +175,7 @@ namespace _305Vision.OWindows
         }
 
 
-        private int aWidth;
-        private int aHeight;
+
         private void button2_Click(object sender, EventArgs e)
         {
             Bitmap bitmap = (Bitmap) resouseImage;
@@ -190,9 +190,9 @@ namespace _305Vision.OWindows
                             try
                             {
                                 //this.aWidth = ((end.X - start.X) * 3 + 4 - (end.X - start.X) * 3 % 4) / 3;//475
-                                this.aWidth = end.X - start.X;//475
+                                int aWidth = Math.Abs(end.X - start.X);//475
                                 //logger.Info("abba是：" + a + ". " + "awidth是：" + aWidth);
-                                this.aHeight = end.Y - start.Y;
+                                int aHeight = Math.Abs(end.Y - start.Y);
 
                                  byte* imageDataPtr = OpenCVSDK.roiCropping(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
                                  , start.X, start.Y, end.X, end.Y, 255, 0, 200, 0);
@@ -218,7 +218,7 @@ namespace _305Vision.OWindows
                                 return null;
                             }
                         }
-                    }, (end.X-start.X + 3) / 4 * 4, end.Y - start.Y);
+                    }, (Math.Abs(end.X-start.X) + 3) / 4 * 4, Math.Abs(end.Y - start.Y));
             //logger.Info(aWidth);
             
             //把处理完的图像传给当前显示窗口
