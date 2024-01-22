@@ -157,6 +157,7 @@ namespace _305Vision.SDK
         
         [DllImport("demo.dll", EntryPoint = "abba", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern  int abba(ref int x);
+
         [DllImport("demo.dll", EntryPoint = "abba", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern  int abbb();
 
