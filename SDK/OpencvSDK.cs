@@ -156,7 +156,7 @@ namespace _305Vision.SDK
         public static extern unsafe byte* findEdgeRectangle(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,double angle,int edgeNum);
         
         [DllImport("demo.dll", EntryPoint = "abba", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern  int abba();
+        public static extern  int abba(ref int x);
         [DllImport("demo.dll", EntryPoint = "abba", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern  int abbb();
 

@@ -196,7 +196,9 @@ namespace _305Vision.OWindows
 
                                  byte* imageDataPtr = OpenCVSDK.roiCropping(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
                                  , start.X, start.Y, end.X, end.Y, 255, 0, 200, 0);
-                                int a = OpenCVSDK.abba();
+                                int a=0;
+                                OpenCVSDK.abba(ref a);
+                                logger.Info(a);
                                 //int b = OpenCVSDK.abbb();
 
                                 int size = (aWidth+3)/4*4 * aHeight *3;
