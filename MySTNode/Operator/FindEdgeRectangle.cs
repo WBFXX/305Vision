@@ -27,8 +27,8 @@ namespace _305Vision.MySTNode.Operator
     public class FindEdgeRectangle : ImageBaseNode
     {
         private STNodeOption in_option;
+        private  int edgeNum;
         private OWindows.FindEdgeRectangleForm findEdgeRectangleForm = new OWindows.FindEdgeRectangleForm();
-        private int edgeNum;
         /// <summary>
         /// 找边数量
         /// </summary>
@@ -41,6 +41,7 @@ namespace _305Vision.MySTNode.Operator
             }
         }
 
+        
 
         //private STNodeOption out_option;
 
@@ -59,11 +60,8 @@ namespace _305Vision.MySTNode.Operator
             ctrl.Text = "选取";
             ctrl.Location = new Point(42, 110);
             this.Controls.Add(ctrl);
-
-
             //当输入节点有数据输入时候
             in_option.DataTransfer += new STNodeOptionEventHandler(Op_img_in_DataTransfer);
-            
             ctrl.MouseClick += Owner_Click;
         }
 
@@ -71,10 +69,13 @@ namespace _305Vision.MySTNode.Operator
         
         private void Owner_Click(object sender, EventArgs e)
         {
+            //点击按钮的时候把参数传过去而不是OnCreate时候
+            findEdgeRectangleForm.EdgeNum = edgeNum;
+
             //创建RetangelROI类的实例，并传递RetangelROIInfo类的实例
             //实例化图像处理窗口
             findEdgeRectangleForm.ShowDialog();
-            //findEdgeRectangleForm.EdgeNum = edgeNum;
+
             m_img_draw = findEdgeRectangleForm.OverImage;
             m_op_img_out.TransferData(findEdgeRectangleForm.OverImage);//out选项 输出
 

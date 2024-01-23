@@ -32,9 +32,7 @@ namespace _305Vision.OWindows
         private Size Lsize;//留白大小
         private double wrate;//宽缩放比率
         private double hrate;//高缩放比率
-        private Image MidImage;//处理中的图片
         private bool isMove = false;//记录鼠标是否在画框
-        private byte[] bytess ;//记录中间图像
         private int edgeNum;//找边数量
 
 
@@ -50,11 +48,14 @@ namespace _305Vision.OWindows
         public int EdgeNum { get => edgeNum; set => edgeNum = value; }
 
         #endregion
-
+        //返回数值
+        public int GetedgeNum()
+        {
+            return edgeNum;
+        }
 
         public FindEdgeRectangleForm()
         {
-
             InitializeComponent();
         }
 
@@ -106,8 +107,7 @@ namespace _305Vision.OWindows
             }
 
         }
-        private int aWidth;
-        private int aHeight;
+
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMove)
@@ -142,7 +142,7 @@ namespace _305Vision.OWindows
                                         logger.Info("截取高度" + Math.Abs(end.Y - start.Y));
                                         logger.Info("起点坐标：" + start + ";" + "终点坐标：" + end);
                                         byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
-                                            , start.X, start.Y, end.X, end.Y,0, 20);
+                                            , start.X, start.Y, end.X, end.Y,0, EdgeNum);
                                         // 处理后的数据流复制到托管数组
                                         
                                             int size = imageData.Width * imageData.Height *3;
