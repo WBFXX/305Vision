@@ -144,6 +144,8 @@
     <Compile Include="DAL\STNodeOptionDAL.cs" />
     <Compile Include="DAL\UtilsDAL.cs" />
     <Compile Include="DAL\WindowsViewDAL.cs" />
+    <Compile Include="Model\BasicImageInfo.cs" />
+    <Compile Include="Model\FindEdgeRecFormInfo.cs" />
     <Compile Include="Model\NodePropertyGridInfo.cs" />
     <Compile Include="MySTNode\Blender\text.cs" />
     <Compile Include="MySTNode\BottonStyle\CommonStyle.cs" />

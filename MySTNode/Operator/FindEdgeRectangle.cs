@@ -26,22 +26,20 @@ namespace _305Vision.MySTNode.Operator
     [STNode("/算子", "在图像上画点")]
     public class FindEdgeRectangle : ImageBaseNode
     {
+        #region 找边参数
         private STNodeOption in_option;
-        private  int edgeNum;
         private OWindows.FindEdgeRectangleForm findEdgeRectangleForm = new OWindows.FindEdgeRectangleForm();
-        /// <summary>
-        /// 找边数量
-        /// </summary>
-        [STNodeProperty("找边线数量", "矩形框中间的数量")]
-        public int EdgeNum
-        {
-            get => edgeNum; set
-            {
-                edgeNum = value;
-            }
-        }
 
+        [STNodeProperty("开始坐标", "开始坐标")]
+        public Point Start { set; get; }
+        [STNodeProperty("终点坐标", "终点坐标")]
+        public Point End{ set; get; }
+        [STNodeProperty("旋转角度", "旋转角度")]
+        public double Angle { set; get; }
+        [STNodeProperty("找边线数量", "找边线数量")]
+        public int EdgeNum { set; get; }
         
+        #endregion
 
         //private STNodeOption out_option;
 
@@ -70,14 +68,27 @@ namespace _305Vision.MySTNode.Operator
         private void Owner_Click(object sender, EventArgs e)
         {
             //点击按钮的时候把参数传过去而不是OnCreate时候
-            findEdgeRectangleForm.EdgeNum = edgeNum;
+            findEdgeRectangleForm.EdgeNum = EdgeNum;
+            findEdgeRectangleForm.Start = Start;
+            findEdgeRectangleForm.End = End;
 
             //创建RetangelROI类的实例，并传递RetangelROIInfo类的实例
             //实例化图像处理窗口
-            findEdgeRectangleForm.ShowDialog();
+            DialogResult result = findEdgeRectangleForm.ShowDialog();
+            // 检查用户的操作
+            if (result == DialogResult.Cancel)
+            {
+                return; // 用户选择了关闭，提前退出方法
+            }
+
+            //选取完框框，展示图像
+            Start = findEdgeRectangleForm.Start; 
+            End = findEdgeRectangleForm.End;
+            Angle = findEdgeRectangleForm.Angle;
 
             m_img_draw = findEdgeRectangleForm.OverImage;
             m_op_img_out.TransferData(findEdgeRectangleForm.OverImage);//out选项 输出
+            this.Invalidate();
 
         }
         
@@ -91,16 +102,34 @@ namespace _305Vision.MySTNode.Operator
                 m_img_draw = null;                  //需要绘制显示的图片置为空
                 
             }
-            else
+            else //有图像的时候，我们店家运行按钮的时候直接运行找边算法
             {
-                    Bitmap img = (Bitmap)e.TargetOption.Data;
-                    //把图像传给操作表格
-                    findEdgeRectangleForm.ResouseImage = (Image)img;
-                    m_op_img_out.TransferData((Image)img);//out选项 输出
-                    m_img_draw = (Image)img;
+                Bitmap img = (Bitmap)e.TargetOption.Data;
+                Bitmap processdImage = ProcessImageBLL.ProcessImage(img, imageData =>
+                {
+                    unsafe
+                    {
+                        //保存提取数据结构
+                        BasicImageInfo info = BasicImageInfo.NewMethod(imageData);
+                        byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(info.ImagePtr, (int)info.Width, (int)info.Height, (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum);
+                        int size = imageData.Width * imageData.Height * 3;
+                        byte[] imageByte = new byte[size];
+                        Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
+                        OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
+                        return imageByte;
+                    }
 
+                });
+                    //把图像传给操作表格
+                    findEdgeRectangleForm.ResouseImage = (Image)processdImage;
+                    m_op_img_out.TransferData((Image)processdImage);//out选项 输出
+                    m_img_draw = (Image)processdImage;
+                this.Invalidate();
+                    
             }
         }
+
+        
 
         protected override void OnDrawBody(DrawingTools dt)
         {

@@ -29,12 +29,14 @@ namespace _305Vision.OWindows
         private Image resouseImage;
         private Point start;//起点坐标
         private Point end;//终点坐标
+        private double angle;//矩形旋转角度
         private Size Lsize;//留白大小
         private double wrate;//宽缩放比率
         private double hrate;//高缩放比率
         private bool isMove = false;//记录鼠标是否在画框
         private int edgeNum;//找边数量
-
+        BasicImageInfo BasicImageInfo;//图形基础
+        
 
 
         /// <summary>
@@ -46,17 +48,18 @@ namespace _305Vision.OWindows
         /// </summary>
         public Image ResouseImage { get => resouseImage; set => resouseImage = value; }
         public int EdgeNum { get => edgeNum; set => edgeNum = value; }
+        public Point Start { get => start; set => start = value; }
+        public Point End { get => end; set => end = value; }
+        public double Angle { get => angle; set => angle = value; }
 
         #endregion
         //返回数值
-        public int GetedgeNum()
-        {
-            return edgeNum;
-        }
+
 
         public FindEdgeRectangleForm()
         {
             InitializeComponent();
+
         }
 
         private void RetangelROI_Load(object sender, EventArgs e)
@@ -69,10 +72,12 @@ namespace _305Vision.OWindows
         {
             if(pictureBox1.Image != null)
             {
+                
                 overImage = pictureBox1.Image;
                 logger.Info("ROI点图像处理完成。");
             }
-             this.Close();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
 
@@ -97,9 +102,9 @@ namespace _305Vision.OWindows
                 hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
                 double startx = ((double)((clientMouse.X - Lsize.Width) * wrate));
                 double starty = ((double)((clientMouse.Y - Lsize.Height) * hrate));
-                start = new Point((int)startx, (int)starty);//记录开始坐标
+                Start = new Point((int)startx, (int)starty);//记录开始坐标
                 isMove =true;
-                logger.Info("起点真坐标为：" + start);
+                logger.Info("起点真坐标为：" + Start);
             }
             else
             {
@@ -125,7 +130,7 @@ namespace _305Vision.OWindows
                     hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
                     double x = ((double)((clientMouse.X - Lsize.Width) * wrate));
                     double y = ((double)((clientMouse.Y - Lsize.Height) * hrate));
-                    end = new Point((int)x, (int)y);//记录结束坐标
+                    End = new Point((int)x, (int)y);//记录结束坐标
 
 
                     // 调用方法，处理原始图片的像素位置
@@ -137,12 +142,18 @@ namespace _305Vision.OWindows
                                 {
                                     try
                                     {
-
-                                        logger.Info("截取宽度：" + Math.Abs(end.X - start.X));
-                                        logger.Info("截取高度" + Math.Abs(end.Y - start.Y));
-                                        logger.Info("起点坐标：" + start + ";" + "终点坐标：" + end);
-                                        byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride
-                                            , start.X, start.Y, end.X, end.Y,0, EdgeNum);
+                                        BasicImageInfo = new BasicImageInfo()
+                                        {
+                                            ImagePtr = imageData.Scan0,
+                                            Width = imageData.Width,
+                                            Height = imageData.Height,
+                                            Stride = imageData.Stride
+                                        };
+                                        logger.Info("截取宽度：" + Math.Abs(End.X - Start.X));
+                                        logger.Info("截取高度" + Math.Abs(End.Y - Start.Y));
+                                        logger.Info("起点坐标：" + Start + ";" + "终点坐标：" + End);
+                                        byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(BasicImageInfo.ImagePtr, (int)BasicImageInfo.Width,(int)BasicImageInfo.Height,(int)BasicImageInfo.Stride
+                                            , Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum);
                                         // 处理后的数据流复制到托管数组
                                         
                                             int size = imageData.Width * imageData.Height *3;

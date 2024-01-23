@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,16 +18,12 @@ namespace _305Vision.MySTNode.图片操作
         private int m_nWidth; // 弹出窗口的宽度
         private float m_scale; // 缩放比例
         private List<object> m_lst = new List<object>(); // 存储枚举值的列表
-
         private StringFormat m_sf; // 字符串格式化对象
-
-       
-
-
-
         private bool m_bClosed; // 标记窗口是否已关闭
-
         public string SelectPreText { get;set; }
+
+
+
 
         /// <summary>
         /// 下拉框控件
@@ -75,6 +72,7 @@ namespace _305Vision.MySTNode.图片操作
             this.Location = m_pt;
             this.Width = (int)(m_nWidth * m_scale);
             this.Height = (int)(m_lst.Count * 20 * m_scale);
+
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -101,11 +99,9 @@ namespace _305Vision.MySTNode.图片操作
                 this.SelectPreText = (String)m_lst[nIndex]; // 更新选定的枚举值
                 
             }
-
-            //MessageBox.Show(SelectPreText);
             this.DialogResult = System.Windows.Forms.DialogResult.OK; // 设置对话框结果为确认
-
             m_bClosed = true; // 标记窗口已关闭
+
         }
 
 

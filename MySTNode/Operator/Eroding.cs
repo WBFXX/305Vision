@@ -117,7 +117,7 @@ namespace _305Vision.MySTNode.Operator
                 this.logger.Info("图像" + this.Title + "处理完成");
                 m_op_img_out.TransferData((Image)processedImage);//out选项 输出
                 m_img_draw = (Image)processedImage;
-
+                this.Invalidate();
             }
         }
 

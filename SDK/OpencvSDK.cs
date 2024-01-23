@@ -121,7 +121,7 @@ namespace _305Vision.SDK
         [DllImport("demo.dll", EntryPoint = "drawRotatedRect", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe byte* drawRotatedRect(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,int r,int g,int b,double angle);
         /// <summary>
-        /// 绘制旋转矩形区域
+        /// 裁剪
         /// </summary>
         /// <param name="intPtr"></param>
         /// <param name="width"></param>

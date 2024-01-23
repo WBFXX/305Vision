@@ -52,8 +52,9 @@ namespace _305Vision.MySTNode.图片操作
         {
             if (this.ValueChanged != null)
                 this.ValueChanged(this, e); // 触发值改变事件
+            this.Invalidate();//触发重绘
         }
-
+        //点击一次创建一个新的下拉框
         protected override void OnMouseClick(System.Windows.Forms.MouseEventArgs e)
         {
             base.OnMouseClick(e);
