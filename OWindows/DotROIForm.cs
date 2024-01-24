@@ -23,6 +23,12 @@ namespace _305Vision.OWindows
         #region 公共图像参数
         private Image overImage;
         private Image resouseImage;
+        BasicImageInfo BasicImageInfo;//图形基础
+        private Point Point;
+        public int Size { set; get; }
+        public int Thickness { set; get; }
+        public Color Color { set; get; }
+
         /// <summary>
         /// 处理好的图片
         /// </summary>
@@ -31,6 +37,8 @@ namespace _305Vision.OWindows
         /// 处理前的图片
         /// </summary>
         public Image ResouseImage { get => resouseImage; set => resouseImage = value; }
+        internal BasicImageInfo BasicImageInfo1 { get => BasicImageInfo; set => BasicImageInfo = value; }
+        public Point Point1 { get => Point; set => Point = value; }
         #endregion
 
 
@@ -42,6 +50,7 @@ namespace _305Vision.OWindows
 
         private void RetangelROI_Load(object sender, EventArgs e)
         {
+            
             //在图像加载的时候就把图像源加载好
             pictureBox1.Image = ResouseImage;
         }
@@ -53,7 +62,8 @@ namespace _305Vision.OWindows
                 overImage = pictureBox1.Image;
                 logger.Info("ROI点图像处理完成。");
             }
-             this.Close();
+            DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void pictureBox1_Click(object sender, MouseEventArgs e)
@@ -79,6 +89,8 @@ namespace _305Vision.OWindows
 
                 float x = ((float)((clientMouse.X - Lsize.Width) * wrate));
                 float y = ((float)((clientMouse.Y - Lsize.Height) * hrate));
+                Point.X = (int)x;
+                Point.Y = (int)y;
 
                 // 调用方法，处理原始图片的像素位置
                 Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)pictureBox.Image,
@@ -89,8 +101,10 @@ namespace _305Vision.OWindows
                         {
                             try
                             {
-                                byte* imageDataPtr = OpenCVSDK.drawPoint(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride, 20
-                                    , (int)x, (int)y, 255, 0, 200,2);
+                                BasicImageInfo = BasicImageInfo.NewMethod(imageData);
+
+                                byte* imageDataPtr = OpenCVSDK.drawPoint(BasicImageInfo.ImagePtr, (int)BasicImageInfo.Width, (int)BasicImageInfo.Height, (int)BasicImageInfo.Stride, Size
+                                    , Point.X, Point.Y, Color.R, Color.G, Color.B, Thickness);
                                 // 处理后的数据流复制到托管数组
                                 int size = imageData.Width * imageData.Height * 3;
                                 byte[] imageByte = new byte[size];

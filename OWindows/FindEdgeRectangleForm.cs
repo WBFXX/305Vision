@@ -142,13 +142,7 @@ namespace _305Vision.OWindows
                                 {
                                     try
                                     {
-                                        BasicImageInfo = new BasicImageInfo()
-                                        {
-                                            ImagePtr = imageData.Scan0,
-                                            Width = imageData.Width,
-                                            Height = imageData.Height,
-                                            Stride = imageData.Stride
-                                        };
+                                        BasicImageInfo = BasicImageInfo.NewMethod(imageData);
                                         logger.Info("截取宽度：" + Math.Abs(End.X - Start.X));
                                         logger.Info("截取高度" + Math.Abs(End.Y - Start.Y));
                                         logger.Info("起点坐标：" + Start + ";" + "终点坐标：" + End);
