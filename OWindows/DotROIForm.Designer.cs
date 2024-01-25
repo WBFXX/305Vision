@@ -70,7 +70,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "RetangelROI";
-            this.Load += new System.EventHandler(this.RetangelROI_Load);
+            this.Load += new System.EventHandler(this.DotROIForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

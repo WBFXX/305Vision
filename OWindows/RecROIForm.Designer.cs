@@ -71,7 +71,7 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "依框裁剪";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.btnCrop_Click);
             // 
             // RecROIForm
             // 
@@ -89,7 +89,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "RetangelROI";
-            this.Load += new System.EventHandler(this.RetangelROI_Load);
+            this.Load += new System.EventHandler(this.RecROIForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
