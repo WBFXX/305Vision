@@ -12,6 +12,7 @@ namespace _305Vision.OWindows
 {
     public partial class RecROIForm : Form
     {
+        #region 变量集合
         private Logger logger = LogManager.GetCurrentClassLogger();
         private Image overImage;
         private Image resouseImage;
@@ -23,6 +24,7 @@ namespace _305Vision.OWindows
         private double hrate;
         private bool isMove = false;
 
+        #endregion
         public Image OverImage { get => overImage; set => overImage = value; }
         public Image ResouseImage { get => resouseImage; set => resouseImage = value; }
         public Point Start { get => start; set => start = value; }
