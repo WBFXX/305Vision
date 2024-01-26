@@ -163,6 +163,7 @@
     <Compile Include="MySTNode\Operator\Binaryzation.cs" />
     <Compile Include="MySTNode\Operator\Expansion.cs" />
     <Compile Include="MySTNode\Operator\Eroding.cs" />
+    <Compile Include="MySTNode\Operator\FindEdgeCircular.cs" />
     <Compile Include="MySTNode\Operator\GrayScale.cs" />
     <Compile Include="MySTNode\Operator\FindEdgeRectangle.cs" />
     <Compile Include="MySTNode\功能节点\RecROI.cs" />
@@ -179,6 +180,12 @@
     <Compile Include="MySTNode\图像源\ImageChannelNode.cs" />
     <Compile Include="MySTNode\图像源\ImageInputNode.cs" />
     <Compile Include="MySTNode\控件库\STNodeButton.cs" />
+    <Compile Include="OWindows\FindEdgeCircularForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OWindows\FindEdgeCircularForm.Designer.cs">
+      <DependentUpon>FindEdgeCircularForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OWindows\FindEdgeRectangleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MySTNode\控件库\ComBoxCL.resx">
       <DependentUpon>ComBoxCL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OWindows\FindEdgeCircularForm.resx">
+      <DependentUpon>FindEdgeCircularForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OWindows\FindEdgeRectangleForm.resx">
       <DependentUpon>FindEdgeRectangleForm.cs</DependentUpon>

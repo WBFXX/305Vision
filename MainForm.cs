@@ -219,7 +219,7 @@ namespace _305Vision
 
         private bool isImageSourse = false;
         /// <summary>
-        /// 测试按钮
+        /// 运行按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

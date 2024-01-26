@@ -14,27 +14,32 @@ using _305Vision.图片操作测试;
 namespace _305Vision.MySTNode.Operator
 {
     [STNode("/算子", "在图像上画点")]
-    public class FindEdgeRectangle : ImageBaseNode
+    public class FindEdgeCircular : ImageBaseNode
     {
         private STNodeOption inOption;
-        private OWindows.FindEdgeRectangleForm findEdgeRectangleForm = new OWindows.FindEdgeRectangleForm();
+        private OWindows.FindEdgeCircularForm findEdgeCircular = new OWindows.FindEdgeCircularForm();
 
         #region 找边参数
-        [STNodeProperty("开始坐标", "开始坐标")]
-        public Point Start { get; set; }
-        [STNodeProperty("终点坐标", "终点坐标")]
-        public Point End { get; set; }
-        [STNodeProperty("旋转角度", "旋转角度")]
-        public double Angle { get; set; }
+        [STNodeProperty("圆心X坐标", "开始坐标")]
+        public int pointX { get; set; }
+        [STNodeProperty("圆心Y坐标", "终点坐标")]
+        public int pointY { get; set; }
+        [STNodeProperty("小圆半径", "旋转角度")]
+        public int radiusSmall { get; set; }
+        [STNodeProperty("大圆半径", "旋转角度")]
+        public int radiusBig { get; set; }
         [STNodeProperty("找边线数量", "找边线数量")]
         public int EdgeNum { get; set; }
+        [STNodeProperty("梯度变化阈值", "找边线数量")]
+        public int gradientThreshold { get; set; }
+        
         #endregion
 
         protected override void OnCreate()
         {
             base.OnCreate();
 
-            this.Title = "找边算法";
+            this.Title = "圆形找边";
             inOption = this.InputOptions.Add("输入图像", typeof(Image), true);
 
             this.AutoSize = false;
@@ -55,19 +60,21 @@ namespace _305Vision.MySTNode.Operator
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
-            findEdgeRectangleForm.InitializeParameters(EdgeNum, Start, End);
+            findEdgeCircular.InitializeParameters(pointX,pointY,radiusSmall,radiusBig,EdgeNum,gradientThreshold);
 
-            DialogResult result = findEdgeRectangleForm.ShowDialog();
+            DialogResult result = findEdgeCircular.ShowDialog();
 
             if (result == DialogResult.Cancel)
                 return;
 
-            Start = findEdgeRectangleForm.Start;
-            End = findEdgeRectangleForm.End;
-            Angle = findEdgeRectangleForm.Angle;
+            pointX = findEdgeCircular.pointX;
+            pointY = findEdgeCircular.pointY;
+            radiusSmall = findEdgeCircular.radiusSmall;
+            radiusBig = findEdgeCircular.radiusBig;
+            gradientThreshold = findEdgeCircular.gradientThreshold;
 
-            m_img_draw = findEdgeRectangleForm.OverImage;
-            m_op_img_out.TransferData(findEdgeRectangleForm.OverImage);
+            m_img_draw = findEdgeCircular.OverImage;
+            m_op_img_out.TransferData(findEdgeCircular.OverImage);
             this.Invalidate();
         }
 
@@ -92,8 +99,8 @@ namespace _305Vision.MySTNode.Operator
                 BasicImageInfo info = BasicImageInfo.NewMethod(imageData);
                 unsafe
                 {
-                    byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(info.ImagePtr, (int)info.Width, (int)info.Height,
-                        (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum);
+                    byte* imageDataPtr = OpenCVSDK.findEdgeCircular(info.ImagePtr, (int)info.Width, (int)info.Height,
+                        (int)info.Stride, pointX, pointY, radiusSmall, radiusBig, EdgeNum, gradientThreshold);
                     int size = imageData.Width * imageData.Height * 3;
                     byte[] imageByte = new byte[size];
                     Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
@@ -102,7 +109,7 @@ namespace _305Vision.MySTNode.Operator
                 }
             });
 
-            findEdgeRectangleForm.ResouseImage = (Image)processedImage;
+            findEdgeCircular.ResouseImage = (Image)processedImage;
             m_op_img_out.TransferData((Image)processedImage);
             m_img_draw = (Image)processedImage;
             this.Invalidate();

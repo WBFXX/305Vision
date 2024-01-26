@@ -149,5 +149,17 @@ namespace _305Vision.DAL
             int black_top_height = (currentSize.Height == pictureBox.Height) ? 0 : (pictureBox.Height - currentSize.Height) / 2;
             return new Size(black_left_width,black_top_height); 
         }
+        /// <summary>
+        /// 两点之间的距离
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <returns>距离</returns>
+        public static double CalculateDistance(double x1, double y1, double x2, double y2)
+        {
+            return Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
+        }
     }
 }

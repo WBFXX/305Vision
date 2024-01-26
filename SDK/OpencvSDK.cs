@@ -154,12 +154,24 @@ namespace _305Vision.SDK
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "findEdgeRectangle", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe byte* findEdgeRectangle(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,double angle,int edgeNum);
-        
-        [DllImport("demo.dll", EntryPoint = "abba", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern  int abba(ref int x);
 
-        [DllImport("demo.dll", EntryPoint = "abba", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern  int abbb();
+        /// <summary>
+        /// 圆形找边
+        /// </summary>
+        /// <param name="intPtr"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="stride"></param>
+        /// <param name="pointX">圆心X</param>
+        /// <param name="pointY">圆心Y</param>
+        /// <param name="radiusSmall">小圆半径</param>
+        /// <param name="radiusBig">大圆半径</param>
+        /// <param name="edgeNum">找边数量</param>
+        /// <param name="gradientThreshold">梯度变化阈值</param>
+        /// <returns></returns>
+        [DllImport("demo.dll", EntryPoint = "findEdgeCircular", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern unsafe byte* findEdgeCircular(IntPtr intPtr, int width, int height, int stride, int pointX, int pointY, int radiusSmall, int radiusBig, int edgeNum, int gradientThreshold);
+        
 
 
 

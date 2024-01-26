@@ -110,5 +110,17 @@ namespace _305Vision.BLL
             }
             
         }
+        /// <summary>
+        /// 两点之间的距离
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <returns>距离</returns>
+        public static double CalculateDistance(double x1, double y1, double x2, double y2)
+        {
+            return UtilsDAL.CalculateDistance(x1,y1,x2,y2);
+        }
     }
 }
