@@ -85,6 +85,14 @@ namespace _305Vision.MySTNode.Operator
                 m_op_img_out.TransferData(null);
                 m_img_draw = null;
             }
+            else if(m_img_draw == null)
+            {
+                Bitmap img = (Bitmap)e.TargetOption.Data;
+                findEdgeCircular.ResouseImage = (Image)img;
+                m_op_img_out.TransferData((Image)img);
+                m_img_draw = (Image)img;
+                this.Invalidate();
+            }
             else
             {
                 Bitmap img = (Bitmap)e.TargetOption.Data;
