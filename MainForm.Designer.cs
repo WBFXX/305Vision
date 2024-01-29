@@ -28,46 +28,372 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.vS2015LightTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2015LightTheme();
             this.vS2015DarkTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme();
-            this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.miniToolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
-            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.statusStrip1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.mainMenu = new System.Windows.Forms.MenuStrip();
+            this.menuItemFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemView = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSolutionExplorer = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemPropertyWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemToolbox = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemOutputWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemTaskList = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemToolBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemStatusBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemLayoutByCode = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemLayoutByXml = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemTools = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSchemaVS2015Light = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSchemaVS2015Blue = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSchemaVS2015Dark = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemNewWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolBar = new System.Windows.Forms.ToolStrip();
+            this.toolBarButtonNew = new System.Windows.Forms.ToolStripButton();
+            this.toolBarButtonSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolBarButtonSolutionExplorer = new System.Windows.Forms.ToolStripButton();
+            this.toolBarButtonPropertyWindow = new System.Windows.Forms.ToolStripButton();
+            this.toolBarButtonToolbox = new System.Windows.Forms.ToolStripButton();
+            this.toolBarButtonOutputWindow = new System.Windows.Forms.ToolStripButton();
+            this.toolBarButtonOpen = new System.Windows.Forms.ToolStripButton();
+            this.toolBarButtonSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolBarButtonLayoutByCode = new System.Windows.Forms.ToolStripButton();
+            this.toolBarButtonLayoutByXml = new System.Windows.Forms.ToolStripButton();
+            this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.vsToolStripExtender1 = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusBar = new System.Windows.Forms.StatusStrip();
+            this.vS2015BlueTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme();
+            this.mainMenu.SuspendLayout();
+            this.toolBar.SuspendLayout();
+            this.statusBar.SuspendLayout();
             this.SuspendLayout();
             // 
-            // statusStrip1
+            // mainMenu
             // 
-            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 584);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1104, 26);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.TabIndex = 10;
-            this.statusStrip1.Text = "statusStrip1";
+            this.mainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemFile,
+            this.menuItemView,
+            this.menuItemTools,
+            this.menuItemWindow,
+            this.menuItemHelp});
+            this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.MdiWindowListItem = this.menuItemWindow;
+            this.mainMenu.Name = "mainMenu";
+            this.mainMenu.Size = new System.Drawing.Size(1104, 30);
+            this.mainMenu.TabIndex = 34;
+            // 
+            // menuItemFile
+            // 
+            this.menuItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemOpen,
+            this.menuItemClose,
+            this.menuItem4,
+            this.menuItemExit});
+            this.menuItemFile.Name = "menuItemFile";
+            this.menuItemFile.Size = new System.Drawing.Size(48, 26);
+            this.menuItemFile.Text = "&File";
+            // 
+            // menuItemOpen
+            // 
+            this.menuItemOpen.Name = "menuItemOpen";
+            this.menuItemOpen.Size = new System.Drawing.Size(286, 26);
+            this.menuItemOpen.Text = "&Open...";
+            this.menuItemOpen.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
+            // 
+            // menuItemClose
+            // 
+            this.menuItemClose.Name = "menuItemClose";
+            this.menuItemClose.Size = new System.Drawing.Size(224, 26);
+            this.menuItemClose.Text = "&Save";
+            this.menuItemClose.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
+            // 
+            // menuItem4
+            // 
+            this.menuItem4.Name = "menuItem4";
+            this.menuItem4.Size = new System.Drawing.Size(283, 6);
+            // 
+            // menuItemExit
+            // 
+            this.menuItemExit.Name = "menuItemExit";
+            this.menuItemExit.Size = new System.Drawing.Size(286, 26);
+            this.menuItemExit.Text = "&Exit";
+            // 
+            // menuItemView
+            // 
+            this.menuItemView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemSolutionExplorer,
+            this.menuItemPropertyWindow,
+            this.menuItemToolbox,
+            this.menuItemOutputWindow,
+            this.menuItemTaskList,
+            this.menuItem1,
+            this.menuItemToolBar,
+            this.menuItemStatusBar,
+            this.menuItem2,
+            this.menuItemLayoutByCode,
+            this.menuItemLayoutByXml});
+            this.menuItemView.MergeIndex = 1;
+            this.menuItemView.Name = "menuItemView";
+            this.menuItemView.Size = new System.Drawing.Size(58, 24);
+            this.menuItemView.Text = "&View";
+            // 
+            // menuItemSolutionExplorer
+            // 
+            this.menuItemSolutionExplorer.Name = "menuItemSolutionExplorer";
+            this.menuItemSolutionExplorer.Size = new System.Drawing.Size(246, 26);
+            this.menuItemSolutionExplorer.Text = "&Solution Explorer";
+            // 
+            // menuItemPropertyWindow
+            // 
+            this.menuItemPropertyWindow.Name = "menuItemPropertyWindow";
+            this.menuItemPropertyWindow.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.menuItemPropertyWindow.Size = new System.Drawing.Size(246, 26);
+            this.menuItemPropertyWindow.Text = "&Property Window";
+            // 
+            // menuItemToolbox
+            // 
+            this.menuItemToolbox.Name = "menuItemToolbox";
+            this.menuItemToolbox.Size = new System.Drawing.Size(246, 26);
+            this.menuItemToolbox.Text = "&Toolbox";
+            // 
+            // menuItemOutputWindow
+            // 
+            this.menuItemOutputWindow.Name = "menuItemOutputWindow";
+            this.menuItemOutputWindow.Size = new System.Drawing.Size(246, 26);
+            this.menuItemOutputWindow.Text = "&Output Window";
+            // 
+            // menuItemTaskList
+            // 
+            this.menuItemTaskList.Name = "menuItemTaskList";
+            this.menuItemTaskList.Size = new System.Drawing.Size(246, 26);
+            this.menuItemTaskList.Text = "Task &List";
+            // 
+            // menuItem1
+            // 
+            this.menuItem1.Name = "menuItem1";
+            this.menuItem1.Size = new System.Drawing.Size(243, 6);
+            // 
+            // menuItemToolBar
+            // 
+            this.menuItemToolBar.Checked = true;
+            this.menuItemToolBar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.menuItemToolBar.Name = "menuItemToolBar";
+            this.menuItemToolBar.Size = new System.Drawing.Size(246, 26);
+            this.menuItemToolBar.Text = "Tool &Bar";
+            // 
+            // menuItemStatusBar
+            // 
+            this.menuItemStatusBar.Checked = true;
+            this.menuItemStatusBar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.menuItemStatusBar.Name = "menuItemStatusBar";
+            this.menuItemStatusBar.Size = new System.Drawing.Size(246, 26);
+            this.menuItemStatusBar.Text = "Status B&ar";
+            // 
+            // menuItem2
+            // 
+            this.menuItem2.Name = "menuItem2";
+            this.menuItem2.Size = new System.Drawing.Size(243, 6);
+            // 
+            // menuItemLayoutByCode
+            // 
+            this.menuItemLayoutByCode.Name = "menuItemLayoutByCode";
+            this.menuItemLayoutByCode.Size = new System.Drawing.Size(246, 26);
+            this.menuItemLayoutByCode.Text = "Layout By &Code";
+            // 
+            // menuItemLayoutByXml
+            // 
+            this.menuItemLayoutByXml.Name = "menuItemLayoutByXml";
+            this.menuItemLayoutByXml.Size = new System.Drawing.Size(246, 26);
+            this.menuItemLayoutByXml.Text = "Layout By &XML";
+            // 
+            // menuItemTools
+            // 
+            this.menuItemTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemSchemaVS2015Light,
+            this.menuItemSchemaVS2015Blue,
+            this.menuItemSchemaVS2015Dark});
+            this.menuItemTools.MergeIndex = 2;
+            this.menuItemTools.Name = "menuItemTools";
+            this.menuItemTools.Size = new System.Drawing.Size(53, 26);
+            this.menuItemTools.Text = "&主题";
+            // 
+            // menuItemSchemaVS2015Light
+            // 
+            this.menuItemSchemaVS2015Light.Name = "menuItemSchemaVS2015Light";
+            this.menuItemSchemaVS2015Light.Size = new System.Drawing.Size(224, 26);
+            this.menuItemSchemaVS2015Light.Text = "浅色";
+            this.menuItemSchemaVS2015Light.Click += new System.EventHandler(this.SetSchema);
+            // 
+            // menuItemSchemaVS2015Blue
+            // 
+            this.menuItemSchemaVS2015Blue.Name = "menuItemSchemaVS2015Blue";
+            this.menuItemSchemaVS2015Blue.Size = new System.Drawing.Size(224, 26);
+            this.menuItemSchemaVS2015Blue.Text = "蓝色";
+            this.menuItemSchemaVS2015Blue.Click += new System.EventHandler(this.SetSchema);
+            // 
+            // menuItemSchemaVS2015Dark
+            // 
+            this.menuItemSchemaVS2015Dark.Checked = true;
+            this.menuItemSchemaVS2015Dark.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.menuItemSchemaVS2015Dark.Name = "menuItemSchemaVS2015Dark";
+            this.menuItemSchemaVS2015Dark.Size = new System.Drawing.Size(224, 26);
+            this.menuItemSchemaVS2015Dark.Text = "暗色";
+            this.menuItemSchemaVS2015Dark.Click += new System.EventHandler(this.SetSchema);
+            // 
+            // menuItemWindow
+            // 
+            this.menuItemWindow.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemNewWindow});
+            this.menuItemWindow.MergeIndex = 2;
+            this.menuItemWindow.Name = "menuItemWindow";
+            this.menuItemWindow.Size = new System.Drawing.Size(83, 24);
+            this.menuItemWindow.Text = "&Window";
+            // 
+            // menuItemNewWindow
+            // 
+            this.menuItemNewWindow.Name = "menuItemNewWindow";
+            this.menuItemNewWindow.Size = new System.Drawing.Size(189, 26);
+            this.menuItemNewWindow.Text = "&New Window";
+            // 
+            // menuItemHelp
+            // 
+            this.menuItemHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemAbout});
+            this.menuItemHelp.MergeIndex = 3;
+            this.menuItemHelp.Name = "menuItemHelp";
+            this.menuItemHelp.Size = new System.Drawing.Size(58, 24);
+            this.menuItemHelp.Text = "&Help";
+            // 
+            // menuItemAbout
+            // 
+            this.menuItemAbout.Name = "menuItemAbout";
+            this.menuItemAbout.Size = new System.Drawing.Size(245, 26);
+            this.menuItemAbout.Text = "&About DockSample...";
+            // 
+            // toolBar
+            // 
+            this.toolBar.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolBarButtonNew,
+            this.toolBarButtonSeparator1,
+            this.toolBarButtonSolutionExplorer,
+            this.toolBarButtonPropertyWindow,
+            this.toolBarButtonToolbox,
+            this.toolBarButtonOutputWindow,
+            this.toolBarButtonOpen,
+            this.toolBarButtonSeparator2,
+            this.toolBarButtonLayoutByCode,
+            this.toolBarButtonLayoutByXml});
+            this.toolBar.Location = new System.Drawing.Point(0, 30);
+            this.toolBar.Name = "toolBar";
+            this.toolBar.Size = new System.Drawing.Size(1104, 31);
+            this.toolBar.TabIndex = 35;
+            // 
+            // toolBarButtonNew
+            // 
+            this.toolBarButtonNew.Image = global::_305Vision.Properties.Resources.play_button_outline_green_icon;
+            this.toolBarButtonNew.Name = "toolBarButtonNew";
+            this.toolBarButtonNew.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonNew.ToolTipText = "运行";
+            this.toolBarButtonNew.Click += new System.EventHandler(this.Start_Click);
+            // 
+            // toolBarButtonSeparator1
+            // 
+            this.toolBarButtonSeparator1.Name = "toolBarButtonSeparator1";
+            this.toolBarButtonSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolBarButtonSolutionExplorer
+            // 
+            this.toolBarButtonSolutionExplorer.Image = ((System.Drawing.Image)(resources.GetObject("toolBarButtonSolutionExplorer.Image")));
+            this.toolBarButtonSolutionExplorer.Name = "toolBarButtonSolutionExplorer";
+            this.toolBarButtonSolutionExplorer.Size = new System.Drawing.Size(29, 28);
+            this.toolBarButtonSolutionExplorer.ToolTipText = "工具箱";
+            this.toolBarButtonSolutionExplorer.Click += new System.EventHandler(this.ToolForm_Click);
+            // 
+            // toolBarButtonPropertyWindow
+            // 
+            this.toolBarButtonPropertyWindow.Image = global::_305Vision.Properties.Resources.timber_color_icon;
+            this.toolBarButtonPropertyWindow.Name = "toolBarButtonPropertyWindow";
+            this.toolBarButtonPropertyWindow.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonPropertyWindow.ToolTipText = "属性栏";
+            this.toolBarButtonPropertyWindow.Click += new System.EventHandler(this.PropertyGrid_Click);
+            // 
+            // toolBarButtonToolbox
+            // 
+            this.toolBarButtonToolbox.Image = global::_305Vision.Properties.Resources.upload_round_color_red_icon;
+            this.toolBarButtonToolbox.Name = "toolBarButtonToolbox";
+            this.toolBarButtonToolbox.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonToolbox.ToolTipText = "输出栏";
+            this.toolBarButtonToolbox.Click += new System.EventHandler(this.OutForm_Click);
+            // 
+            // toolBarButtonOutputWindow
+            // 
+            this.toolBarButtonOutputWindow.Image = global::_305Vision.Properties.Resources.creative_idea_icon;
+            this.toolBarButtonOutputWindow.Name = "toolBarButtonOutputWindow";
+            this.toolBarButtonOutputWindow.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonOutputWindow.ToolTipText = "流程画布";
+            this.toolBarButtonOutputWindow.Click += new System.EventHandler(this.ProcessForm_Click);
+            // 
+            // toolBarButtonOpen
+            // 
+            this.toolBarButtonOpen.Image = global::_305Vision.Properties.Resources.study_icon;
+            this.toolBarButtonOpen.Name = "toolBarButtonOpen";
+            this.toolBarButtonOpen.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonOpen.ToolTipText = "图窗显示";
+            this.toolBarButtonOpen.Click += new System.EventHandler(this.NewCountPlatform_Click);
+            // 
+            // toolBarButtonSeparator2
+            // 
+            this.toolBarButtonSeparator2.Name = "toolBarButtonSeparator2";
+            this.toolBarButtonSeparator2.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolBarButtonLayoutByCode
+            // 
+            this.toolBarButtonLayoutByCode.Image = global::_305Vision.Properties.Resources.painting_bucket_logo_icon;
+            this.toolBarButtonLayoutByCode.Name = "toolBarButtonLayoutByCode";
+            this.toolBarButtonLayoutByCode.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonLayoutByCode.ToolTipText = "测试1";
+            this.toolBarButtonLayoutByCode.Click += new System.EventHandler(this.test1);
+            // 
+            // toolBarButtonLayoutByXml
+            // 
+            this.toolBarButtonLayoutByXml.Image = global::_305Vision.Properties.Resources.painting_bucket_logo_icon;
+            this.toolBarButtonLayoutByXml.Name = "toolBarButtonLayoutByXml";
+            this.toolBarButtonLayoutByXml.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonLayoutByXml.ToolTipText = "测试2";
+            this.toolBarButtonLayoutByXml.Click += new System.EventHandler(this.test2);
+            // 
+            // dockPanel
+            // 
+            this.dockPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dockPanel.DockBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.dockPanel.DockBottomPortion = 0.15D;
+            this.dockPanel.DockLeftPortion = 0.15D;
+            this.dockPanel.DockRightPortion = 0.15D;
+            this.dockPanel.DockTopPortion = 0.15D;
+            this.dockPanel.Location = new System.Drawing.Point(0, 61);
+            this.dockPanel.Name = "dockPanel";
+            this.dockPanel.Padding = new System.Windows.Forms.Padding(6);
+            this.dockPanel.ShowAutoHideContentOnHover = false;
+            this.dockPanel.Size = new System.Drawing.Size(1104, 523);
+            this.dockPanel.TabIndex = 38;
+            this.dockPanel.Theme = this.vS2015DarkTheme1;
+            // 
+            // vsToolStripExtender1
+            // 
+            this.vsToolStripExtender1.DefaultRenderer = null;
             // 
             // toolStripStatusLabel1
             // 
@@ -78,279 +404,91 @@
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "MyVision";
             // 
-            // 文件ToolStripMenuItem
+            // statusBar
             // 
-            this.文件ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.打开ToolStripMenuItem,
-            this.关闭ToolStripMenuItem});
-            this.文件ToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
-            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.文件ToolStripMenuItem.Text = "文件";
-            // 
-            // 打开ToolStripMenuItem
-            // 
-            this.打开ToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.打开ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
-            this.打开ToolStripMenuItem.Text = "&打开";
-            this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
-            // 
-            // 关闭ToolStripMenuItem
-            // 
-            this.关闭ToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.关闭ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
-            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
-            this.关闭ToolStripMenuItem.Text = "&保存";
-            this.关闭ToolStripMenuItem.Click += new System.EventHandler(this.关闭ToolStripMenuItem_Click);
-            // 
-            // 编辑ToolStripMenuItem
-            // 
-            this.编辑ToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
-            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.编辑ToolStripMenuItem.Text = "编辑";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.文件ToolStripMenuItem,
-            this.编辑ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1104, 28);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // miniToolStrip
-            // 
-            this.miniToolStrip.AccessibleName = "新项选择";
-            this.miniToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
-            this.miniToolStrip.AutoSize = false;
-            this.miniToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.miniToolStrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.miniToolStrip.CanOverflow = false;
-            this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.miniToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.miniToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.miniToolStrip.Location = new System.Drawing.Point(10, 0);
-            this.miniToolStrip.Name = "miniToolStrip";
-            this.miniToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.miniToolStrip.Size = new System.Drawing.Size(112, 25);
-            this.miniToolStrip.TabIndex = 22;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.toolStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripSeparator1,
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripButton5,
-            this.toolStripButton6,
-            this.toolStripButton7,
-            this.toolStripButton8,
-            this.toolStripButton9});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(1104, 39);
-            this.toolStrip1.TabIndex = 22;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton1.Text = "运行$a";
-            this.toolStripButton1.ToolTipText = "运行";
-            this.toolStripButton1.Click += new System.EventHandler(this.Test_Click);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::_305Vision.Properties.Resources.creative_idea_icon;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton2.Text = "toolStripButton2";
-            this.toolStripButton2.ToolTipText = "改变图像窗口数量";
-            this.toolStripButton2.Click += new System.EventHandler(this.NewCountPlatform_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.BackColor = System.Drawing.Color.Gray;
-            this.toolStripSeparator1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton3.Text = "toolStripButton3";
-            this.toolStripButton3.ToolTipText = "工具箱视图";
-            this.toolStripButton3.Click += new System.EventHandler(this.ToolForm_Click);
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton4.Text = "toolStripButton4";
-            this.toolStripButton4.ToolTipText = "画布视图";
-            this.toolStripButton4.Click += new System.EventHandler(this.ProcessForm_Click);
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton5.Text = "toolStripButton5";
-            this.toolStripButton5.ToolTipText = "输出视图";
-            this.toolStripButton5.Click += new System.EventHandler(this.OutForm_Click);
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton6.Text = "toolStripButton6";
-            this.toolStripButton6.ToolTipText = "图像显示窗口";
-            this.toolStripButton6.Click += new System.EventHandler(this.PlatForm_Click);
-            // 
-            // toolStripButton7
-            // 
-            this.toolStripButton7.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton7.Text = "toolStripButton7";
-            this.toolStripButton7.ToolTipText = "属性窗口";
-            this.toolStripButton7.Click += new System.EventHandler(this.PropertyGrid_Click);
-            // 
-            // toolStripButton8
-            // 
-            this.toolStripButton8.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton8.Text = "toolStripButton7";
-            this.toolStripButton8.ToolTipText = "属性窗口";
-            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
-            // 
-            // toolStripButton9
-            // 
-            this.toolStripButton9.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton9.Text = "toolStripButton7";
-            this.toolStripButton9.ToolTipText = "属性窗口";
-            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click_1);
-            // 
-            // dockPanel1
-            // 
-            this.dockPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dockPanel1.DockBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.dockPanel1.DockBottomPortion = 0.15D;
-            this.dockPanel1.DockLeftPortion = 0.15D;
-            this.dockPanel1.DockRightPortion = 0.15D;
-            this.dockPanel1.DockTopPortion = 0.15D;
-            this.dockPanel1.Location = new System.Drawing.Point(0, 67);
-            this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.Padding = new System.Windows.Forms.Padding(6);
-            this.dockPanel1.ShowAutoHideContentOnHover = false;
-            this.dockPanel1.Size = new System.Drawing.Size(1104, 517);
-            this.dockPanel1.TabIndex = 31;
-            this.dockPanel1.Theme = this.vS2015DarkTheme1;
+            this.statusBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.statusBar.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusBar.Location = new System.Drawing.Point(0, 584);
+            this.statusBar.Name = "statusBar";
+            this.statusBar.Size = new System.Drawing.Size(1104, 26);
+            this.statusBar.SizingGrip = false;
+            this.statusBar.TabIndex = 10;
             // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(1104, 610);
-            this.Controls.Add(this.dockPanel1);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.dockPanel);
+            this.Controls.Add(this.toolBar);
+            this.Controls.Add(this.mainMenu);
+            this.Controls.Add(this.statusBar);
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "305Vision";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.mainMenu.ResumeLayout(false);
+            this.mainMenu.PerformLayout();
+            this.toolBar.ResumeLayout(false);
+            this.toolBar.PerformLayout();
+            this.statusBar.ResumeLayout(false);
+            this.statusBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private WeifenLuo.WinFormsUI.Docking.VS2015LightTheme vS2015LightTheme1;
-        private System.Windows.Forms.ToolStripMenuItem 文件ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 打开ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 关闭ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 编辑ToolStripMenuItem;
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme vS2015DarkTheme1;
-        private System.Windows.Forms.ToolStrip miniToolStrip;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
-        private System.Windows.Forms.ToolStripButton toolStripButton7;
-        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
-        private System.Windows.Forms.ToolStripButton toolStripButton9;
-        private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.MenuStrip mainMenu;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFile;
+        private System.Windows.Forms.ToolStripMenuItem menuItemOpen;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClose;
+        private System.Windows.Forms.ToolStripSeparator menuItem4;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExit;
+        private System.Windows.Forms.ToolStripMenuItem menuItemView;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSolutionExplorer;
+        private System.Windows.Forms.ToolStripMenuItem menuItemPropertyWindow;
+        private System.Windows.Forms.ToolStripMenuItem menuItemToolbox;
+        private System.Windows.Forms.ToolStripMenuItem menuItemOutputWindow;
+        private System.Windows.Forms.ToolStripMenuItem menuItemTaskList;
+        private System.Windows.Forms.ToolStripSeparator menuItem1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemToolBar;
+        private System.Windows.Forms.ToolStripMenuItem menuItemStatusBar;
+        private System.Windows.Forms.ToolStripSeparator menuItem2;
+        private System.Windows.Forms.ToolStripMenuItem menuItemLayoutByCode;
+        private System.Windows.Forms.ToolStripMenuItem menuItemLayoutByXml;
+        private System.Windows.Forms.ToolStripMenuItem menuItemTools;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSchemaVS2015Light;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSchemaVS2015Blue;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSchemaVS2015Dark;
+        private System.Windows.Forms.ToolStripMenuItem menuItemWindow;
+        private System.Windows.Forms.ToolStripMenuItem menuItemNewWindow;
+        private System.Windows.Forms.ToolStripMenuItem menuItemHelp;
+        private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
+        private System.Windows.Forms.ToolStrip toolBar;
+        private System.Windows.Forms.ToolStripButton toolBarButtonNew;
+        private System.Windows.Forms.ToolStripButton toolBarButtonOpen;
+        private System.Windows.Forms.ToolStripSeparator toolBarButtonSeparator1;
+        private System.Windows.Forms.ToolStripButton toolBarButtonSolutionExplorer;
+        private System.Windows.Forms.ToolStripButton toolBarButtonPropertyWindow;
+        private System.Windows.Forms.ToolStripButton toolBarButtonToolbox;
+        private System.Windows.Forms.ToolStripButton toolBarButtonOutputWindow;
+        private System.Windows.Forms.ToolStripSeparator toolBarButtonSeparator2;
+        private System.Windows.Forms.ToolStripButton toolBarButtonLayoutByCode;
+        private System.Windows.Forms.ToolStripButton toolBarButtonLayoutByXml;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel;
+        private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.StatusStrip statusBar;
+        private WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme vS2015BlueTheme1;
     }
 }
 

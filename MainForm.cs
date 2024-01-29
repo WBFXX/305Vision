@@ -10,6 +10,9 @@ using _305Vision.Properties;
 using System.Runtime.InteropServices;
 using ST.Library.UI.NodeEditor;
 using System.Windows.Markup;
+using System.Windows.Controls;
+using System.Linq;
+using System.IO;
 
 namespace _305Vision
 {
@@ -29,17 +32,40 @@ namespace _305Vision
         FormOutput FormOut = FormOutput.Instance;
         FormProcess formProcess = FormProcess.Instance;
         PropertyGrid propertyGrid = PropertyGrid.Instance;
+        //私有变量
+        private bool m_bSaveLayout = true;
+        private DeserializeDockContent m_deserializeDockContent;
+        private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
 
 
         public MainForm()
         {
             InitializeComponent();
-            menuStrip1.Renderer = new BlackRender(); //引用Utils自创继承颜色
-            // 订阅事件以进行绘制
-            //toolStrip1.Renderer = new CustomToolStripRenderer(); 
-            // 订阅事件以进行绘制
-            toolStrip1.Paint += ToolStrip1_Paint;
+
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            vsToolStripExtender1.DefaultRenderer = _toolStripProfessionalRenderer;
+            SetSchema(this.menuItemSchemaVS2015Dark, null);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //menuStrip1.Renderer = new BlackRender(); //引用Utils自创继承颜色
+            //// 订阅事件以进行绘制
+            ////toolStrip1.Renderer = new CustomToolStripRenderer(); 
+            //// 订阅事件以进行绘制
+            //toolStrip1.Paint += ToolStrip1_Paint;
 
             //tabControl1 = new TabControl();
             // 设置选项卡的背景颜色
@@ -53,16 +79,22 @@ namespace _305Vision
             //    true);
             //this.TransparencyKey = System.Drawing.Color.LightGray;
         }
-        //重绘ToolStripl
-        private void ToolStrip1_Paint(object sender, PaintEventArgs e)
+
+        private IDockContent GetContentFromPersistString(string persistString)
         {
-            //去掉toolStriip底边的线
-            if ((sender as ToolStrip).RenderMode == ToolStripRenderMode.System)
-            {
-                Rectangle rect = new Rectangle(0, 0, this.toolStrip1.Width, this.toolStrip1.Height - 2);
-                e.Graphics.SetClip(rect);
-            } 
+            if (persistString == typeof(ToolsBox).ToString())
+                return toolBox;
+            else if (persistString == typeof(FormPlatform).ToString())
+                return platform;
+            else if (persistString == typeof(FormOutput).ToString())
+                return FormOut;
+            else if (persistString == typeof(PropertyGrid).ToString())
+                return propertyGrid;
+            else if (persistString == typeof(FormProcess).ToString())
+                return formProcess;
+            else return null;
         }
+
 
         public static MainForm Instance
         {
@@ -93,19 +125,19 @@ namespace _305Vision
 
 
             // 调整左侧停靠区域的宽度比例
-            dockPanel1.DockLeftPortion = 0.15;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%
+            dockPanel.DockLeftPortion = 0.15;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%
             // 调整左侧停靠区域的宽度比例
-            dockPanel1.DockRightPortion = 0.15;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%
-            platform.Show(dockPanel1);//没第二个参数 默认为主窗体 中间
+            dockPanel.DockRightPortion = 0.15;  // 例如，将宽度设置为整个 DockPanel 宽度的 20%
+            platform.Show(dockPanel);//没第二个参数 默认为主窗体 中间
             //加载流程框架,在platform的左边 占比30%
             formProcess.Show(platform.Pane, DockAlignment.Left, 0.5);
             //加载输出栏,在platform的下方 占比30%
             FormOut.Show(platform.Pane, DockAlignment.Bottom, 0.3);
             //加载侧边栏，并设置侧边栏的宽度
-            toolBox.Show(dockPanel1, DockState.DockLeft);
+            toolBox.Show(dockPanel, DockState.DockLeft);
             toolBox.DockPanel.DockLeftPortion = 0.15;
             //加载属性栏,并设置侧边栏宽度
-            propertyGrid.Show(dockPanel1,DockState.DockRight);
+            propertyGrid.Show(dockPanel,DockState.DockRight);
             propertyGrid.DockPanel.DockLeftPortion = 0.15;
 
             
@@ -223,7 +255,7 @@ namespace _305Vision
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Test_Click(object sender, EventArgs e)
+        private void Start_Click(object sender, EventArgs e)
         {
             STNodeEditor sTNodeEditor = new STNodeEditor();
             sTNodeEditor = formProcess.GetEditor();
@@ -252,7 +284,7 @@ namespace _305Vision
 
         }
 
-        private void toolStripButton9_Click(object sender, EventArgs e)
+        private void test(object sender, EventArgs e)
         {
             TestForm testForm = new TestForm();
             testForm.Show();
@@ -267,7 +299,7 @@ namespace _305Vision
             FormProcess.Instance.GetEditor().LoadCanvas(ofd.FileName);
         }
 
-        private void 关闭ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "*.stn|*.stn";
@@ -275,14 +307,14 @@ namespace _305Vision
             FormProcess.Instance.GetEditor().SaveCanvas(sfd.FileName);
         }
 
-        private void toolStripButton9_Click_1(object sender, EventArgs e)
+        private void test1(object sender, EventArgs e)
         {
             Test2 test2 = new Test2();
             test2.Show();
             
         }
 
-        private void toolStripButton8_Click(object sender, EventArgs e)
+        private void test2(object sender, EventArgs e)
         {
             TestForm testForm = new TestForm();
             string imgePath = "e:/1.jpg";
@@ -290,6 +322,90 @@ namespace _305Vision
             testForm.Image = new Bitmap(bitmap);
             testForm.Show();
         }
+        #region 切换主题下拉菜单
+        private void SetSchema(object sender, System.EventArgs e)
+        {
+            // Persist settings when rebuilding UI
+            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
+
+            dockPanel.SaveAsXml(configFile);
+            CloseAllContents();
+
+            if (sender == this.menuItemSchemaVS2015Blue)
+            {
+                this.dockPanel.Theme = this.vS2015BlueTheme1;
+                this.EnableVSRenderer(VisualStudioToolStripExtender.VsVersion.Vs2015, vS2015BlueTheme1);
+            }
+            else if (sender == this.menuItemSchemaVS2015Light)
+            {
+                this.dockPanel.Theme = this.vS2015LightTheme1;
+                this.EnableVSRenderer(VisualStudioToolStripExtender.VsVersion.Vs2015, vS2015LightTheme1);
+            }
+            else if (sender == this.menuItemSchemaVS2015Dark)
+            {
+                this.dockPanel.Theme = this.vS2015DarkTheme1;
+                this.EnableVSRenderer(VisualStudioToolStripExtender.VsVersion.Vs2015, vS2015DarkTheme1);
+            }
+
+
+            menuItemSchemaVS2015Light.Checked = (sender == menuItemSchemaVS2015Light);
+            menuItemSchemaVS2015Blue.Checked = (sender == menuItemSchemaVS2015Blue);
+            menuItemSchemaVS2015Dark.Checked = (sender == menuItemSchemaVS2015Dark);
+            if (dockPanel.Theme.ColorPalette != null)
+            {
+                statusBar.BackColor = dockPanel.Theme.ColorPalette.MainWindowStatusBarDefault.Background;
+            }
+
+            if (File.Exists(configFile))
+                dockPanel.LoadFromXml(configFile, m_deserializeDockContent);
+        }
+
+        private void EnableVSRenderer(VisualStudioToolStripExtender.VsVersion version, ThemeBase theme)
+        {
+            vsToolStripExtender1.SetStyle(mainMenu, version, theme);
+            vsToolStripExtender1.SetStyle(toolBar, version, theme);
+            vsToolStripExtender1.SetStyle(statusBar, version, theme);
+        }
+
+
+        private void CloseAllDocuments()
+        {
+            if (dockPanel.DocumentStyle == DocumentStyle.SystemMdi)
+            {
+                foreach (Form form in MdiChildren)
+                    form.Close();
+            }
+            else
+            {
+                foreach (IDockContent document in dockPanel.DocumentsToArray())
+                {
+                    // IMPORANT: dispose all panes.
+                    document.DockHandler.DockPanel = null;
+                    document.DockHandler.Close();
+                }
+            }
+        }
+        private void CloseAllContents()
+        {
+            // we don't want to create another instance of tool window, set DockPanel to null
+            toolBox.DockPanel = null;
+            platform.DockPanel = null;
+            formProcess.DockPanel = null;
+            FormOut.DockPanel = null;
+            propertyGrid.DockPanel = null;
+
+            // Close all other document windows
+            CloseAllDocuments();
+
+            // IMPORTANT: dispose all float windows.
+            foreach (var window in dockPanel.FloatWindows.ToList())
+                window.Dispose();
+
+            System.Diagnostics.Debug.Assert(dockPanel.Panes.Count == 0);
+            System.Diagnostics.Debug.Assert(dockPanel.Contents.Count == 0);
+            System.Diagnostics.Debug.Assert(dockPanel.FloatWindows.Count == 0);
+        }
+        #endregion
     }
 
 }
