@@ -91,7 +91,7 @@
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.MdiWindowListItem = this.menuItemWindow;
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1104, 30);
+            this.mainMenu.Size = new System.Drawing.Size(1104, 28);
             this.mainMenu.TabIndex = 34;
             // 
             // menuItemFile
@@ -102,13 +102,13 @@
             this.menuItem4,
             this.menuItemExit});
             this.menuItemFile.Name = "menuItemFile";
-            this.menuItemFile.Size = new System.Drawing.Size(48, 26);
-            this.menuItemFile.Text = "&File";
+            this.menuItemFile.Size = new System.Drawing.Size(53, 26);
+            this.menuItemFile.Text = "&文件";
             // 
             // menuItemOpen
             // 
             this.menuItemOpen.Name = "menuItemOpen";
-            this.menuItemOpen.Size = new System.Drawing.Size(286, 26);
+            this.menuItemOpen.Size = new System.Drawing.Size(224, 26);
             this.menuItemOpen.Text = "&Open...";
             this.menuItemOpen.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
             // 
@@ -122,12 +122,12 @@
             // menuItem4
             // 
             this.menuItem4.Name = "menuItem4";
-            this.menuItem4.Size = new System.Drawing.Size(283, 6);
+            this.menuItem4.Size = new System.Drawing.Size(221, 6);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(286, 26);
+            this.menuItemExit.Size = new System.Drawing.Size(224, 26);
             this.menuItemExit.Text = "&Exit";
             // 
             // menuItemView
@@ -146,8 +146,8 @@
             this.menuItemLayoutByXml});
             this.menuItemView.MergeIndex = 1;
             this.menuItemView.Name = "menuItemView";
-            this.menuItemView.Size = new System.Drawing.Size(58, 24);
-            this.menuItemView.Text = "&View";
+            this.menuItemView.Size = new System.Drawing.Size(53, 26);
+            this.menuItemView.Text = "&视图";
             // 
             // menuItemSolutionExplorer
             // 
@@ -258,13 +258,13 @@
             this.menuItemNewWindow});
             this.menuItemWindow.MergeIndex = 2;
             this.menuItemWindow.Name = "menuItemWindow";
-            this.menuItemWindow.Size = new System.Drawing.Size(83, 24);
-            this.menuItemWindow.Text = "&Window";
+            this.menuItemWindow.Size = new System.Drawing.Size(53, 26);
+            this.menuItemWindow.Text = "&窗口";
             // 
             // menuItemNewWindow
             // 
             this.menuItemNewWindow.Name = "menuItemNewWindow";
-            this.menuItemNewWindow.Size = new System.Drawing.Size(189, 26);
+            this.menuItemNewWindow.Size = new System.Drawing.Size(224, 26);
             this.menuItemNewWindow.Text = "&New Window";
             // 
             // menuItemHelp
@@ -273,14 +273,15 @@
             this.menuItemAbout});
             this.menuItemHelp.MergeIndex = 3;
             this.menuItemHelp.Name = "menuItemHelp";
-            this.menuItemHelp.Size = new System.Drawing.Size(58, 24);
-            this.menuItemHelp.Text = "&Help";
+            this.menuItemHelp.Size = new System.Drawing.Size(53, 24);
+            this.menuItemHelp.Text = "&帮助";
             // 
             // menuItemAbout
             // 
             this.menuItemAbout.Name = "menuItemAbout";
             this.menuItemAbout.Size = new System.Drawing.Size(245, 26);
             this.menuItemAbout.Text = "&About DockSample...";
+            this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
             // 
             // toolBar
             // 
@@ -296,29 +297,29 @@
             this.toolBarButtonSeparator2,
             this.toolBarButtonLayoutByCode,
             this.toolBarButtonLayoutByXml});
-            this.toolBar.Location = new System.Drawing.Point(0, 30);
+            this.toolBar.Location = new System.Drawing.Point(0, 28);
             this.toolBar.Name = "toolBar";
-            this.toolBar.Size = new System.Drawing.Size(1104, 31);
+            this.toolBar.Size = new System.Drawing.Size(1104, 27);
             this.toolBar.TabIndex = 35;
             // 
             // toolBarButtonNew
             // 
             this.toolBarButtonNew.Image = global::_305Vision.Properties.Resources.play_button_outline_green_icon;
             this.toolBarButtonNew.Name = "toolBarButtonNew";
-            this.toolBarButtonNew.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonNew.Size = new System.Drawing.Size(29, 28);
             this.toolBarButtonNew.ToolTipText = "运行";
             this.toolBarButtonNew.Click += new System.EventHandler(this.Start_Click);
             // 
             // toolBarButtonSeparator1
             // 
             this.toolBarButtonSeparator1.Name = "toolBarButtonSeparator1";
-            this.toolBarButtonSeparator1.Size = new System.Drawing.Size(6, 27);
+            this.toolBarButtonSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // toolBarButtonSolutionExplorer
             // 
             this.toolBarButtonSolutionExplorer.Image = ((System.Drawing.Image)(resources.GetObject("toolBarButtonSolutionExplorer.Image")));
             this.toolBarButtonSolutionExplorer.Name = "toolBarButtonSolutionExplorer";
-            this.toolBarButtonSolutionExplorer.Size = new System.Drawing.Size(29, 28);
+            this.toolBarButtonSolutionExplorer.Size = new System.Drawing.Size(29, 24);
             this.toolBarButtonSolutionExplorer.ToolTipText = "工具箱";
             this.toolBarButtonSolutionExplorer.Click += new System.EventHandler(this.ToolForm_Click);
             // 
@@ -326,7 +327,7 @@
             // 
             this.toolBarButtonPropertyWindow.Image = global::_305Vision.Properties.Resources.timber_color_icon;
             this.toolBarButtonPropertyWindow.Name = "toolBarButtonPropertyWindow";
-            this.toolBarButtonPropertyWindow.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonPropertyWindow.Size = new System.Drawing.Size(29, 28);
             this.toolBarButtonPropertyWindow.ToolTipText = "属性栏";
             this.toolBarButtonPropertyWindow.Click += new System.EventHandler(this.PropertyGrid_Click);
             // 
@@ -334,7 +335,7 @@
             // 
             this.toolBarButtonToolbox.Image = global::_305Vision.Properties.Resources.upload_round_color_red_icon;
             this.toolBarButtonToolbox.Name = "toolBarButtonToolbox";
-            this.toolBarButtonToolbox.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonToolbox.Size = new System.Drawing.Size(29, 28);
             this.toolBarButtonToolbox.ToolTipText = "输出栏";
             this.toolBarButtonToolbox.Click += new System.EventHandler(this.OutForm_Click);
             // 
@@ -342,7 +343,7 @@
             // 
             this.toolBarButtonOutputWindow.Image = global::_305Vision.Properties.Resources.creative_idea_icon;
             this.toolBarButtonOutputWindow.Name = "toolBarButtonOutputWindow";
-            this.toolBarButtonOutputWindow.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonOutputWindow.Size = new System.Drawing.Size(29, 28);
             this.toolBarButtonOutputWindow.ToolTipText = "流程画布";
             this.toolBarButtonOutputWindow.Click += new System.EventHandler(this.ProcessForm_Click);
             // 
@@ -350,20 +351,20 @@
             // 
             this.toolBarButtonOpen.Image = global::_305Vision.Properties.Resources.study_icon;
             this.toolBarButtonOpen.Name = "toolBarButtonOpen";
-            this.toolBarButtonOpen.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonOpen.Size = new System.Drawing.Size(29, 28);
             this.toolBarButtonOpen.ToolTipText = "图窗显示";
             this.toolBarButtonOpen.Click += new System.EventHandler(this.NewCountPlatform_Click);
             // 
             // toolBarButtonSeparator2
             // 
             this.toolBarButtonSeparator2.Name = "toolBarButtonSeparator2";
-            this.toolBarButtonSeparator2.Size = new System.Drawing.Size(6, 27);
+            this.toolBarButtonSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // toolBarButtonLayoutByCode
             // 
             this.toolBarButtonLayoutByCode.Image = global::_305Vision.Properties.Resources.painting_bucket_logo_icon;
             this.toolBarButtonLayoutByCode.Name = "toolBarButtonLayoutByCode";
-            this.toolBarButtonLayoutByCode.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonLayoutByCode.Size = new System.Drawing.Size(29, 28);
             this.toolBarButtonLayoutByCode.ToolTipText = "测试1";
             this.toolBarButtonLayoutByCode.Click += new System.EventHandler(this.test1);
             // 
@@ -371,7 +372,7 @@
             // 
             this.toolBarButtonLayoutByXml.Image = global::_305Vision.Properties.Resources.painting_bucket_logo_icon;
             this.toolBarButtonLayoutByXml.Name = "toolBarButtonLayoutByXml";
-            this.toolBarButtonLayoutByXml.Size = new System.Drawing.Size(29, 24);
+            this.toolBarButtonLayoutByXml.Size = new System.Drawing.Size(29, 28);
             this.toolBarButtonLayoutByXml.ToolTipText = "测试2";
             this.toolBarButtonLayoutByXml.Click += new System.EventHandler(this.test2);
             // 
@@ -383,11 +384,11 @@
             this.dockPanel.DockLeftPortion = 0.15D;
             this.dockPanel.DockRightPortion = 0.15D;
             this.dockPanel.DockTopPortion = 0.15D;
-            this.dockPanel.Location = new System.Drawing.Point(0, 61);
+            this.dockPanel.Location = new System.Drawing.Point(0, 55);
             this.dockPanel.Name = "dockPanel";
             this.dockPanel.Padding = new System.Windows.Forms.Padding(6);
             this.dockPanel.ShowAutoHideContentOnHover = false;
-            this.dockPanel.Size = new System.Drawing.Size(1104, 523);
+            this.dockPanel.Size = new System.Drawing.Size(1104, 529);
             this.dockPanel.TabIndex = 38;
             this.dockPanel.Theme = this.vS2015DarkTheme1;
             // 

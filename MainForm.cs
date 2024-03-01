@@ -406,6 +406,12 @@ namespace _305Vision
             System.Diagnostics.Debug.Assert(dockPanel.FloatWindows.Count == 0);
         }
         #endregion
+
+        private void menuItemAbout_Click(object sender, EventArgs e)
+        {
+            AboutDialog aboutDialog = new AboutDialog();
+            aboutDialog.ShowDialog(this);
+        }
     }
 
 }

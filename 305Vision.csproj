@@ -132,6 +132,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutDialog.Designer.cs">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="BLL\ImageRoiBLL.cs" />
     <Compile Include="BLL\ProcessImageBLL.cs" />
     <Compile Include="BLL\STNodeBLL.cs" />
@@ -283,6 +289,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utils\ToolStripRendererEx.cs" />
+    <EmbeddedResource Include="AboutDialog.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormOutput.resx">
       <DependentUpon>FormOutput.cs</DependentUpon>
     </EmbeddedResource>
