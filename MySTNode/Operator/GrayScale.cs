@@ -85,7 +85,7 @@ namespace _305Vision.MySTNode.Operator
                         ColorPalette palette = ImageBitmap.Palette;
                         for (int i = 0; i < 256; i++)
                         {
-                            palette.Entries[i] = Color.FromArgb(i, i, i);
+                            palette.Entries[i] = Color.FromArgb(255,i, i, i);
                         }
 
                         ImageBitmap.Palette = palette;
