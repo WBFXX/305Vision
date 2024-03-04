@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using _305Vision.MySTNode.控件库;
 using _305Vision.图片操作测试;
+using System.Collections.Generic;
 
 namespace _305Vision.MySTNode.Operator
 {
@@ -28,6 +29,8 @@ namespace _305Vision.MySTNode.Operator
         public double Angle { get; set; }
         [STNodeProperty("找边线数量", "找边线数量")]
         public int EdgeNum { get; set; }
+        [STNodeProperty("点集", "点集")]
+        public List<Point> listPoints { get; set; }
         #endregion
 
         protected override void OnCreate()
@@ -92,8 +95,10 @@ namespace _305Vision.MySTNode.Operator
                 BasicImageInfo info = BasicImageInfo.NewMethod(imageData);
                 unsafe
                 {
+                    IntPtr Points  = IntPtr.Zero;
+                    int sizee = 0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(info.ImagePtr, (int)info.Width, (int)info.Height,
-                        (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum);
+                        (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, ref Points, ref sizee);
                     int size = imageData.Width * imageData.Height * 3;
                     byte[] imageByte = new byte[size];
                     Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
@@ -106,6 +111,7 @@ namespace _305Vision.MySTNode.Operator
             m_op_img_out.TransferData((Image)processedImage);
             m_img_draw = (Image)processedImage;
             this.Invalidate();
+            
         }
 
         protected override void OnDrawBody(DrawingTools dt)

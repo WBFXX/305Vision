@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -139,7 +140,7 @@ namespace _305Vision.SDK
         [DllImport("demo.dll", EntryPoint = "roiCropping", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe byte* roiCropping(IntPtr intPtr, int width, int height,int stride, double startX,double startY,double endX,double endY,int r,int g,int b,double angle);
         /// <summary>
-        /// 矩形找边
+        /// 举行找边
         /// </summary>
         /// <param name="intPtr"></param>
         /// <param name="width"></param>
@@ -149,11 +150,12 @@ namespace _305Vision.SDK
         /// <param name="startY"></param>
         /// <param name="endX"></param>
         /// <param name="endY"></param>
-        /// <param name="angle">角度</param>
-        /// <param name="edgeNum">边的数量</param>
+        /// <param name="angle"></param>
+        /// <param name="edgeNum"></param>
+        /// <param name="listPoints"></param>
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "findEdgeRectangle", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe byte* findEdgeRectangle(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,double angle,int edgeNum);
+        public static extern unsafe byte* findEdgeRectangle(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,double angle,int edgeNum, ref IntPtr listPoints, ref int size);
 
         /// <summary>
         /// 圆形找边

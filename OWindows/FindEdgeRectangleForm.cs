@@ -3,6 +3,7 @@ using _305Vision.Model;
 using _305Vision.SDK;
 using NLog;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -22,6 +23,7 @@ namespace _305Vision.OWindows
         private double angle;
         private int edgeNum;
         BasicImageInfo basicImageInfo;
+        
 
         private bool isMove = false;//记录目标是否在画框
         #endregion
@@ -127,14 +129,21 @@ namespace _305Vision.OWindows
 
                 unsafe
                 {
+                    IntPtr Points = IntPtr.Zero;
+                    int sizee = 0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(basicImageInfo.ImagePtr, (int)basicImageInfo.Width,
-                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum);
-
+                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, ref Points, ref sizee);
                     int size = (int)(basicImageInfo.Width * basicImageInfo.Height * 3);
                     byte[] imageByte = new byte[size];
+                    //读取点集
+                    byte* arrayPtr = (byte*)Points;
+                    int[] array = new int[sizee];
+                    Marshal.Copy((IntPtr)arrayPtr, array, 0, sizee);//复制点集数组
                     Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
                     OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
-
+                    logger.Info("Sizee是：" + sizee);
+                    logger.Info("array是：" + array);
+                    logger.Info("Points是：" + Points);
                     return imageByte;
                 }
             }
