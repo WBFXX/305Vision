@@ -22,6 +22,7 @@ namespace _305Vision.OWindows
         private Point end;
         private double angle;
         private int edgeNum;
+        private List<Point> listPoints = new List<Point>();
         BasicImageInfo basicImageInfo;
         
 
@@ -135,15 +136,21 @@ namespace _305Vision.OWindows
                         (int)basicImageInfo.Height, (int)basicImageInfo.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, ref Points, ref sizee);
                     int size = (int)(basicImageInfo.Width * basicImageInfo.Height * 3);
                     byte[] imageByte = new byte[size];
-                    //读取点集
-                    byte* arrayPtr = (byte*)Points;
-                    int[] array = new int[sizee];
+                    #region 读取点集
+                    byte* arrayPtr = (byte*)Points;//读取点集
+                    int[] array = new int[sizee];//读取点集
                     Marshal.Copy((IntPtr)arrayPtr, array, 0, sizee);//复制点集数组
+                    listPoints = UtilsBLL.ConvertArrayToPointList(array);
+                    // 打印
+                    int listI = 1;
+                    foreach (Point point in listPoints)
+                    {
+                       logger.Info( "点 "+ listI + $"坐标：({point.X}, {point.Y})\n");
+                       listI++;
+                    }
+                    #endregion
                     Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
                     OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
-                    logger.Info("Sizee是：" + sizee);
-                    logger.Info("array是：" + array);
-                    logger.Info("Points是：" + Points);
                     return imageByte;
                 }
             }

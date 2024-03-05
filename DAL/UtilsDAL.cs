@@ -161,5 +161,31 @@ namespace _305Vision.DAL
         {
             return Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
         }
+
+        /// <summary>
+        /// 解析数组到List
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static List<Point> ConvertArrayToPointList(int[] array)
+        {
+            List<Point> pointList = new List<Point>();
+
+            // 确保数组长度为偶数，因为每个点需要两个值
+            if (array.Length % 2 != 0)
+            {
+                throw new ArgumentException("数组长度不是偶数！");
+            }
+
+            // 将数组拆解为点，并添加到List<Point>中
+            for (int i = 0; i < array.Length; i += 2)
+            {
+                Point point = new Point(array[i], array[i + 1]);
+                pointList.Add(point);
+            }
+
+            return pointList;
+        }
     }
 }

@@ -122,5 +122,14 @@ namespace _305Vision.BLL
         {
             return UtilsDAL.CalculateDistance(x1,y1,x2,y2);
         }
+        /// <summary>
+        /// 解析数组到List
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
+        public static List<Point> ConvertArrayToPointList(int[] array)
+        {
+            return UtilsDAL.ConvertArrayToPointList(array); 
+        }
     }
 }
