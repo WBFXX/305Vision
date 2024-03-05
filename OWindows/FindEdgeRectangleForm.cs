@@ -110,8 +110,6 @@ namespace _305Vision.OWindows
                     double x = ((double)((clientMouse.X - lSize.Width) * wrate));
                     double y = ((double)((clientMouse.Y - lSize.Height) * hrate));
                     End = new Point((int)x, (int)y);
-
-
                     Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage, imageData => ProcessImageData(imageData));
                     pictureBox.Image = processedImage;
                 }
@@ -122,6 +120,17 @@ namespace _305Vision.OWindows
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             isMove = false;
+            //打印数据
+            logger.Info("截取宽度：" + Math.Abs(End.X - Start.X));
+            logger.Info("截取高度" + Math.Abs(End.Y - Start.Y));
+            logger.Info("起点坐标：" + Start + ";" + "终点坐标：" + End);
+            // 打印点集
+            int listI = 1;
+            foreach (Point point in listPoints)
+            {
+                logger.Info("点 " + listI + $"坐标：({point.X}, {point.Y})\n");
+                listI++;
+            }
         }
 
         private byte[] ProcessImageData(BitmapData imageData)
@@ -129,10 +138,6 @@ namespace _305Vision.OWindows
             try
             {
                 basicImageInfo = BasicImageInfo.NewMethod(imageData);
-                logger.Info("截取宽度：" + Math.Abs(End.X - Start.X));
-                logger.Info("截取高度" + Math.Abs(End.Y - Start.Y));
-                logger.Info("起点坐标：" + Start + ";" + "终点坐标：" + End);
-
                 unsafe
                 {
                     IntPtr Points = IntPtr.Zero;
@@ -147,13 +152,7 @@ namespace _305Vision.OWindows
                     Marshal.Copy((IntPtr)arrayPtr, array, 0, sizee);//复制点集数组
                     this.Array = array;
                     listPoints = UtilsBLL.ConvertArrayToPointList(array);
-                    // 打印
-                    int listI = 1;
-                    foreach (Point point in listPoints)
-                    {
-                       logger.Info( "点 "+ listI + $"坐标：({point.X}, {point.Y})\n");
-                       listI++;
-                    }
+                    
                     #endregion
                     Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
                     OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);

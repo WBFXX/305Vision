@@ -173,6 +173,18 @@ namespace _305Vision.SDK
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "findEdgeCircular", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe byte* findEdgeCircular(IntPtr intPtr, int width, int height, int stride, int pointX, int pointY, int radiusSmall, int radiusBig, int edgeNum, int gradientThreshold);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="intPtr">数组</param>
+        /// <param name="num">数组长度</param>
+        /// <param name="discard">抛弃点数量</param>
+        /// <param name="jieradis">结果半径</param>
+        /// <param name="centerX">结果圆心X</param>
+        /// <param name="centerY">结果圆心Y</param>
+        /// <returns></returns>
+        [DllImport("demo.dll", EntryPoint = "circleFitting", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern unsafe void circleFitting(IntPtr intPtr, int num, int discard, ref double jieradis,ref double centerX,ref double centerY);
         
 
 

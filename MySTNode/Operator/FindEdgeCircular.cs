@@ -16,8 +16,8 @@ namespace _305Vision.MySTNode.Operator
     [STNode("/算子", "在图像上画点")]
     public class FindEdgeCircular : ImageBaseNode
     {
-        private STNodeOption inOption;
         private OWindows.FindEdgeCircularForm findEdgeCircular = new OWindows.FindEdgeCircularForm();
+        private STNodeOption outDataOption;
 
         #region 找边参数
         [STNodeProperty("圆心X坐标", "开始坐标")]
@@ -32,15 +32,15 @@ namespace _305Vision.MySTNode.Operator
         public int EdgeNum { get; set; }
         [STNodeProperty("梯度变化阈值", "找边线数量")]
         public int gradientThreshold { get; set; }
-        
+        [STNodeProperty("点集", "点集")]
+        public int[] Array { get; set; }
         #endregion
 
         protected override void OnCreate()
         {
             base.OnCreate();
-
+            outDataOption = this.OutputOptions.Add("输出点集", typeof(int[]), false);
             this.Title = "圆形找边";
-            inOption = this.InputOptions.Add("输入图像", typeof(Image), true);
 
             this.AutoSize = false;
             this.Height += 30;
@@ -83,20 +83,22 @@ namespace _305Vision.MySTNode.Operator
             if (e.Status != ConnectionStatus.Connected || e.TargetOption.Data == null)
             {
                 m_op_img_out.TransferData(null);
+                outDataOption.TransferData(null);
                 m_img_draw = null;
-            }
-            else if(m_img_draw == null)
-            {
-                Bitmap img = (Bitmap)e.TargetOption.Data;
-                findEdgeCircular.ResouseImage = (Image)img;
-                m_op_img_out.TransferData((Image)img);
-                m_img_draw = (Image)img;
-                this.Invalidate();
             }
             else
             {
                 Bitmap img = (Bitmap)e.TargetOption.Data;
-                ProcessImage(img);
+                if (isSecond)
+                {
+                    ProcessImage(img);
+                }
+                else
+                {
+                    findEdgeCircular.ResouseImage = (Image)img;
+                    m_op_img_out.TransferData((Image)img);
+                    isSecond = true;
+                }
             }
         }
 

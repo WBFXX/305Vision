@@ -10,17 +10,17 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using _305Vision.MySTNode.控件库;
 using _305Vision.图片操作测试;
-using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 
 namespace _305Vision.MySTNode.Operator
 {
     [STNode("/算子", "在图像上画点")]
     public class FindEdgeRectangle : ImageBaseNode
     {
-        private STNodeOption inOption;
+        
         private STNodeOption outDataOption;
         private OWindows.FindEdgeRectangleForm findEdgeRectangleForm = new OWindows.FindEdgeRectangleForm();
-        
+
         #region 找边参数
         [STNodeProperty("开始坐标", "开始坐标")]
         public Point Start { get; set; }
@@ -31,6 +31,7 @@ namespace _305Vision.MySTNode.Operator
         [STNodeProperty("找边线数量", "找边线数量")]
         public int EdgeNum { get; set; }
         //[STNodeProperty("点集", "点集")]
+        [STNodeProperty("点集", "点集")]
         public int[] Array { get; set; }
         #endregion
 
@@ -39,26 +40,34 @@ namespace _305Vision.MySTNode.Operator
             base.OnCreate();
             outDataOption = this.OutputOptions.Add("输出点集", typeof(int[]),false);
             this.Title = "矩形找边";
-            inOption = this.InputOptions.Add("输入图像", typeof(Image), true);
-
+            
             this.AutoSize = false;
             this.Height += 50;
-
             var selectButton = new STNodeButton
             {
                 Text = "选取",
                 Location = new Point(42, 130)
             };
-
             EdgeNum = 20;
             selectButton.MouseClick += SelectButton_Click;
             this.Controls.Add(selectButton);
-
             inOption.DataTransfer += OpImgInDataTransfer;
+            this.Invalidate();
+
         }
 
+        
+
+
+        /// <summary>
+        /// "选取"按钮点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectButton_Click(object sender, EventArgs e)
         {
+            if(this.inOption.ConnectionCount==0)return;
+
             findEdgeRectangleForm.InitializeParameters(EdgeNum, Start, End, Array);
 
             DialogResult result = findEdgeRectangleForm.ShowDialog();
@@ -88,7 +97,16 @@ namespace _305Vision.MySTNode.Operator
             else
             {
                 Bitmap img = (Bitmap)e.TargetOption.Data;
-                ProcessImage(img);
+                if (isSecond)
+                {
+                    ProcessImage(img);
+                }
+                else
+                {
+                    findEdgeRectangleForm.ResouseImage = (Image)img;
+                    m_op_img_out.TransferData((Image)img);
+                    isSecond = true;
+                }
             }
         }
 
@@ -123,5 +141,8 @@ namespace _305Vision.MySTNode.Operator
             base.OnDrawBody(dt);
             STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top+20);
         }
+        
+
+
     }
 }

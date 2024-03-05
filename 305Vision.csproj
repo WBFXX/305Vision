@@ -172,6 +172,7 @@
     <Compile Include="MySTNode\Operator\FindEdgeCircular.cs" />
     <Compile Include="MySTNode\Operator\GrayScale.cs" />
     <Compile Include="MySTNode\Operator\FindEdgeRectangle.cs" />
+    <Compile Include="MySTNode\功能节点\CircleFitting.cs" />
     <Compile Include="MySTNode\功能节点\RecROI.cs" />
     <Compile Include="MySTNode\功能节点\DotROI.cs" />
     <Compile Include="MySTNode\控件库\ComBoxControl.cs" />
