@@ -1,6 +1,7 @@
 ﻿using _305Vision.BLL;
 using _305Vision.Model;
 using _305Vision.SDK;
+using Newtonsoft.Json.Linq;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace _305Vision.OWindows
         private double angle;
         private int edgeNum;
         private List<Point> listPoints = new List<Point>();
+        private int[] array;
         BasicImageInfo basicImageInfo;
         
 
@@ -35,17 +37,20 @@ namespace _305Vision.OWindows
         public Point Start { get => start; set => start = value; }
         public Point End { get => end; set => end = value; }
         public double Angle { get => angle; set => angle = value; }
+        public List<Point> ListPoints { get => listPoints; set => listPoints = value; }
+        public int[] Array { get => array; set => array = value; }
 
         public FindEdgeRectangleForm()
         {
             InitializeComponent();
         }
 
-        public void InitializeParameters(int edgeNum, Point start, Point end)
+        public void InitializeParameters(int edgeNum, Point start, Point end, int[] array)
         {
             EdgeNum = edgeNum;
             Start = start;
             End = end;
+            Array = array;
         }
 
         private void RetangelROI_Load(object sender, EventArgs e)
@@ -138,8 +143,9 @@ namespace _305Vision.OWindows
                     byte[] imageByte = new byte[size];
                     #region 读取点集
                     byte* arrayPtr = (byte*)Points;//读取点集
-                    int[] array = new int[sizee];//读取点集
+                    array = new int[sizee];//读取点集
                     Marshal.Copy((IntPtr)arrayPtr, array, 0, sizee);//复制点集数组
+                    this.Array = array;
                     listPoints = UtilsBLL.ConvertArrayToPointList(array);
                     // 打印
                     int listI = 1;

@@ -18,8 +18,9 @@ namespace _305Vision.MySTNode.Operator
     public class FindEdgeRectangle : ImageBaseNode
     {
         private STNodeOption inOption;
+        private STNodeOption outDataOption;
         private OWindows.FindEdgeRectangleForm findEdgeRectangleForm = new OWindows.FindEdgeRectangleForm();
-
+        
         #region 找边参数
         [STNodeProperty("开始坐标", "开始坐标")]
         public Point Start { get; set; }
@@ -29,24 +30,24 @@ namespace _305Vision.MySTNode.Operator
         public double Angle { get; set; }
         [STNodeProperty("找边线数量", "找边线数量")]
         public int EdgeNum { get; set; }
-        [STNodeProperty("点集", "点集")]
-        public List<Point> listPoints { get; set; }
+        //[STNodeProperty("点集", "点集")]
+        public int[] Array { get; set; }
         #endregion
 
         protected override void OnCreate()
         {
             base.OnCreate();
-
-            this.Title = "找边算法";
+            outDataOption = this.OutputOptions.Add("输出点集", typeof(int[]),false);
+            this.Title = "矩形找边";
             inOption = this.InputOptions.Add("输入图像", typeof(Image), true);
 
             this.AutoSize = false;
-            this.Height += 30;
+            this.Height += 50;
 
             var selectButton = new STNodeButton
             {
                 Text = "选取",
-                Location = new Point(42, 110)
+                Location = new Point(42, 130)
             };
 
             EdgeNum = 20;
@@ -58,7 +59,7 @@ namespace _305Vision.MySTNode.Operator
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
-            findEdgeRectangleForm.InitializeParameters(EdgeNum, Start, End);
+            findEdgeRectangleForm.InitializeParameters(EdgeNum, Start, End, Array);
 
             DialogResult result = findEdgeRectangleForm.ShowDialog();
 
@@ -68,9 +69,11 @@ namespace _305Vision.MySTNode.Operator
             Start = findEdgeRectangleForm.Start;
             End = findEdgeRectangleForm.End;
             Angle = findEdgeRectangleForm.Angle;
+            Array = findEdgeRectangleForm.Array;
 
             m_img_draw = findEdgeRectangleForm.OverImage;
             m_op_img_out.TransferData(findEdgeRectangleForm.OverImage);
+            outDataOption.TransferData(Array);
             this.Invalidate();
         }
 
@@ -79,6 +82,7 @@ namespace _305Vision.MySTNode.Operator
             if (e.Status != ConnectionStatus.Connected || e.TargetOption.Data == null)
             {
                 m_op_img_out.TransferData(null);
+                outDataOption.TransferData(null);
                 m_img_draw = null;
             }
             else
@@ -117,7 +121,7 @@ namespace _305Vision.MySTNode.Operator
         protected override void OnDrawBody(DrawingTools dt)
         {
             base.OnDrawBody(dt);
-            STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top);
+            STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top+20);
         }
     }
 }

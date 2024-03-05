@@ -29,7 +29,7 @@ namespace _305Vision.图片操作测试
             protected override void OnCreate()
             {
                 base.OnCreate();
-                m_op_img_out = this.OutputOptions.Add("输出", typeof(Image), false);
+                m_op_img_out = this.OutputOptions.Add("输出图像", typeof(Image), false);
                 this.AutoSize = false;          //此节点需要定制UI 所以无需AutoSize
                                                 //this.Size = new Size(320,240);
                 this.Width = 160;               //手动设置节点大小
@@ -42,6 +42,7 @@ namespace _305Vision.图片操作测试
                 base.OnOwnerChanged();
                 if (this.Owner == null) return;
                 this.Owner.SetTypeColor(typeof(Image), Color.DarkCyan);
+                this.Owner.SetTypeColor(typeof(int[]), Color.Aquamarine);
             }
         }
     }
