@@ -19,7 +19,6 @@ namespace _305Vision.MySTNode.Operator
     [STNode("/算子/", "二值化")]
     public class Binaryzation : ImageBaseNode
     {
-        private STNodeOption in_option;
         //private STNodeOption out_option;7
 
 
@@ -86,26 +85,32 @@ namespace _305Vision.MySTNode.Operator
             base.OnCreate();
             this.Title = "二值化";
 
-            in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
 
             //当输入节点有数据输入时候
-            in_option.DataTransfer += new STNodeOptionEventHandler(op_img_in_DataTransfer);
+            inOption.DataTransfer += new STNodeOptionEventHandler(op_img_in_DataTransfer);
             //this.DoubleValueChanged += Binaryzation_DoubleValueChanged;
         }
 
+        /// <summary>
+        /// 值改变事件实现
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void Binaryzation_DoubleValueChanged(object sender, EventArgs e)
         {
             //判断改变值的大小是否在允许范围内
             if (DoubleValue > 255 || DoubleValue < 0 || Max>255||Max<0 || Min>255 || Min < 0)
             {
                 logger.Error("参数输入错误,请规范输入(0-255)。");
-
                 return;
             }
 
             //实例化自定义工具MyOption类
-           if(STNodeOptionBLL.ReconnectOutputNodes(in_option))
-            logger.Info(this.Title + "算子参数改变,已重新绘制图像");
+            if (STNodeOptionBLL.TransferDataFromConnectedOutputNodes(inOption))
+            {
+                logger.Info(this.Title + "算子参数改变,已重新绘制图像");
+
+            }
         }
 
 
@@ -122,11 +127,16 @@ namespace _305Vision.MySTNode.Operator
             }
             else
             {
+                Bitmap img = (Bitmap)e.TargetOption.Data;
+                if (isSecond)
+                {
 
+                
                 // 调用方法
                 Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)e.TargetOption.Data, 
                     imageData =>
                 {
+                    
 
                     // 具体的处理逻辑
                     unsafe
@@ -142,10 +152,17 @@ namespace _305Vision.MySTNode.Operator
                         return imageByte;
                     }
                 });
+                
                 this.logger.Info("图像" +  this.Title + "处理完成");
                 m_op_img_out.TransferData((Image)processedImage);//out选项 输出
                 m_img_draw = (Image)processedImage;
                 this.Invalidate();
+                }
+                else
+                {
+                    m_op_img_out.TransferData((Image)img);
+                    isSecond = true;
+                }
             }
         }
         protected override void OnDrawBody(DrawingTools dt)

@@ -27,17 +27,15 @@ namespace _305Vision.MySTNode.Operator
     [STNode("/算子/", "对图像进行灰度处理")]
     public class GrayScale : ImageBaseNode
     {
-        private STNodeOption in_option;
         //private STNodeOption out_option;
         AlgorithmFlow algorithmFlow = new AlgorithmFlow();
         protected override void OnCreate()
         {
             base.OnCreate();
             this.Title = "灰度化";
-            in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
 
             //当输入节点有数据输入时候
-            in_option.DataTransfer += new STNodeOptionEventHandler(Op_img_in_DataTransfer);
+            inOption.DataTransfer += new STNodeOptionEventHandler(Op_img_in_DataTransfer);
         }
 
 
@@ -56,77 +54,88 @@ namespace _305Vision.MySTNode.Operator
             {
                 //否则将图像转bitmap形式
                 Bitmap bmp = (Bitmap)e.TargetOption.Data;
-                //获取图像
-                BitmapData imgData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite,
-                PixelFormat.Format24bppRgb);
-                int width = imgData.Width;
-                int height = imgData.Height;
-                int stride = imgData.Stride;
-                try
+                if (isSecond)
                 {
-                    unsafe
+                    //获取图像
+                    BitmapData imgData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite,
+                    PixelFormat.Format24bppRgb);
+                    int width = imgData.Width;
+                    int height = imgData.Height;
+                    int stride = imgData.Stride;
+                    try
                     {
-                        //System.Windows.Forms.MessageBox.Show("a");
-                        byte* imageDataPtr = OpenCVSDK.grayScale(imgData.Scan0, width, height);
-
-
-                        bmp.UnlockBits(imgData);
-                        int size = width * height;
-                        byte[] data = new byte[size];//创建同大小的数组
-
-                        // 接收 C++ 的字节数据流后释放分配的内存空间
-                        Marshal.Copy((IntPtr)imageDataPtr, data, 0, size);
-                        OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);//释放
-
-                        // 定义一个用于将字节数据流转换为 Bitmap 图片的 Bitmap 变量
-                        Bitmap ImageBitmap = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
-
-                        // 设置颜色调色板
-                        ColorPalette palette = ImageBitmap.Palette;
-                        for (int i = 0; i < 256; i++)
+                        unsafe
                         {
-                            palette.Entries[i] = Color.FromArgb(255,i, i, i);
-                        }
+                            //System.Windows.Forms.MessageBox.Show("a");
+                            byte* imageDataPtr = OpenCVSDK.grayScale(imgData.Scan0, width, height);
 
-                        ImageBitmap.Palette = palette;
 
-                        //处理完的图像BitmapData
-                        BitmapData bitmapData = ImageBitmap.LockBits(new Rectangle(0, 0, width, height),
-                            ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
-                        //复制到要显示的
-                        Marshal.Copy(data, 0, bitmapData.Scan0, data.Length);
-                        ImageBitmap.UnlockBits(bitmapData);//释放bitmapData
+                            bmp.UnlockBits(imgData);
+                            int size = width * height;
+                            byte[] data = new byte[size];//创建同大小的数组
 
-                        m_op_img_out.TransferData((Image)ImageBitmap);//out选项 输出
-                        m_img_draw = (Image)ImageBitmap;
-                        #region 保存json
-                        // 添加第一个算子调用信息
-                        OperatorCallInfo operatorCallInfo1 = new OperatorCallInfo
-                        {
-                            OperatorType = "GrayScale",
-                            Parameters = new Dictionary<string, object>
+                            // 接收 C++ 的字节数据流后释放分配的内存空间
+                            Marshal.Copy((IntPtr)imageDataPtr, data, 0, size);
+                            OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);//释放
+
+                            // 定义一个用于将字节数据流转换为 Bitmap 图片的 Bitmap 变量
+                            Bitmap ImageBitmap = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
+
+                            // 设置颜色调色板
+                            ColorPalette palette = ImageBitmap.Palette;
+                            for (int i = 0; i < 256; i++)
+                            {
+                                palette.Entries[i] = Color.FromArgb(255, i, i, i);
+                            }
+
+                            ImageBitmap.Palette = palette;
+
+                            //处理完的图像BitmapData
+                            BitmapData bitmapData = ImageBitmap.LockBits(new Rectangle(0, 0, width, height),
+                                ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
+                            //复制到要显示的
+                            Marshal.Copy(data, 0, bitmapData.Scan0, data.Length);
+                            ImageBitmap.UnlockBits(bitmapData);//释放bitmapData
+
+                            m_op_img_out.TransferData((Image)ImageBitmap);//out选项 输出
+                            m_img_draw = (Image)ImageBitmap;
+
+                            #region 保存json
+                            // 添加第一个算子调用信息
+                            OperatorCallInfo operatorCallInfo1 = new OperatorCallInfo
+                            {
+                                OperatorType = "GrayScale",
+                                Parameters = new Dictionary<string, object>
                             {
                                     { "imgData", imgData.Scan0 },
                                     { "width", width },
                                     { "height", height },
                                     { "stride", stride }
                             }
-                        };
-                        algorithmFlow.OperatorCalls.Add(operatorCallInfo1);
-                        // 保存到JSON文件
-                        try
-                        {
-                            string jsonContent = JsonConvert.SerializeObject(algorithmFlow, Newtonsoft.Json.Formatting.Indented);
-                            File.WriteAllText("algorithm_flow.json", jsonContent);
-                            logger.Info("保存json成功。");
-                        }catch (Exception ex) { logger.Error(ex); }
-                        #endregion
+                            };
+                            algorithmFlow.OperatorCalls.Add(operatorCallInfo1);
+                            // 保存到JSON文件
+                            try
+                            {
+                                string jsonContent = JsonConvert.SerializeObject(algorithmFlow, Newtonsoft.Json.Formatting.Indented);
+                                File.WriteAllText("algorithm_flow.json", jsonContent);
+                                logger.Info("保存json成功。");
+                            }
+                            catch (Exception ex) { logger.Error(ex); }
+                            #endregion
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("这里是grayScale：" + ex);
                     }
                 }
-                catch (Exception ex) 
+                else
                 {
-                    logger.Error("这里是grayScale："+ex);
+                    m_op_img_out.TransferData((Image)bmp);
+                    isSecond = true;
                 }
+                
                 
             }
         }

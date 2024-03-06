@@ -86,6 +86,13 @@ namespace _305Vision.MySTNode.Operator
             this.Invalidate();
         }
 
+        protected override void InOption_DisConnected(object sender, STNodeOptionEventArgs e)
+        {
+            base.InOption_DisConnected (sender, e);
+            findEdgeRectangleForm.OverImage = null;
+
+        }
+        //有数据传进来 建立连接的时候
         private void OpImgInDataTransfer(object sender, STNodeOptionEventArgs e)
         {
             if (e.Status != ConnectionStatus.Connected || e.TargetOption.Data == null)
@@ -97,13 +104,13 @@ namespace _305Vision.MySTNode.Operator
             else
             {
                 Bitmap img = (Bitmap)e.TargetOption.Data;
+                findEdgeRectangleForm.ResouseImage = (Image)img;
                 if (isSecond)
                 {
                     ProcessImage(img);
                 }
                 else
                 {
-                    findEdgeRectangleForm.ResouseImage = (Image)img;
                     m_op_img_out.TransferData((Image)img);
                     isSecond = true;
                 }

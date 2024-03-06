@@ -49,14 +49,12 @@ namespace _305Vision.MySTNode.Operator
         #endregion
 
 
-        private STNodeOption in_option;
         protected override void OnCreate()
         {
             base.OnCreate();
             this.Title = "图像膨胀";
 
-            in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
-            in_option.DataTransfer += In_option_DataTransfer;
+            inOption.DataTransfer += In_option_DataTransfer;
         }
 
         private void In_option_DataTransfer(object sender, STNodeOptionEventArgs e)
@@ -72,16 +70,19 @@ namespace _305Vision.MySTNode.Operator
             }
             else
             {
+                Bitmap img = e.TargetOption.Data as Bitmap;
 
-                // 调用方法
-                Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)e.TargetOption.Data,
+                if (isSecond)
+                {
+                    // 调用方法
+                    Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)e.TargetOption.Data,
                     imageData =>
                     {
 
                         // 具体的处理逻辑
                         unsafe
                         {
-                            byte* imageDataPtr = OpenCVSDK.expansion(imageData.Scan0, imageData.Width, imageData.Height, imageData.Width*3, KerSizeX, KerSizeY, (int)KerStr, PointX, PointY, Iterations);
+                            byte* imageDataPtr = OpenCVSDK.expansion(imageData.Scan0, imageData.Width, imageData.Height, imageData.Width * 3, KerSizeX, KerSizeY, (int)KerStr, PointX, PointY, Iterations);
 
                             // 处理后的数据流复制到托管数组
                             int size = imageData.Width * imageData.Height * 3;
@@ -92,9 +93,15 @@ namespace _305Vision.MySTNode.Operator
                             return imageByte;
                         }
                     });
-                this.logger.Info("图像" + this.Title + "处理完成");
-                m_op_img_out.TransferData((Image)processedImage);//out选项 输出
-                m_img_draw = (Image)processedImage;
+                    this.logger.Info("图像" + this.Title + "处理完成");
+                    m_op_img_out.TransferData((Image)processedImage);//out选项 输出
+                    m_img_draw = (Image)processedImage;
+                }
+                else
+                {
+                    m_op_img_out.TransferData((Image)img);
+                    isSecond = true;
+                }
             }
         }
 

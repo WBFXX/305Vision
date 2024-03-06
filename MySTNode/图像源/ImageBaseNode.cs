@@ -61,7 +61,7 @@ namespace _305Vision.图片操作测试
         /// <param name="e"></param>
         /// <exception cref="NotImplementedException"></exception>
 
-        protected void InOption_DisConnected(object sender, STNodeOptionEventArgs e)
+        protected virtual void InOption_DisConnected(object sender, STNodeOptionEventArgs e)
         {
             isSecond = false;
             this.Owner.Invalidate();

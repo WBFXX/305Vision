@@ -10,7 +10,7 @@ namespace _305Vision.BLL
     public class STNodeOptionDAL
     {
         // 封装获取连接的所有输出节点并重新连接的函数
-        //作者提供的GetConnection()方法有问题
+        //作者提供的GetConnection()方法有问题 output-->outputNode-->input
         /// <summary>
         /// 重新绘制连线，目的为了连接的上个节点重新传输数据
         /// </summary>
