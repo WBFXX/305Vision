@@ -23,6 +23,7 @@ namespace _305Vision.OWindows
         private Point end;
         private double angle;
         private int edgeNum;
+        private int gradientThreshold;
         private List<Point> listPoints = new List<Point>();
         private int[] array;
         BasicImageInfo basicImageInfo;
@@ -34,6 +35,7 @@ namespace _305Vision.OWindows
         public Image OverImage { get => overImage; set => overImage = value; }
         public Image ResouseImage { get => resouseImage; set => resouseImage = value; }
         public int EdgeNum { get => edgeNum; set => edgeNum = value; }
+        public int GradientThreshold { get => gradientThreshold; set => gradientThreshold = value; }
         public Point Start { get => start; set => start = value; }
         public Point End { get => end; set => end = value; }
         public double Angle { get => angle; set => angle = value; }
@@ -143,7 +145,7 @@ namespace _305Vision.OWindows
                     IntPtr Points = IntPtr.Zero;
                     int sizee = 0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(basicImageInfo.ImagePtr, (int)basicImageInfo.Width,
-                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, ref Points, ref sizee);
+                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, GradientThreshold, ref Points, ref sizee);
                     int size = (int)(basicImageInfo.Width * basicImageInfo.Height * 3);
                     byte[] imageByte = new byte[size];
                     #region 读取点集

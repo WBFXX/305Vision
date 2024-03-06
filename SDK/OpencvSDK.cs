@@ -155,7 +155,7 @@ namespace _305Vision.SDK
         /// <param name="listPoints"></param>
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "findEdgeRectangle", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe byte* findEdgeRectangle(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,double angle,int edgeNum, ref IntPtr listPoints, ref int size);
+        public static extern unsafe byte* findEdgeRectangle(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,double angle,int edgeNum,int gradientThreshold, ref IntPtr listPoints, ref int size);
 
         /// <summary>
         /// 圆形找边

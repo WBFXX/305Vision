@@ -30,6 +30,8 @@ namespace _305Vision.MySTNode.Operator
         public double Angle { get; set; }
         [STNodeProperty("找边线数量", "找边线数量")]
         public int EdgeNum { get; set; }
+        [STNodeProperty("阈值", "阈值")]
+        public int GradientThreshold { get; set; }
         //[STNodeProperty("点集", "点集")]
         [STNodeProperty("点集", "点集")]
         public int[] Array { get; set; }
@@ -127,7 +129,7 @@ namespace _305Vision.MySTNode.Operator
                     IntPtr Points  = IntPtr.Zero;
                     int sizee = 0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(info.ImagePtr, (int)info.Width, (int)info.Height,
-                        (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, ref Points, ref sizee);
+                        (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, GradientThreshold,ref Points, ref sizee);
                     int size = imageData.Width * imageData.Height * 3;
                     byte[] imageByte = new byte[size];
                     Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
