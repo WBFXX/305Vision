@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using _305Vision.MySTNode.控件库;
 using _305Vision.图片操作测试;
 using System.Drawing.Drawing2D;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace _305Vision.MySTNode.Operator
 {
@@ -70,7 +72,7 @@ namespace _305Vision.MySTNode.Operator
         {
             if(this.inOption.ConnectionCount==0)return;
 
-            findEdgeRectangleForm.InitializeParameters(EdgeNum, Start, End, Array);
+            findEdgeRectangleForm.InitializeParameters(EdgeNum, Start, End, Array, GradientThreshold);
 
             DialogResult result = findEdgeRectangleForm.ShowDialog();
 
@@ -81,10 +83,11 @@ namespace _305Vision.MySTNode.Operator
             End = findEdgeRectangleForm.End;
             Angle = findEdgeRectangleForm.Angle;
             Array = findEdgeRectangleForm.Array;
+            GradientThreshold = findEdgeRectangleForm.GradientThreshold;
 
             m_img_draw = findEdgeRectangleForm.OverImage;
             m_op_img_out.TransferData(findEdgeRectangleForm.OverImage);
-            outDataOption.TransferData(Array);
+            
             this.Invalidate();
         }
 
@@ -110,6 +113,16 @@ namespace _305Vision.MySTNode.Operator
                 if (isSecond)
                 {
                     ProcessImage(img);
+                   List<Point> listPoints = UtilsBLL.ConvertArrayToPointList(Array);
+                    // 打印点集
+                    int listI = 1;
+                    foreach (Point point in listPoints)
+                    {
+                        logger.Info("xxxxxxxxxxxxxxxxxx点 " + listI + $"坐标：({point.X}, {point.Y})\n");
+                        listI++;
+                    }
+                    //outDataOption.TransferData(Array);
+                    outDataOption.TransferData(Array);
                 }
                 else
                 {
@@ -130,10 +143,19 @@ namespace _305Vision.MySTNode.Operator
                     int sizee = 0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(info.ImagePtr, (int)info.Width, (int)info.Height,
                         (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, GradientThreshold,ref Points, ref sizee);
+                    #region 读取点集
+                    byte* arrayPtr = (byte*)Points;//读取点集
+                    int[] array = new int[sizee];//读取点集
+                    Marshal.Copy((IntPtr)arrayPtr, array, 0, sizee);//复制点集数组
+                    this.Array = array;
+                    logger.Info("sizee大小为：" + sizee + "数组为：" + array[sizee - 2] + "," + array[sizee - 1]);
+                    List<Point> listPoints = UtilsBLL.ConvertArrayToPointList(array);
+                    #endregion
                     int size = imageData.Width * imageData.Height * 3;
                     byte[] imageByte = new byte[size];
                     Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
                     OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
+
                     return imageByte;
                 }
             });

@@ -47,12 +47,13 @@ namespace _305Vision.OWindows
             InitializeComponent();
         }
 
-        public void InitializeParameters(int edgeNum, Point start, Point end, int[] array)
+        public void InitializeParameters(int edgeNum, Point start, Point end, int[] array , int gradientThreshold)
         {
             EdgeNum = edgeNum;
             Start = start;
             End = end;
             Array = array;
+            GradientThreshold = gradientThreshold;
         }
 
         private void RetangelROI_Load(object sender, EventArgs e)
@@ -130,7 +131,6 @@ namespace _305Vision.OWindows
             int listI = 1;
             foreach (Point point in listPoints)
             {
-                logger.Info("点 " + listI + $"坐标：({point.X}, {point.Y})\n");
                 listI++;
             }
         }
@@ -147,6 +147,7 @@ namespace _305Vision.OWindows
                     byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(basicImageInfo.ImagePtr, (int)basicImageInfo.Width,
                         (int)basicImageInfo.Height, (int)basicImageInfo.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, GradientThreshold, ref Points, ref sizee);
                     int size = (int)(basicImageInfo.Width * basicImageInfo.Height * 3);
+                    
                     byte[] imageByte = new byte[size];
                     #region 读取点集
                     byte* arrayPtr = (byte*)Points;//读取点集
@@ -154,7 +155,6 @@ namespace _305Vision.OWindows
                     Marshal.Copy((IntPtr)arrayPtr, array, 0, sizee);//复制点集数组
                     this.Array = array;
                     listPoints = UtilsBLL.ConvertArrayToPointList(array);
-                    
                     #endregion
                     Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
                     OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
