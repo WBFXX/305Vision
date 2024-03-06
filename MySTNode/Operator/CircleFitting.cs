@@ -13,7 +13,7 @@ using _305Vision.图片操作测试;
 using System.Drawing.Drawing2D;
 using Newtonsoft.Json.Linq;
 
-namespace _305Vision.MySTNode.功能节点
+namespace _305Vision.MySTNode.Operator
 {
     [STNode("/算子", "在图像上画点")]
     public class CircleFitting : ImageBaseNode
@@ -104,13 +104,18 @@ namespace _305Vision.MySTNode.功能节点
 
         private void ProcessImage(Bitmap img)
         {
-            IntPtr ArrPtr = Marshal.AllocHGlobal(Array.Length * sizeof(int));
-            OpenCVSDK.circleFitting(ArrPtr, (int)Array.Length, (int)Discard,
-                ref jieRadis, ref centerX, ref centerY);
-            logger.Info(jieRadis);
 
-            m_op_img_out.TransferData((Image)img);
-            m_img_draw = (Image)img;
+            OpenCVSDK.circleFitting(Array, (int)Array.Length, (int)Discard,ref jieRadis, ref centerX, ref centerY);
+
+            logger.Info(jieRadis);
+            //经过OpenCVSDK算法处理后，算出了圆心和半径
+            // 在图像上绘制圆
+            Bitmap newImage = DrawCircleOnImage(img, CenterX, CenterY, JieRadis);
+
+            // 将新图像传递给输出
+            m_op_img_out.TransferData(newImage);
+            m_img_draw = newImage;
+            m_op_img_out.TransferData((Image)newImage);
             this.Invalidate();
 
         }
@@ -121,6 +126,29 @@ namespace _305Vision.MySTNode.功能节点
             STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top + 20);
         }
 
+        private Bitmap DrawCircleOnImage(Bitmap image, double centerX, double centerY, double radius)
+        {
+            // 创建一个新的图像副本，以免修改原始图像
+            Bitmap newImage = new Bitmap(image);
+
+            // 在图像上创建Graphics对象
+            using (Graphics g = Graphics.FromImage(newImage))
+            {
+                // 创建一个画笔
+                using (Pen pen = new Pen(Color.Red, 2)) // 这里使用红色笔绘制圆形，可以根据需要进行调整
+                {
+                    // 计算圆的边界矩形
+                    int x = (int)(centerX - radius);
+                    int y = (int)(centerY - radius);
+                    int diameter = (int)(2 * radius);
+
+                    // 在图像上绘制圆
+                    g.DrawEllipse(pen, x, y, diameter, diameter);
+                }
+            }
+
+            return newImage;
+        }
 
 
     }

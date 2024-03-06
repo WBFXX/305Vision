@@ -176,7 +176,7 @@ namespace _305Vision.SDK
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="intPtr">数组</param>
+        /// <param name="Array">数组</param>
         /// <param name="num">数组长度</param>
         /// <param name="discard">抛弃点数量</param>
         /// <param name="jieradis">结果半径</param>
@@ -184,7 +184,7 @@ namespace _305Vision.SDK
         /// <param name="centerY">结果圆心Y</param>
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "circleFitting", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe void circleFitting(IntPtr intPtr, int num, int discard, ref double jieradis,ref double centerX,ref double centerY);
+        public static extern unsafe void circleFitting(int[] Array, int num, int discard, ref double jieradis,ref double centerX,ref double centerY);
         
 
 
