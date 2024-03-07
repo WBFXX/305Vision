@@ -111,9 +111,9 @@ namespace _305Vision
                 pictureBoxName[pictureBox.Name] = pictureBox;
                 pictureBox.Click += PictureBox_Click;
                 PictureBoxes.Add(pictureBox);
-                string imgePath = "e:/1.jpg";
-                Bitmap bitmap = new Bitmap(imgePath);
-                PictureBoxes[0].Image = bitmap;
+                //string imgePath = "e:/1.jpg";
+                //Bitmap bitmap = new Bitmap(imgePath);
+                //PictureBoxes[0].Image = bitmap;
                 flowLayoutPanel1.Controls.Add(pictureBox);
             }
         }
