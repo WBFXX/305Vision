@@ -72,7 +72,7 @@ namespace _305Vision.OWindows
                 double startY = ((double)((clientMouse.Y - Lsize.Height) * hrate));
                 Start = new Point((int)startX, (int)startY);
                 isMove = true;
-                logger.Info("起点真坐标为：" + Start);
+
             }
             else
             {

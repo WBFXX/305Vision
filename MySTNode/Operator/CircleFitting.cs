@@ -15,7 +15,7 @@ using Newtonsoft.Json.Linq;
 
 namespace _305Vision.MySTNode.Operator
 {
-    [STNode("/算子", "在图像上画点")]
+    [STNode("/拟合", "在图像上画点")]
     public class CircleFitting : ImageBaseNode
     {
 

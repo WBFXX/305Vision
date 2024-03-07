@@ -19,7 +19,6 @@ namespace _305Vision.MySTNode.功能节点
     [STNode("/ROI功能节点", "在图像上画点")]
     public class FindEdgeRectangle : ImageBaseNode
     {
-        private STNodeOption in_option;
         private OWindows.RecROIForm recROIForm = new OWindows.RecROIForm();
 
         [STNodeProperty("开始坐标", "开始坐标")]
@@ -34,7 +33,6 @@ namespace _305Vision.MySTNode.功能节点
             base.OnCreate();
 
             this.Title = "矩形ROI";
-            in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
 
             this.AutoSize = false;
             this.Height += 30;
@@ -44,7 +42,7 @@ namespace _305Vision.MySTNode.功能节点
             this.Controls.Add(ctrl);
 
             // 当输入节点有数据输入时候
-            in_option.DataTransfer += new STNodeOptionEventHandler(Op_img_in_DataTransfer);
+            inOption.DataTransfer += new STNodeOptionEventHandler(Op_img_in_DataTransfer);
 
             ctrl.MouseClick += Owner_Click;
         }
@@ -83,45 +81,56 @@ namespace _305Vision.MySTNode.功能节点
                 m_op_img_out.TransferData(null); // 向所有输出节点输出空数据
                 m_img_draw = null;               // 需要绘制显示的图片置为空
             }
-            else if (e.Status == ConnectionStatus.Connected && m_img_draw == null)
-            {
-                Bitmap img = (Bitmap)e.TargetOption.Data;
+            //else if (e.Status == ConnectionStatus.Connected && m_img_draw == null)
+            //{
+            //    Bitmap img = (Bitmap)e.TargetOption.Data;
 
-                // 把图像传给操作表格
-                recROIForm.ResouseImage = (Image)img;
-                m_op_img_out.TransferData((Image)img); // 输出
-                m_img_draw = (Image)img;
-                this.Invalidate();
-            }
+            //    // 把图像传给操作表格
+            //    recROIForm.ResouseImage = (Image)img;
+            //    m_op_img_out.TransferData((Image)img); // 输出
+            //    m_img_draw = (Image)img;
+            //    this.Invalidate();
+            //}
             else
             {
-                #region 矩形裁剪算法
                 Bitmap img = (Bitmap)e.TargetOption.Data;
-                Bitmap processedImage = ProcessImageDAL.ProcessCoriImage((Bitmap)img, imageData =>
+                if (isSecond)
                 {
-                    unsafe
+                    #region 矩形裁剪算法
+                    Bitmap processedImage = ProcessImageDAL.ProcessCoriImage((Bitmap)img, imageData =>
                     {
-                        int aWidth = Math.Abs(End.X - Start.X);
-                        int aHeight = Math.Abs(End.Y - Start.Y);
+                        unsafe
+                        {
+                            int aWidth = Math.Abs(End.X - Start.X);
+                            int aHeight = Math.Abs(End.Y - Start.Y);
 
-                        // 保存提取数据结构
-                        BasicImageInfo info = BasicImageInfo.NewMethod(imageData);
-                        byte* imageDataPtr = OpenCVSDK.roiCropping(info.ImagePtr, (int)info.Width, (int)info.Height, (int)info.Stride, Start.X, Start.Y, End.X, End.Y, 255, 0, 200, Angle);
+                            // 保存提取数据结构
+                            BasicImageInfo info = BasicImageInfo.NewMethod(imageData);
+                            byte* imageDataPtr = OpenCVSDK.roiCropping(info.ImagePtr, (int)info.Width, (int)info.Height, (int)info.Stride, Start.X, Start.Y, End.X, End.Y, 255, 0, 200, Angle);
 
-                        int size = (aWidth + 3) / 4 * 4 * aHeight * 3;
-                        byte[] imageByte = new byte[size];
-                        Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
-                        OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
-                        return imageByte;
-                    }
-                }, (Math.Abs(End.X - Start.X) + 3) / 4 * 4, Math.Abs(End.Y - Start.Y));
-                #endregion
+                            int size = (aWidth + 3) / 4 * 4 * aHeight * 3;
+                            byte[] imageByte = new byte[size];
+                            Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
+                            OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
+                            return imageByte;
+                        }
+                    }, (Math.Abs(End.X - Start.X) + 3) / 4 * 4, Math.Abs(End.Y - Start.Y));
+                    #endregion
 
-                // 把图像传给操作表格
-                recROIForm.ResouseImage = (Image)processedImage;
-                m_op_img_out.TransferData((Image)processedImage); // 输出
-                m_img_draw = (Image)processedImage;
-                this.Invalidate();
+                    // 把图像传给操作表格
+                    recROIForm.OverImage = (Image)processedImage;
+                    m_op_img_out.TransferData((Image)processedImage); // 输出
+                    m_img_draw = (Image)processedImage;
+                    this.Invalidate();
+                }
+                else
+                {
+                    // 把图像传给操作表格
+                    recROIForm.ResouseImage = (Image)img;
+                    m_op_img_out.TransferData((Image)img);
+                    isSecond = true;
+                }
+                
             }
         }
 

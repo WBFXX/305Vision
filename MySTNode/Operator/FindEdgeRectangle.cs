@@ -52,6 +52,7 @@ namespace _305Vision.MySTNode.Operator
                 Text = "选取",
                 Location = new Point(42, 130)
             };
+            GradientThreshold = 20;
             EdgeNum = 20;
             selectButton.MouseClick += SelectButton_Click;
             this.Controls.Add(selectButton);
@@ -85,7 +86,7 @@ namespace _305Vision.MySTNode.Operator
             Array = findEdgeRectangleForm.Array;
             GradientThreshold = findEdgeRectangleForm.GradientThreshold;
 
-            m_img_draw = findEdgeRectangleForm.OverImage;
+            //m_img_draw = findEdgeRectangleForm.OverImage;
             m_op_img_out.TransferData(findEdgeRectangleForm.OverImage);
             
             this.Invalidate();
@@ -109,7 +110,7 @@ namespace _305Vision.MySTNode.Operator
             else
             {
                 Bitmap img = (Bitmap)e.TargetOption.Data;
-                findEdgeRectangleForm.ResouseImage = (Image)img;
+                
                 if (isSecond)
                 {
                     ProcessImage(img);
@@ -126,6 +127,7 @@ namespace _305Vision.MySTNode.Operator
                 }
                 else
                 {
+                    findEdgeRectangleForm.ResouseImage = (Image)img;
                     m_op_img_out.TransferData((Image)img);
                     isSecond = true;
                 }
@@ -160,7 +162,7 @@ namespace _305Vision.MySTNode.Operator
                 }
             });
 
-            findEdgeRectangleForm.ResouseImage = (Image)processedImage;
+            findEdgeRectangleForm.OverImage = (Image)processedImage;
             m_op_img_out.TransferData((Image)processedImage);
             m_img_draw = (Image)processedImage;
             this.Invalidate();

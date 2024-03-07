@@ -119,7 +119,7 @@ namespace _305Vision.MySTNode.Operator
                 }
             });
 
-            findEdgeCircular.ResouseImage = (Image)processedImage;
+            findEdgeCircular.OverImage = (Image)processedImage;
             m_op_img_out.TransferData((Image)processedImage);
             m_img_draw = (Image)processedImage;
             this.Invalidate();

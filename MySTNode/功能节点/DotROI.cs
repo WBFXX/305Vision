@@ -19,7 +19,6 @@ namespace _305Vision.MySTNode.功能节点
     [STNode("/ROI功能节点", "在图像上画点")]
     public class DotROI : ImageBaseNode
     {
-        private STNodeOption in_option;
         private OWindows.DotROIForm dotROIForm = new OWindows.DotROIForm();
 
         internal BasicImageInfo BasicImageInfo { get; set; }
@@ -49,7 +48,6 @@ namespace _305Vision.MySTNode.功能节点
             Size = 20;
 
             this.Title = "画点";
-            in_option = this.InputOptions.Add("输入图像", typeof(Image), true);
 
             this.AutoSize = false;
             this.Height += 30;
@@ -60,7 +58,7 @@ namespace _305Vision.MySTNode.功能节点
             this.Controls.Add(ctrl);
 
             // 当输入节点有数据输入时候
-            in_option.DataTransfer += new STNodeOptionEventHandler(Op_img_in_DataTransfer);
+            inOption.DataTransfer += new STNodeOptionEventHandler(Op_img_in_DataTransfer);
 
             ctrl.MouseClick += Owner_Click;
         }
@@ -97,25 +95,36 @@ namespace _305Vision.MySTNode.功能节点
                 m_op_img_out.TransferData(null); // 向所有输出节点输出空数据
                 m_img_draw = null; // 需要绘制显示的图片置为空
             }
-            else if (e.Status == ConnectionStatus.Connected && m_img_draw == null)
-            {
-                Bitmap img = (Bitmap)e.TargetOption.Data;
-                // 把图像传给操作表格
-                dotROIForm.ResouseImage = (Image)img;
-                m_op_img_out.TransferData((Image)img); // out 选项 输出
-                m_img_draw = (Image)img;
-                this.Invalidate();
-            }
+            //else if (e.Status == ConnectionStatus.Connected && m_img_draw == null)
+            //{
+            //    Bitmap img = (Bitmap)e.TargetOption.Data;
+            //    // 把图像传给操作表格
+            //    dotROIForm.ResouseImage = (Image)img;
+            //    m_op_img_out.TransferData((Image)img); // out 选项 输出
+            //    m_img_draw = (Image)img;
+            //    this.Invalidate();
+            //}
             else
             {
-                // 画点算法
+                
                 Bitmap img = (Bitmap)e.TargetOption.Data;
-                Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)img, imageData => ProcessImageData(imageData));
-                // 把图像传给操作表格
-                dotROIForm.ResouseImage = (Image)processedImage;
-                m_op_img_out.TransferData((Image)processedImage); // out 选项 输出
-                m_img_draw = (Image)processedImage;
-                this.Invalidate();
+                if (isSecond)
+                {
+                    // 画点算法
+                    Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)img, imageData => ProcessImageData(imageData));
+                    // 把图像传给操作表格
+                    dotROIForm.OverImage = (Image)processedImage;
+                    m_op_img_out.TransferData((Image)processedImage); // out 选项 输出
+                    m_img_draw = (Image)processedImage;
+                    this.Invalidate();
+                }
+                else
+                {
+                    dotROIForm.ResouseImage = (Image)img;
+                    m_op_img_out.TransferData((Image)img); // out 选项 输出
+                    isSecond = true;
+                }
+
             }
         }
 
