@@ -39,14 +39,14 @@ namespace _305Vision.OWindows
         public Point Start { get => start; set => start = value; }
         public Point End { get => end; set => end = value; }
         public double Angle { get => angle; set => angle = value; }
-        public List<Point> ListPoints { get => listPoints; set => listPoints = value; }
+        //public List<Point> ListPoints { get => listPoints; set => listPoints = value; }
         public int[] Array { get => array; set => array = value; }
 
         public FindEdgeRectangleForm()
         {
             InitializeComponent();
         }
-
+        //这里添加了array
         public void InitializeParameters(int edgeNum, Point start, Point end, int[] array , int gradientThreshold)
         {
             EdgeNum = edgeNum;
@@ -148,14 +148,16 @@ namespace _305Vision.OWindows
                         (int)basicImageInfo.Height, (int)basicImageInfo.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, GradientThreshold, ref Points, ref sizee);
                     int size = (int)(basicImageInfo.Width * basicImageInfo.Height * 3);
                     
-                    byte[] imageByte = new byte[size];
+                    
                     #region 读取点集
                     byte* arrayPtr = (byte*)Points;//读取点集
                     array = new int[sizee];//读取点集
                     Marshal.Copy((IntPtr)arrayPtr, array, 0, sizee);//复制点集数组
                     this.Array = array;
-                    listPoints = UtilsBLL.ConvertArrayToPointList(array);
+                    //listPoints = UtilsBLL.ConvertArrayToPointList(array);
                     #endregion
+
+                    byte[] imageByte = new byte[size];
                     Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
                     OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
                     return imageByte;

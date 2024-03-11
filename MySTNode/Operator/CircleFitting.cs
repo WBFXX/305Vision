@@ -25,11 +25,10 @@ namespace _305Vision.MySTNode.Operator
         private double centerY;
 
         #region 拟合参数
-        [STNodeProperty("图像", "输入图像")]
-        public Image FitImg { get; set; }
+
         [STNodeProperty("点集", "点集")]
         public int[] Array { get; set; }
-        [STNodeProperty("数组长度", "数组长度")]
+        [STNodeProperty("点个数", "点个数")]
         public int ArrayLength { get; set; }
         [STNodeProperty("抛弃点数量", "抛弃点数量")]
         public int Discard { get; set; }
@@ -80,10 +79,13 @@ namespace _305Vision.MySTNode.Operator
                 m_op_img_out.TransferData(null);
                 m_img_draw = null;
             }
-            else Array = (int[])e.TargetOption.Data;
+            else
+            {
+                Array = (int[])e.TargetOption.Data;
+                ArrayLength = Array.Length/2;
+            }
         }
-
-        private void OpImgInDataTransfer(object sender, STNodeOptionEventArgs e)
+            private void OpImgInDataTransfer(object sender, STNodeOptionEventArgs e)
         {
             if (e.Status != ConnectionStatus.Connected || e.TargetOption.Data == null)
             {

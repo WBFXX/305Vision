@@ -1,6 +1,7 @@
 ﻿using _305Vision.BLL;
 using _305Vision.Model;
 using _305Vision.SDK;
+using Newtonsoft.Json.Linq;
 using NLog;
 using ST.Library.UI.NodeEditor;
 using System;
@@ -33,6 +34,10 @@ namespace _305Vision.OWindows
         public int EdgeNum { get; set; }
         public int gradientThreshold { get; set; }
         public Point End { get; set; }
+        #region 点集添加
+        private int[] array;//点集添加
+        public int[] Array { get => array; set => array = value; }
+        #endregion
         #endregion
         public FindEdgeCircularForm()
         {
@@ -133,9 +138,16 @@ namespace _305Vision.OWindows
 
                 unsafe
                 {
+                    IntPtr Points = IntPtr.Zero;
+                    int sizee = 0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeCircular(basicImageInfo.ImagePtr, (int)basicImageInfo.Width,
-                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, pointX,pointY,radiusSmall,radiusBig,EdgeNum,gradientThreshold);
-
+                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, pointX,pointY,radiusSmall,radiusBig,EdgeNum,gradientThreshold, ref Points, ref sizee);
+                    #region 读取点集
+                    byte* arrayPtr = (byte*)Points;//读取点集
+                    array = new int[sizee];//读取点集
+                    Marshal.Copy((IntPtr)arrayPtr, array, 0, sizee);//复制点集数组
+                    this.Array = array;
+                    #endregion
                     int size = (int)(basicImageInfo.Width * basicImageInfo.Height * 3);
                     byte[] imageByte = new byte[size];
                     Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);

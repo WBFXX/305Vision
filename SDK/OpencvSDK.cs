@@ -172,7 +172,7 @@ namespace _305Vision.SDK
         /// <param name="gradientThreshold">梯度变化阈值</param>
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "findEdgeCircular", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe byte* findEdgeCircular(IntPtr intPtr, int width, int height, int stride, int pointX, int pointY, int radiusSmall, int radiusBig, int edgeNum, int gradientThreshold);
+        public static extern unsafe byte* findEdgeCircular(IntPtr intPtr, int width, int height, int stride, int pointX, int pointY, int radiusSmall, int radiusBig, int edgeNum, int gradientThreshold ,ref IntPtr listPoints,ref int size);
         /// <summary>
         /// 
         /// </summary>

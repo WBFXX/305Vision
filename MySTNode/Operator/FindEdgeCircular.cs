@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using _305Vision.MySTNode.控件库;
 using _305Vision.图片操作测试;
+using System.Collections.Generic;
 
 namespace _305Vision.MySTNode.Operator
 {
@@ -30,8 +31,8 @@ namespace _305Vision.MySTNode.Operator
         public int radiusBig { get; set; }
         [STNodeProperty("找边线数量", "找边线数量")]
         public int EdgeNum { get; set; }
-        [STNodeProperty("梯度变化阈值", "找边线数量")]
-        public int gradientThreshold { get; set; }
+        [STNodeProperty("阈值", "阈值")]
+        public int GradientThreshold { get; set; }
         [STNodeProperty("点集", "点集")]
         public int[] Array { get; set; }
         #endregion
@@ -43,14 +44,14 @@ namespace _305Vision.MySTNode.Operator
             this.Title = "圆形找边";
 
             this.AutoSize = false;
-            this.Height += 30;
+            this.Height += 50;
 
             var selectButton = new STNodeButton
             {
                 Text = "选取",
-                Location = new Point(42, 110)
+                Location = new Point(42, 130)
             };
-
+            GradientThreshold = 20;
             EdgeNum = 20;
             selectButton.MouseClick += SelectButton_Click;
             this.Controls.Add(selectButton);
@@ -60,7 +61,7 @@ namespace _305Vision.MySTNode.Operator
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
-            findEdgeCircular.InitializeParameters(pointX,pointY,radiusSmall,radiusBig,EdgeNum,gradientThreshold);
+            findEdgeCircular.InitializeParameters(pointX,pointY,radiusSmall,radiusBig,EdgeNum,GradientThreshold);
 
             DialogResult result = findEdgeCircular.ShowDialog();
 
@@ -71,7 +72,7 @@ namespace _305Vision.MySTNode.Operator
             pointY = findEdgeCircular.pointY;
             radiusSmall = findEdgeCircular.radiusSmall;
             radiusBig = findEdgeCircular.radiusBig;
-            gradientThreshold = findEdgeCircular.gradientThreshold;
+            GradientThreshold = findEdgeCircular.gradientThreshold;
 
             m_img_draw = findEdgeCircular.OverImage;
             m_op_img_out.TransferData(findEdgeCircular.OverImage);
@@ -92,6 +93,7 @@ namespace _305Vision.MySTNode.Operator
                 if (isSecond)
                 {
                     ProcessImage(img);
+                    outDataOption.TransferData(Array);//点集增加
                 }
                 else
                 {
@@ -109,8 +111,20 @@ namespace _305Vision.MySTNode.Operator
                 BasicImageInfo info = BasicImageInfo.NewMethod(imageData);
                 unsafe
                 {
+                    IntPtr Points = IntPtr.Zero;
+                    int sizee=0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeCircular(info.ImagePtr, (int)info.Width, (int)info.Height,
-                        (int)info.Stride, pointX, pointY, radiusSmall, radiusBig, EdgeNum, gradientThreshold);
+                        (int)info.Stride, pointX, pointY, radiusSmall, radiusBig, EdgeNum, GradientThreshold, ref Points,ref sizee);
+
+                    #region 读取点集
+                    byte* arrayPtr = (byte*)Points;//读取点集
+                    int[] array = new int[sizee];//读取点集
+                    Marshal.Copy((IntPtr)arrayPtr, array, 0, sizee);//复制点集数组
+                    this.Array = array;
+                    logger.Info("sizee大小为：" + sizee + "数组为：" + array[sizee - 2] + "," + array[sizee - 1]);
+                    List<Point> listPoints = UtilsBLL.ConvertArrayToPointList(array);
+                    #endregion
+
                     int size = imageData.Width * imageData.Height * 3;
                     byte[] imageByte = new byte[size];
                     Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
@@ -128,7 +142,7 @@ namespace _305Vision.MySTNode.Operator
         protected override void OnDrawBody(DrawingTools dt)
         {
             base.OnDrawBody(dt);
-            STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top);
+            STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top + 20);
         }
     }
 }

@@ -145,6 +145,7 @@ namespace _305Vision.MySTNode.Operator
                     int sizee = 0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(info.ImagePtr, (int)info.Width, (int)info.Height,
                         (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, GradientThreshold,ref Points, ref sizee);
+
                     #region 读取点集
                     byte* arrayPtr = (byte*)Points;//读取点集
                     int[] array = new int[sizee];//读取点集
