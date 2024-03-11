@@ -174,7 +174,7 @@ namespace _305Vision.SDK
         [DllImport("demo.dll", EntryPoint = "findEdgeCircular", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe byte* findEdgeCircular(IntPtr intPtr, int width, int height, int stride, int pointX, int pointY, int radiusSmall, int radiusBig, int edgeNum, int gradientThreshold ,ref IntPtr listPoints,ref int size);
         /// <summary>
-        /// 
+        /// 圆形拟合
         /// </summary>
         /// <param name="Array">数组</param>
         /// <param name="num">数组长度</param>
@@ -185,6 +185,18 @@ namespace _305Vision.SDK
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "circleFitting", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe void circleFitting(int[] Array, int num, int discard, ref double jieradis,ref double centerX,ref double centerY);
+        /// <summary>
+        /// 直线拟合
+        /// </summary>
+        /// <param name="Array"></param>
+        /// <param name="num"></param>
+        /// <param name="discard">抛弃点</param>
+        /// <param name="xielvK">斜率</param>
+        /// <param name="pointX"></param>
+        /// <param name="pointY"></param>
+        [DllImport("demo.dll", EntryPoint = "circleFitting", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern unsafe void lineFitting(int[] Array, int num, int discard, ref double xielvK,ref double pointX,ref double pointY);
+
         
 
 

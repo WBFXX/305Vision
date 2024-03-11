@@ -166,13 +166,14 @@
     <Compile Include="MySTNode\Blender\STNodeColorButton.cs" />
     <Compile Include="MySTNode\Blender\STNodeProgress.cs" />
     <Compile Include="MySTNode\Blender\STNodeSelectBox.cs" />
+    <Compile Include="MySTNode\Fitting\LineFitting.cs" />
     <Compile Include="MySTNode\Operator\Binaryzation.cs" />
     <Compile Include="MySTNode\Operator\Expansion.cs" />
     <Compile Include="MySTNode\Operator\Eroding.cs" />
     <Compile Include="MySTNode\Operator\FindEdgeCircular.cs" />
     <Compile Include="MySTNode\Operator\GrayScale.cs" />
     <Compile Include="MySTNode\Operator\FindEdgeRectangle.cs" />
-    <Compile Include="MySTNode\Operator\CircleFitting.cs" />
+    <Compile Include="MySTNode\Fitting\CircleFitting.cs" />
     <Compile Include="MySTNode\功能节点\RecROI.cs" />
     <Compile Include="MySTNode\功能节点\DotROI.cs" />
     <Compile Include="MySTNode\控件库\ComBoxControl.cs" />
@@ -404,5 +405,6 @@
     <Content Include="Resources\树结构_tree-list.png" />
     <Content Include="Resources\键盘_keyboard-one.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
