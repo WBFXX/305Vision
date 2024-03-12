@@ -132,7 +132,7 @@ namespace _305Vision.OWindows
         {
             try
             {
-                basicImageInfo = BasicImageInfo.NewMethod(imageData);
+                basicImageInfo = BasicImageInfo.GetImgInfo(imageData);
                 logger.Info("小圆半径：" + Math.Abs(End.X - pointX));
                 logger.Info("大圆半径：" + Math.Abs(End.Y - pointY));
 
@@ -148,12 +148,8 @@ namespace _305Vision.OWindows
                     Marshal.Copy((IntPtr)arrayPtr, array, 0, sizee);//复制点集数组
                     this.Array = array;
                     #endregion
-                    int size = (int)(basicImageInfo.Width * basicImageInfo.Height * 3);
-                    byte[] imageByte = new byte[size];
-                    Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
-                    OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
 
-                    return imageByte;
+                    return UtilsBLL.GetImageBytes((IntPtr)imageDataPtr, imageData.Width, imageData.Height, 3);
                 }
             }
             catch (Exception ex)

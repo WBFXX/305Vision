@@ -114,15 +114,14 @@ namespace _305Vision.MySTNode.Operator
                 if (isSecond)
                 {
                     ProcessImage(img);
-                   List<Point> listPoints = UtilsBLL.ConvertArrayToPointList(Array);
-                    // 打印点集
+                    List<Point> listPoints = UtilsBLL.ConvertArrayToPointList(Array);
+                    //打印点集
                     int listI = 1;
                     foreach (Point point in listPoints)
                     {
-                        logger.Info("xxxxxxxxxxxxxxxxxx点 " + listI + $"坐标：({point.X}, {point.Y})\n");
+                        //logger.Info("xxxxxxxxxxxxxxxxxx点 " + listI + $"坐标：({point.X}, {point.Y})\n");
                         listI++;
                     }
-                    //outDataOption.TransferData(Array);
                     outDataOption.TransferData(Array);
                 }
                 else
@@ -138,7 +137,7 @@ namespace _305Vision.MySTNode.Operator
         {
             Bitmap processedImage = ProcessImageBLL.ProcessImage(img, imageData =>
             {
-                BasicImageInfo info = BasicImageInfo.NewMethod(imageData);
+                BasicImageInfo info = BasicImageInfo.GetImgInfo(imageData);
                 unsafe
                 {
                     IntPtr Points  = IntPtr.Zero;
@@ -146,20 +145,14 @@ namespace _305Vision.MySTNode.Operator
                     byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(info.ImagePtr, (int)info.Width, (int)info.Height,
                         (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, GradientThreshold,ref Points, ref sizee);
 
-                    #region 读取点集
-                    byte* arrayPtr = (byte*)Points;//读取点集
+                    //读取点集
+                    //byte* arrayPtr = (byte*)Points;//读取点集
                     int[] array = new int[sizee];//读取点集
-                    Marshal.Copy((IntPtr)arrayPtr, array, 0, sizee);//复制点集数组
+                    Marshal.Copy(Points, array, 0, sizee);//复制点集数组
                     this.Array = array;
-                    logger.Info("sizee大小为：" + sizee + "数组为：" + array[sizee - 2] + "," + array[sizee - 1]);
-                    List<Point> listPoints = UtilsBLL.ConvertArrayToPointList(array);
-                    #endregion
-                    int size = imageData.Width * imageData.Height * 3;
-                    byte[] imageByte = new byte[size];
-                    Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
-                    OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
-
-                    return imageByte;
+                    OpenCVSDK.releaseBuffer(Points);
+                    //返回复制好的图像
+                    return UtilsBLL.GetImageBytes((IntPtr)imageDataPtr, imageData.Width, imageData.Height, 3);
                 }
             });
 

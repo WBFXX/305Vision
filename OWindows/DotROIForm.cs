@@ -98,7 +98,7 @@ namespace _305Vision.OWindows
         {
             try
             {
-                basicImageInfo = BasicImageInfo.NewMethod(imageData);
+                basicImageInfo = BasicImageInfo.GetImgInfo(imageData);
 
                 unsafe
                 {

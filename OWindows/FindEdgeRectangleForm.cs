@@ -124,22 +124,14 @@ namespace _305Vision.OWindows
         {
             isMove = false;
             //打印数据
-            logger.Info("截取宽度：" + Math.Abs(End.X - Start.X));
-            logger.Info("截取高度" + Math.Abs(End.Y - Start.Y));
-            logger.Info("起点坐标：" + Start + ";" + "终点坐标：" + End);
-            // 打印点集
-            int listI = 1;
-            foreach (Point point in listPoints)
-            {
-                listI++;
-            }
+
         }
 
         private byte[] ProcessImageData(BitmapData imageData)
         {
             try
             {
-                basicImageInfo = BasicImageInfo.NewMethod(imageData);
+                basicImageInfo = BasicImageInfo.GetImgInfo(imageData);
                 unsafe
                 {
                     IntPtr Points = IntPtr.Zero;
@@ -157,10 +149,8 @@ namespace _305Vision.OWindows
                     //listPoints = UtilsBLL.ConvertArrayToPointList(array);
                     #endregion
 
-                    byte[] imageByte = new byte[size];
-                    Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
-                    OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
-                    return imageByte;
+
+                    return UtilsBLL.GetImageBytes((IntPtr)imageDataPtr, imageData.Width, imageData.Height, 3);
                 }
             }
             catch (Exception ex)

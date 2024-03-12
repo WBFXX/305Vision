@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 using _305Vision.DAL;
 
 namespace _305Vision.BLL
@@ -130,6 +132,46 @@ namespace _305Vision.BLL
         public static List<Point> ConvertArrayToPointList(int[] array)
         {
             return UtilsDAL.ConvertArrayToPointList(array); 
+        }
+        /// <summary>
+        /// 解析点集
+        /// </summary>
+        /// <param name="points">传回来的点集数组</param>
+        /// <param name="size">传回来的数组大小</param>
+        /// <returns></returns>
+        public static int[] ReadPoints(IntPtr points, int size)
+        {
+            try
+            {
+                return UtilsDAL.ReadPoints(points, size);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("解析点集失败：" + ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+        }
+        /// <summary>
+        /// 获创建3通道，图像数据的拷贝
+        /// </summary>
+        /// <param name="imageDataPtr"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="channel">通道数</param>
+        /// <returns>imageBytes</returns>
+        public static byte[] GetImageBytes(IntPtr imageDataPtr, int width, int height, int channel)
+        {
+            try
+            {
+                return UtilsDAL.GetImageBytes(imageDataPtr, width, height, channel);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("图像数据(imageDataPtr)拷贝失败：" + ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
         }
     }
 }

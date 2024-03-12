@@ -38,12 +38,10 @@ namespace _305Vision
             //this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);//以下三行消除主界面闪烁
             //this.SetStyle(ControlStyles.DoubleBuffer, true);
             //this.SetStyle(ControlStyles.UserPaint, true);
-            contextMenuStrip1.ShowImageMargin = false;
-            contextMenuStrip1.Renderer = new ToolStripRendererEx();
+            //下面这两句代码是修改背景颜色的
+            //contextMenuStrip1.ShowImageMargin = false;
+            //contextMenuStrip1.Renderer = new ToolStripRendererEx();
             
-
-
-
         }
 
 

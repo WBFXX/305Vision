@@ -138,12 +138,15 @@
     <Compile Include="AboutDialog.Designer.cs">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="BLL\DrawBll.cs" />
     <Compile Include="BLL\ImageRoiBLL.cs" />
     <Compile Include="BLL\ProcessImageBLL.cs" />
     <Compile Include="BLL\STNodeBLL.cs" />
     <Compile Include="BLL\STNodeOptionBLL.cs" />
     <Compile Include="BLL\UtilsBLL.cs" />
     <Compile Include="BLL\WindowsViewBLL.cs" />
+    <Compile Include="Common\STNodeStyleSetting.cs" />
+    <Compile Include="DAL\DrawDAL.cs" />
     <Compile Include="DAL\ImageRoiDAL.cs" />
     <Compile Include="DAL\ProcessImageDAL.cs" />
     <Compile Include="DAL\STNodeDAL.cs" />
@@ -153,6 +156,7 @@
     <Compile Include="Model\BasicImageInfo.cs" />
     <Compile Include="Model\FindEdgeRecFormInfo.cs" />
     <Compile Include="Model\NodePropertyGridInfo.cs" />
+    <Compile Include="Model\SpotSearchInfo.cs" />
     <Compile Include="MySTNode\Blender\text.cs" />
     <Compile Include="MySTNode\BottonStyle\CommonStyle.cs" />
     <Compile Include="MySTNode\BottonStyle\OrangeStyle.cs" />
@@ -166,14 +170,15 @@
     <Compile Include="MySTNode\Blender\STNodeColorButton.cs" />
     <Compile Include="MySTNode\Blender\STNodeProgress.cs" />
     <Compile Include="MySTNode\Blender\STNodeSelectBox.cs" />
-    <Compile Include="MySTNode\Fitting\LineFitting.cs" />
+    <Compile Include="MySTNode\Fitting\CircleFitting.cs" />
+    <Compile Include="MySTNode\Operator\SpotSearch.cs" />
     <Compile Include="MySTNode\Operator\Binaryzation.cs" />
     <Compile Include="MySTNode\Operator\Expansion.cs" />
     <Compile Include="MySTNode\Operator\Eroding.cs" />
     <Compile Include="MySTNode\Operator\FindEdgeCircular.cs" />
     <Compile Include="MySTNode\Operator\GrayScale.cs" />
     <Compile Include="MySTNode\Operator\FindEdgeRectangle.cs" />
-    <Compile Include="MySTNode\Fitting\CircleFitting.cs" />
+    <Compile Include="MySTNode\Fitting\LineFitting.cs" />
     <Compile Include="MySTNode\功能节点\RecROI.cs" />
     <Compile Include="MySTNode\功能节点\DotROI.cs" />
     <Compile Include="MySTNode\控件库\ComBoxControl.cs" />

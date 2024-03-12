@@ -23,7 +23,7 @@ namespace _305Vision.Model
         public double Height { get => height; set => height = value; }
         public double Stride { get => stride; set => stride = value; }
 
-        public static BasicImageInfo NewMethod(BitmapData imageData)
+        public static BasicImageInfo GetImgInfo(BitmapData imageData)
         {
             return new BasicImageInfo()
             {

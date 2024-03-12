@@ -1,9 +1,11 @@
-﻿using NLog;
+﻿using _305Vision.SDK;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -71,11 +73,11 @@ namespace _305Vision.DAL
         /// <returns>Size( width,heigh )</returns>
         public static Size GetPictureCurrentSize(PictureBox pictureBox)
         {
-            
+
             //原始宽高
             int originalWidth = pictureBox.Image.Width;
             int originalHeight = pictureBox.Image.Height;
-            
+
 
             PropertyInfo rectangleProperty = pictureBox.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
             Rectangle rectangle = (Rectangle)rectangleProperty.GetValue(pictureBox, null);
@@ -116,12 +118,12 @@ namespace _305Vision.DAL
         /// <param name="pictureBox">图像盒子</param>
         /// <param name="currentSize">真实尺寸</param>
         /// <returns>double缩放比例</returns>
-        public static double GetPictureWRate(PictureBox pictureBox,Size currentSize) 
+        public static double GetPictureWRate(PictureBox pictureBox, Size currentSize)
         {
-            
+
             //缩放比例
             //double rate =   pictureBox.Image.Width / currentSize.Width;
-            double rate =   (double)pictureBox.Image.Height / (double)currentSize.Height;
+            double rate = (double)pictureBox.Image.Height / (double)currentSize.Height;
             return rate;
         }
         /// <summary>
@@ -130,7 +132,7 @@ namespace _305Vision.DAL
         /// <param name="pictureBox">图像盒子</param>
         /// <param name="currentSize">真实尺寸</param>
         /// <returns>double缩放比例</returns>
-        public static double GetPictureHRate(PictureBox pictureBox,Size currentSize) 
+        public static double GetPictureHRate(PictureBox pictureBox, Size currentSize)
         {
             //缩放比例
             //double rate =   pictureBox.Image.Width / currentSize.Width;
@@ -143,11 +145,11 @@ namespace _305Vision.DAL
         /// <param name="pictureBox">图像盒子</param>
         /// <param name="currentSize">真实尺寸</param>
         /// <returns>Size(左边距，上边距)</returns>
-        public static Size GetBlackSize(PictureBox pictureBox, Size currentSize) 
+        public static Size GetBlackSize(PictureBox pictureBox, Size currentSize)
         {
             int black_left_width = (currentSize.Width == pictureBox.Width) ? 0 : (pictureBox.Width - currentSize.Width) / 2;
             int black_top_height = (currentSize.Height == pictureBox.Height) ? 0 : (pictureBox.Height - currentSize.Height) / 2;
-            return new Size(black_left_width,black_top_height); 
+            return new Size(black_left_width, black_top_height);
         }
         /// <summary>
         /// 两点之间的距离
@@ -187,5 +189,44 @@ namespace _305Vision.DAL
 
             return pointList;
         }
+        /// <summary>
+        /// 解析点集
+        /// </summary>
+        /// <param name="points">传回来的点集数组</param>
+        /// <param name="size">传回来的数组大小</param>
+        /// <returns></returns>
+        public static int[] ReadPoints(IntPtr points, int size)
+        {
+            unsafe
+            {
+                byte* ptr = (byte*)points;
+                int[] array = new int[size];
+                Marshal.Copy((IntPtr)ptr, array, 0, size);
+                return array;
+            }
+        }
+        /// <summary>
+        /// 获创建3通道，图像数据的拷贝
+        /// </summary>
+        /// <param name="imageDataPtr"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="channel">通道数</param>
+        /// <returns>imageBytes</returns>
+        public static byte[] GetImageBytes(IntPtr imageDataPtr, int width, int height ,int channel)
+        {
+            int size = width * height * channel;
+            byte[] imageBytes = new byte[size];
+            Marshal.Copy(imageDataPtr, imageBytes, 0, size);
+            unsafe
+            {
+                OpenCVSDK.releaseBuffer(imageDataPtr);
+
+            }
+            return imageBytes;
+        }
+
+
+
     }
 }

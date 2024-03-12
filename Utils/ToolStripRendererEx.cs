@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace _305Vision.Utils
 {
+    //修改控件颜色的 在FormProcess里有用过
     public class ToolStripRendererEx : ToolStripRenderer
     {
         private SolidBrush m_brush = new SolidBrush(Color.FromArgb(255, 52, 86, 141));

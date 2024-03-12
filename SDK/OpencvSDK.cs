@@ -194,10 +194,38 @@ namespace _305Vision.SDK
         /// <param name="xielvK">斜率</param>
         /// <param name="pointX"></param>
         /// <param name="pointY"></param>
-        [DllImport("demo.dll", EntryPoint = "circleFitting", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        [DllImport("demo.dll", EntryPoint = "lineFitting", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe void lineFitting(int[] Array, int num, int discard, ref double xielvK,ref double pointX,ref double pointY);
 
-        
+        /// <summary>
+        /// 斑点查找  要求输入灰度图像
+        /// </summary>
+        /// <param name="data">图像数据指针</param>
+        /// <param name="width">图像宽度</param>
+        /// <param name="height">图像高度</param>
+        /// <param name="stride">图像步长</param>
+        /// <param name="backgroundFlag">背景：黑底白点为1，白底黑点为0</param>
+        /// <param name="areaMax">面积最大约束，无为-1</param>
+        /// <param name="areaMin">面积最小约束，无为-1</param>
+        /// <param name="widthMax">宽度最大约束，无为-1</param>
+        /// <param name="widthMin">宽度最小约束，无为-1</param>
+        /// <param name="heightMax">长度最大约束，无为-1</param>
+        /// <param name="heightMin">长度最小约束，无为-1</param>
+        /// <param name="arrayX">存储斑点X坐标数组</param>
+        /// <param name="arrayY">存储斑点Y坐标数组</param>
+        /// <param name="arrayW">存储斑点宽度数组</param>
+        /// <param name="arrayH">存储斑点高度数组</param>
+        /// <param name="arrayA">存储斑点面积数组</param>
+        /// <param name="size">存储斑点数组长度</param>
+        /// <returns>unsigned char* imageBuffer	//图像数组</returns>
+        [DllImport("demo.dll", EntryPoint = "spotSearch", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern unsafe byte* spotSearch(
+            IntPtr data, int width, int height, int stride, int backgroundFlag, 
+            int areaMax, int areaMin, int widthMax, int widthMin, int heightMax, 
+            int heightMin, ref IntPtr arrayX, ref IntPtr arrayY, ref IntPtr arrayW, ref IntPtr arrayH,
+            ref IntPtr arrayA, ref int size);
+
+
 
 
 

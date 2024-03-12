@@ -105,12 +105,8 @@ namespace _305Vision.MySTNode.Operator
                                 byte* imageDataPtr = OpenCVSDK.eroding(imageData.Scan0, imageData.Width, imageData.Height, imageData.Width * 3, KerSizeX, KerSizeY, (int)KerStr, PointX, PointY, Iterations);
 
                                 // 处理后的数据流复制到托管数组
-                                int size = imageData.Width * imageData.Height * 3;
-                                byte[] imageByte = new byte[size];
-                                Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
-                                OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
+                                return UtilsBLL.GetImageBytes((IntPtr)imageDataPtr, imageData.Width, imageData.Height, 3);
 
-                                return imageByte;
                             }
                         });
                     this.logger.Info("图像" + this.Title + "处理完成");

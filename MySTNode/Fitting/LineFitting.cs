@@ -12,17 +12,18 @@ using _305Vision.MySTNode.控件库;
 using _305Vision.图片操作测试;
 using System.Drawing.Drawing2D;
 using Newtonsoft.Json.Linq;
+using _305Vision.Common;
 
 namespace _305Vision.MySTNode.Fitting
 {
     [STNode("/拟合", "在图像上画点")]
-    public class CircleFitting : ImageBaseNode
+    public class LineFitting : ImageBaseNode
     {
 
         private STNodeOption ArrInputOption;
-        private double jieRadis;
-        private double centerX;
-        private double centerY;
+        private double xielvK;
+        private double pointX;
+        private double pointY;
 
         #region 拟合参数
 
@@ -32,12 +33,12 @@ namespace _305Vision.MySTNode.Fitting
         public int ArrayLength { get; set; }
         [STNodeProperty("抛弃点数量", "抛弃点数量")]
         public int Discard { get; set; }
-        [STNodeProperty("拟合半径", "拟合圆半径")]
-        public double JieRadis { get => jieRadis; set => jieRadis = value; }
-        [STNodeProperty("圆心X", "圆心X")]
-        public double CenterX { get => centerX; set => centerX = value; }
-        [STNodeProperty("圆心Y", "圆心Y")]
-        public double CenterY { get => centerY; set => centerY = value; }
+        [STNodeProperty("直线斜率", "直线斜率")]
+        public double XielvK { get => xielvK; set => xielvK = value; }
+        [STNodeProperty("点的X坐标", "点的X坐标")]
+        public double PointX { get => pointX; set => pointX = value; }
+        [STNodeProperty("点的Y坐标", "点的Y坐标")]
+        public double PointY { get => pointY; set => pointY = value; }
 
         //
         //public double XielvK { get; set; }
@@ -51,21 +52,21 @@ namespace _305Vision.MySTNode.Fitting
         protected override void OnCreate()
         {
             base.OnCreate();
-            this.Title = "圆形拟合";
+            this.Title = "直线拟合";
             ArrInputOption = InputOptions.Add("点集", typeof(int[]), true);
 
             this.AutoSize = false;
-            this.Height += 50;
-            var selectButton = new STNodeButton
-            {
-                Text = "选取",
-                Location = new Point(42, 130)
-            };
-            CenterX = 0; 
-            CenterY = 0;
-            JieRadis = 0;
+            this.Height += 30;
+            //var selectButton = new STNodeButton
+            //{
+            //    Text = "选取",
+            //    Location = new Point(42, 130)
+            //};
+            PointX = 0; 
+            PointY = 0;
+            XielvK = 0;
 
-            this.Controls.Add(selectButton);
+            //this.Controls.Add(selectButton);
             inOption.DataTransfer += OpImgInDataTransfer;
             ArrInputOption.DataTransfer += ArrInputOption_DataTransfer;
             this.Invalidate();
@@ -106,16 +107,13 @@ namespace _305Vision.MySTNode.Fitting
 
         private void ProcessImage(Bitmap img)
         {
+            OpenCVSDK.lineFitting(Array, (int)Array.Length, (int)Discard,ref xielvK, ref pointX, ref pointY);
 
-            OpenCVSDK.circleFitting(Array, (int)Array.Length, (int)Discard,ref jieRadis, ref centerX, ref centerY);
-
-            logger.Info(jieRadis);
             //经过OpenCVSDK算法处理后，算出了圆心和半径
-            // 在图像上绘制圆
-            Bitmap newImage = DrawCircleOnImage(img, CenterX, CenterY, JieRadis);
+            // 在图像上绘制直线
+            Bitmap newImage = DrawBll.DrawLineOnImage(img, PointX, PointY, XielvK);
 
             // 将新图像传递给输出
-            m_op_img_out.TransferData(newImage);
             m_img_draw = newImage;
             m_op_img_out.TransferData((Image)newImage);
             this.Invalidate();
@@ -125,32 +123,10 @@ namespace _305Vision.MySTNode.Fitting
         protected override void OnDrawBody(DrawingTools dt)
         {
             base.OnDrawBody(dt);
-            STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top + 20);
+            STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top + STNodeStyleSetting.COMMON_TOP);
         }
 
-        private Bitmap DrawCircleOnImage(Bitmap image, double centerX, double centerY, double radius)
-        {
-            // 创建一个新的图像副本，以免修改原始图像
-            Bitmap newImage = new Bitmap(image);
-
-            // 在图像上创建Graphics对象
-            using (Graphics g = Graphics.FromImage(newImage))
-            {
-                // 创建一个画笔
-                using (Pen pen = new Pen(Color.Red, 2)) // 这里使用红色笔绘制圆形，可以根据需要进行调整
-                {
-                    // 计算圆的边界矩形
-                    int x = (int)(centerX - radius);
-                    int y = (int)(centerY - radius);
-                    int diameter = (int)(2 * radius);
-
-                    // 在图像上绘制圆
-                    g.DrawEllipse(pen, x, y, diameter, diameter);
-                }
-            }
-
-            return newImage;
-        }
+        
 
 
     }

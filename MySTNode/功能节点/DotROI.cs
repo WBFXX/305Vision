@@ -139,18 +139,15 @@ namespace _305Vision.MySTNode.功能节点
         {
             try
             {
-                BasicImageInfo = BasicImageInfo.NewMethod(imageData);
+                BasicImageInfo = BasicImageInfo.GetImgInfo(imageData);
                 unsafe
                 {
                     byte* imageDataPtr = OpenCVSDK.drawPoint(BasicImageInfo.ImagePtr, (int)BasicImageInfo.Width,
                         (int)BasicImageInfo.Height, (int)BasicImageInfo.Stride, Size, Point.X, Point.Y,
                         Color.R, Color.G, Color.B, Thickness);
                     // 处理后的数据流复制到托管数组
-                    int size = imageData.Width * imageData.Height * 3;
-                    byte[] imageByte = new byte[size];
-                    Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
-                    OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
-                    return imageByte;
+                    return UtilsBLL.GetImageBytes((IntPtr)imageDataPtr, imageData.Width, imageData.Height, 3);
+
                 }
             }
             catch (Exception ex)

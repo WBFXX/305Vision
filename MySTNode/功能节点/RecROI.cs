@@ -105,7 +105,7 @@ namespace _305Vision.MySTNode.功能节点
                             int aHeight = Math.Abs(End.Y - Start.Y);
 
                             // 保存提取数据结构
-                            BasicImageInfo info = BasicImageInfo.NewMethod(imageData);
+                            BasicImageInfo info = BasicImageInfo.GetImgInfo(imageData);
                             byte* imageDataPtr = OpenCVSDK.roiCropping(info.ImagePtr, (int)info.Width, (int)info.Height, (int)info.Stride, Start.X, Start.Y, End.X, End.Y, 255, 0, 200, Angle);
 
                             int size = (aWidth + 3) / 4 * 4 * aHeight * 3;
