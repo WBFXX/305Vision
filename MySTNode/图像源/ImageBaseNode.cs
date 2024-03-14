@@ -75,7 +75,7 @@ namespace _305Vision.图片操作测试
         {
             #region 改变颜色部分的代码
             Color _TitleColor;
-            if (isSecond || this.Title== "ImageInput")
+            if (isSecond)
             {
                 _TitleColor = Color.FromArgb(200, Color.DarkCyan);
             }

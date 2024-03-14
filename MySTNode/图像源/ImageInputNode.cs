@@ -28,6 +28,7 @@ namespace _305Vision.图片操作测试
                 if (!string.IsNullOrEmpty(value))
                 {
                     img = Image.FromFile(value);
+                    isSecond=true;
                 }
                 //判断输入图片的宽度
                 if(img.Width * 3 %4!=0 )

@@ -13,6 +13,7 @@ using _305Vision.图片操作测试;
 using System.Drawing.Drawing2D;
 using Newtonsoft.Json.Linq;
 using _305Vision.Common;
+using System.Data.SqlTypes;
 
 namespace _305Vision.MySTNode.Fitting
 {
@@ -33,6 +34,8 @@ namespace _305Vision.MySTNode.Fitting
         public int ArrayLength { get; set; }
         [STNodeProperty("抛弃点数量", "抛弃点数量")]
         public int Discard { get; set; }
+        [STNodeProperty("直线长度", "直线长度")]
+        public int LineLength { get; set; }
         [STNodeProperty("直线斜率", "直线斜率")]
         public double XielvK { get => xielvK; set => xielvK = value; }
         [STNodeProperty("点的X坐标", "点的X坐标")]
@@ -65,6 +68,7 @@ namespace _305Vision.MySTNode.Fitting
             PointX = 0; 
             PointY = 0;
             XielvK = 0;
+            LineLength = 500;
 
             //this.Controls.Add(selectButton);
             inOption.DataTransfer += OpImgInDataTransfer;
@@ -111,7 +115,7 @@ namespace _305Vision.MySTNode.Fitting
 
             //经过OpenCVSDK算法处理后，算出了圆心和半径
             // 在图像上绘制直线
-            Bitmap newImage = DrawBll.DrawLineOnImage(img, PointX, PointY, XielvK);
+            Bitmap newImage = DrawBll.DrawLineOnImage(img, PointX, PointY, XielvK , LineLength);
 
             // 将新图像传递给输出
             m_img_draw = newImage;

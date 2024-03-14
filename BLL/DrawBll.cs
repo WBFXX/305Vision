@@ -18,9 +18,9 @@ namespace _305Vision.BLL
         /// <param name="centerY">圆心Y</param>
         /// <param name="radius">半径</param>
         /// <returns>新图像</returns>
-        public static Bitmap DrawLineOnImage(Bitmap image, double pointX, double pointY, double XielvK)
+        public static Bitmap DrawLineOnImage(Bitmap image, double pointX, double pointY, double XielvK, double lineLength)
         {
-            return DrawDAL.DrawLineOnImage(image,pointX,pointY,XielvK);
+            return DrawDAL.DrawLineOnImage(image,pointX,pointY,XielvK,lineLength);
         }
         /// <summary>
         /// 在图上画直线

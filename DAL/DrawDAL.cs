@@ -48,25 +48,25 @@ namespace _305Vision.DAL
         /// <param name="pointY"></param>
         /// <param name="XielvK">斜率</param>
         /// <returns>新的图像</returns>
-        public static Bitmap DrawLineOnImage(Bitmap image, double pointX, double pointY, double XielvK)
+        public static Bitmap DrawLineOnImage(Bitmap image, double pointX, double pointY, double XielvK, double lineLength)
         {
-            // 创建一个新的图像副本，以免修改原始图像
+            // 创建一个新的图像副本，以免修改原始图像  
             Bitmap newImage = new Bitmap(image);
 
-            // 在图像上创建Graphics对象
+            // 在图像上创建Graphics对象  
             using (Graphics g = Graphics.FromImage(newImage))
             {
-                // 创建一个画笔
-                using (Pen pen = new Pen(Color.Red, 2)) // 这里使用红色笔绘制圆形，可以根据需要进行调整
+                // 创建一个画笔  
+                using (Pen pen = new Pen(Color.Red, 2)) // 这里使用红色笔绘制直线，可以根据需要进行调整  
                 {
+                    // 计算直线的终点坐标  
+                    double startX = pointX - lineLength/2; // 根据传入的lineLength计算直线终点的X坐标  
+                    double startY = pointY - XielvK * lineLength/2; // 根据斜率计算直线终点的Y坐标
+                    double endX = pointX + lineLength/2; // 根据传入的lineLength计算直线终点的X坐标  
+                    double endY = pointY + XielvK * lineLength/2; // 根据斜率计算直线终点的Y坐标  
 
-                    // 计算直线的终点坐标，假设为 (endX, endY)
-                    double endX = pointX + 100; // 例如，直线长度为100个单位
-                    double endY = pointY + XielvK * 100; // 根据斜率计算直线终点的Y坐标
-
-                    // 在图像上绘制直线
-                    g.DrawLine(pen, (float)pointX, (float)pointY, (float)endX, (float)endY);
-
+                    // 在图像上绘制直线  
+                    g.DrawLine(pen, (float)startX, (float)startY, (float)endX, (float)endY);
                 }
             }
 
