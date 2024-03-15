@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using _305Vision.MySTNode.控件库;
 using _305Vision.图片操作测试;
 using System.Collections.Generic;
+using _305Vision.Common;
 
 namespace _305Vision.MySTNode.Operator
 {
@@ -35,6 +36,8 @@ namespace _305Vision.MySTNode.Operator
         public int GradientThreshold { get; set; }
         [STNodeProperty("点集", "点集")]
         public int[] Array { get; set; }
+        [STNodeProperty("找边方向", "找边方向")]
+        public _305Enum.EdgeDetectionType EdgeDetectionType { get; set; }
         #endregion
 
         protected override void OnCreate()
@@ -51,6 +54,7 @@ namespace _305Vision.MySTNode.Operator
                 Text = "选取",
                 Location = new Point(42, 130)
             };
+            EdgeDetectionType = _305Enum.EdgeDetectionType.黑到白;
             GradientThreshold = 20;
             EdgeNum = 20;
             selectButton.MouseClick += SelectButton_Click;
@@ -61,7 +65,7 @@ namespace _305Vision.MySTNode.Operator
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
-            findEdgeCircular.InitializeParameters(pointX,pointY,radiusSmall,radiusBig,EdgeNum,GradientThreshold);
+            findEdgeCircular.InitializeParameters(pointX,pointY,radiusSmall,radiusBig,EdgeNum,GradientThreshold, EdgeDetectionType);
 
             DialogResult result = findEdgeCircular.ShowDialog();
 
@@ -73,6 +77,7 @@ namespace _305Vision.MySTNode.Operator
             radiusSmall = findEdgeCircular.radiusSmall;
             radiusBig = findEdgeCircular.radiusBig;
             GradientThreshold = findEdgeCircular.gradientThreshold;
+            EdgeDetectionType = findEdgeCircular.edgeDetectionType;
 
             m_img_draw = findEdgeCircular.OverImage;
             m_op_img_out.TransferData(findEdgeCircular.OverImage);
@@ -114,7 +119,7 @@ namespace _305Vision.MySTNode.Operator
                     IntPtr Points = IntPtr.Zero;
                     int sizee=0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeCircular(info.ImagePtr, (int)info.Width, (int)info.Height,
-                        (int)info.Stride, pointX, pointY, radiusSmall, radiusBig, EdgeNum, GradientThreshold, ref Points,ref sizee);
+                        (int)info.Stride, pointX, pointY, radiusSmall, radiusBig, EdgeDetectionType ,EdgeNum, GradientThreshold, ref Points,ref sizee);
 
                     //读取点集
                     int[] array = new int[sizee];//读取点集

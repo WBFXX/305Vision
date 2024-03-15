@@ -13,13 +13,15 @@ using _305Vision.图片操作测试;
 using System.Drawing.Drawing2D;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using _305Vision.Common;
+using static _305Vision.Common._305Enum;
 
 namespace _305Vision.MySTNode.Operator
 {
     [STNode("/算子", "在图像上画点")]
     public class FindEdgeRectangle : ImageBaseNode
     {
-        
+
         private STNodeOption outDataOption;
         private OWindows.FindEdgeRectangleForm findEdgeRectangleForm = new OWindows.FindEdgeRectangleForm();
 
@@ -37,7 +39,12 @@ namespace _305Vision.MySTNode.Operator
         //[STNodeProperty("点集", "点集")]
         [STNodeProperty("点集", "点集")]
         public int[] Array { get; set; }
+        [STNodeProperty("找边方向", "找边方向")]
+        public _305Enum.EdgeDetectionType EdgeDetectionType { get; set; }
+
         #endregion
+
+
 
         protected override void OnCreate()
         {
@@ -52,6 +59,7 @@ namespace _305Vision.MySTNode.Operator
                 Text = "选取",
                 Location = new Point(42, 130)
             };
+            EdgeDetectionType = EdgeDetectionType.黑到白;
             GradientThreshold = 20;
             EdgeNum = 20;
             selectButton.MouseClick += SelectButton_Click;
@@ -73,7 +81,7 @@ namespace _305Vision.MySTNode.Operator
         {
             if(this.inOption.ConnectionCount==0)return;
 
-            findEdgeRectangleForm.InitializeParameters(EdgeNum, Start, End, Array, GradientThreshold);
+            findEdgeRectangleForm.InitializeParameters(EdgeNum, Start, End, Array, GradientThreshold, EdgeDetectionType);
 
             DialogResult result = findEdgeRectangleForm.ShowDialog();
 
@@ -85,6 +93,7 @@ namespace _305Vision.MySTNode.Operator
             Angle = findEdgeRectangleForm.Angle;
             Array = findEdgeRectangleForm.Array;
             GradientThreshold = findEdgeRectangleForm.GradientThreshold;
+            EdgeDetectionType=findEdgeRectangleForm.EdgeDetectionType;
 
             //m_img_draw = findEdgeRectangleForm.OverImage;
             m_op_img_out.TransferData(findEdgeRectangleForm.OverImage);
@@ -143,7 +152,7 @@ namespace _305Vision.MySTNode.Operator
                     IntPtr Points  = IntPtr.Zero;
                     int sizee = 0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(info.ImagePtr, (int)info.Width, (int)info.Height,
-                        (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, GradientThreshold,ref Points, ref sizee);
+                        (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeDetectionType , EdgeNum, GradientThreshold,ref Points, ref sizee);
 
                     //读取点集
                     //byte* arrayPtr = (byte*)Points;//读取点集

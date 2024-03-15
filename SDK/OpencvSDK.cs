@@ -1,11 +1,12 @@
-﻿using System;
+﻿using _305Vision.Common;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using static _305Vision.MySTNode.Operator.SpotSearch;
 
 namespace _305Vision.SDK
 {
@@ -155,7 +156,7 @@ namespace _305Vision.SDK
         /// <param name="listPoints"></param>
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "findEdgeRectangle", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe byte* findEdgeRectangle(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,double angle,int edgeNum,int gradientThreshold, ref IntPtr listPoints, ref int size);
+        public static extern unsafe byte* findEdgeRectangle(IntPtr intPtr, int width, int height, int stride, double startX,double startY,double endX,double endY,double angle, _305Enum.EdgeDetectionType EdgeDetectionType, int edgeNum,int gradientThreshold, ref IntPtr listPoints, ref int size);
 
         /// <summary>
         /// 圆形找边
@@ -172,7 +173,7 @@ namespace _305Vision.SDK
         /// <param name="gradientThreshold">梯度变化阈值</param>
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "findEdgeCircular", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe byte* findEdgeCircular(IntPtr intPtr, int width, int height, int stride, int pointX, int pointY, int radiusSmall, int radiusBig, int edgeNum, int gradientThreshold ,ref IntPtr listPoints,ref int size);
+        public static extern unsafe byte* findEdgeCircular(IntPtr intPtr, int width, int height, int stride, int pointX, int pointY, int radiusSmall, int radiusBig, _305Enum.EdgeDetectionType EdgeDetectionType, int edgeNum, int gradientThreshold ,ref IntPtr listPoints,ref int size);
         /// <summary>
         /// 圆形拟合
         /// </summary>
@@ -220,7 +221,7 @@ namespace _305Vision.SDK
         /// <returns>unsigned char* imageBuffer	//图像数组</returns>
         [DllImport("demo.dll", EntryPoint = "spotSearch", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
         public static extern unsafe byte* spotSearch(
-            IntPtr data, int width, int height, int stride, int backgroundFlag, 
+            IntPtr data, int width, int height, int stride, _305Enum.BlackGround backgroundFlag, 
             int areaMax, int areaMin, int widthMax, int widthMin, int heightMax, 
             int heightMin, ref IntPtr arrayX, ref IntPtr arrayY, ref IntPtr arrayW, ref IntPtr arrayH,
             ref IntPtr arrayA, ref int size);

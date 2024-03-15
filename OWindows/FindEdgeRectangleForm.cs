@@ -1,4 +1,5 @@
 ﻿using _305Vision.BLL;
+using _305Vision.Common;
 using _305Vision.Model;
 using _305Vision.SDK;
 using Newtonsoft.Json.Linq;
@@ -26,6 +27,7 @@ namespace _305Vision.OWindows
         private int gradientThreshold;
         private List<Point> listPoints = new List<Point>();
         private int[] array;
+        private _305Enum.EdgeDetectionType edgeDetectionType;
         BasicImageInfo basicImageInfo;
         
 
@@ -41,19 +43,20 @@ namespace _305Vision.OWindows
         public double Angle { get => angle; set => angle = value; }
         //public List<Point> ListPoints { get => listPoints; set => listPoints = value; }
         public int[] Array { get => array; set => array = value; }
-
+        public _305Enum.EdgeDetectionType EdgeDetectionType { get=> edgeDetectionType; set => edgeDetectionType = value; }
         public FindEdgeRectangleForm()
         {
             InitializeComponent();
         }
         //这里添加了array
-        public void InitializeParameters(int edgeNum, Point start, Point end, int[] array , int gradientThreshold)
+        public void InitializeParameters(int edgeNum, Point start, Point end, int[] array , int gradientThreshold , _305Enum.EdgeDetectionType edgeDetectionType)
         {
             EdgeNum = edgeNum;
             Start = start;
             End = end;
             Array = array;
             GradientThreshold = gradientThreshold;
+            EdgeDetectionType = edgeDetectionType;
         }
 
         private void RetangelROI_Load(object sender, EventArgs e)
@@ -137,7 +140,7 @@ namespace _305Vision.OWindows
                     IntPtr Points = IntPtr.Zero;
                     int sizee = 0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeRectangle(basicImageInfo.ImagePtr, (int)basicImageInfo.Width,
-                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeNum, GradientThreshold, ref Points, ref sizee);
+                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeDetectionType ,EdgeNum, GradientThreshold, ref Points, ref sizee);
                     int size = (int)(basicImageInfo.Width * basicImageInfo.Height * 3);
                     
                     

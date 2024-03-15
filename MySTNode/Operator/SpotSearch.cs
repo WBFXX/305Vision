@@ -22,9 +22,11 @@ namespace _305Vision.MySTNode.Operator
     {
 
         #region 拟合参数
+        
+
 
         [STNodeProperty("背景", "默认为0")]
-        public int BackGroundFlag { get; set; }
+        public _305Enum.BlackGround BackGroundFlag { get; set; }
         [STNodeProperty("面积最大约束", "“无”为-1")]
         public int AreaMax { get; set; }
         [STNodeProperty("面积最小约束", "“无”为-1")]
@@ -59,7 +61,7 @@ namespace _305Vision.MySTNode.Operator
             base.OnCreate();
             this.Title = "斑点查找";
             #region 参数初始化默认值
-            BackGroundFlag = 1;
+            BackGroundFlag = _305Enum.BlackGround.黑色;
             AreaMax = -1;
             AreaMin = -1;
             WidthMax = -1;

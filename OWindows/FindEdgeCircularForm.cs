@@ -1,4 +1,5 @@
 ﻿using _305Vision.BLL;
+using _305Vision.Common;
 using _305Vision.Model;
 using _305Vision.SDK;
 using Newtonsoft.Json.Linq;
@@ -34,6 +35,7 @@ namespace _305Vision.OWindows
         public int EdgeNum { get; set; }
         public int gradientThreshold { get; set; }
         public Point End { get; set; }
+        public _305Enum.EdgeDetectionType edgeDetectionType { get; set; }
         #region 点集添加
         private int[] array;//点集添加
         public int[] Array { get => array; set => array = value; }
@@ -44,7 +46,7 @@ namespace _305Vision.OWindows
             InitializeComponent();
         }
 
-        public void InitializeParameters(int pointX, int pointY, int radiusSmall, int radiusBig, int edgeNum, int gradientThreshold)
+        public void InitializeParameters(int pointX, int pointY, int radiusSmall, int radiusBig, int edgeNum, int gradientThreshold , _305Enum.EdgeDetectionType EdgeDetectionType)
         {
             this.pointX = pointX;
             this.pointY = pointY;
@@ -52,6 +54,7 @@ namespace _305Vision.OWindows
             this.radiusBig = radiusBig;
             this.EdgeNum = edgeNum;
             this.gradientThreshold = gradientThreshold;
+            this.edgeDetectionType = EdgeDetectionType;
         }
 
         private void RetangelROI_Load(object sender, EventArgs e)
@@ -141,7 +144,7 @@ namespace _305Vision.OWindows
                     IntPtr Points = IntPtr.Zero;
                     int sizee = 0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeCircular(basicImageInfo.ImagePtr, (int)basicImageInfo.Width,
-                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, pointX,pointY,radiusSmall,radiusBig,EdgeNum,gradientThreshold, ref Points, ref sizee);
+                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, pointX,pointY,radiusSmall,radiusBig,edgeDetectionType,EdgeNum,gradientThreshold, ref Points, ref sizee);
                     #region 读取点集
                     byte* arrayPtr = (byte*)Points;//读取点集
                     array = new int[sizee];//读取点集

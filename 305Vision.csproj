@@ -145,6 +145,7 @@
     <Compile Include="BLL\STNodeOptionBLL.cs" />
     <Compile Include="BLL\UtilsBLL.cs" />
     <Compile Include="BLL\WindowsViewBLL.cs" />
+    <Compile Include="Common\305Enum.cs" />
     <Compile Include="Common\STNodeStyleSetting.cs" />
     <Compile Include="DAL\DrawDAL.cs" />
     <Compile Include="DAL\ImageRoiDAL.cs" />
