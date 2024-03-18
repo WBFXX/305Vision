@@ -108,19 +108,26 @@ namespace _305Vision.OWindows
 
                 if (pictureBox != null)
                 {
-                    Point clientMouse = e.Location;
-                    Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                    double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                    double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                    double x = ((double)((clientMouse.X - lSize.Width) * wrate));
-                    double y = ((double)((clientMouse.Y - lSize.Height) * hrate));
-                    End = new Point((int)x, (int)y);
-                    this.radiusBig = (int)UtilsBLL.CalculateDistance(pointX, pointY, End.X, End.Y);//求两点间距离
-                    this.radiusSmall = radiusBig / 2;//小圆半径为大圆半径的一半
+                    // 获取PictureBox图像的边界
+                    Rectangle imageBounds = ImageRoiBLL.GetImageBounds(pictureBox);
+
+                    // 检查鼠标是否在PictureBox图像的范围内
+                    if (imageBounds.Contains(e.Location))
+                    {
+                        Point clientMouse = e.Location;
+                        Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                        double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                        double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                        double x = ((double)((clientMouse.X - lSize.Width) * wrate));
+                        double y = ((double)((clientMouse.Y - lSize.Height) * hrate));
+                        End = new Point((int)x, (int)y);
+                        this.radiusBig = (int)UtilsBLL.CalculateDistance(pointX, pointY, End.X, End.Y);//求两点间距离
+                        this.radiusSmall = radiusBig / 2;//小圆半径为大圆半径的一半
 
 
-                    Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage, imageData => ProcessImageData(imageData));
-                    pictureBox.Image = processedImage;
+                        Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage, imageData => ProcessImageData(imageData));
+                        pictureBox.Image = processedImage;
+                    }
                 }
             }
         }

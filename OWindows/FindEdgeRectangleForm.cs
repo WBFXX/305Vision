@@ -30,7 +30,7 @@ namespace _305Vision.OWindows
         private _305Enum.EdgeDetectionType edgeDetectionType;
         BasicImageInfo basicImageInfo;
         
-
+        
         private bool isMove = false;//记录目标是否在画框
         #endregion
 
@@ -107,21 +107,28 @@ namespace _305Vision.OWindows
             {
                 PictureBox pictureBox = sender as PictureBox;
 
-                if (pictureBox != null)
+                if (pictureBox != null && pictureBox.Image != null)
                 {
-                    Point clientMouse = e.Location;
-                    Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                    double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                    double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                    double x = ((double)((clientMouse.X - lSize.Width) * wrate));
-                    double y = ((double)((clientMouse.Y - lSize.Height) * hrate));
-                    End = new Point((int)x, (int)y);
-                    Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage, imageData => ProcessImageData(imageData));
-                    pictureBox.Image = processedImage;
+                    // 获取PictureBox图像的边界
+                    Rectangle imageBounds = ImageRoiBLL.GetImageBounds(pictureBox);
+
+                    // 检查鼠标是否在PictureBox图像的范围内
+                    if (imageBounds.Contains(e.Location))
+                    {
+                        // 鼠标在图像范围内，执行算法
+                        Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                        double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                        double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                        double x = ((double)((e.Location.X - lSize.Width) * wrate));
+                        double y = ((double)((e.Location.Y - lSize.Height) * hrate));
+                        End = new Point((int)x, (int)y);
+                        Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage, imageData => ProcessImageData(imageData));
+                        pictureBox.Image = processedImage;
+                    }
+                    
                 }
             }
         }
-
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -162,5 +169,6 @@ namespace _305Vision.OWindows
                 return null;
             }
         }
+
     }
 }

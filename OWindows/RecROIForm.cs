@@ -88,42 +88,47 @@ namespace _305Vision.OWindows
 
                 if (pictureBox != null)
                 {
-                    Point clientMouse = e.Location;
-                    Lsize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                    wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                    hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    // 获取PictureBox图像的边界
+                    Rectangle imageBounds = ImageRoiBLL.GetImageBounds(pictureBox);
 
-                    double x = ((double)((clientMouse.X - Lsize.Width) * wrate));
-                    double y = ((double)((clientMouse.Y - Lsize.Height) * hrate));
-                    End = new Point((int)x, (int)y);
-
-                    Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage, imageData =>
+                    // 检查鼠标是否在PictureBox图像的范围内
+                    if (imageBounds.Contains(e.Location))
                     {
-                        unsafe
+                        Point clientMouse = e.Location;
+                        Lsize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                        wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                        hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+
+                        double x = ((double)((clientMouse.X - Lsize.Width) * wrate));
+                        double y = ((double)((clientMouse.Y - Lsize.Height) * hrate));
+                        End = new Point((int)x, (int)y);
+
+                        Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage, imageData =>
                         {
-                            try
+                            unsafe
                             {
-                                logger.Info("截取宽度：" + Math.Abs(End.X - Start.X));
-                                logger.Info("截取高度：" + Math.Abs(End.Y - Start.Y));
-                                logger.Info("起点坐标：" + Start + ";" + "终点坐标：" + End);
-                                byte* imageDataPtr = OpenCVSDK.drawRotatedRect(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride,
-                                    Start.X, Start.Y, End.X, End.Y, 255, 0, 200, 0);
+                                try
+                                {
 
-                                int size = imageData.Width * imageData.Height * 3;
-                                byte[] imageByte = new byte[size];
-                                Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
-                                OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
-                                return imageByte;
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.ToString());
-                                return null;
-                            }
-                        }
-                    });
+                                    byte* imageDataPtr = OpenCVSDK.drawRotatedRect(imageData.Scan0, imageData.Width, imageData.Height, imageData.Stride,
+                                        Start.X, Start.Y, End.X, End.Y, 255, 0, 200, 0);
 
-                    pictureBox.Image = processedImage;
+                                    int size = imageData.Width * imageData.Height * 3;
+                                    byte[] imageByte = new byte[size];
+                                    Marshal.Copy((IntPtr)imageDataPtr, imageByte, 0, size);
+                                    OpenCVSDK.releaseBuffer((IntPtr)imageDataPtr);
+                                    return imageByte;
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show(ex.ToString());
+                                    return null;
+                                }
+                            }
+                        });
+
+                        pictureBox.Image = processedImage;
+                    }
                 }
             }
         }
