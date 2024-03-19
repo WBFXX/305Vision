@@ -25,6 +25,7 @@ namespace _305Vision.OWindows
         private bool isMove = false;
 
         #endregion
+        private PictureBox pictureBox1 { get; set; }
         public Image OverImage { get => overImage; set => overImage = value; }
         public Image ResouseImage { get => resouseImage; set => resouseImage = value; }
         public Point Start { get => start; set => start = value; }
@@ -38,7 +39,11 @@ namespace _305Vision.OWindows
 
         private void RecROIForm_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = ResouseImage;
+            pictureBox1 = pictureWindow1.PictureBox;
+            pictureWindow1.Image = (Bitmap)ResouseImage;
+            pictureBox1.MouseDown += pictureBox1_MouseDown;
+            pictureBox1.MouseMove += pictureBox1_MouseMove;
+            pictureBox1.MouseUp += pictureBox1_MouseUp;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -55,34 +60,39 @@ namespace _305Vision.OWindows
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            PictureBox pictureBox = sender as PictureBox;
-
-            Point clientMouse = e.Location;
-
-            resouseImage = pictureBox1.Image;
-
-            Image image = pictureBox.Image;
-
-            if (image != null)
+            //当没有按下Ctrl键时 触发 画方形操作
+            if ((Control.ModifierKeys & Keys.Control) != Keys.Control)
             {
-                Lsize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                double startX = ((double)((clientMouse.X - Lsize.Width) * wrate));
-                double startY = ((double)((clientMouse.Y - Lsize.Height) * hrate));
-                Start = new Point((int)startX, (int)startY);
-                isMove = true;
+                PictureBox pictureBox = sender as PictureBox;
 
-            }
-            else
-            {
-                MessageBox.Show("当前窗口无图像");
+                Point clientMouse = e.Location;
+
+                resouseImage = pictureBox1.Image;
+
+                Image image = pictureBox.Image;
+
+                if (image != null)
+                {
+                    Lsize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    double startX = ((double)((clientMouse.X - Lsize.Width) * wrate));
+                    double startY = ((double)((clientMouse.Y - Lsize.Height) * hrate));
+                    Start = new Point((int)startX, (int)startY);
+                    isMove = true;
+
+                }
+                else
+                {
+                    MessageBox.Show("当前窗口无图像");
+                }
             }
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMove)
+            //检查是否同时按下了 Control 键
+            if (isMove && (Control.ModifierKeys & Keys.Control) != Keys.Control)
             {
                 PictureBox pictureBox = sender as PictureBox;
 
@@ -135,7 +145,8 @@ namespace _305Vision.OWindows
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            isMove = false;
+            if (isMove && (Control.ModifierKeys & Keys.Control) != Keys.Control)
+                isMove = false;
         }
 
         private void btnCrop_Click(object sender, EventArgs e)
@@ -172,6 +183,6 @@ namespace _305Vision.OWindows
             Close();
         }
 
-        
+
     }
 }

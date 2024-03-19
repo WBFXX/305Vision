@@ -25,6 +25,7 @@ namespace _305Vision.OWindows
         BasicImageInfo basicImageInfo;
 
         private bool isMovee = false;//记录目标是否在画框
+        private bool isFinished = false;//记录是否已经拖动完画图
 
 
         public Image OverImage { get => overImage; set => overImage = value; }
@@ -86,12 +87,14 @@ namespace _305Vision.OWindows
 
                 PictureBox pictureBox = sender as PictureBox;
                 //PictureBox pictureBox = pictureWindow.PictureBox;
-
                 Point clientMouse = e.Location;
-                resouseImage = pictureBox.Image;
-
+                //resouseImage = pictureBox.Image;
                 Image image = pictureBox.Image;
-
+                if (isFinished)
+                {
+                    pictureBox.Image = resouseImage;
+                    isFinished = false;
+                }
                 if (image != null)
                 {
                     Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
@@ -122,9 +125,8 @@ namespace _305Vision.OWindows
                 {
                     // 获取PictureBox图像的边界
                     Rectangle imageBounds = ImageRoiBLL.GetImageBounds(pictureBox);
-                    logger.Info(imageBounds + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                     // 检查鼠标是否在PictureBox图像的范围内
-                    if (imageBounds.Contains(e.Location))
+                    if (imageBounds.Contains(e.Location) )
                     {
                         Point clientMouse = e.Location;
                         Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
@@ -135,11 +137,15 @@ namespace _305Vision.OWindows
                         End = new Point((int)x, (int)y);
                         this.radiusBig = (int)UtilsBLL.CalculateDistance(pointX, pointY, End.X, End.Y);//求两点间距离
                         this.radiusSmall = radiusBig / 2;//小圆半径为大圆半径的一半
-
-
-                        Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage, imageData => ProcessImageData(imageData));
-                        pictureBox.Image = (Bitmap)processedImage;
+                        //防止小圆半径出镜 报错
+                        if (pointX - radiusSmall > 0 && pointY - radiusSmall >0)
+                        {
+                            Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage, imageData => ProcessImageData(imageData));
+                            pictureBox.Image = (Bitmap)processedImage;
+                        }
+                        
                     }
+
                 }
             }
         }
@@ -149,6 +155,7 @@ namespace _305Vision.OWindows
         {
             if (isMovee && (Control.ModifierKeys & Keys.Control) != Keys.Control)
             {
+                isFinished = true;
                 isMovee = false;
             }
         }
@@ -158,9 +165,8 @@ namespace _305Vision.OWindows
             try
             {
                 basicImageInfo = BasicImageInfo.GetImgInfo(imageData);
-                logger.Info("小圆半径：" + Math.Abs(End.X - pointX));
-                logger.Info("大圆半径：" + Math.Abs(End.Y - pointY));
-
+                //logger.Info("小圆半径：" + Math.Abs(End.X - pointX));
+                //logger.Info("大圆半径：" + Math.Abs(End.Y - pointY));
                 unsafe
                 {
                     IntPtr Points = IntPtr.Zero;

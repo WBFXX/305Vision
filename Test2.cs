@@ -35,7 +35,7 @@ namespace _305Vision
             InitializeComponent();
             //string imgePath = "e:/1.jpg";
             //Bitmap bitmap = new Bitmap(imgePath);
-            //pictureBox1.Image = (Image)bitmap;
+            //pictureBox.Image = (Image)bitmap;
             isDrawing = false;
             isRotating = false;
             rotateHandle = Point.Empty;

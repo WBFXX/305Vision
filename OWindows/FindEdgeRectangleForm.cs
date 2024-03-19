@@ -48,6 +48,7 @@ namespace _305Vision.OWindows
         {
             InitializeComponent();
         }
+        PictureBox pictureBox { get; set; }
         //这里添加了array
         public void InitializeParameters(int edgeNum, Point start, Point end, int[] array , int gradientThreshold , _305Enum.EdgeDetectionType edgeDetectionType)
         {
@@ -61,14 +62,18 @@ namespace _305Vision.OWindows
 
         private void RetangelROI_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = ResouseImage;
+            pictureBox = pictureWindow1.PictureBox;
+            pictureWindow1.Image = (Bitmap)ResouseImage;
+            pictureBox.MouseDown += pictureBox1_MouseDown;
+            pictureBox.MouseMove += pictureBox1_MouseMove;
+            pictureBox.MouseUp += pictureBox1_MouseUp;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image != null)
+            if (pictureBox.Image != null)
             {
-                OverImage = pictureBox1.Image;
+                OverImage = pictureBox.Image;
                 logger.Info("ROI点图像处理完成。");
             }
             this.DialogResult = DialogResult.OK;
@@ -77,33 +82,35 @@ namespace _305Vision.OWindows
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            PictureBox pictureBox = sender as PictureBox;
-
-            Point clientMouse = e.Location;
-            resouseImage = pictureBox1.Image;
-
-            Image image = pictureBox.Image;
-
-            if (image != null)
+            //当没有按下Ctrl键时 触发 画方形操作
+            if ((Control.ModifierKeys & Keys.Control) != Keys.Control)
             {
-                Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                double startX = ((double)((clientMouse.X - lSize.Width) * wrate));
-                double startY = ((double)((clientMouse.Y - lSize.Height) * hrate));
-                Start = new Point((int)startX, (int)startY);
-                isMove = true;
-                logger.Info("起点真坐标为：" + Start);
-            }
-            else
-            {
-                MessageBox.Show("当前窗口无图像");
+                PictureBox pictureBox = sender as PictureBox;
+
+                Point clientMouse = e.Location;
+                resouseImage = this.pictureBox.Image;
+                Image image = pictureBox.Image;
+                if (image != null)
+                {
+                    Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    double startX = ((double)((clientMouse.X - lSize.Width) * wrate));
+                    double startY = ((double)((clientMouse.Y - lSize.Height) * hrate));
+                    Start = new Point((int)startX, (int)startY);
+                    isMove = true;
+                    logger.Info("起点真坐标为：" + Start);
+                }
+                else
+                {
+                    MessageBox.Show("当前窗口无图像");
+                }
             }
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMove)
+            if (isMove && (Control.ModifierKeys & Keys.Control) != Keys.Control)
             {
                 PictureBox pictureBox = sender as PictureBox;
 
@@ -132,9 +139,7 @@ namespace _305Vision.OWindows
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            isMove = false;
-            //打印数据
-
+            if ((Control.ModifierKeys & Keys.Control) != Keys.Control) isMove = false;
         }
 
         private byte[] ProcessImageData(BitmapData imageData)
