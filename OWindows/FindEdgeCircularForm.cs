@@ -1,9 +1,11 @@
 ﻿using _305Vision.BLL;
 using _305Vision.Common;
+using _305Vision.DAL;
 using _305Vision.Model;
 using _305Vision.SDK;
 using Newtonsoft.Json.Linq;
 using NLog;
+using PictureWindowControl;
 using ST.Library.UI.NodeEditor;
 using System;
 using System.Drawing;
@@ -22,8 +24,8 @@ namespace _305Vision.OWindows
         private Image resouseImage;
         BasicImageInfo basicImageInfo;
 
-        private bool isMove = false;//记录目标是否在画框
-        
+        private bool isMovee = false;//记录目标是否在画框
+
 
         public Image OverImage { get => overImage; set => overImage = value; }
         public Image ResouseImage { get => resouseImage; set => resouseImage = value; }
@@ -46,7 +48,7 @@ namespace _305Vision.OWindows
             InitializeComponent();
         }
 
-        public void InitializeParameters(int pointX, int pointY, int radiusSmall, int radiusBig, int edgeNum, int gradientThreshold , _305Enum.EdgeDetectionType EdgeDetectionType)
+        public void InitializeParameters(int pointX, int pointY, int radiusSmall, int radiusBig, int edgeNum, int gradientThreshold, _305Enum.EdgeDetectionType EdgeDetectionType)
         {
             this.pointX = pointX;
             this.pointY = pointY;
@@ -59,58 +61,68 @@ namespace _305Vision.OWindows
 
         private void RetangelROI_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = ResouseImage;
+            pictureBox11.Image = (Bitmap)ResouseImage;
+            pictureBox11.PictureBox.MouseDown += pictureBox11_MouseDown;
+            pictureBox11.PictureBox.MouseMove += pictureBox1_MouseMove;
+            pictureBox11.PictureBox.MouseUp += pictureBox1_MouseUp;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image != null)
+            if (pictureBox11.Image != null)
             {
-                OverImage = pictureBox1.Image;
+                OverImage = pictureBox11.Image;
                 logger.Info("ROI点图像处理完成。");
             }
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBox11_MouseDown(object sender, MouseEventArgs e)
         {
-            PictureBox pictureBox = sender as PictureBox;
-
-            Point clientMouse = e.Location;
-            resouseImage = pictureBox1.Image;
-
-            Image image = pictureBox.Image;
-
-            if (image != null)
+            //鼠标没在按键
+            if ((Control.ModifierKeys & Keys.Control) != Keys.Control)
             {
-                Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                double startX = ((double)((clientMouse.X - lSize.Width) * wrate));
-                double startY = ((double)((clientMouse.Y - lSize.Height) * hrate));
-                this.pointX = (int)startX;
-                this.pointY = (int)startY;
-                isMove = true;
-                logger.Info("圆心坐标为：(" + pointX + "," + pointY + ")");
-            }
-            else
-            {
-                MessageBox.Show("当前窗口无图像");
+
+                PictureBox pictureBox = sender as PictureBox;
+                //PictureBox pictureBox = pictureWindow.PictureBox;
+
+                Point clientMouse = e.Location;
+                resouseImage = pictureBox.Image;
+
+                Image image = pictureBox.Image;
+
+                if (image != null)
+                {
+                    Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    double startX = ((double)((clientMouse.X) * wrate));
+                    double startY = ((double)((clientMouse.Y) * hrate));
+                    this.pointX = (int)startX;
+                    this.pointY = (int)startY;
+                    isMovee = true;
+                    logger.Info("圆心坐标为：(" + pointX + "," + pointY + ")");
+                }
+                else
+                {
+                    MessageBox.Show("当前窗口无图像");
+                }
             }
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMove)
+            //logger.Info("Ismove是：" + isMovee);
+            if (isMovee && (Control.ModifierKeys & Keys.Control) != Keys.Control)
             {
                 PictureBox pictureBox = sender as PictureBox;
-
+                //PictureBox pictureBox = pictureWindow.PictureBox;
                 if (pictureBox != null)
                 {
                     // 获取PictureBox图像的边界
                     Rectangle imageBounds = ImageRoiBLL.GetImageBounds(pictureBox);
-
+                    logger.Info(imageBounds + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                     // 检查鼠标是否在PictureBox图像的范围内
                     if (imageBounds.Contains(e.Location))
                     {
@@ -118,24 +130,27 @@ namespace _305Vision.OWindows
                         Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
                         double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
                         double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                        double x = ((double)((clientMouse.X - lSize.Width) * wrate));
-                        double y = ((double)((clientMouse.Y - lSize.Height) * hrate));
+                        double x = ((double)((clientMouse.X) * wrate));
+                        double y = ((double)((clientMouse.Y) * hrate));
                         End = new Point((int)x, (int)y);
                         this.radiusBig = (int)UtilsBLL.CalculateDistance(pointX, pointY, End.X, End.Y);//求两点间距离
                         this.radiusSmall = radiusBig / 2;//小圆半径为大圆半径的一半
 
 
                         Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)resouseImage, imageData => ProcessImageData(imageData));
-                        pictureBox.Image = processedImage;
+                        pictureBox.Image = (Bitmap)processedImage;
                     }
                 }
             }
         }
-        
+
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            isMove = false;
+            if (isMovee && (Control.ModifierKeys & Keys.Control) != Keys.Control)
+            {
+                isMovee = false;
+            }
         }
 
         private byte[] ProcessImageData(BitmapData imageData)
@@ -151,7 +166,7 @@ namespace _305Vision.OWindows
                     IntPtr Points = IntPtr.Zero;
                     int sizee = 0;
                     byte* imageDataPtr = OpenCVSDK.findEdgeCircular(basicImageInfo.ImagePtr, (int)basicImageInfo.Width,
-                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, pointX,pointY,radiusSmall,radiusBig,edgeDetectionType,EdgeNum,gradientThreshold, ref Points, ref sizee);
+                        (int)basicImageInfo.Height, (int)basicImageInfo.Stride, pointX, pointY, radiusSmall, radiusBig, edgeDetectionType, EdgeNum, gradientThreshold, ref Points, ref sizee);
                     #region 读取点集
                     byte* arrayPtr = (byte*)Points;//读取点集
                     array = new int[sizee];//读取点集
@@ -168,6 +183,7 @@ namespace _305Vision.OWindows
                 return null;
             }
         }
-        
+
+
     }
 }

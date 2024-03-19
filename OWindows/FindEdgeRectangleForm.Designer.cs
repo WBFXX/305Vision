@@ -28,12 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.findEdgeRectangleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.findEdgeRectangleBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -62,10 +59,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // findEdgeRectangleBindingSource
-            // 
-            this.findEdgeRectangleBindingSource.DataSource = typeof(_305Vision.MySTNode.Operator.FindEdgeRectangle);
-            // 
             // FindEdgeRectangleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -83,7 +76,6 @@
             this.Text = "RetangelROI";
             this.Load += new System.EventHandler(this.RetangelROI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.findEdgeRectangleBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -92,6 +84,5 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.BindingSource findEdgeRectangleBindingSource;
     }
 }

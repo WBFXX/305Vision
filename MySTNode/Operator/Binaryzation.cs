@@ -131,28 +131,28 @@ namespace _305Vision.MySTNode.Operator
                 if (isSecond)
                 {
 
-                
-                // 调用方法
-                Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)e.TargetOption.Data, 
-                    imageData =>
-                {
-                    
 
-                    // 具体的处理逻辑
-                    unsafe
+                    // 调用方法
+                    Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)e.TargetOption.Data,
+                        imageData =>
                     {
-                        byte* imageDataPtr = OpenCVSDK.binaryzation(imageData.Scan0, imageData.Width, imageData.Height, imageData.Width*3, doubleValue, Max, Min);
 
-                        // 处理后的数据流复制到托管数组
-                        return UtilsBLL.GetImageBytes((IntPtr)imageDataPtr, imageData.Width, imageData.Height, 3);
 
-                    }
-                });
-                
-                this.logger.Info("图像" +  this.Title + "处理完成");
-                m_op_img_out.TransferData((Image)processedImage);//out选项 输出
-                m_img_draw = (Image)processedImage;
-                this.Invalidate();
+                        // 具体的处理逻辑
+                        unsafe
+                        {
+                            byte* imageDataPtr = OpenCVSDK.binaryzation(imageData.Scan0, imageData.Width, imageData.Height, imageData.Width * 3, doubleValue, Max, Min);
+
+                            // 处理后的数据流复制到托管数组
+                            return UtilsBLL.GetImageBytes((IntPtr)imageDataPtr, imageData.Width, imageData.Height, 3);
+
+                        }
+                    });
+
+                    this.logger.Info("图像" + this.Title + "处理完成");
+                    m_op_img_out.TransferData((Image)processedImage);//out选项 输出
+                    m_img_draw = (Image)processedImage;
+                    this.Invalidate();
                 }
                 else
                 {

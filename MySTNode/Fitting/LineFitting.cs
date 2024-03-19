@@ -100,6 +100,7 @@ namespace _305Vision.MySTNode.Fitting
             else
             {
                 Bitmap img = (Bitmap)e.TargetOption.Data;
+
                 if (inOption.ConnectionCount != 0 && ArrInputOption.ConnectionCount!=0) 
                 {
                     m_op_img_out.TransferData((Image)img);

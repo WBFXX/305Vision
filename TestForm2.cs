@@ -1,5 +1,4 @@
-﻿using _305PictureBox;
-using _305Vision.BLL;
+﻿using _305Vision.BLL;
 using _305Vision.SDK;
 using _305Vision.Utils;
 using NLog;

@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "305Vision", "305Vision.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureWindow", "..\PictureWindow\PictureWindow.csproj", "{FF66971D-799F-4B1E-A874-2F2DA4409B27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "305PictureBox", "..\305PictureBox\305PictureBox.csproj", "{CD7D12AB-EAB2-4418-B766-62733321AF30}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,18 +41,6 @@ Global
 		{FF66971D-799F-4B1E-A874-2F2DA4409B27}.Release|x64.Build.0 = Release|Any CPU
 		{FF66971D-799F-4B1E-A874-2F2DA4409B27}.Release|x86.ActiveCfg = Release|Any CPU
 		{FF66971D-799F-4B1E-A874-2F2DA4409B27}.Release|x86.Build.0 = Release|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Debug|x64.Build.0 = Debug|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Debug|x86.Build.0 = Debug|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Release|x64.ActiveCfg = Release|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Release|x64.Build.0 = Release|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Release|x86.ActiveCfg = Release|Any CPU
-		{CD7D12AB-EAB2-4418-B766-62733321AF30}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,9 @@
 ﻿using _305Vision.BLL;
+using _305Vision.DAL;
 using _305Vision.Model;
 using _305Vision.SDK;
 using NLog;
+using PictureWindowControl;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -43,7 +45,10 @@ namespace _305Vision.OWindows
         private void DotROIForm_Load(object sender, EventArgs e)
         {
             // 在图像加载的时候就把图像源加载好
-            pictureBox1.Image = ResouseImage;
+            pictureBox1.Image = (Bitmap)ResouseImage;
+            pictureBox1.PictureBox.MouseDown += pictureBox1_MouseDown;
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -57,40 +62,45 @@ namespace _305Vision.OWindows
             this.Close();
         }
 
-        private void pictureBox1_Click(object sender, MouseEventArgs e)
+        
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            PictureBox pictureBox = sender as PictureBox;
-
-            Point clientMouse = e.Location;
-
-            // 获取 PictureBox 显示的图片
-            Image image = pictureBox.Image;
-
-            if (image != null)
+            //鼠标没在按键
+            if ((Control.ModifierKeys & Keys.Control) != Keys.Control)
             {
-                Size pictureBoxSize = pictureBox.ClientSize;
-                // 获取留白
-                Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                // 宽度缩放比率
-                double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
-                // 高度缩放比率
-                double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                PictureBox pictureBox = sender as PictureBox;
+                Point clientMouse = e.Location;
 
-                float x = (float)((clientMouse.X - lSize.Width) * wrate);
-                float y = (float)((clientMouse.Y - lSize.Height) * hrate);
-                point.X = (int)x;
-                point.Y = (int)y;
+                // 获取 PictureBox 显示的图片
+                Image image = pictureBox.Image;
 
-                // 调用方法，处理原始图片的像素位置
-                Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)pictureBox.Image,
-                    imageData => ProcessImageData(imageData));
+                if (image != null)
+                {
+                    Size pictureBoxSize = pictureBox.ClientSize;
+                    // 获取留白
+                    Size lSize = UtilsBLL.GetBlackSize(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    // 宽度缩放比率
+                    double wrate = UtilsBLL.GetPictureWRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
+                    // 高度缩放比率
+                    double hrate = UtilsBLL.GetPictureHRate(pictureBox, UtilsBLL.GetPictureBoxCurrentSize(pictureBox));
 
-                // 把处理完的图像传给当前显示窗口
-                pictureBox.Image = processedImage;
-            }
-            else
-            {
-                MessageBox.Show("当前窗口无图像");
+                    float x = (float)((clientMouse.X - lSize.Width) * wrate);
+                    float y = (float)((clientMouse.Y - lSize.Height) * hrate);
+                    point.X = (int)x;
+                    point.Y = (int)y;
+
+                    // 调用方法，处理原始图片的像素位置
+                    Bitmap processedImage = ProcessImageBLL.ProcessImage((Bitmap)pictureBox.Image,
+                        imageData => ProcessImageData(imageData));
+
+                    // 把处理完的图像传给当前显示窗口
+                    pictureBox.Image = processedImage;
+                }
+                else
+                {
+                    MessageBox.Show("当前窗口无图像");
+                }
             }
         }
 
@@ -121,5 +131,6 @@ namespace _305Vision.OWindows
                 return null;
             }
         }
+
     }
 }
