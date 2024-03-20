@@ -1,4 +1,5 @@
 ﻿using _305Vision.Blender;
+using PictureWindowControl;
 using ST.Library.UI.NodeEditor;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace _305Vision.MySTNode.图片操作
         }
 
 
-        private List<PictureBox> m_ = new List<PictureBox>();
+        private List<PictureWindow> m_ = new List<PictureWindow>();
 
         public string PName
         {
@@ -62,7 +63,7 @@ namespace _305Vision.MySTNode.图片操作
             if (FormPlatform.Instance.IsHidden)
             {
                 m_ = null;
-            }else m_ = FormPlatform.Instance.PictureBoxes;
+            }else m_ = FormPlatform.Instance.PictureWindows;
 
             // 计算弹出窗口的位置
             /*这一行是用来计算弹出窗口的位置 pt 的。让我解释一下这里各个参数的含义：

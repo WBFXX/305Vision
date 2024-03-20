@@ -175,7 +175,7 @@ namespace _305Vision
                 FormPlatform.Instance.Close();
                 // 更新 FormPlatform.Instance 单例的引用
                 FormPlatform.SetPlatformInstance(newInstance);
-                logger.Info("创建主窗口成功，当前窗口数量：" + FormPlatform.Instance.PictureBoxes.Count + ";");
+                logger.Info("创建主窗口成功，当前窗口数量：" + FormPlatform.Instance.PictureWindows.Count + ";");
             }
 
         }

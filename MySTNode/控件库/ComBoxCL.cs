@@ -1,4 +1,5 @@
 ﻿using NLog;
+using PictureWindowControl;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,7 +35,7 @@ namespace _305Vision.MySTNode.图片操作
         /// <param name="scale">缩放比例</param>
         /// <param name="pName">当前框中名</param>
         private string pName;
-        public ComBoxCL(List<PictureBox> e, Point pt, int nWidth, float scale ,string pName)
+        public ComBoxCL(List<PictureWindow> e, Point pt, int nWidth, float scale ,string pName)
         {
             // 设置控件样式，启用双缓冲等
             //双缓冲技术用于减少绘图时的闪烁和提高绘图性能。

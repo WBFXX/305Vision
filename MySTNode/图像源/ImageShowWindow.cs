@@ -1,5 +1,6 @@
 ﻿using _305Vision.Blender;
 using NLog;
+using PictureWindowControl;
 using ST.Library.UI.NodeEditor;
 using System;
 using System.Collections.Generic;
@@ -84,7 +85,7 @@ namespace _305Vision.MySTNode.图片操作
 
         private ComBoxControl ComboBox;//自定义控件
         private String pName ;
-        private Dictionary<String, PictureBox> pNameDictionary = FormPlatform.PictureBoxName;
+        private Dictionary<String, PictureWindow> pNameDictionary = FormPlatform.PictureWindowName;
         
 
 
@@ -102,7 +103,7 @@ namespace _305Vision.MySTNode.图片操作
                     //MessageBox.Show(this.PName);
                     try
                     {
-                        pNameDictionary[this.PName].Image = (Image)e.TargetOption.Data;
+                        pNameDictionary[this.PName].Image = (Bitmap)e.TargetOption.Data;
 
                     }
                     catch (Exception ex)
