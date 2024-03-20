@@ -20,9 +20,10 @@ namespace _305Vision.MySTNode.Operator
     [STNode("/算子/", "输入图像与数组")]
     public class SpotSearch : ImageBaseNode
     {
+        private int[] overPointArray;
 
         #region 拟合参数
-        
+
 
 
         [STNodeProperty("背景", "默认为0")]
@@ -53,13 +54,15 @@ namespace _305Vision.MySTNode.Operator
         [STNodeProperty("数组长度", "数组长度")]
         public int ArraySize { get; set; }
 
-
+        private int[] OverPointArray;//读取点集
+        private STNodeOption spotArray_Output;
         #endregion
 
         protected override void OnCreate()
         {
             base.OnCreate();
             this.Title = "斑点查找";
+            spotArray_Output = this.OutputOptions.Add("输出点集", typeof(int[]), false);
             #region 参数初始化默认值
             BackGroundFlag = _305Enum.BlackGround.黑色;
             AreaMax = -1;
@@ -138,8 +141,7 @@ namespace _305Vision.MySTNode.Operator
                     #region 读取点集
                     int[] array = new int[sizee];//读取点集
                     Marshal.Copy(PointsX, array, 0, sizee);//复制点集数组
-                    ArrayX = array;
-
+                    this.ArrayX = array;
                     array = new int[sizee];//重置数组
                     Marshal.Copy(PointsY, array, 0, sizee);//复制点集数组
                     this.ArrayY = array;
@@ -152,21 +154,17 @@ namespace _305Vision.MySTNode.Operator
                     array = new int[sizee];//重置数组
                     Marshal.Copy(PointsA, array, 0, sizee);//复制点集数组
                     this.ArrayA = array;
-
+                    //释放数组内存
                     OpenCVSDK.releaseBuffer(PointsX);
                     OpenCVSDK.releaseBuffer(PointsY);
                     OpenCVSDK.releaseBuffer(PointsW);
                     OpenCVSDK.releaseBuffer(PointsH);
                     OpenCVSDK.releaseBuffer(PointsA);
-                    //OpenCVSDK.releaseBuffer(PointsX);
-                    //this.ArrayX = arrayx;
-                    //this.ArrayX = UtilsBLL.ReadPoints(PointsX, sizee);
-                    //this.ArrayY = UtilsBLL.ReadPoints(PointsY, sizee);
-                    //this.ArrayW = UtilsBLL.ReadPoints(PointsW, sizee);
-                    //this.ArrayH = UtilsBLL.ReadPoints(PointsH, sizee);
-                    //this.ArrayA = UtilsBLL.ReadPoints(PointsA, sizee);
+                    //把X,Y数组合并为一个 方便数据输出给后续节点
+                    this.OverPointArray = new int[sizee * 2];
+                    this.OverPointArray = UtilsBLL.MergeArrays(ArrayX, ArrayY);
                     #endregion
-
+                    spotArray_Output.TransferData(this.OverPointArray);//输出点集
                     return UtilsBLL.GetImageBytes((IntPtr)imageDataPtr, imageData.Width, imageData.Height, 3);
 
                 }

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using NLog;
 using System.Drawing.Drawing2D;
+using _305Vision.Model;
 
 namespace _305Vision.图片操作测试
 {
@@ -52,6 +53,8 @@ namespace _305Vision.图片操作测试
             if (this.Owner == null) return;
             this.Owner.SetTypeColor(typeof(Image), Color.DarkCyan);
             this.Owner.SetTypeColor(typeof(int[]), Color.Aquamarine);
+            this.Owner.SetTypeColor(typeof(CircleInfo), Color.BlueViolet);
+            this.Owner.SetTypeColor(typeof(LineInfo), Color.CornflowerBlue);
         }
 
         /// <summary>

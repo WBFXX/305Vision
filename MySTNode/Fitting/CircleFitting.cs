@@ -21,9 +21,11 @@ namespace _305Vision.MySTNode.Fitting
     {
 
         private STNodeOption ArrInputOption;
+        private STNodeOption CircleInfo_OutPut;
         private double jieRadis;
         private double centerX;
         private double centerY;
+        private CircleInfo circleInfo;
 
         #region 拟合参数
 
@@ -54,6 +56,7 @@ namespace _305Vision.MySTNode.Fitting
             base.OnCreate();
             this.Title = "圆形拟合";
             ArrInputOption = InputOptions.Add("点集", typeof(int[]), true);
+            CircleInfo_OutPut = OutputOptions.Add("输出圆信息", typeof(CircleInfo), false);
 
             this.AutoSize = false;
             this.Height += 50;
@@ -114,8 +117,13 @@ namespace _305Vision.MySTNode.Fitting
             //经过OpenCVSDK算法处理后，算出了圆心和半径
             // 在图像上绘制圆
             Bitmap newImage = DrawBll.DrawCircleOnImage(img, CenterX, CenterY, JieRadis);
-
+            circleInfo = new CircleInfo
+            {
+                Center = new Point((int)CenterX, (int)CenterY),
+                Radius = JieRadis
+            };
             // 将新图像传递给输出
+            CircleInfo_OutPut.TransferData(circleInfo);
             m_op_img_out.TransferData(newImage);
             m_img_draw = newImage;
             m_op_img_out.TransferData((Image)newImage);

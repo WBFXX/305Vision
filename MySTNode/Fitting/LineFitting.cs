@@ -14,6 +14,7 @@ using System.Drawing.Drawing2D;
 using Newtonsoft.Json.Linq;
 using _305Vision.Common;
 using System.Data.SqlTypes;
+using System.IO;
 
 namespace _305Vision.MySTNode.Fitting
 {
@@ -22,6 +23,8 @@ namespace _305Vision.MySTNode.Fitting
     {
 
         private STNodeOption ArrInputOption;
+        private STNodeOption LineArray_OutPut;
+        private LineInfo lineInfo;
         private double xielvK;
         private double pointX;
         private double pointY;
@@ -43,13 +46,6 @@ namespace _305Vision.MySTNode.Fitting
         [STNodeProperty("点的Y坐标", "点的Y坐标")]
         public double PointY { get => pointY; set => pointY = value; }
 
-        //
-        //public double XielvK { get; set; }
-        //
-        //public double PointX { get; set; }
-        //
-        //public double PointY { get; set; }
-
         #endregion
 
         protected override void OnCreate()
@@ -57,6 +53,7 @@ namespace _305Vision.MySTNode.Fitting
             base.OnCreate();
             this.Title = "直线拟合";
             ArrInputOption = InputOptions.Add("点集", typeof(int[]), true);
+            LineArray_OutPut = OutputOptions.Add("输出直线", typeof(LineInfo), false);
 
             this.AutoSize = false;
             this.Height += 30;
@@ -118,8 +115,14 @@ namespace _305Vision.MySTNode.Fitting
             // 在图像上绘制直线
             Bitmap newImage = DrawBll.DrawLineOnImage(img, PointX, PointY, XielvK , LineLength);
 
+            lineInfo = new LineInfo
+            {
+                PointOnLine = new Point((int)PointX, (int)PointY),
+                Slope = XielvK,
+            };
             // 将新图像传递给输出
             m_img_draw = newImage;
+            LineArray_OutPut.TransferData(lineInfo);
             m_op_img_out.TransferData((Image)newImage);
             this.Invalidate();
 

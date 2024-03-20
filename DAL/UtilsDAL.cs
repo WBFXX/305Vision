@@ -214,7 +214,7 @@ namespace _305Vision.DAL
         /// <param name="height"></param>
         /// <param name="channel">通道数</param>
         /// <returns>imageBytes</returns>
-        public static byte[] GetImageBytes(IntPtr imageDataPtr, int width, int height ,int channel)
+        public static byte[] GetImageBytes(IntPtr imageDataPtr, int width, int height, int channel)
         {
             int size = width * height * channel;
             byte[] imageBytes = new byte[size];
@@ -226,111 +226,32 @@ namespace _305Vision.DAL
             }
             return imageBytes;
         }
-        public static Size MypcGetPictureCurrentSize(PictureWindow pictureBox)
-        {
-
-            //原始宽高
-            int originalWidth = pictureBox.Image.Width;
-            int originalHeight = pictureBox.Image.Height;
-
-
-            PropertyInfo rectangleProperty = pictureBox.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
-            Rectangle rectangle = (Rectangle)rectangleProperty.GetValue(pictureBox, null);
-            //实际宽高
-            int currentWidth = rectangle.Width;
-            int currentHeight = rectangle.Height;
-            return new Size(currentWidth, currentHeight);
-
-
-
-            ////缩放比例
-            //double rate = (double)currentHeight / (double)originalHeight;
-
-            //int black_left_width = (currentWidth == pictureBox.Width) ? 0 : (pictureBox.Width - currentWidth) / 2;
-            //int black_top_height = (currentHeight == pictureBox.Height) ? 0 : (pictureBox.Height - currentHeight) / 2;
-            //int zoom_x = e.X - black_left_width;
-            //int zoom_y = e.Y - black_top_height;
-
-            //double original_x = (double)zoom_x / rate;
-            //double original_y = (double)zoom_y / rate;
-
-            //StringBuilder sb = new StringBuilder();
-
-            //sb.AppendFormat("原始尺寸{0}/{1}(宽/高)\r\n", originalWidth, originalHeight);
-            //sb.AppendFormat("缩放状态图片尺寸{0}/{1}(宽/高)\r\n", currentWidth, currentHeight);
-            //sb.AppendFormat("缩放比率{0}\r\n", rate);
-            //sb.AppendFormat("左留白宽度{0}\r\n", black_left_width);
-            //sb.AppendFormat("上留白高度{0}\r\n", black_top_height);
-            //sb.AppendFormat("当前鼠标坐标{0}/{1}(X/Y)\r\n", e.X, e.Y);
-            //sb.AppendFormat("缩放图中鼠标坐标{0}/{1}(X/Y)\r\n", zoom_x, zoom_y);
-            //sb.AppendFormat("原始图中鼠标坐标{0}/{1}(X/Y)\r\n", original_x, original_y);
-            //this.label1.Text = sb.ToString();
-
-        }
         /// <summary>
-        /// 获取图像宽度缩放比例
+        /// 合并数组
         /// </summary>
-        /// <param name="pictureBox">图像盒子</param>
-        /// <param name="currentSize">真实尺寸</param>
-        /// <returns>double缩放比例</returns>
-        public static double MyPcGetPictureWRate(PictureWindow pictureBox, Size currentSize)
+        /// <param name="xCoords">X坐标</param>
+        /// <param name="yCoords">Y坐标</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static int[] MergeArrays(int[] xCoords, int[] yCoords)
         {
+            if (xCoords.Length != yCoords.Length)
+            {
+                throw new ArgumentException("X坐标数组和Y坐标数组长度不一致");
+            }
 
-            //缩放比例
-            //double rate =   pictureBox.Image.Width / currentSize.Width;
-            double rate = (double)pictureBox.Image.Height / (double)currentSize.Height;
-            return rate;
+            int[] mergedArray = new int[xCoords.Length * 2];
+            int index = 0;
+
+            for (int i = 0; i < xCoords.Length; i++)
+            {
+                mergedArray[index] = xCoords[i];
+                mergedArray[index + 1] = yCoords[i];
+                index += 2;
+            }
+
+            return mergedArray;
         }
-        /// <summary>
-        /// 获取图像高度缩放比例
-        /// </summary>
-        /// <param name="pictureBox">图像盒子</param>
-        /// <param name="currentSize">真实尺寸</param>
-        /// <returns>double缩放比例</returns>
-        public static double MyPcPictureHRate(PictureWindow pictureBox, Size currentSize)
-        {
-            //缩放比例
-            //double rate =   pictureBox.Image.Width / currentSize.Width;
-            double rate = (double)pictureBox.Image.Height / (double)currentSize.Height;
-            return rate;
-        }
-        /// <summary>
-        /// 获取缩放后图像左边距和上边距
-        /// </summary>
-        /// <param name="pictureBox">图像盒子</param>
-        /// <param name="currentSize">真实尺寸</param>
-        /// <returns>Size(左边距，上边距)</returns>
-        public static Size MyPcGetBlackSize(PictureWindow pictureBox, Size currentSize)
-        {
-            int black_left_width = (currentSize.Width == pictureBox.Width) ? 0 : (pictureBox.Width - currentSize.Width) / 2;
-            int black_top_height = (currentSize.Height == pictureBox.Height) ? 0 : (pictureBox.Height - currentSize.Height) / 2;
-            return new Size(black_left_width, black_top_height);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
 }

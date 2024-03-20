@@ -173,5 +173,23 @@ namespace _305Vision.BLL
                 return null;
             }
         }
+        /// <summary>
+        /// 合并数组
+        /// </summary>
+        /// <param name="xCoords">X坐标</param>
+        /// <param name="yCoords">Y坐标</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static int[] MergeArrays(int[] xCoords, int[] yCoords)
+        {
+            try
+            {
+                return UtilsDAL.MergeArrays(xCoords, yCoords);
+            }catch (Exception ex)
+            {
+                MessageBox.Show("合并数组失败：" + ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+        }
     }
 }

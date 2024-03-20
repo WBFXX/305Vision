@@ -152,7 +152,9 @@
     <Compile Include="DAL\UtilsDAL.cs" />
     <Compile Include="DAL\WindowsViewDAL.cs" />
     <Compile Include="Model\BasicImageInfo.cs" />
+    <Compile Include="Model\CircleInfo.cs" />
     <Compile Include="Model\FindEdgeRecFormInfo.cs" />
+    <Compile Include="Model\LineInfo.cs" />
     <Compile Include="Model\NodePropertyGridInfo.cs" />
     <Compile Include="Model\SpotSearchInfo.cs" />
     <Compile Include="MySTNode\Blender\text.cs" />
