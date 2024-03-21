@@ -155,11 +155,9 @@ namespace _305Vision.MySTNode.Operator
                         (int)info.Stride, Start.X, Start.Y, End.X, End.Y, Angle, EdgeDetectionType , EdgeNum, GradientThreshold,ref Points, ref sizee);
 
                     //读取点集
-                    //byte* arrayPtr = (byte*)Points;//读取点集
-                    int[] array = new int[sizee];//读取点集
-                    Marshal.Copy(Points, array, 0, sizee);//复制点集数组
-                    this.Array = array;
-                    OpenCVSDK.releaseBuffer(Points);
+                    //byte* arrayPtr = (byte*)Points;
+                    //读取点集
+                    this.Array = UtilsBLL.ReadIntPtrToArray(Points, sizee);
                     //返回复制好的图像
                     return UtilsBLL.GetImageBytes((IntPtr)imageDataPtr, imageData.Width, imageData.Height, 3);
                 }

@@ -28,6 +28,8 @@ namespace _305Vision.MySTNode.Fitting
         private double xielvK;
         private double pointX;
         private double pointY;
+        private int sizeOfSave;
+        private int sizeOfThrow;
 
         #region 拟合参数
 
@@ -45,6 +47,14 @@ namespace _305Vision.MySTNode.Fitting
         public double PointX { get => pointX; set => pointX = value; }
         [STNodeProperty("点的Y坐标", "点的Y坐标")]
         public double PointY { get => pointY; set => pointY = value; }
+        [STNodeProperty("保留点的集", "点集")]
+        public int[] ArrayOfSave { get; set; }
+        [STNodeProperty("保留点集大小", "点集")]
+        public int SizeOfSave { get => sizeOfSave; set => sizeOfSave = value; }
+        [STNodeProperty("抛弃点的点集", "点集")]
+        public int[] ArrayOfThrow { get; set; }
+        [STNodeProperty("抛弃点集大小", "点集")]
+        public int SizeOfThrow { get => sizeOfThrow; set => sizeOfThrow = value; }
 
         #endregion
 
@@ -62,6 +72,9 @@ namespace _305Vision.MySTNode.Fitting
             //    Text = "选取",
             //    Location = new Point(42, 130)
             //};
+            Discard = 1;
+            SizeOfSave = 0;
+            SizeOfThrow = 0;
             PointX = 0; 
             PointY = 0;
             XielvK = 0;
@@ -74,6 +87,7 @@ namespace _305Vision.MySTNode.Fitting
 
         }
 
+        private Bitmap midImg;//数据传输的先后顺序，先执行的是OpImgInDataTransfer 再执行ArrInputOption_DataTransfer 所以要后处理ProcessImage(midImg
         private void ArrInputOption_DataTransfer(object sender, STNodeOptionEventArgs e)
         {
             if (e.Status != ConnectionStatus.Connected || e.TargetOption.Data == null)
@@ -85,6 +99,13 @@ namespace _305Vision.MySTNode.Fitting
             {
                 Array = (int[])e.TargetOption.Data;
                 ArrayLength = Array.Length/2;
+
+                if (inOption.ConnectionCount != 0 && ArrInputOption.ConnectionCount != 0)
+                {
+                    m_op_img_out.TransferData((Image)midImg);
+                    isSecond = true;
+                    ProcessImage(midImg);
+                }
             }
         }
             private void OpImgInDataTransfer(object sender, STNodeOptionEventArgs e)
@@ -96,23 +117,21 @@ namespace _305Vision.MySTNode.Fitting
             }
             else
             {
-                Bitmap img = (Bitmap)e.TargetOption.Data;
+                midImg = (Bitmap)e.TargetOption.Data;
 
-                if (inOption.ConnectionCount != 0 && ArrInputOption.ConnectionCount!=0) 
-                {
-                    m_op_img_out.TransferData((Image)img);
-                    isSecond = true;
-                    ProcessImage(img);
-                }
             }
         }
 
         private void ProcessImage(Bitmap img)
         {
-            OpenCVSDK.lineFitting(Array, (int)Array.Length, (int)Discard,ref xielvK, ref pointX, ref pointY);
-
+            IntPtr intPtrOfSave = IntPtr.Zero;
+            IntPtr intPtrOfThrow = IntPtr.Zero;
+            OpenCVSDK.lineFitting(Array, (int)Array.Length, (int)Discard,ref xielvK, ref pointX, ref pointY,ref intPtrOfSave ,ref sizeOfSave,ref intPtrOfThrow,ref sizeOfThrow);
+            //读取点集
+            this.ArrayOfSave = UtilsBLL.ReadIntPtrToArray(intPtrOfSave, sizeOfSave);
+            this.ArrayOfThrow= UtilsBLL.ReadIntPtrToArray(intPtrOfThrow, sizeOfThrow);
             //经过OpenCVSDK算法处理后，算出了圆心和半径
-            // 在图像上绘制直线
+            //在图像上绘制直线
             lineInfo = new LineInfo
             {
                 PointOnLine = new Point((int)PointX, (int)PointY),

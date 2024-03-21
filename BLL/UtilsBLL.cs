@@ -133,25 +133,7 @@ namespace _305Vision.BLL
         {
             return UtilsDAL.ConvertArrayToPointList(array); 
         }
-        /// <summary>
-        /// 解析点集
-        /// </summary>
-        /// <param name="points">传回来的点集数组</param>
-        /// <param name="size">传回来的数组大小</param>
-        /// <returns></returns>
-        public static int[] ReadPoints(IntPtr points, int size)
-        {
-            try
-            {
-                return UtilsDAL.ReadPoints(points, size);
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("解析点集失败：" + ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-        }
         /// <summary>
         /// 获创建3通道，图像数据的拷贝
         /// </summary>
@@ -191,5 +173,19 @@ namespace _305Vision.BLL
                 return null;
             }
         }
+
+        public static int[] ReadIntPtrToArray(IntPtr points, int size)
+        {
+            try
+            {
+                return UtilsDAL.ReadIntPtrToArray(points, size);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Inptr转数组失败：" + ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+        }
+
     }
 }

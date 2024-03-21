@@ -190,22 +190,7 @@ namespace _305Vision.DAL
 
             return pointList;
         }
-        /// <summary>
-        /// 解析点集
-        /// </summary>
-        /// <param name="points">传回来的点集数组</param>
-        /// <param name="size">传回来的数组大小</param>
-        /// <returns></returns>
-        public static int[] ReadPoints(IntPtr points, int size)
-        {
-            unsafe
-            {
-                byte* ptr = (byte*)points;
-                int[] array = new int[size];
-                Marshal.Copy((IntPtr)ptr, array, 0, size);
-                return array;
-            }
-        }
+
         /// <summary>
         /// 获创建3通道，图像数据的拷贝
         /// </summary>
@@ -251,6 +236,23 @@ namespace _305Vision.DAL
             }
 
             return mergedArray;
+        }
+        /// <summary>
+        /// 将Inptr读为数组
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="size"></param>
+        /// <returns>读出来的数组</returns>
+        public static int[] ReadIntPtrToArray(IntPtr points, int size)
+        {
+            int[] array = new int[size];
+            Marshal.Copy(points, array, 0, size);
+            //this.Array = array;
+            unsafe
+            {
+                OpenCVSDK.releaseBuffer(points); // Assuming OpenCVSDK is available and has the method releaseBuffer
+            }
+            return array;
         }
     }
 
