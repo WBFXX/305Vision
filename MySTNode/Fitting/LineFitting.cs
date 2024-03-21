@@ -113,13 +113,13 @@ namespace _305Vision.MySTNode.Fitting
 
             //经过OpenCVSDK算法处理后，算出了圆心和半径
             // 在图像上绘制直线
-            Bitmap newImage = DrawBll.DrawLineOnImage(img, PointX, PointY, XielvK , LineLength);
-
             lineInfo = new LineInfo
             {
                 PointOnLine = new Point((int)PointX, (int)PointY),
                 Slope = XielvK,
             };
+            Bitmap newImage = DrawBll.DrawLineOnImage(img, lineInfo, LineLength) ;
+
             // 将新图像传递给输出
             m_img_draw = newImage;
             LineArray_OutPut.TransferData(lineInfo);

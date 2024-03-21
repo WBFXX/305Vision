@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _305Vision.Model
 {
-    struct LineInfo
+    public struct LineInfo
     {
         public Point PointOnLine { get; set; } // 直线上的一点
         public double Slope { get; set; } // 斜率

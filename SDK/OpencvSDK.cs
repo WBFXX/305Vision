@@ -185,7 +185,7 @@ namespace _305Vision.SDK
         /// <param name="centerY">结果圆心Y</param>
         /// <returns></returns>
         [DllImport("demo.dll", EntryPoint = "circleFitting", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe void circleFitting(int[] Array, int num, int discard, ref double jieradis,ref double centerX,ref double centerY);
+        public static extern unsafe void circleFitting(int[] Array, int num, int discard, ref double jieradis,ref double centerX,ref double centerY , ref IntPtr savePoints , ref int saveSize, ref IntPtr paoPoints, ref int paoSize);
         /// <summary>
         /// 直线拟合
         /// </summary>
@@ -196,7 +196,7 @@ namespace _305Vision.SDK
         /// <param name="pointX"></param>
         /// <param name="pointY"></param>
         [DllImport("demo.dll", EntryPoint = "lineFitting", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
-        public static extern unsafe void lineFitting(int[] Array, int num, int discard, ref double xielvK,ref double pointX,ref double pointY);
+        public static extern unsafe void lineFitting(int[] Array, int num, int discard, ref double xielvK,ref double pointX,ref double pointY, ref IntPtr savePoints, ref int saveSize, ref IntPtr paoPoints, ref int paoSize);
 
         /// <summary>
         /// 斑点查找  要求输入灰度图像

@@ -113,15 +113,17 @@ namespace _305Vision.MySTNode.Fitting
 
             OpenCVSDK.circleFitting(Array, (int)Array.Length, (int)Discard,ref jieRadis, ref centerX, ref centerY);
 
-            
+
             //经过OpenCVSDK算法处理后，算出了圆心和半径
             // 在图像上绘制圆
-            Bitmap newImage = DrawBll.DrawCircleOnImage(img, CenterX, CenterY, JieRadis);
+            //把图像信息放到结构体里
             circleInfo = new CircleInfo
             {
                 Center = new Point((int)CenterX, (int)CenterY),
                 Radius = JieRadis
             };
+            Bitmap newImage = DrawBll.DrawCircleOnImage(img, circleInfo);
+            
             // 将新图像传递给输出
             CircleInfo_OutPut.TransferData(circleInfo);
             m_op_img_out.TransferData(newImage);

@@ -1,7 +1,9 @@
 ﻿using _305Vision.DAL;
+using _305Vision.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +16,10 @@ namespace _305Vision.BLL
         /// 画圆
         /// </summary>
         /// <param name="image"></param>
-        /// <param name="centerX">圆心X</param>
-        /// <param name="centerY">圆心Y</param>
-        /// <param name="radius">半径</param>
         /// <returns>新图像</returns>
-        public static Bitmap DrawLineOnImage(Bitmap image, double pointX, double pointY, double XielvK, double lineLength)
+        public static Bitmap DrawLineOnImage(Bitmap image, LineInfo lineInfo, int lineLength)
         {
-            return DrawDAL.DrawLineOnImage(image,pointX,pointY,XielvK,lineLength);
+            return DrawDAL.DrawLineOnImage(image,lineInfo, lineLength);
         }
         /// <summary>
         /// 在图上画直线
@@ -30,9 +29,17 @@ namespace _305Vision.BLL
         /// <param name="pointY"></param>
         /// <param name="XielvK">斜率</param>
         /// <returns>新的图像</returns>
-        public static Bitmap DrawCircleOnImage(Bitmap image, double centerX, double centerY, double radius)
+        public static Bitmap DrawCircleOnImage(Bitmap image, CircleInfo circleInfo)
         {
-            return DrawDAL.DrawCircleOnImage(image,centerX,centerY,radius);
+            try
+            {
+                return DrawDAL.DrawCircleOnImage(image, circleInfo);
+
+            }catch (Exception e)
+            {
+
+                return null;
+            }
         }
     }
 }

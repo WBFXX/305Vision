@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _305Vision.Model
 {
-    struct CircleInfo
+    public struct CircleInfo
     {
         public Point Center { get; set; } // 圆心
         public double Radius { get; set; } // 半径
