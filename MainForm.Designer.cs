@@ -102,32 +102,32 @@
             this.menuItem4,
             this.menuItemExit});
             this.menuItemFile.Name = "menuItemFile";
-            this.menuItemFile.Size = new System.Drawing.Size(53, 26);
+            this.menuItemFile.Size = new System.Drawing.Size(53, 24);
             this.menuItemFile.Text = "&文件";
             // 
             // menuItemOpen
             // 
             this.menuItemOpen.Name = "menuItemOpen";
-            this.menuItemOpen.Size = new System.Drawing.Size(224, 26);
+            this.menuItemOpen.Size = new System.Drawing.Size(144, 26);
             this.menuItemOpen.Text = "&Open...";
             this.menuItemOpen.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
             // 
             // menuItemClose
             // 
             this.menuItemClose.Name = "menuItemClose";
-            this.menuItemClose.Size = new System.Drawing.Size(224, 26);
+            this.menuItemClose.Size = new System.Drawing.Size(144, 26);
             this.menuItemClose.Text = "&Save";
             this.menuItemClose.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
             // 
             // menuItem4
             // 
             this.menuItem4.Name = "menuItem4";
-            this.menuItem4.Size = new System.Drawing.Size(221, 6);
+            this.menuItem4.Size = new System.Drawing.Size(141, 6);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(224, 26);
+            this.menuItemExit.Size = new System.Drawing.Size(144, 26);
             this.menuItemExit.Text = "&Exit";
             // 
             // menuItemView
@@ -146,7 +146,7 @@
             this.menuItemLayoutByXml});
             this.menuItemView.MergeIndex = 1;
             this.menuItemView.Name = "menuItemView";
-            this.menuItemView.Size = new System.Drawing.Size(53, 26);
+            this.menuItemView.Size = new System.Drawing.Size(53, 24);
             this.menuItemView.Text = "&视图";
             // 
             // menuItemSolutionExplorer
@@ -226,20 +226,20 @@
             this.menuItemSchemaVS2015Dark});
             this.menuItemTools.MergeIndex = 2;
             this.menuItemTools.Name = "menuItemTools";
-            this.menuItemTools.Size = new System.Drawing.Size(53, 26);
+            this.menuItemTools.Size = new System.Drawing.Size(53, 24);
             this.menuItemTools.Text = "&主题";
             // 
             // menuItemSchemaVS2015Light
             // 
             this.menuItemSchemaVS2015Light.Name = "menuItemSchemaVS2015Light";
-            this.menuItemSchemaVS2015Light.Size = new System.Drawing.Size(224, 26);
+            this.menuItemSchemaVS2015Light.Size = new System.Drawing.Size(122, 26);
             this.menuItemSchemaVS2015Light.Text = "浅色";
             this.menuItemSchemaVS2015Light.Click += new System.EventHandler(this.SetSchema);
             // 
             // menuItemSchemaVS2015Blue
             // 
             this.menuItemSchemaVS2015Blue.Name = "menuItemSchemaVS2015Blue";
-            this.menuItemSchemaVS2015Blue.Size = new System.Drawing.Size(224, 26);
+            this.menuItemSchemaVS2015Blue.Size = new System.Drawing.Size(122, 26);
             this.menuItemSchemaVS2015Blue.Text = "蓝色";
             this.menuItemSchemaVS2015Blue.Click += new System.EventHandler(this.SetSchema);
             // 
@@ -248,7 +248,7 @@
             this.menuItemSchemaVS2015Dark.Checked = true;
             this.menuItemSchemaVS2015Dark.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuItemSchemaVS2015Dark.Name = "menuItemSchemaVS2015Dark";
-            this.menuItemSchemaVS2015Dark.Size = new System.Drawing.Size(224, 26);
+            this.menuItemSchemaVS2015Dark.Size = new System.Drawing.Size(122, 26);
             this.menuItemSchemaVS2015Dark.Text = "暗色";
             this.menuItemSchemaVS2015Dark.Click += new System.EventHandler(this.SetSchema);
             // 
@@ -258,13 +258,13 @@
             this.menuItemNewWindow});
             this.menuItemWindow.MergeIndex = 2;
             this.menuItemWindow.Name = "menuItemWindow";
-            this.menuItemWindow.Size = new System.Drawing.Size(53, 26);
+            this.menuItemWindow.Size = new System.Drawing.Size(53, 24);
             this.menuItemWindow.Text = "&窗口";
             // 
             // menuItemNewWindow
             // 
             this.menuItemNewWindow.Name = "menuItemNewWindow";
-            this.menuItemNewWindow.Size = new System.Drawing.Size(224, 26);
+            this.menuItemNewWindow.Size = new System.Drawing.Size(189, 26);
             this.menuItemNewWindow.Text = "&New Window";
             // 
             // menuItemHelp
@@ -294,8 +294,8 @@
             this.toolBarButtonToolbox,
             this.toolBarButtonOutputWindow,
             this.toolBarButtonOpen,
-            this.toolBarButtonSeparator2,
             this.toolBarButtonLayoutByCode,
+            this.toolBarButtonSeparator2,
             this.toolBarButtonLayoutByXml});
             this.toolBar.Location = new System.Drawing.Point(0, 28);
             this.toolBar.Name = "toolBar";
@@ -306,14 +306,14 @@
             // 
             this.toolBarButtonNew.Image = global::_305Vision.Properties.Resources.play_button_outline_green_icon;
             this.toolBarButtonNew.Name = "toolBarButtonNew";
-            this.toolBarButtonNew.Size = new System.Drawing.Size(29, 28);
+            this.toolBarButtonNew.Size = new System.Drawing.Size(29, 24);
             this.toolBarButtonNew.ToolTipText = "运行";
             this.toolBarButtonNew.Click += new System.EventHandler(this.Start_Click);
             // 
             // toolBarButtonSeparator1
             // 
             this.toolBarButtonSeparator1.Name = "toolBarButtonSeparator1";
-            this.toolBarButtonSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.toolBarButtonSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // toolBarButtonSolutionExplorer
             // 
@@ -327,7 +327,7 @@
             // 
             this.toolBarButtonPropertyWindow.Image = global::_305Vision.Properties.Resources.timber_color_icon;
             this.toolBarButtonPropertyWindow.Name = "toolBarButtonPropertyWindow";
-            this.toolBarButtonPropertyWindow.Size = new System.Drawing.Size(29, 28);
+            this.toolBarButtonPropertyWindow.Size = new System.Drawing.Size(29, 24);
             this.toolBarButtonPropertyWindow.ToolTipText = "属性栏";
             this.toolBarButtonPropertyWindow.Click += new System.EventHandler(this.PropertyGrid_Click);
             // 
@@ -335,7 +335,7 @@
             // 
             this.toolBarButtonToolbox.Image = global::_305Vision.Properties.Resources.upload_round_color_red_icon;
             this.toolBarButtonToolbox.Name = "toolBarButtonToolbox";
-            this.toolBarButtonToolbox.Size = new System.Drawing.Size(29, 28);
+            this.toolBarButtonToolbox.Size = new System.Drawing.Size(29, 24);
             this.toolBarButtonToolbox.ToolTipText = "输出栏";
             this.toolBarButtonToolbox.Click += new System.EventHandler(this.OutForm_Click);
             // 
@@ -343,7 +343,7 @@
             // 
             this.toolBarButtonOutputWindow.Image = global::_305Vision.Properties.Resources.creative_idea_icon;
             this.toolBarButtonOutputWindow.Name = "toolBarButtonOutputWindow";
-            this.toolBarButtonOutputWindow.Size = new System.Drawing.Size(29, 28);
+            this.toolBarButtonOutputWindow.Size = new System.Drawing.Size(29, 24);
             this.toolBarButtonOutputWindow.ToolTipText = "流程画布";
             this.toolBarButtonOutputWindow.Click += new System.EventHandler(this.ProcessForm_Click);
             // 
@@ -351,20 +351,20 @@
             // 
             this.toolBarButtonOpen.Image = global::_305Vision.Properties.Resources.study_icon;
             this.toolBarButtonOpen.Name = "toolBarButtonOpen";
-            this.toolBarButtonOpen.Size = new System.Drawing.Size(29, 28);
+            this.toolBarButtonOpen.Size = new System.Drawing.Size(29, 24);
             this.toolBarButtonOpen.ToolTipText = "图窗显示";
             this.toolBarButtonOpen.Click += new System.EventHandler(this.NewCountPlatform_Click);
             // 
             // toolBarButtonSeparator2
             // 
             this.toolBarButtonSeparator2.Name = "toolBarButtonSeparator2";
-            this.toolBarButtonSeparator2.Size = new System.Drawing.Size(6, 31);
+            this.toolBarButtonSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // toolBarButtonLayoutByCode
             // 
             this.toolBarButtonLayoutByCode.Image = global::_305Vision.Properties.Resources.painting_bucket_logo_icon;
             this.toolBarButtonLayoutByCode.Name = "toolBarButtonLayoutByCode";
-            this.toolBarButtonLayoutByCode.Size = new System.Drawing.Size(29, 28);
+            this.toolBarButtonLayoutByCode.Size = new System.Drawing.Size(29, 24);
             this.toolBarButtonLayoutByCode.ToolTipText = "测试1";
             this.toolBarButtonLayoutByCode.Click += new System.EventHandler(this.test1);
             // 
@@ -372,7 +372,7 @@
             // 
             this.toolBarButtonLayoutByXml.Image = global::_305Vision.Properties.Resources.painting_bucket_logo_icon;
             this.toolBarButtonLayoutByXml.Name = "toolBarButtonLayoutByXml";
-            this.toolBarButtonLayoutByXml.Size = new System.Drawing.Size(29, 28);
+            this.toolBarButtonLayoutByXml.Size = new System.Drawing.Size(29, 24);
             this.toolBarButtonLayoutByXml.ToolTipText = "测试2";
             this.toolBarButtonLayoutByXml.Click += new System.EventHandler(this.test2);
             // 

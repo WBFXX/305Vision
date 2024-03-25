@@ -143,7 +143,7 @@
     <Compile Include="BLL\UtilsBLL.cs" />
     <Compile Include="BLL\WindowsViewBLL.cs" />
     <Compile Include="Common\305Enum.cs" />
-    <Compile Include="Common\STNodeStyleSetting.cs" />
+    <Compile Include="Common\CommonStyleSetting.cs" />
     <Compile Include="DAL\DrawDAL.cs" />
     <Compile Include="DAL\ImageRoiDAL.cs" />
     <Compile Include="DAL\ProcessImageDAL.cs" />
@@ -181,6 +181,7 @@
     <Compile Include="MySTNode\Fitting\LineFitting.cs" />
     <Compile Include="MySTNode\功能节点\RecROI.cs" />
     <Compile Include="MySTNode\功能节点\DotROI.cs" />
+    <Compile Include="MySTNode\图像源\CameraImgInputNode.cs" />
     <Compile Include="MySTNode\控件库\ComBoxControl.cs" />
     <Compile Include="MySTNode\控件库\ComBoxCL.cs">
       <SubType>Form</SubType>
@@ -193,6 +194,12 @@
     <Compile Include="MySTNode\图像源\ImageChannelNode.cs" />
     <Compile Include="MySTNode\图像源\ImageInputNode.cs" />
     <Compile Include="MySTNode\控件库\STNodeButton.cs" />
+    <Compile Include="OWindows\CameraSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OWindows\CameraSettingForm.Designer.cs">
+      <DependentUpon>CameraSettingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OWindows\FindEdgeCircularForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MySTNode\控件库\ComBoxCL.resx">
       <DependentUpon>ComBoxCL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OWindows\CameraSettingForm.resx">
+      <DependentUpon>CameraSettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OWindows\FindEdgeCircularForm.resx">
       <DependentUpon>FindEdgeCircularForm.cs</DependentUpon>

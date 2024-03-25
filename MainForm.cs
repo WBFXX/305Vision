@@ -296,7 +296,14 @@ namespace _305Vision
             ofd.Filter = "*.stn|*.stn";
             if (ofd.ShowDialog() != DialogResult.OK) return;
             FormProcess.Instance.GetEditor().Nodes.Clear();//清除后再加载
-            FormProcess.Instance.GetEditor().LoadCanvas(ofd.FileName);
+            try
+            {
+                FormProcess.Instance.GetEditor().LoadCanvas(ofd.FileName);
+            }catch(Exception ex)
+            {
+                MessageBox.Show("打开流程失败：" + ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
         }
 
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -309,9 +316,10 @@ namespace _305Vision
 
         private void test1(object sender, EventArgs e)
         {
-            Test2 test2 = new Test2();
-            test2.Show();
-            
+            WindowsViewBLL.ShowForm(FormOut);
+            //Test2 test2 = new Test2();
+            //test2.Show();
+
         }
 
         private void test2(object sender, EventArgs e)

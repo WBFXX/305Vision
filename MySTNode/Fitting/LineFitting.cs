@@ -150,7 +150,7 @@ namespace _305Vision.MySTNode.Fitting
         protected override void OnDrawBody(DrawingTools dt)
         {
             base.OnDrawBody(dt);
-            STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top + STNodeStyleSetting.COMMON_TOP);
+            STNodeBLL.DrawBody(dt, m_img_draw, this.Left, this.Top + CommonStyleSetting.COMMON_TOP);
         }
 
         

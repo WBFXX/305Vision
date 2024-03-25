@@ -77,7 +77,7 @@ namespace _305Vision.MySTNode.Operator
             var selectButton = new STNodeButton
             {
                 Text = "备用",
-                Location = new Point(42, 110 + STNodeStyleSetting.COMMON_TOP)
+                Location = new Point(42, 110 + CommonStyleSetting.COMMON_TOP)
             };
             
 

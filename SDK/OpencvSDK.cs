@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 using static _305Vision.MySTNode.Operator.SpotSearch;
 
 namespace _305Vision.SDK
@@ -13,7 +14,7 @@ namespace _305Vision.SDK
     class OpenCVSDK
     {
         /// <summary>
-        /// 图像宽度预处理（读图片）
+        /// 图像宽度预处理（读图片补全字节）
         /// </summary>
         /// <param name="data"></param>
         /// <param name="width"></param>
@@ -225,7 +226,47 @@ namespace _305Vision.SDK
             int areaMax, int areaMin, int widthMax, int widthMin, int heightMax, 
             int heightMin, ref IntPtr arrayX, ref IntPtr arrayY, ref IntPtr arrayW, ref IntPtr arrayH,
             ref IntPtr arrayA, ref int size);
-
+        /// <summary>
+        /// 打开并初始化相机
+        /// </summary>
+        /// <param name="ip1">地址1</param>
+        /// <param name="ip2">地址2</param>
+        /// <param name="ip3">地址3</param>
+        /// <param name="ip4">地址4</param>
+        /// <param name="outExposureTime">相机曝光时间</param>
+        /// <param name="outGain">相机增益参数</param>
+        /// <returns>0-->打开相机失败
+        /// 1-->设置相机曝光时间参数失败
+        /// 2-->设置相机增益参数失败
+        /// 3-->开始采集失败
+        /// 4-->成功</returns>
+        [DllImport("demo.dll", EntryPoint = "openAndInitCamera", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern int openAndInitCamera(int ip1, int ip2, int ip3, int ip4, float outExposureTime, float outGain);
+        /// <summary>
+        /// 采集图像数据
+        /// </summary>
+        /// <param name="width">输出图像宽度</param>
+        /// <param name="height">输出图像高度</param>
+        /// <param name="stride">输出图像步长</param>
+        /// <returns>unsigned char* imageBuffer	//图像数组</returns>
+        [DllImport("demo.dll", EntryPoint = "readCameraImage", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern unsafe byte* readCameraImage(ref int width, ref int height, ref int stride);
+        /// <summary>
+        /// 设置相机参数
+        /// </summary>
+        /// <param name="outExposureTime">相机曝光时间参数</param>
+        /// <param name="outGain">相机增益参数</param>
+        /// <returns></returns>
+        [DllImport("demo.dll", EntryPoint = "setCameraParameter", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern int setCameraParameter( ref float outExposureTime, ref float outGain);
+        /// <summary>
+        /// 停止抓取并关闭相机
+        /// </summary>
+        /// <returns>0-->停止抓取失败
+        /// 1-->关闭相机失败
+        /// 2-->成功</returns>
+        [DllImport("demo.dll", EntryPoint = "stopAndcloseCamera", CallingConvention = CallingConvention.Cdecl/*, CallingConvention = CallingConvention.Cdecl*/)]
+        public static extern int stopAndcloseCamera();
 
 
 
